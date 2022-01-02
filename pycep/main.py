@@ -22,6 +22,12 @@ class BicepToJson(Transformer):
 
         return result
 
+    ####################
+    #
+    # elements
+    #
+    ####################
+
     def param(self, args: Tuple[Token, Token, Optional[Token]]):
         name, data_type, default = args
         return {
@@ -86,6 +92,12 @@ class BicepToJson(Transformer):
             }
         }
 
+    ####################
+    #
+    # element type extras
+    #
+    ####################
+
     def data_type(self, arg: Tuple[Token]) -> str:
         return str(arg[0])
 
@@ -149,18 +161,29 @@ class BicepToJson(Transformer):
         return {
             "type": "index",
             "detail": {
-                "name": str(idx_name),
+                "index_name": str(idx_name),
                 "start_index": str(start_idx),
                 "count": str(count),
             },
         }
 
-    def loop_array(self, args: Tuple[Token, Token]):
+    def loop_array(self, args: Tuple[Token, Token]) -> Dict[str, Any]:
         item_name, array_name = args
         return {
             "type": "array",
             "detail": {
-                "name": str(item_name),
+                "item_name": str(item_name),
+                "array_name": str(array_name),
+            },
+        }
+
+    def loop_array_index(self, args: Tuple[Token, Token]) -> Dict[str, Any]:
+        item_name, idx_name, array_name = args
+        return {
+            "type": "array",
+            "detail": {
+                "item_name": str(item_name),
+                "index_name": str(idx_name),
                 "array_name": str(array_name),
             },
         }

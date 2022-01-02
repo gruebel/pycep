@@ -11,7 +11,6 @@ element: "param" string data_type ["=" param_value]             -> param
       | "false"                                     -> false
       | QUOTED_INTERPOLATION                        -> string
       | FUNCTION                                    -> string
-      | INDEX                                       -> string
       | string
       | array
       | object
@@ -37,7 +36,7 @@ type_api_pair: "'" /[\w.\/]+/ "@" /[\d\-]+/ "'"
 
 module_path: QUOTED_INTERPOLATION
 
-// loop
+// loops
 
 loop: "[" "for" (loop_range | loop_array | loop_array_index | loop_object) ":" ["if" "(" string ")"] value "]"
 
@@ -49,7 +48,7 @@ loop_array_index: "(" STRING "," STRING ")" "in" STRING
 
 loop_object: STRING "in" "items" "(" STRING ")"
 
-
+// data types
 
 string: STRING
 
@@ -64,8 +63,7 @@ key: string
 // Terms
 
 STRING: /[\w_.]+/
-FUNCTION: /(?=[\w_]+[()]+)[\w_().]+/
-INDEX: /(?=[\w_]+[\[\]]+)[\w_\[\].]+/
+FUNCTION: /(?=[\w_]+([\[\]]|[()])+)[\w_\[\]()., ]+/
 //QUOTED_STRING: "'" /[\s\w\-\/.:+]+/ "'"
 QUOTED_INTERPOLATION: "'" /[\s\w\-\/${}().:+]+/ "'"
 

@@ -181,7 +181,11 @@ def test_parse_loop_index():
                     "value": {
                         "loop_type": {
                             "type": "index",
-                            "detail": {"name": "i", "start_index": "0", "count": "itemCount"},
+                            "detail": {
+                                "index_name": "i",
+                                "start_index": "0",
+                                "count": "itemCount",
+                            },
                         },
                         "condition": None,
                         "config": "'item${(i + 1)}'",
@@ -195,7 +199,7 @@ def test_parse_loop_index():
                         "loop_type": {
                             "type": "index",
                             "detail": {
-                                "name": "i",
+                                "index_name": "i",
                                 "start_index": "0",
                                 "count": "storageCount",
                             },
@@ -217,7 +221,7 @@ def test_parse_loop_index():
                         "loop_type": {
                             "type": "index",
                             "detail": {
-                                "name": "i",
+                                "index_name": "i",
                                 "start_index": "0",
                                 "count": "2",
                             },
@@ -245,7 +249,7 @@ def test_parse_loop_index():
                         "loop_type": {
                             "type": "index",
                             "detail": {
-                                "name": "i",
+                                "index_name": "i",
                                 "start_index": "0",
                                 "count": "storageCount",
                             },
@@ -269,10 +273,6 @@ def test_parse_loop_array():
     # given
     file_path = EXAMPLES_DIR / "loop/02-loop-array/main.bicep"
 
-    parser = BicepParser(file_path)
-    print(parser.print_tree())
-    print(json.dumps(parser.json(), indent=4))
-
     # when
     result = BicepParser(file_path).json()
 
@@ -285,7 +285,10 @@ def test_parse_loop_array():
                     "default": {
                         "loop_type": {
                             "type": "array",
-                            "detail": {"name": "i", "array_name": "bicepVarArray"},
+                            "detail": {
+                                "item_name": "i",
+                                "array_name": "bicepVarArray",
+                            },
                         },
                         "condition": None,
                         "config": {
@@ -302,7 +305,7 @@ def test_parse_loop_array():
                         "loop_type": {
                             "type": "array",
                             "detail": {
-                                "name": "name",
+                                "item_name": "name",
                                 "array_name": "storageNames",
                             },
                         },
@@ -324,7 +327,7 @@ def test_parse_loop_array():
                         "loop_type": {
                             "type": "array",
                             "detail": {
-                                "name": "parent",
+                                "item_name": "parent",
                                 "array_name": "parents",
                             },
                         },
@@ -336,7 +339,7 @@ def test_parse_loop_array():
                                     "loop_type": {
                                         "type": "array",
                                         "detail": {
-                                            "name": "child",
+                                            "item_name": "child",
                                             "array_name": "parent.children",
                                         },
                                     },
@@ -354,12 +357,15 @@ def test_parse_loop_array():
             "modules": {
                 "sqlFirewallRules": {
                     "type": "local",
-                    "detail": {"full": "sql-firewall-rule.bicep", "path": "sql-firewall-rule.bicep"},
+                    "detail": {
+                        "full": "sql-firewall-rule.bicep",
+                        "path": "sql-firewall-rule.bicep",
+                    },
                     "config": {
                         "loop_type": {
                             "type": "array",
                             "detail": {
-                                "name": "firewallRules",
+                                "item_name": "firewallRules",
                                 "array_name": "sqlLogicalServer.firewallRules",
                             },
                         },
@@ -376,3 +382,16 @@ def test_parse_loop_array():
             },
         }
     )
+
+
+def test_parse_loop_array_index():
+    # given
+    sub_dir_path = EXAMPLES_DIR / "loop/03-loop-array-index"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BicepParser(file_path).json()
+
+    # then
+    assert_that(result).is_equal_to(expected_result)

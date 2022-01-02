@@ -1,0 +1,76 @@
+{
+  "outputs": {
+    "deployedNSGs": {
+      "type": "array",
+      "default": {
+        "loop_type": {
+          "type": "array",
+          "detail": {
+            "item_name": "name",
+            "index_name": "i",
+            "array_name": "orgNames"
+          }
+        },
+        "condition": null,
+        "config": {
+          "orgName": "name",
+          "nsgName": "nsg[i].name",
+          "resourceId": "nsg[i].id"
+        }
+      }
+    }
+  },
+  "resources": {
+    "storageArrayIndex": {
+      "type": "Microsoft.Storage/storageAccounts",
+      "api_version": "2021-06-01",
+      "config": {
+        "loop_type": {
+          "type": "array",
+          "detail": {
+            "item_name": "config",
+            "index_name": "i",
+            "array_name": "storageConfigurations"
+          }
+        },
+        "condition": null,
+        "config": {
+          "name": "'${storageAccountNamePrefix}${config.suffix}${i}'",
+          "location": "resourceGroup().location",
+          "sku": {
+            "name": "config.sku"
+          },
+          "kind": "'StorageV2'"
+        }
+      }
+    }
+  },
+  "modules": {
+    "sqlLogicalServer": {
+      "type": "local",
+      "detail": {
+        "full": "sql-logical-server.bicep",
+        "path": "sql-logical-server.bicep"
+      },
+      "config": {
+        "loop_type": {
+          "type": "array",
+          "detail": {
+            "item_name": "sqlLogicalServer",
+            "index_name": "index",
+            "array_name": "sqlLogicalServers"
+          }
+        },
+        "condition": null,
+        "config": {
+          "name": "'sqlLogicalServer-${index}'",
+          "params": {
+            "sqlLogicalServer": "union(defaultSqlLogicalServerProperties, sqlLogicalServer)",
+            "password": "sqlPassKeyVaults[index].getSecret(sqlLogicalServer.passwordFromKeyVault.secretName)",
+            "tags": "union(tags, union(defaultSqlLogicalServerProperties, sqlLogicalServer).tags)"
+          }
+        }
+      }
+    }
+  }
+}
