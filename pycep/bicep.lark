@@ -1,0 +1,82 @@
+start: element*
+
+element: "param" string data_type ["=" param_value]             -> param
+       | "var" string "=" var_value                             -> var
+       | "output" string data_type "=" output_value             -> output
+       | "resource" string type_api_pair "=" resource_value     -> resource
+       | "module" string module_path "=" module_value           -> module
+
+?value: SIGNED_INT                                  -> int
+      | "true"                                      -> true
+      | "false"                                     -> false
+      | QUOTED_INTERPOLATION                        -> string
+      | FUNCTION                                    -> string
+      | INDEX                                       -> string
+      | string
+      | array
+      | object
+
+// element values
+
+?param_value: value
+            | MULTI_LINE_STRING                     -> multi_line_string
+
+?var_value: param_value | loop
+
+?output_value: param_value | loop
+
+?resource_value: object | loop
+
+?module_value: object | loop
+
+// element type extras
+
+data_type: STRING
+
+type_api_pair: "'" /[\w.\/]+/ "@" /[\d\-]+/ "'"
+
+module_path: QUOTED_INTERPOLATION
+
+// loop
+
+loop: "[" "for" (loop_range | loop_array | loop_array_index | loop_object) ":" ["if" "(" string ")"] value "]"
+
+loop_range: STRING "in" "range" "(" STRING "," STRING ")"
+
+loop_array: STRING "in" STRING
+
+loop_array_index: "(" STRING "," STRING ")" "in" STRING
+
+loop_object: STRING "in" "items" "(" STRING ")"
+
+
+
+string: STRING
+
+array: "[" value+ "]"
+
+object: "{" pair+ "}"
+
+pair: key ":" (value | loop)
+
+key: string
+
+// Terms
+
+STRING: /[\w_.]+/
+FUNCTION: /(?=[\w_]+[()]+)[\w_().]+/
+INDEX: /(?=[\w_]+[\[\]]+)[\w_\[\].]+/
+//QUOTED_STRING: "'" /[\s\w\-\/.:+]+/ "'"
+QUOTED_INTERPOLATION: "'" /[\s\w\-\/${}().:+]+/ "'"
+
+MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
+
+STRING_INTERPOLATION : "${" /[^}]+/ "}"
+
+%import common.CPP_COMMENT
+%import common.NEWLINE
+%import common.SIGNED_INT
+%import common.WS
+%ignore CPP_COMMENT
+%ignore NEWLINE
+%ignore WS
