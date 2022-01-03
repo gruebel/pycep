@@ -29,10 +29,10 @@ repos:
 #    hooks:
 #      - id: python-safety-dependencies-check
 #        files: requirements
-#  - repo: https://github.com/pre-commit/mirrors-mypy
-#    rev: v0.910
-#    hooks:
-#      - id: mypy
-#        additional_dependencies: [aws-lambda-typing==1.0.3, types-requests==0.1.13]
-#        args: [--strict, --implicit-reexport, --ignore-missing-imports]
-#        files: src
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.930
+    hooks:
+      - id: mypy
+        additional_dependencies: [lark==1.0.0]
+        args: [--strict, --implicit-reexport, --ignore-missing-imports]
+        files: pycep

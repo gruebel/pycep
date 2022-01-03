@@ -13,8 +13,8 @@ TEMPLATE_SPEC_PATTERN = re.compile(
 )
 
 
-class BicepToJson(Transformer):
-    def start(self, args: List) -> Dict[str, Any]:
+class BicepToJson(Transformer[Dict[str, Any]]):
+    def start(self, args: List[Dict[str, Any]]) -> Dict[str, Any]:
         result: Dict[str, Any] = {}
         for arg in args:
             for key, value in arg.items():
@@ -28,7 +28,7 @@ class BicepToJson(Transformer):
     #
     ####################
 
-    def param(self, args: Tuple[Token, Token, Optional[Token]]):
+    def param(self, args: Tuple[Token, Token, Optional[Token]]) -> Dict[str, Any]:
         name, data_type, default = args
         return {
             "parameters": {
@@ -40,7 +40,7 @@ class BicepToJson(Transformer):
             }
         }
 
-    def var(self, args: Tuple[Token, Token]):
+    def var(self, args: Tuple[Token, Token]) -> Dict[str, Any]:
         name, value = args
 
         return {
@@ -52,7 +52,7 @@ class BicepToJson(Transformer):
             }
         }
 
-    def output(self, args: Tuple[Token, Token, Token]):
+    def output(self, args: Tuple[Token, Token, Token]) -> Dict[str, Any]:
         name, data_type, value = args
         return {
             "outputs": {
@@ -64,7 +64,7 @@ class BicepToJson(Transformer):
             }
         }
 
-    def resource(self, args: Tuple[str, Dict[str, str], Dict[str, Any]]):
+    def resource(self, args: Tuple[str, Dict[str, str], Dict[str, Any]]) -> Dict[str, Any]:
         name, type_api_pair, config = args
 
         if config.get("loop_type"):
@@ -80,7 +80,7 @@ class BicepToJson(Transformer):
             }
         }
 
-    def module(self, args):
+    def module(self, args: Tuple[str, Dict[str, Any], Dict[str, Any]]) -> Dict[str, Any]:
         name, path, config = args
         return {
             "modules": {
@@ -110,6 +110,8 @@ class BicepToJson(Transformer):
 
         if file_path.startswith("br:"):
             m = re.match(BICEP_REGISTRY_PATTERN, file_path)
+            if not m:
+                raise ValueError(f"Bicep registry path is invalid: {file_path}")
 
             return {
                 "type": "bicep_registry",
@@ -122,6 +124,8 @@ class BicepToJson(Transformer):
             }
         elif file_path.startswith("ts:"):
             m = re.match(TEMPLATE_SPEC_PATTERN, file_path)
+            if not m:
+                raise ValueError(f"Template spec path is invalid: {file_path}")
 
             return {
                 "type": "template_spec",
@@ -148,7 +152,7 @@ class BicepToJson(Transformer):
     #
     ####################
 
-    def loop(self, args: Tuple[Token, Token, Token]):
+    def loop(self, args: Tuple[Token, Token, Token]) -> Dict[str, Any]:
         loop_type, condition, config = args
         return {
             "loop_type": loop_type,
@@ -177,7 +181,7 @@ class BicepToJson(Transformer):
             },
         }
 
-    def loop_array_index(self, args: Tuple[Token, Token]) -> Dict[str, Any]:
+    def loop_array_index(self, args: Tuple[Token, Token, Token]) -> Dict[str, Any]:
         item_name, idx_name, array_name = args
         return {
             "type": "array",
@@ -201,7 +205,7 @@ class BicepToJson(Transformer):
     def object(self, args: List[Tuple[str, Any]]) -> Dict[str, Any]:
         return dict(args)
 
-    def pair(self, args):
+    def pair(self, args: Tuple[str, Union[bool, int, Token]]) -> Tuple[str, Union[bool, int, str]]:
         key, value = args
         return (key, value.value if isinstance(value, Token) else value)
 
@@ -214,15 +218,15 @@ class BicepToJson(Transformer):
     def string(self, arg: Tuple[Token]) -> str:
         return str(arg[0])
 
-    def multi_line_string(self, arg: Tuple[Token]):
+    def multi_line_string(self, arg: Tuple[Token]) -> str:
         value = arg[0].value[3:-3]
         value = value[1:] if value.startswith("\n") else value
         return f"'{value}'"
 
-    def true(self, _) -> Literal[True]:
+    def true(self, _: Any) -> Literal[True]:
         return True
 
-    def false(self, _) -> Literal[False]:
+    def false(self, _: Any) -> Literal[False]:
         return False
 
 

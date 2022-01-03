@@ -7,3 +7,8 @@ line-length = 120
 [tool.isort]
 profile = "black"
 line_length = 120
+
+[tool.mypy]
+files = "pycep"
+strict = true
+implicit_reexport = true
