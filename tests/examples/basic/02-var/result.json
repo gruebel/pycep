@@ -1,0 +1,24 @@
+{
+  "variables": {
+    "stringVar": {
+      "value": "'this is multi-line\n  string with formatting\n  preserved.\n'"
+    },
+    "exampleBool": {
+      "value": true
+    },
+    "exampleInt": {
+      "value": 1
+    },
+    "mixedArray": {
+      "value": [
+        "resourceGroup().name",
+        1,
+        true,
+        "'example string'"
+      ]
+    },
+    "storageName": {
+      "value": "'${toLower(storageNamePrefix)}${uniqueString(resourceGroup().id)}'"
+    }
+  }
+}

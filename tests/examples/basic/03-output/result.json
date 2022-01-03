@@ -1,0 +1,24 @@
+{
+  "outputs": {
+    "stringOutput": {
+      "type": "int",
+      "default": 42
+    },
+    "booleanOutput": {
+      "type": "bool",
+      "default": false
+    },
+    "storageName": {
+      "type": "string",
+      "default": "'${toLower(storageNamePrefix)}${uniqueString(resourceGroup().id)}'"
+    },
+    "location": {
+      "type": "string",
+      "default": "resourceGroup().location"
+    },
+    "multilineOutput": {
+      "type": "string",
+      "default": "'this is multi-line\n  string with formatting\n  preserved.\n'"
+    }
+  }
+}

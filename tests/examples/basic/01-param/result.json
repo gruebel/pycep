@@ -1,0 +1,41 @@
+{
+    "parameters": {
+        "demoString": {
+            "type": "string",
+            "default": null
+        },
+        "demoInt": {
+            "type": "int",
+            "default": null
+        },
+        "demoParam": {
+            "type": "string",
+            "default": "'Contoso'"
+        },
+        "demoBool": {
+            "type": "bool",
+            "default": false
+        },
+        "demoArray": {
+            "type": "array",
+            "default": [
+                "resourceGroup().name",
+                1,
+                true,
+                "'example string'"
+            ]
+        },
+        "location": {
+            "type": "string",
+            "default": "resourceGroup().location"
+        },
+        "siteName": {
+            "type": "string",
+            "default": "'site-${uniqueString(resourceGroup().id)}'"
+        },
+        "multilineOutput": {
+            "type": "string",
+            "default": "'this is multi-line\n  string with formatting\n  preserved.\n'"
+        }
+    }
+}

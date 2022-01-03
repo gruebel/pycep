@@ -1,0 +1,91 @@
+{
+  "variables": {
+    "stringArray": {
+      "value": {
+        "loop_type": {
+          "type": "index",
+          "detail": {
+            "index_name": "i",
+            "start_index": "0",
+            "count": "itemCount"
+          }
+        },
+        "condition": null,
+        "config": "'item${(i + 1)}'"
+      }
+    }
+  },
+  "outputs": {
+    "storageInfo": {
+      "type": "array",
+      "default": {
+        "loop_type": {
+          "type": "index",
+          "detail": {
+            "index_name": "i",
+            "start_index": "0",
+            "count": "storageCount"
+          }
+        },
+        "condition": null,
+        "config": {
+          "id": "storageAcct[i].id",
+          "blobEndpoint": "storageAcct[i].properties.primaryEndpoints.blob",
+          "status": "storageAcct[i].properties.statusOfPrimary"
+        }
+      }
+    }
+  },
+  "resources": {
+    "storageIndex": {
+      "type": "Microsoft.Storage/storageAccounts",
+      "api_version": "2021-06-01",
+      "config": {
+        "loop_type": {
+          "type": "index",
+          "detail": {
+            "index_name": "i",
+            "start_index": "0",
+            "count": "2"
+          }
+        },
+        "condition": null,
+        "config": {
+          "name": "'${i}storage${uniqueString(resourceGroup().id)}'",
+          "location": "location",
+          "sku": {
+            "name": "'Standard_LRS'"
+          },
+          "kind": "'Storage'"
+        }
+      }
+    }
+  },
+  "modules": {
+    "stgModule": {
+      "type": "local",
+      "detail": {
+        "full": "./storageAccount.bicep",
+        "path": "./storageAccount.bicep"
+      },
+      "config": {
+        "loop_type": {
+          "type": "index",
+          "detail": {
+            "index_name": "i",
+            "start_index": "0",
+            "count": "storageCount"
+          }
+        },
+        "condition": null,
+        "config": {
+          "name": "'${i}deploy${baseName}'",
+          "params": {
+            "storageName": "'${i}${baseName}'",
+            "location": "location"
+          }
+        }
+      }
+    }
+  }
+}
