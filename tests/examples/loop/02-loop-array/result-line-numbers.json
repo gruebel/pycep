@@ -1,0 +1,111 @@
+{
+  "outputs": {
+    "out1": {
+      "type": "array",
+      "value": {
+        "loop_type": {
+          "type": "array",
+          "detail": {
+            "item_name": "i",
+            "array_name": "bicepVarArray"
+          }
+        },
+        "condition": null,
+        "config": {
+          "element": "i"
+        }
+      },
+      "__start_line__": 4,
+      "__end_line__": 6
+    }
+  },
+  "resources": {
+    "storageArray": {
+      "type": "Microsoft.Storage/storageAccounts",
+      "api_version": "2021-06-01",
+      "config": {
+        "loop_type": {
+          "type": "array",
+          "detail": {
+            "item_name": "name",
+            "array_name": "storageNames"
+          }
+        },
+        "condition": null,
+        "config": {
+          "name": "'${name}${uniqueString(resourceGroup().id)}'",
+          "location": "location",
+          "sku": {
+            "name": "'Standard_LRS'"
+          },
+          "kind": "'Storage'"
+        }
+      },
+      "__start_line__": 9,
+      "__end_line__": 16
+    },
+    "parentResources": {
+      "type": "Microsoft.Example/examples",
+      "api_version": "2020-06-06",
+      "config": {
+        "loop_type": {
+          "type": "array",
+          "detail": {
+            "item_name": "parent",
+            "array_name": "parents"
+          }
+        },
+        "condition": null,
+        "config": {
+          "name": "parent.name",
+          "properties": {
+            "children": {
+              "loop_type": {
+                "type": "array",
+                "detail": {
+                  "item_name": "child",
+                  "array_name": "parent.children"
+                }
+              },
+              "condition": null,
+              "config": {
+                "name": "child.name",
+                "setting": "child.settingValue"
+              }
+            }
+          }
+        }
+      },
+      "__start_line__": 28,
+      "__end_line__": 36
+    }
+  },
+  "modules": {
+    "sqlFirewallRules": {
+      "type": "local",
+      "detail": {
+        "full": "sql-firewall-rule.bicep",
+        "path": "sql-firewall-rule.bicep"
+      },
+      "config": {
+        "loop_type": {
+          "type": "array",
+          "detail": {
+            "item_name": "firewallRules",
+            "array_name": "sqlLogicalServer.firewallRules"
+          }
+        },
+        "condition": null,
+        "config": {
+          "name": "'sqlFirewallRule-${uniqueString(sqlLogicalServer.name)}'",
+          "params": {
+            "sqlFirewallRule": "firewallRules",
+            "sqlServerName": "sqlLogicalServer.name"
+          }
+        }
+      },
+      "__start_line__": 19,
+      "__end_line__": 25
+    }
+  }
+}

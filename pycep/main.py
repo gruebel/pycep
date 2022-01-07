@@ -1,9 +1,26 @@
+from __future__ import annotations
+
 import re
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
-from lark import Lark, Token, Transformer, Tree
+from lark import Lark, Token, Transformer, Tree, v_args
+from lark.tree import Meta
 from typing_extensions import Literal
+
+from pycep.typing import (
+    ApiTypeVersion,
+    BicepRegistryModulePath,
+    LocalModulePath,
+    ModulePath,
+    ModuleResponse,
+    OutputResponse,
+    ParamResponse,
+    PossibleValue,
+    ResourceResponse,
+    TemplateSpecModulePath,
+    VarResponse,
+)
 
 LARK_GRAMMAR = (Path(__file__).parent / "bicep.lark").read_text()
 
@@ -14,6 +31,17 @@ TEMPLATE_SPEC_PATTERN = re.compile(
 
 
 class BicepToJson(Transformer[Dict[str, Any]]):
+    def __init__(self, add_line_numbers: bool) -> None:
+        self.add_line_numbers = add_line_numbers
+
+        super().__init__()
+
+    ####################
+    #
+    # start
+    #
+    ####################
+
     def start(self, args: List[Dict[str, Any]]) -> Dict[str, Any]:
         result: Dict[str, Any] = {}
         for arg in args:
@@ -28,9 +56,11 @@ class BicepToJson(Transformer[Dict[str, Any]]):
     #
     ####################
 
-    def param(self, args: Tuple[Token, Token, Optional[Token]]) -> Dict[str, Any]:
+    @v_args(meta=True)
+    def param(self, meta: Meta, args: tuple[str, str, PossibleValue | None]) -> ParamResponse:
         name, data_type, default = args
-        return {
+
+        result: ParamResponse = {
             "parameters": {
                 "__name__": name,
                 "__attrs__": {
@@ -40,10 +70,17 @@ class BicepToJson(Transformer[Dict[str, Any]]):
             }
         }
 
-    def var(self, args: Tuple[Token, Token]) -> Dict[str, Any]:
+        if self.add_line_numbers:
+            result["parameters"]["__attrs__"]["__start_line__"] = meta.line
+            result["parameters"]["__attrs__"]["__end_line__"] = meta.end_line
+
+        return result
+
+    @v_args(meta=True)
+    def var(self, meta: Meta, args: tuple[str, PossibleValue]) -> VarResponse:
         name, value = args
 
-        return {
+        result: VarResponse = {
             "variables": {
                 "__name__": name,
                 "__attrs__": {
@@ -52,45 +89,71 @@ class BicepToJson(Transformer[Dict[str, Any]]):
             }
         }
 
-    def output(self, args: Tuple[Token, Token, Token]) -> Dict[str, Any]:
+        if self.add_line_numbers:
+            result["variables"]["__attrs__"]["__start_line__"] = meta.line
+            result["variables"]["__attrs__"]["__end_line__"] = meta.end_line
+
+        return result
+
+    @v_args(meta=True)
+    def output(self, meta: Meta, args: tuple[str, str, PossibleValue]) -> OutputResponse:
         name, data_type, value = args
-        return {
+
+        result: OutputResponse = {
             "outputs": {
                 "__name__": name,
                 "__attrs__": {
                     "type": data_type,
-                    "default": value,
+                    "value": value,
                 },
             }
         }
 
-    def resource(self, args: Tuple[str, Dict[str, str], Dict[str, Any]]) -> Dict[str, Any]:
+        if self.add_line_numbers:
+            result["outputs"]["__attrs__"]["__start_line__"] = meta.line
+            result["outputs"]["__attrs__"]["__end_line__"] = meta.end_line
+
+        return result
+
+    @v_args(meta=True)
+    def resource(self, meta: Meta, args: tuple[str, ApiTypeVersion, Dict[str, Any]]) -> ResourceResponse:
         name, type_api_pair, config = args
 
-        if config.get("loop_type"):
-            pass
-
-        return {
+        result: ResourceResponse = {
             "resources": {
                 "__name__": name,
                 "__attrs__": {
-                    **type_api_pair,
+                    **type_api_pair,  # type: ignore[misc] # https://github.com/python/mypy/issues/11753
                     "config": config,
                 },
             }
         }
 
-    def module(self, args: Tuple[str, Dict[str, Any], Dict[str, Any]]) -> Dict[str, Any]:
+        if self.add_line_numbers:
+            result["resources"]["__attrs__"]["__start_line__"] = meta.line
+            result["resources"]["__attrs__"]["__end_line__"] = meta.end_line
+
+        return result
+
+    @v_args(meta=True)
+    def module(self, meta: Meta, args: Tuple[str, ModulePath, Dict[str, Any]]) -> ModuleResponse:
         name, path, config = args
-        return {
+
+        result: ModuleResponse = {
             "modules": {
                 "__name__": name,
                 "__attrs__": {
-                    **path,
+                    **path,  # type: ignore[misc] # https://github.com/python/mypy/issues/11753
                     "config": config,
                 },
             }
         }
+
+        if self.add_line_numbers:
+            result["modules"]["__attrs__"]["__start_line__"] = meta.line
+            result["modules"]["__attrs__"]["__end_line__"] = meta.end_line
+
+        return result
 
     ####################
     #
@@ -105,7 +168,7 @@ class BicepToJson(Transformer[Dict[str, Any]]):
         type_name, api_version = args
         return {"type": str(type_name), "api_version": str(api_version)}
 
-    def module_path(self, args: Tuple[Token]) -> Dict[str, Any]:
+    def module_path(self, args: Tuple[Token]) -> ModulePath:
         file_path = str(args[0])[1:-1]
 
         if file_path.startswith("br:"):
@@ -113,7 +176,7 @@ class BicepToJson(Transformer[Dict[str, Any]]):
             if not m:
                 raise ValueError(f"Bicep registry path is invalid: {file_path}")
 
-            return {
+            br_result: BicepRegistryModulePath = {
                 "type": "bicep_registry",
                 "detail": {
                     "full": file_path[3:],
@@ -122,12 +185,13 @@ class BicepToJson(Transformer[Dict[str, Any]]):
                     "tag": m.group("tag"),
                 },
             }
+            return br_result
         elif file_path.startswith("ts:"):
             m = re.match(TEMPLATE_SPEC_PATTERN, file_path)
             if not m:
                 raise ValueError(f"Template spec path is invalid: {file_path}")
 
-            return {
+            ts_result: TemplateSpecModulePath = {
                 "type": "template_spec",
                 "detail": {
                     "full": file_path[3:],
@@ -137,14 +201,16 @@ class BicepToJson(Transformer[Dict[str, Any]]):
                     "version": m.group("version"),
                 },
             }
+            return ts_result
 
-        return {
+        local_result: LocalModulePath = {
             "type": "local",
             "detail": {
                 "full": file_path,
                 "path": file_path,
             },
         }
+        return local_result
 
     ####################
     #
@@ -231,8 +297,9 @@ class BicepToJson(Transformer[Dict[str, Any]]):
 
 
 class BicepParser:
-    def __init__(self, file_path: Path) -> None:
+    def __init__(self, file_path: Path, add_line_numbers: bool = False) -> None:
         self.file_path = file_path
+        self.add_line_numbers = add_line_numbers
 
         self.tree = self._create_tree()
 
@@ -243,7 +310,7 @@ class BicepParser:
         return lark_parser.parse(content)
 
     def json(self) -> Dict[str, Any]:
-        return BicepToJson().transform(self.tree)
+        return BicepToJson(add_line_numbers=self.add_line_numbers).transform(self.tree)
 
     def print_tree(self) -> str:
         return self.tree.pretty()

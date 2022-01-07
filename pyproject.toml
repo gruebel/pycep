@@ -12,3 +12,9 @@ line_length = 120
 files = "pycep"
 strict = true
 implicit_reexport = true
+
+[[tool.mypy.overrides]]
+module = [
+    "assertpy"
+]
+ignore_missing_imports = true

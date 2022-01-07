@@ -2,23 +2,23 @@
   "outputs": {
     "stringOutput": {
       "type": "int",
-      "default": 42
+      "value": 42
     },
     "booleanOutput": {
       "type": "bool",
-      "default": false
+      "value": false
     },
     "storageName": {
       "type": "string",
-      "default": "'${toLower(storageNamePrefix)}${uniqueString(resourceGroup().id)}'"
+      "value": "'${toLower(storageNamePrefix)}${uniqueString(resourceGroup().id)}'"
     },
     "location": {
       "type": "string",
-      "default": "resourceGroup().location"
+      "value": "resourceGroup().location"
     },
     "multilineOutput": {
       "type": "string",
-      "default": "'this is multi-line\n  string with formatting\n  preserved.\n'"
+      "value": "'this is multi-line\n  string with formatting\n  preserved.\n'"
     }
   }
 }

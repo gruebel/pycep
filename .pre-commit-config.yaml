@@ -34,5 +34,5 @@ repos:
     hooks:
       - id: mypy
         additional_dependencies: [lark==1.0.0]
-        args: [--strict, --implicit-reexport, --ignore-missing-imports]
-        files: pycep
+        args: [--strict, --implicit-reexport, --ignore-missing-imports, --show-error-codes]
+        files: pycep|tests
