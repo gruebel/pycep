@@ -38,9 +38,9 @@ module_path: QUOTED_INTERPOLATION
 
 // loops
 
-loop: "[" "for" (loop_range | loop_array | loop_array_index | loop_object) ":" ["if" "(" string ")"] value "]"
+loop: "[" "for" (loop_index | loop_array | loop_array_index | loop_object) ":" ["if" "(" string ")"] value "]"
 
-loop_range: STRING "in" "range" "(" STRING "," STRING ")"
+loop_index: STRING "in" "range" "(" STRING "," STRING ")"
 
 loop_array: STRING "in" STRING
 

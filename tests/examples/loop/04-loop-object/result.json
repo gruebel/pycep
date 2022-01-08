@@ -1,0 +1,38 @@
+{
+  "outputs": {
+    "inputObjKeys": {
+      "type": "array",
+      "value": {
+        "loop_type": {
+          "type": "object",
+          "detail": {
+            "item_name": "item",
+            "object_name": "inputObj"
+          }
+        },
+        "condition": null,
+        "config": "item.key"
+      }
+    }
+  },
+  "resources": {
+    "nsgObject": {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "api_version": "2020-06-01",
+      "config": {
+        "loop_type": {
+          "type": "object",
+          "detail": {
+            "item_name": "nsg",
+            "object_name": "nsgValues"
+          }
+        },
+        "condition": null,
+        "config": {
+          "name": "nsg.value.name",
+          "location": "nsg.value.location"
+        }
+      }
+    }
+  }
+}

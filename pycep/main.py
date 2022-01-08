@@ -12,6 +12,12 @@ from pycep.typing import (
     ApiTypeVersion,
     BicepRegistryModulePath,
     LocalModulePath,
+    Loop,
+    LoopArray,
+    LoopArrayIndex,
+    LoopIndex,
+    LoopObject,
+    LoopType,
     ModulePath,
     ModuleResponse,
     OutputResponse,
@@ -218,7 +224,7 @@ class BicepToJson(Transformer[Dict[str, Any]]):
     #
     ####################
 
-    def loop(self, args: Tuple[Token, Token, Token]) -> Dict[str, Any]:
+    def loop(self, args: Tuple[LoopType, None, Dict[str, Any]]) -> Loop:
         loop_type, condition, config = args
         return {
             "loop_type": loop_type,
@@ -226,7 +232,7 @@ class BicepToJson(Transformer[Dict[str, Any]]):
             "config": config,
         }
 
-    def loop_range(self, args: Tuple[Token, Token, Token]) -> Dict[str, Any]:
+    def loop_index(self, args: Tuple[Token, Token, Token]) -> LoopIndex:
         idx_name, start_idx, count = args
         return {
             "type": "index",
@@ -237,7 +243,7 @@ class BicepToJson(Transformer[Dict[str, Any]]):
             },
         }
 
-    def loop_array(self, args: Tuple[Token, Token]) -> Dict[str, Any]:
+    def loop_array(self, args: Tuple[Token, Token]) -> LoopArray:
         item_name, array_name = args
         return {
             "type": "array",
@@ -247,14 +253,24 @@ class BicepToJson(Transformer[Dict[str, Any]]):
             },
         }
 
-    def loop_array_index(self, args: Tuple[Token, Token, Token]) -> Dict[str, Any]:
+    def loop_array_index(self, args: Tuple[Token, Token, Token]) -> LoopArrayIndex:
         item_name, idx_name, array_name = args
         return {
-            "type": "array",
+            "type": "array_index",
             "detail": {
                 "item_name": str(item_name),
                 "index_name": str(idx_name),
                 "array_name": str(array_name),
+            },
+        }
+
+    def loop_object(self, args: Tuple[Token, Token]) -> LoopObject:
+        item_name, obj_name = args
+        return {
+            "type": "object",
+            "detail": {
+                "item_name": str(item_name),
+                "object_name": str(obj_name),
             },
         }
 

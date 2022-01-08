@@ -2,7 +2,7 @@
   "outputs": {
     "out1": {
       "type": "array",
-      "default": {
+      "value": {
         "loop_type": {
           "type": "array",
           "detail": {

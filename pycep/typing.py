@@ -6,6 +6,7 @@ from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
 PossibleValue: TypeAlias = "bool | int | str | list[bool | int | str]"
 ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | TemplateSpecModulePath"
+LoopType: TypeAlias = "LoopIndex | LoopArray | LoopArrayIndex | LoopObject"
 
 
 class _ParameterAttributes(TypedDict):
@@ -94,6 +95,13 @@ class ApiTypeVersion(TypedDict):
     api_version: str
 
 
+####################
+#
+# Module Paths
+#
+####################
+
+
 class _LocalModulePathDetail(TypedDict):
     full: str
     path: str
@@ -127,3 +135,58 @@ class _TemplateSpecModulePathDetail(TypedDict):
 class TemplateSpecModulePath(TypedDict):
     type: Literal["template_spec"]
     detail: _TemplateSpecModulePathDetail
+
+
+####################
+#
+# Loops
+#
+####################
+
+
+class _LoopIndexDetail(TypedDict):
+    index_name: str
+    start_index: str
+    count: str
+
+
+class LoopIndex(TypedDict):
+    type: Literal["index"]
+    detail: _LoopIndexDetail
+
+
+class _LoopArrayDetail(TypedDict):
+    item_name: str
+    array_name: str
+
+
+class LoopArray(TypedDict):
+    type: Literal["array"]
+    detail: _LoopArrayDetail
+
+
+class _LoopArrayIndexDetail(TypedDict):
+    item_name: str
+    index_name: str
+    array_name: str
+
+
+class LoopArrayIndex(TypedDict):
+    type: Literal["array_index"]
+    detail: _LoopArrayIndexDetail
+
+
+class _LoopObjectDetail(TypedDict):
+    item_name: str
+    object_name: str
+
+
+class LoopObject(TypedDict):
+    type: Literal["object"]
+    detail: _LoopObjectDetail
+
+
+class Loop(TypedDict):
+    loop_type: LoopType
+    condition: None
+    config: Dict[str, Any]

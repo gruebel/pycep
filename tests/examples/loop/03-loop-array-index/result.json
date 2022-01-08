@@ -2,9 +2,9 @@
   "outputs": {
     "deployedNSGs": {
       "type": "array",
-      "default": {
+      "value": {
         "loop_type": {
-          "type": "array",
+          "type": "array_index",
           "detail": {
             "item_name": "name",
             "index_name": "i",
@@ -26,7 +26,7 @@
       "api_version": "2021-06-01",
       "config": {
         "loop_type": {
-          "type": "array",
+          "type": "array_index",
           "detail": {
             "item_name": "config",
             "index_name": "i",
@@ -54,7 +54,7 @@
       },
       "config": {
         "loop_type": {
-          "type": "array",
+          "type": "array_index",
           "detail": {
             "item_name": "sqlLogicalServer",
             "index_name": "index",
