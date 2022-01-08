@@ -63,7 +63,7 @@ key: string
 // Terms
 
 STRING: /[\w_.]+/
-FUNCTION: /(?=[\w_]+([\[\]]|[()])+)[\w_\[\]()., ]+/
+FUNCTION: /(?!if\()(?=[\w_]+([\[\]]|[()])+)[\w_\[\]()., ]+/
 //QUOTED_STRING: "'" /[\s\w\-\/.:+]+/ "'"
 QUOTED_INTERPOLATION: "'" /[\s\w\-\/${}().:+]+/ "'"
 

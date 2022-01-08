@@ -5,12 +5,13 @@ A fun little project, which has the goal to parse
 This is still a very early stage, therefore a lot can and will change.
 
 ## Next milestones
-- [ ] Complete loop support
+- [x] Complete loop support
 - [ ] Param decorator
 - [ ] Module decorator
 - [ ] Output condition
 - [ ] Existing resource keyword
 - [ ] Module alias
+- [ ] Deployment condition
 - [x] Adding line numbers to element blocks
 - [ ] Create a package
 - [ ] Publish package to `pypi`

@@ -10,6 +10,7 @@ from typing_extensions import Literal
 
 from pycep.typing import (
     ApiTypeVersion,
+    BicepJson,
     BicepRegistryModulePath,
     LocalModulePath,
     Loop,
@@ -36,7 +37,7 @@ TEMPLATE_SPEC_PATTERN = re.compile(
 )
 
 
-class BicepToJson(Transformer[Dict[str, Any]]):
+class BicepToJson(Transformer[BicepJson]):
     def __init__(self, add_line_numbers: bool) -> None:
         self.add_line_numbers = add_line_numbers
 
@@ -48,11 +49,13 @@ class BicepToJson(Transformer[Dict[str, Any]]):
     #
     ####################
 
-    def start(self, args: List[Dict[str, Any]]) -> Dict[str, Any]:
-        result: Dict[str, Any] = {}
+    def start(
+        self, args: List[ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse]
+    ) -> BicepJson:
+        result: BicepJson = {}
         for arg in args:
             for key, value in arg.items():
-                result.setdefault(key, {})[value["__name__"]] = value["__attrs__"]
+                result.setdefault(key, {})[value["__name__"]] = value["__attrs__"]  # type: ignore[misc, index]
 
         return result
 
@@ -325,7 +328,7 @@ class BicepParser:
 
         return lark_parser.parse(content)
 
-    def json(self) -> Dict[str, Any]:
+    def json(self) -> BicepJson:
         return BicepToJson(add_line_numbers=self.add_line_numbers).transform(self.tree)
 
     def print_tree(self) -> str:

@@ -9,6 +9,13 @@ ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | TemplateSpe
 LoopType: TypeAlias = "LoopIndex | LoopArray | LoopArrayIndex | LoopObject"
 
 
+####################
+#
+# JSON response
+#
+####################
+
+
 class _ParameterAttributes(TypedDict):
     type: str
     default: PossibleValue | None
@@ -190,3 +197,18 @@ class Loop(TypedDict):
     loop_type: LoopType
     condition: None
     config: Dict[str, Any]
+
+
+####################
+#
+# JSON response
+#
+####################
+
+
+class BicepJson(TypedDict):
+    parameters: NotRequired[Dict[str, _ParameterAttributes]]
+    variables: NotRequired[Dict[str, _VariableAttributes]]
+    resources: NotRequired[Dict[str, _ResourceAttributes]]
+    modules: NotRequired[Dict[str, _ModuleAttributes]]
+    outputs: NotRequired[Dict[str, _OutputAttributes]]

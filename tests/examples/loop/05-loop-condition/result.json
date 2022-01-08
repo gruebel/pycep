@@ -1,0 +1,64 @@
+{
+  "resources": {
+    "parentResources": {
+      "type": "Microsoft.Example/examples",
+      "api_version": "2020-06-06",
+      "config": {
+        "loop_type": {
+          "type": "array",
+          "detail": {
+            "item_name": "parent",
+            "array_name": "parents"
+          }
+        },
+        "condition": "parent.enabled",
+        "config": {
+          "name": "parent.name",
+          "properties": {
+            "children": {
+              "loop_type": {
+                "type": "array",
+                "detail": {
+                  "item_name": "child",
+                  "array_name": "parent.children"
+                }
+              },
+              "condition": null,
+              "config": {
+                "name": "child.name",
+                "setting": "child.settingValue"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "modules": {
+    "stgModule": {
+      "type": "local",
+      "detail": {
+        "full": "./storageAccount.bicep",
+        "path": "./storageAccount.bicep"
+      },
+      "config": {
+        "loop_type": {
+          "type": "index",
+          "detail": {
+            "index_name": "i",
+            "start_index": "0",
+            "count": "storageCount"
+          }
+        },
+        "condition": "createNewStorage",
+        "config": {
+          "name": "'${i}deploy${baseName}'",
+          "params": {
+            "storageName": "'${i}${baseName}'",
+            "location": "location"
+          }
+        }
+      }
+    }
+  }
+}
