@@ -1,0 +1,121 @@
+{
+  "parameters": {
+    "zone": {
+      "decorators": [
+        {
+          "type": "allowed",
+          "argument": [
+            1,
+            2,
+            3
+          ]
+        }
+      ],
+      "type": "int",
+      "default": null
+    },
+    "demoEnum": {
+      "decorators": [
+        {
+          "type": "allowed",
+          "argument": [
+            "'one'",
+            "'two'"
+          ]
+        }
+      ],
+      "type": "string",
+      "default": null
+    },
+    "virtualMachineSize": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "'Must be at least Standard_A3 to support 2 NICs.'"
+        }
+      ],
+      "type": "string",
+      "default": "'Standard_DS1_v2'"
+    },
+    "storageAccountName": {
+      "decorators": [
+        {
+          "type": "min_length",
+          "argument": 3
+        }
+      ],
+      "type": "string",
+      "default": null
+    },
+    "appNames": {
+      "decorators": [
+        {
+          "type": "max_length",
+          "argument": 5
+        }
+      ],
+      "type": "array",
+      "default": null
+    },
+    "month": {
+      "decorators": [
+        {
+          "type": "min_value",
+          "argument": 1
+        }
+      ],
+      "type": "int",
+      "default": null
+    },
+    "retentionInDays": {
+      "decorators": [
+        {
+          "type": "max_value",
+          "argument": 730
+        }
+      ],
+      "type": "int",
+      "default": null
+    },
+    "modules": {
+      "decorators": [
+        {
+          "type": "metadata",
+          "argument": {
+            "name": "'Module name'",
+            "version": "'Module version or specify latest to get the latest version'",
+            "uri": "'Module package uri, e.g. https://www.powershellgallery.com/api/v2/package'"
+          }
+        }
+      ],
+      "type": "array",
+      "default": []
+    },
+    "demoPassword": {
+      "decorators": [
+        {
+          "type": "secure"
+        }
+      ],
+      "type": "string",
+      "default": null
+    },
+    "adminPassword": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "'Password for the Virtual Machine.'"
+        },
+        {
+          "type": "min_length",
+          "argument": 12
+        },
+        {
+          "type": "secure"
+        }
+      ],
+      "type": "string",
+      "default": null
+    }
+  }
+}

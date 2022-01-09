@@ -1,22 +1,27 @@
 {
     "parameters": {
         "demoString": {
+            "decorators": [],
             "type": "string",
             "default": null
         },
         "demoInt": {
+            "decorators": [],
             "type": "int",
             "default": null
         },
         "demoParam": {
+            "decorators": [],
             "type": "string",
             "default": "'Contoso'"
         },
         "demoBool": {
+            "decorators": [],
             "type": "bool",
             "default": false
         },
         "demoArray": {
+            "decorators": [],
             "type": "array",
             "default": [
                 "resourceGroup().name",
@@ -26,14 +31,17 @@
             ]
         },
         "location": {
+            "decorators": [],
             "type": "string",
             "default": "resourceGroup().location"
         },
         "siteName": {
+            "decorators": [],
             "type": "string",
             "default": "'site-${uniqueString(resourceGroup().id)}'"
         },
         "multilineOutput": {
+            "decorators": [],
             "type": "string",
             "default": "'this is multi-line\n  string with formatting\n  preserved.\n'"
         }

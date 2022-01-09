@@ -1,6 +1,6 @@
 start: element*
 
-element: "param" string data_type ["=" param_value]             -> param
+element: [decorator] "param" string data_type ["=" param_value]             -> param
        | "var" string "=" var_value                             -> var
        | "output" string data_type "=" output_value             -> output
        | "resource" string type_api_pair "=" resource_value     -> resource
@@ -52,7 +52,7 @@ loop_object: STRING "in" "items" "(" STRING ")"
 
 string: STRING
 
-array: "[" value+ "]"
+array: "[" value* "]"
 
 object: "{" pair+ "}"
 
@@ -60,12 +60,32 @@ pair: key ":" (value | loop)
 
 key: string
 
+// decorators
+
+decorator: ("@" (deco_allowed | deco_description | deco_min_len | deco_max_len | deco_min_val | deco_max_val | deco_metadata | deco_secure))+
+
+deco_allowed: "allowed" "(" array ")"
+
+deco_description: "description" "(" QUOTED_INTERPOLATION ")"
+
+deco_min_len: "minLength" "(" /\d+/ ")"
+
+deco_max_len: "maxLength" "(" /\d+/ ")"
+
+deco_min_val: "minValue" "(" /\d+/ ")"
+
+deco_max_val: "maxValue" "(" /\d+/ ")"
+
+deco_metadata: "metadata" "(" object ")"
+
+deco_secure: "secure" "(" ")"
+
 // Terms
 
 STRING: /[\w_.]+/
-FUNCTION: /(?!if\()(?=[\w_]+([\[\]]|[()])+)[\w_\[\]()., ]+/
+FUNCTION: /(?!if\()(?=[\w_]+([\[\]]|[()])+)[\w_\[\]()\/.,' ]+/
 //QUOTED_STRING: "'" /[\s\w\-\/.:+]+/ "'"
-QUOTED_INTERPOLATION: "'" /[\s\w\-\/${}().:+]+/ "'"
+QUOTED_INTERPOLATION: "'" /[\s\w\-\/${}().,:+* ]+/ "'"
 
 MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
 

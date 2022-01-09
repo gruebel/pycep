@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any
 
 from lark import Lark, Token, Transformer, Tree, v_args
 from lark.tree import Meta
@@ -12,6 +12,16 @@ from pycep.typing import (
     ApiTypeVersion,
     BicepJson,
     BicepRegistryModulePath,
+    Decorator,
+    DecoratorAllowed,
+    DecoratorDescription,
+    DecoratorMaxLength,
+    DecoratorMaxValue,
+    DecoratorMetadata,
+    DecoratorMinLength,
+    DecoratorMinValue,
+    DecoratorSecure,
+    ElementResponse,
     LocalModulePath,
     Loop,
     LoopArray,
@@ -49,9 +59,7 @@ class BicepToJson(Transformer[BicepJson]):
     #
     ####################
 
-    def start(
-        self, args: List[ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse]
-    ) -> BicepJson:
+    def start(self, args: list[ElementResponse]) -> BicepJson:
         result: BicepJson = {}
         for arg in args:
             for key, value in arg.items():
@@ -66,13 +74,14 @@ class BicepToJson(Transformer[BicepJson]):
     ####################
 
     @v_args(meta=True)
-    def param(self, meta: Meta, args: tuple[str, str, PossibleValue | None]) -> ParamResponse:
-        name, data_type, default = args
+    def param(self, meta: Meta, args: tuple[list[Decorator] | None, str, str, PossibleValue | None]) -> ParamResponse:
+        decorators, name, data_type, default = args
 
         result: ParamResponse = {
             "parameters": {
                 "__name__": name,
                 "__attrs__": {
+                    "decorators": decorators if decorators else [],
                     "type": data_type,
                     "default": default,
                 },
@@ -125,7 +134,7 @@ class BicepToJson(Transformer[BicepJson]):
         return result
 
     @v_args(meta=True)
-    def resource(self, meta: Meta, args: tuple[str, ApiTypeVersion, Dict[str, Any]]) -> ResourceResponse:
+    def resource(self, meta: Meta, args: tuple[str, ApiTypeVersion, dict[str, Any]]) -> ResourceResponse:
         name, type_api_pair, config = args
 
         result: ResourceResponse = {
@@ -145,7 +154,7 @@ class BicepToJson(Transformer[BicepJson]):
         return result
 
     @v_args(meta=True)
-    def module(self, meta: Meta, args: Tuple[str, ModulePath, Dict[str, Any]]) -> ModuleResponse:
+    def module(self, meta: Meta, args: tuple[str, ModulePath, dict[str, Any]]) -> ModuleResponse:
         name, path, config = args
 
         result: ModuleResponse = {
@@ -170,14 +179,17 @@ class BicepToJson(Transformer[BicepJson]):
     #
     ####################
 
-    def data_type(self, arg: Tuple[Token]) -> str:
+    def data_type(self, arg: tuple[Token]) -> str:
         return str(arg[0])
 
-    def type_api_pair(self, args: Tuple[Token, Token]) -> Dict[str, str]:
+    def type_api_pair(self, args: tuple[Token, Token]) -> ApiTypeVersion:
         type_name, api_version = args
-        return {"type": str(type_name), "api_version": str(api_version)}
+        return {
+            "type": str(type_name),
+            "api_version": str(api_version),
+        }
 
-    def module_path(self, args: Tuple[Token]) -> ModulePath:
+    def module_path(self, args: tuple[Token]) -> ModulePath:
         file_path = str(args[0])[1:-1]
 
         if file_path.startswith("br:"):
@@ -227,7 +239,7 @@ class BicepToJson(Transformer[BicepJson]):
     #
     ####################
 
-    def loop(self, args: Tuple[LoopType, None, Dict[str, Any]]) -> Loop:
+    def loop(self, args: tuple[LoopType, str | None, dict[str, Any]]) -> Loop:
         loop_type, condition, config = args
         return {
             "loop_type": loop_type,
@@ -235,7 +247,7 @@ class BicepToJson(Transformer[BicepJson]):
             "config": config,
         }
 
-    def loop_index(self, args: Tuple[Token, Token, Token]) -> LoopIndex:
+    def loop_index(self, args: tuple[Token, Token, Token]) -> LoopIndex:
         idx_name, start_idx, count = args
         return {
             "type": "index",
@@ -246,7 +258,7 @@ class BicepToJson(Transformer[BicepJson]):
             },
         }
 
-    def loop_array(self, args: Tuple[Token, Token]) -> LoopArray:
+    def loop_array(self, args: tuple[Token, Token]) -> LoopArray:
         item_name, array_name = args
         return {
             "type": "array",
@@ -256,7 +268,7 @@ class BicepToJson(Transformer[BicepJson]):
             },
         }
 
-    def loop_array_index(self, args: Tuple[Token, Token, Token]) -> LoopArrayIndex:
+    def loop_array_index(self, args: tuple[Token, Token, Token]) -> LoopArrayIndex:
         item_name, idx_name, array_name = args
         return {
             "type": "array_index",
@@ -267,7 +279,7 @@ class BicepToJson(Transformer[BicepJson]):
             },
         }
 
-    def loop_object(self, args: Tuple[Token, Token]) -> LoopObject:
+    def loop_object(self, args: tuple[Token, Token]) -> LoopObject:
         item_name, obj_name = args
         return {
             "type": "object",
@@ -279,31 +291,87 @@ class BicepToJson(Transformer[BicepJson]):
 
     ####################
     #
+    # decorators
+    #
+    ####################
+
+    def decorator(self, args: list[Decorator]) -> list[Decorator]:
+        return args
+
+    def deco_allowed(self, args: tuple[list[int | str]]) -> DecoratorAllowed:
+        return {
+            "type": "allowed",
+            "argument": args[0],
+        }
+
+    def deco_description(self, args: tuple[Token]) -> DecoratorDescription:
+        return {
+            "type": "description",
+            "argument": str(args[0]),
+        }
+
+    def deco_min_len(self, args: tuple[Token]) -> DecoratorMinLength:
+        return {
+            "type": "min_length",
+            "argument": int(args[0]),
+        }
+
+    def deco_max_len(self, args: tuple[Token]) -> DecoratorMaxLength:
+        return {
+            "type": "max_length",
+            "argument": int(args[0]),
+        }
+
+    def deco_min_val(self, args: tuple[Token]) -> DecoratorMinValue:
+        return {
+            "type": "min_value",
+            "argument": int(args[0]),
+        }
+
+    def deco_max_val(self, args: tuple[Token]) -> DecoratorMaxValue:
+        return {
+            "type": "max_value",
+            "argument": int(args[0]),
+        }
+
+    def deco_metadata(self, args: tuple[dict[str, Any]]) -> DecoratorMetadata:
+        return {
+            "type": "metadata",
+            "argument": args[0],
+        }
+
+    def deco_secure(self, _: Any) -> DecoratorSecure:
+        return {
+            "type": "secure",
+        }
+
+    ####################
+    #
     # data types
     #
     ####################
 
-    def array(self, args: List[Union[bool, int, Token]]) -> List[Union[bool, int, str]]:
+    def array(self, args: list[bool | int | Token]) -> list[bool | int | str]:
         result = [item.value if isinstance(item, Token) else item for item in args]
         return result
 
-    def object(self, args: List[Tuple[str, Any]]) -> Dict[str, Any]:
+    def object(self, args: list[tuple[str, Any]]) -> dict[str, Any]:
         return dict(args)
 
-    def pair(self, args: Tuple[str, Union[bool, int, Token]]) -> Tuple[str, Union[bool, int, str]]:
+    def pair(self, args: tuple[str, bool | int | Token]) -> tuple[str, bool | int | str]:
         key, value = args
         return (key, value.value if isinstance(value, Token) else value)
 
-    def key(self, arg: Tuple[Token]) -> str:
+    def key(self, arg: tuple[Token]) -> str:
         return str(arg[0])
 
-    def int(self, arg: Tuple[Token]) -> int:
+    def int(self, arg: tuple[Token]) -> int:
         return int(arg[0])
 
-    def string(self, arg: Tuple[Token]) -> str:
+    def string(self, arg: tuple[Token]) -> str:
         return str(arg[0])
 
-    def multi_line_string(self, arg: Tuple[Token]) -> str:
+    def multi_line_string(self, arg: tuple[Token]) -> str:
         value = arg[0].value[3:-3]
         value = value[1:] if value.startswith("\n") else value
         return f"'{value}'"

@@ -7,16 +7,19 @@ from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 PossibleValue: TypeAlias = "bool | int | str | list[bool | int | str]"
 ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | TemplateSpecModulePath"
 LoopType: TypeAlias = "LoopIndex | LoopArray | LoopArrayIndex | LoopObject"
+ElementResponse: TypeAlias = "ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse"
+Decorator: TypeAlias = "DecoratorAllowed | DecoratorDescription | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"  # noqa: E501, B950
 
 
 ####################
 #
-# JSON response
+# Elements
 #
 ####################
 
 
 class _ParameterAttributes(TypedDict):
+    decorators: list[Decorator]
     type: str
     default: PossibleValue | None
     __start_line__: NotRequired[int]
@@ -195,8 +198,54 @@ class LoopObject(TypedDict):
 
 class Loop(TypedDict):
     loop_type: LoopType
-    condition: None
-    config: Dict[str, Any]
+    condition: str | None
+    config: dict[str, Any]
+
+
+####################
+#
+# Decorators
+#
+####################
+
+
+class DecoratorAllowed(TypedDict):
+    type: Literal["allowed"]
+    argument: list[int | str]
+
+
+class DecoratorDescription(TypedDict):
+    type: Literal["description"]
+    argument: str
+
+
+class DecoratorMinLength(TypedDict):
+    type: Literal["min_length"]
+    argument: int
+
+
+class DecoratorMaxLength(TypedDict):
+    type: Literal["max_length"]
+    argument: int
+
+
+class DecoratorMinValue(TypedDict):
+    type: Literal["min_value"]
+    argument: int
+
+
+class DecoratorMaxValue(TypedDict):
+    type: Literal["max_value"]
+    argument: int
+
+
+class DecoratorMetadata(TypedDict):
+    type: Literal["metadata"]
+    argument: dict[str, Any]
+
+
+class DecoratorSecure(TypedDict):
+    type: Literal["secure"]
 
 
 ####################
@@ -207,8 +256,8 @@ class Loop(TypedDict):
 
 
 class BicepJson(TypedDict):
-    parameters: NotRequired[Dict[str, _ParameterAttributes]]
-    variables: NotRequired[Dict[str, _VariableAttributes]]
-    resources: NotRequired[Dict[str, _ResourceAttributes]]
-    modules: NotRequired[Dict[str, _ModuleAttributes]]
-    outputs: NotRequired[Dict[str, _OutputAttributes]]
+    parameters: NotRequired[dict[str, _ParameterAttributes]]
+    variables: NotRequired[dict[str, _VariableAttributes]]
+    resources: NotRequired[dict[str, _ResourceAttributes]]
+    modules: NotRequired[dict[str, _ModuleAttributes]]
+    outputs: NotRequired[dict[str, _OutputAttributes]]

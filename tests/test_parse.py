@@ -150,3 +150,16 @@ def test_parse_loop_condition() -> None:
 
     # then
     assert_that(result).is_equal_to(expected_result)
+
+
+def test_parse_param_decorator() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "complex/01-param-decorator"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BicepParser(file_path).json()
+
+    # then
+    assert_that(result).is_equal_to(expected_result)
