@@ -1,0 +1,334 @@
+{
+  "parameters": {
+    "virtualMachineSize": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "'Virtual machine size (has to be at least the size of Standard_A3 to support 2 NICs)'"
+        }
+      ],
+      "type": "string",
+      "default": "'Standard_DS1_v2'",
+      "__start_line__": 3,
+      "__end_line__": 4
+    },
+    "adminUsername": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "'Default Admin username'"
+        }
+      ],
+      "type": "string",
+      "default": null,
+      "__start_line__": 6,
+      "__end_line__": 7
+    },
+    "adminPassword": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "'Default Admin password'"
+        },
+        {
+          "type": "secure"
+        }
+      ],
+      "type": "string",
+      "default": null,
+      "__start_line__": 9,
+      "__end_line__": 11
+    },
+    "storageAccountType": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "'Storage Account type for the VM and VM diagnostic storage'"
+        },
+        {
+          "type": "allowed",
+          "argument": [
+            "'Standard_LRS'",
+            "'Premium_LRS'"
+          ]
+        }
+      ],
+      "type": "string",
+      "default": "'Standard_LRS'",
+      "__start_line__": 13,
+      "__end_line__": 18
+    },
+    "location": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "'Location for all resources.'"
+        }
+      ],
+      "type": "string",
+      "default": "resourceGroup().location",
+      "__start_line__": 20,
+      "__end_line__": 21
+    }
+  },
+  "variables": {
+    "virtualMachineName": {
+      "value": "'VM-MultiNic'",
+      "__start_line__": 23,
+      "__end_line__": 23
+    },
+    "nic1Name": {
+      "value": "'nic-1'",
+      "__start_line__": 24,
+      "__end_line__": 24
+    },
+    "nic2Name": {
+      "value": "'nic-2'",
+      "__start_line__": 25,
+      "__end_line__": 25
+    },
+    "virtualNetworkName": {
+      "value": "'virtualNetwork'",
+      "__start_line__": 26,
+      "__end_line__": 26
+    },
+    "subnet1Name": {
+      "value": "'subnet-1'",
+      "__start_line__": 27,
+      "__end_line__": 27
+    },
+    "subnet2Name": {
+      "value": "'subnet-2'",
+      "__start_line__": 28,
+      "__end_line__": 28
+    },
+    "publicIPAddressName": {
+      "value": "'publicIp'",
+      "__start_line__": 29,
+      "__end_line__": 29
+    },
+    "diagStorageAccountName": {
+      "value": "'diags${uniqueString(resourceGroup().id)}'",
+      "__start_line__": 30,
+      "__end_line__": 30
+    },
+    "networkSecurityGroupName": {
+      "value": "'NSG'",
+      "__start_line__": 31,
+      "__end_line__": 31
+    },
+    "networkSecurityGroupName2": {
+      "value": "'${subnet2Name}-nsg'",
+      "__start_line__": 32,
+      "__end_line__": 32
+    }
+  },
+  "resources": {
+    "vm": {
+      "type": "Microsoft.Compute/virtualMachines",
+      "api_version": "2020-06-01",
+      "config": {
+        "name": "virtualMachineName",
+        "location": "location",
+        "properties": {
+          "osProfile": {
+            "computerName": "virtualMachineName",
+            "adminUsername": "adminUsername",
+            "adminPassword": "adminPassword",
+            "windowsConfiguration": {
+              "provisionVMAgent": true
+            }
+          },
+          "hardwareProfile": {
+            "vmSize": "virtualMachineSize"
+          },
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "'MicrosoftWindowsServer'",
+              "offer": "'WindowsServer'",
+              "sku": "'2019-Datacenter'",
+              "version": "'latest'"
+            },
+            "osDisk": {
+              "createOption": "'FromImage'"
+            }
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "properties": {
+                  "primary": true
+                },
+                "id": "nic1.id"
+              },
+              {
+                "properties": {
+                  "primary": false
+                },
+                "id": "nic2.id"
+              }
+            ]
+          },
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "enabled": true,
+              "storageUri": "diagsAccount.properties.primaryEndpoints.blob"
+            }
+          }
+        }
+      },
+      "__start_line__": 35,
+      "__end_line__": 84
+    },
+    "diagsAccount": {
+      "type": "Microsoft.Storage/storageAccounts",
+      "api_version": "2019-06-01",
+      "config": {
+        "name": "diagStorageAccountName",
+        "location": "location",
+        "sku": {
+          "name": "storageAccountType"
+        },
+        "kind": "'StorageV2'"
+      },
+      "__start_line__": 86,
+      "__end_line__": 93
+    },
+    "nsg2": {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "api_version": "2020-06-01",
+      "config": {
+        "name": "networkSecurityGroupName2",
+        "location": "location"
+      },
+      "__start_line__": 96,
+      "__end_line__": 99
+    },
+    "vnet": {
+      "type": "Microsoft.Network/virtualNetworks",
+      "api_version": "2020-06-01",
+      "config": {
+        "name": "virtualNetworkName",
+        "location": "location",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "'10.0.0.0/16'"
+            ]
+          },
+          "subnets": [
+            {
+              "name": "subnet1Name",
+              "properties": {
+                "addressPrefix": "'10.0.0.0/24'"
+              }
+            },
+            {
+              "name": "subnet2Name",
+              "properties": {
+                "addressPrefix": "'10.0.1.0/24'",
+                "networkSecurityGroup": {
+                  "id": "nsg2.id"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "__start_line__": 102,
+      "__end_line__": 129
+    },
+    "nic1": {
+      "type": "Microsoft.Network/networkInterfaces",
+      "api_version": "2020-06-01",
+      "config": {
+        "name": "nic1Name",
+        "location": "location",
+        "properties": {
+          "ipConfigurations": [
+            {
+              "name": "'ipconfig1'",
+              "properties": {
+                "subnet": {
+                  "id": "resourceId('Microsoft.Network/virtualNetworks/subnets', vnet.name, subnet1Name)"
+                },
+                "privateIPAllocationMethod": "'Dynamic'",
+                "publicIPAddress": {
+                  "id": "pip.id"
+                }
+              }
+            }
+          ],
+          "networkSecurityGroup": {
+            "id": "nsg.id"
+          }
+        }
+      },
+      "__start_line__": 132,
+      "__end_line__": 154
+    },
+    "nic2": {
+      "type": "Microsoft.Network/networkInterfaces",
+      "api_version": "2020-06-01",
+      "config": {
+        "name": "nic2Name",
+        "location": "location",
+        "properties": {
+          "ipConfigurations": [
+            {
+              "name": "'ipconfig1'",
+              "properties": {
+                "subnet": {
+                  "id": "resourceId('Microsoft.Network/virtualNetworks/subnets', vnet.name, subnet2Name)"
+                },
+                "privateIPAllocationMethod": "'Dynamic'"
+              }
+            }
+          ]
+        }
+      },
+      "__start_line__": 157,
+      "__end_line__": 173
+    },
+    "pip": {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "api_version": "2020-06-01",
+      "config": {
+        "name": "publicIPAddressName",
+        "location": "location",
+        "properties": {
+          "publicIPAllocationMethod": "'Dynamic'"
+        }
+      },
+      "__start_line__": 176,
+      "__end_line__": 182
+    },
+    "nsg": {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "api_version": "2020-06-01",
+      "config": {
+        "name": "networkSecurityGroupName",
+        "location": "location",
+        "properties": {
+          "securityRules": [
+            {
+              "name": "'default-allow-rdp'",
+              "properties": {
+                "priority": 1000,
+                "sourceAddressPrefix": "'*'",
+                "protocol": "'Tcp'",
+                "destinationPortRange": "'3389'",
+                "access": "'Allow'",
+                "direction": "'Inbound'",
+                "sourcePortRange": "'*'",
+                "destinationAddressPrefix": "'*'"
+              }
+            }
+          ]
+        }
+      },
+      "__start_line__": 185,
+      "__end_line__": 205
+    }
+  }
+}

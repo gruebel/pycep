@@ -8,20 +8,6 @@ from pycep import BicepParser
 EXAMPLES_DIR = Path(__file__).parent / "examples"
 
 
-# will change this to a more complex example, when decorators are supported
-def test_parse_with_line_numbers() -> None:
-    # given
-    sub_dir_path = EXAMPLES_DIR / "loop/02-loop-array"
-    file_path = sub_dir_path / "main.bicep"
-    expected_result = json.loads((sub_dir_path / "result-line-numbers.json").read_text())
-
-    # when
-    result = BicepParser(file_path, add_line_numbers=True).json()
-
-    # then
-    assert_that(result).is_equal_to(expected_result)
-
-
 def test_parse_param() -> None:
     # given
     sub_dir_path = EXAMPLES_DIR / "basic/01-param"
