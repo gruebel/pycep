@@ -7,7 +7,7 @@ This is still a very early stage, therefore a lot can and will change.
 ## Next milestones
 - [x] Complete loop support
 - [x] Param decorator
-- [ ] Module decorator
+- [x] Resource/Module decorator
 - [ ] Output condition
 - [ ] Existing resource keyword
 - [ ] Module alias

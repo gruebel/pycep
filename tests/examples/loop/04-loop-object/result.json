@@ -17,6 +17,7 @@
   },
   "resources": {
     "nsgObject": {
+      "decorators": [],
       "type": "Microsoft.Network/networkSecurityGroups",
       "api_version": "2020-06-01",
       "config": {

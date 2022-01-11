@@ -1,10 +1,10 @@
 start: element*
 
 element: [decorator] "param" string data_type ["=" param_value]             -> param
-       | "var" string "=" var_value                             -> var
-       | "output" string data_type "=" output_value             -> output
-       | "resource" string type_api_pair "=" resource_value     -> resource
-       | "module" string module_path "=" module_value           -> module
+       | "var" string "=" var_value                                         -> var
+       | "output" string data_type "=" output_value                         -> output
+       | [decorator] "resource" string type_api_pair "=" resource_value     -> resource
+       | [decorator] "module" string module_path "=" module_value           -> module
 
 ?value: SIGNED_INT                                  -> int
       | "true"                                      -> true
@@ -62,9 +62,11 @@ key: string
 
 // decorators
 
-decorator: ("@" (deco_allowed | deco_description | deco_min_len | deco_max_len | deco_min_val | deco_max_val | deco_metadata | deco_secure))+
+decorator: ("@" (deco_allowed | deco_batch | deco_description | deco_min_len | deco_max_len | deco_min_val | deco_max_val | deco_metadata | deco_secure))+
 
 deco_allowed: "allowed" "(" array ")"
+
+deco_batch: "batchSize" "(" /\d+/ ")"
 
 deco_description: "description" "(" QUOTED_INTERPOLATION ")"
 

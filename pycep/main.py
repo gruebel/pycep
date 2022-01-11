@@ -14,6 +14,7 @@ from pycep.typing import (
     BicepRegistryModulePath,
     Decorator,
     DecoratorAllowed,
+    DecoratorBatchSize,
     DecoratorDescription,
     DecoratorMaxLength,
     DecoratorMaxValue,
@@ -134,13 +135,16 @@ class BicepToJson(Transformer[BicepJson]):
         return result
 
     @v_args(meta=True)
-    def resource(self, meta: Meta, args: tuple[str, ApiTypeVersion, dict[str, Any]]) -> ResourceResponse:
-        name, type_api_pair, config = args
+    def resource(
+        self, meta: Meta, args: tuple[list[Decorator] | None, str, ApiTypeVersion, dict[str, Any]]
+    ) -> ResourceResponse:
+        decorators, name, type_api_pair, config = args
 
         result: ResourceResponse = {
             "resources": {
                 "__name__": name,
                 "__attrs__": {
+                    "decorators": decorators if decorators else [],
                     **type_api_pair,  # type: ignore[misc] # https://github.com/python/mypy/issues/11753
                     "config": config,
                 },
@@ -154,13 +158,16 @@ class BicepToJson(Transformer[BicepJson]):
         return result
 
     @v_args(meta=True)
-    def module(self, meta: Meta, args: tuple[str, ModulePath, dict[str, Any]]) -> ModuleResponse:
-        name, path, config = args
+    def module(
+        self, meta: Meta, args: tuple[list[Decorator] | None, str, ModulePath, dict[str, Any]]
+    ) -> ModuleResponse:
+        decorators, name, path, config = args
 
         result: ModuleResponse = {
             "modules": {
                 "__name__": name,
                 "__attrs__": {
+                    "decorators": decorators if decorators else [],
                     **path,  # type: ignore[misc] # https://github.com/python/mypy/issues/11753
                     "config": config,
                 },
@@ -302,6 +309,12 @@ class BicepToJson(Transformer[BicepJson]):
         return {
             "type": "allowed",
             "argument": args[0],
+        }
+
+    def deco_batch(self, args: tuple[Token]) -> DecoratorBatchSize:
+        return {
+            "type": "batchSize",
+            "argument": int(args[0]),
         }
 
     def deco_description(self, args: tuple[Token]) -> DecoratorDescription:

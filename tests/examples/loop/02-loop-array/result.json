@@ -19,6 +19,7 @@
   },
   "resources": {
     "storageArray": {
+      "decorators": [],
       "type": "Microsoft.Storage/storageAccounts",
       "api_version": "2021-06-01",
       "config": {
@@ -41,6 +42,7 @@
       }
     },
     "parentResources": {
+      "decorators": [],
       "type": "Microsoft.Example/examples",
       "api_version": "2020-06-06",
       "config": {
@@ -76,6 +78,7 @@
   },
   "modules": {
     "sqlFirewallRules": {
+      "decorators": [],
       "type": "local",
       "detail": {
         "full": "sql-firewall-rule.bicep",

@@ -95,6 +95,7 @@
   },
   "resources": {
     "vm": {
+      "decorators": [],
       "type": "Microsoft.Compute/virtualMachines",
       "api_version": "2020-06-01",
       "config": {
@@ -149,6 +150,7 @@
       }
     },
     "diagsAccount": {
+      "decorators": [],
       "type": "Microsoft.Storage/storageAccounts",
       "api_version": "2019-06-01",
       "config": {
@@ -161,6 +163,7 @@
       }
     },
     "nsg2": {
+      "decorators": [],
       "type": "Microsoft.Network/networkSecurityGroups",
       "api_version": "2020-06-01",
       "config": {
@@ -169,6 +172,7 @@
       }
     },
     "vnet": {
+      "decorators": [],
       "type": "Microsoft.Network/virtualNetworks",
       "api_version": "2020-06-01",
       "config": {
@@ -201,6 +205,7 @@
       }
     },
     "nic1": {
+      "decorators": [],
       "type": "Microsoft.Network/networkInterfaces",
       "api_version": "2020-06-01",
       "config": {
@@ -228,6 +233,7 @@
       }
     },
     "nic2": {
+      "decorators": [],
       "type": "Microsoft.Network/networkInterfaces",
       "api_version": "2020-06-01",
       "config": {
@@ -249,6 +255,7 @@
       }
     },
     "pip": {
+      "decorators": [],
       "type": "Microsoft.Network/publicIPAddresses",
       "api_version": "2020-06-01",
       "config": {
@@ -260,6 +267,7 @@
       }
     },
     "nsg": {
+      "decorators": [],
       "type": "Microsoft.Network/networkSecurityGroups",
       "api_version": "2020-06-01",
       "config": {

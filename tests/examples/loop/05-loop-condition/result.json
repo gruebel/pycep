@@ -1,6 +1,7 @@
 {
   "resources": {
     "parentResources": {
+      "decorators": [],
       "type": "Microsoft.Example/examples",
       "api_version": "2020-06-06",
       "config": {
@@ -36,6 +37,7 @@
   },
   "modules": {
     "stgModule": {
+      "decorators": [],
       "type": "local",
       "detail": {
         "full": "./storageAccount.bicep",

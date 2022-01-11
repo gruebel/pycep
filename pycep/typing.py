@@ -8,7 +8,7 @@ PossibleValue: TypeAlias = "bool | int | str | list[bool | int | str]"
 ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | TemplateSpecModulePath"
 LoopType: TypeAlias = "LoopIndex | LoopArray | LoopArrayIndex | LoopObject"
 ElementResponse: TypeAlias = "ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse"
-Decorator: TypeAlias = "DecoratorAllowed | DecoratorDescription | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"  # noqa: E501, B950
+Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"  # noqa: E501, B950
 
 
 ####################
@@ -67,6 +67,7 @@ class OutputResponse(TypedDict):
 
 
 class _ResourceAttributes(TypedDict):
+    decorators: list[Decorator]
     type: str
     api_version: str
     config: Dict[str, Any]
@@ -84,6 +85,7 @@ class ResourceResponse(TypedDict):
 
 
 class _ModuleAttributes(TypedDict):
+    decorators: list[Decorator]
     type: Literal["local"] | Literal["bicep_registry"] | Literal["template_spec"]
     detail: _LocalModulePathDetail | _BicepRegistryModulePathDetail | _TemplateSpecModulePathDetail
     config: Dict[str, Any]
@@ -212,6 +214,11 @@ class Loop(TypedDict):
 class DecoratorAllowed(TypedDict):
     type: Literal["allowed"]
     argument: list[int | str]
+
+
+class DecoratorBatchSize(TypedDict):
+    type: Literal["batchSize"]
+    argument: int
 
 
 class DecoratorDescription(TypedDict):

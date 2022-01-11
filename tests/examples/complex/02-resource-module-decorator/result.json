@@ -1,54 +1,43 @@
 {
-  "outputs": {
-    "deployedNSGs": {
-      "type": "array",
-      "value": {
-        "loop_type": {
-          "type": "array_index",
-          "detail": {
-            "item_name": "name",
-            "index_name": "i",
-            "array_name": "orgNames"
-          }
-        },
-        "condition": null,
-        "config": {
-          "orgName": "name",
-          "nsgName": "nsg[i].name",
-          "resourceId": "nsg[i].id"
-        }
-      }
-    }
-  },
   "resources": {
-    "storageArrayIndex": {
-      "decorators": [],
+    "storageAcct": {
+      "decorators": [
+        {
+          "type": "batchSize",
+          "argument": 2
+        }
+      ],
       "type": "Microsoft.Storage/storageAccounts",
       "api_version": "2021-06-01",
       "config": {
         "loop_type": {
-          "type": "array_index",
+          "type": "index",
           "detail": {
-            "item_name": "config",
             "index_name": "i",
-            "array_name": "storageConfigurations"
+            "start_index": "0",
+            "count": "4"
           }
         },
         "condition": null,
         "config": {
-          "name": "'${storageAccountNamePrefix}${config.suffix}${i}'",
-          "location": "resourceGroup().location",
+          "name": "'${i}storage${uniqueString(resourceGroup().id)}'",
+          "location": "location",
           "sku": {
-            "name": "config.sku"
+            "name": "'Standard_LRS'"
           },
-          "kind": "'StorageV2'"
+          "kind": "'Storage'"
         }
       }
     }
   },
   "modules": {
     "sqlLogicalServer": {
-      "decorators": [],
+      "decorators": [
+        {
+          "type": "batchSize",
+          "argument": 1
+        }
+      ],
       "type": "local",
       "detail": {
         "full": "sql-logical-server.bicep",

@@ -1,6 +1,7 @@
 {
   "resources": {
     "storageAccount": {
+      "decorators": [],
       "type": "Microsoft.Storage/storageAccounts",
       "api_version": "2019-06-01",
       "config": {
