@@ -1,0 +1,51 @@
+{
+  "globals": {
+    "scope": {
+      "value": "tenant"
+    }
+  },
+  "parameters": {
+    "deploymentName": {
+      "decorators": [],
+      "type": "string",
+      "default": "'managementGroups${utcNow()}'"
+    }
+  },
+  "modules": {
+    "managementGroupGlobal": {
+      "decorators": [],
+      "type": "local",
+      "detail": {
+        "full": "./main.bicep",
+        "path": "./main.bicep"
+      },
+      "config": {
+        "name": "'${deploymentName}managementGroupGlobal'",
+        "params": {
+          "managementGroupDisplayName": "'MyOrganisation'",
+          "managementGroupId": "'gbl-org-mgp'",
+          "subscriptionIds": []
+        }
+      }
+    },
+    "managementGroupPlatform": {
+      "decorators": [],
+      "type": "local",
+      "detail": {
+        "full": "./main.bicep",
+        "path": "./main.bicep"
+      },
+      "config": {
+        "name": "'${deploymentName}managementGroupSandbox'",
+        "params": {
+          "managementGroupDisplayName": "'Sandbox'",
+          "managementGroupId": "'sbx-org-mgp'",
+          "parentManagementGroupId": "managementGroupGlobal.outputs.managementGroupID",
+          "subscriptionIds": [
+            "'63c1651a-ec30-4f6c-a3ec-671e23063585'"
+          ]
+        }
+      }
+    }
+  }
+}

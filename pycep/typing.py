@@ -18,6 +18,29 @@ Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescrip
 ####################
 
 
+class _GlobalsAttributes(TypedDict):
+    scope: _ScopeAttributes
+
+
+class Globals(TypedDict):
+    globals: _GlobalsAttributes
+
+
+class _ScopeAttributes(TypedDict):
+    value: Literal["resourceGroup", "subscription", "managementGroup", "tenant"]
+    __start_line__: NotRequired[int]
+    __end_line__: NotRequired[int]
+
+
+class _Scope(TypedDict):
+    __name__: Literal["scope"]
+    __attrs__: _ScopeAttributes
+
+
+class ScopeResponse(TypedDict):
+    globals: _Scope
+
+
 class _ParameterAttributes(TypedDict):
     decorators: list[Decorator]
     type: str
@@ -263,6 +286,7 @@ class DecoratorSecure(TypedDict):
 
 
 class BicepJson(TypedDict):
+    globals: _GlobalsAttributes
     parameters: NotRequired[dict[str, _ParameterAttributes]]
     variables: NotRequired[dict[str, _VariableAttributes]]
     resources: NotRequired[dict[str, _ResourceAttributes]]

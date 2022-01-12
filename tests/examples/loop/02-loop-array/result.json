@@ -1,4 +1,9 @@
 {
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
   "outputs": {
     "out1": {
       "type": "array",

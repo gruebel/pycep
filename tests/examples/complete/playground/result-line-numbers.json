@@ -1,4 +1,11 @@
 {
+  "globals": {
+    "scope": {
+      "value": "resourceGroup",
+      "__start_line__": 0,
+      "__end_line__": 0
+    }
+  },
   "parameters": {
     "virtualMachineSize": {
       "decorators": [

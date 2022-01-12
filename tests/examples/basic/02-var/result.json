@@ -1,4 +1,9 @@
 {
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
   "variables": {
     "stringVar": {
       "value": "'this is multi-line\n  string with formatting\n  preserved.\n'"

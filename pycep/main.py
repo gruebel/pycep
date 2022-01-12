@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from lark import Lark, Token, Transformer, Tree, v_args
 from lark.tree import Meta
@@ -36,6 +36,7 @@ from pycep.typing import (
     ParamResponse,
     PossibleValue,
     ResourceResponse,
+    ScopeResponse,
     TemplateSpecModulePath,
     VarResponse,
 )
@@ -46,6 +47,8 @@ BICEP_REGISTRY_PATTERN = re.compile(r"br:(?P<registry_name>\w+)\.azurecr\.io/(?P
 TEMPLATE_SPEC_PATTERN = re.compile(
     r"ts:(?P<sub_id>[\d\-]+)/(?P<rg_id>[\w._\-()]+)/(?P<name>[\w.\-]+):(?P<version>[\w.\-]+)"
 )
+
+VALID_TARGET_SCOPES = {"resourceGroup", "subscription", "managementGroup", "tenant"}
 
 
 class BicepToJson(Transformer[BicepJson]):
@@ -61,7 +64,19 @@ class BicepToJson(Transformer[BicepJson]):
     ####################
 
     def start(self, args: list[ElementResponse]) -> BicepJson:
-        result: BicepJson = {}
+        result: BicepJson = {
+            "globals": {
+                "scope": {
+                    "value": "resourceGroup",
+                },
+            }
+        }
+
+        # defaults are not included in the file
+        if self.add_line_numbers:
+            result["globals"]["scope"]["__start_line__"] = 0
+            result["globals"]["scope"]["__end_line__"] = 0
+
         for arg in args:
             for key, value in arg.items():
                 result.setdefault(key, {})[value["__name__"]] = value["__attrs__"]  # type: ignore[misc, index]
@@ -73,6 +88,28 @@ class BicepToJson(Transformer[BicepJson]):
     # elements
     #
     ####################
+
+    @v_args(meta=True)
+    def scope(self, meta: Meta, args: tuple[Token]) -> ScopeResponse:
+        value = cast(Literal["resourceGroup", "subscription", "managementGroup", "tenant"], str(args[0])[1:-1])
+
+        if value not in VALID_TARGET_SCOPES:
+            raise ValueError(f"target scope is invalid: {value}")
+
+        result: ScopeResponse = {
+            "globals": {
+                "__name__": "scope",
+                "__attrs__": {
+                    "value": value,
+                },
+            }
+        }
+
+        if self.add_line_numbers:
+            result["globals"]["__attrs__"]["__start_line__"] = meta.line
+            result["globals"]["__attrs__"]["__end_line__"] = meta.end_line
+
+        return result
 
     @v_args(meta=True)
     def param(self, meta: Meta, args: tuple[list[Decorator] | None, str, str, PossibleValue | None]) -> ParamResponse:

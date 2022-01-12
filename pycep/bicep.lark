@@ -1,6 +1,7 @@
 start: element*
 
-element: [decorator] "param" string data_type ["=" param_value]             -> param
+element: "targetScope" "=" QUOTED_INTERPOLATION                             -> scope
+       | [decorator] "param" string data_type ["=" param_value]             -> param
        | "var" string "=" var_value                                         -> var
        | "output" string data_type "=" output_value                         -> output
        | [decorator] "resource" string type_api_pair "=" resource_value     -> resource
@@ -32,7 +33,7 @@ element: [decorator] "param" string data_type ["=" param_value]             -> p
 
 data_type: STRING
 
-type_api_pair: "'" /[\w.\/]+/ "@" /[\d\-]+/ "'"
+type_api_pair: "'" /[\w.\/]+/ "@" /[\d\-]+\w*/ "'"
 
 module_path: QUOTED_INTERPOLATION
 
@@ -54,7 +55,7 @@ string: STRING
 
 array: "[" value* "]"
 
-object: "{" pair+ "}"
+object: "{" pair* "}"
 
 pair: key ":" (value | loop)
 
@@ -87,7 +88,7 @@ deco_secure: "secure" "(" ")"
 STRING: /[\w_.]+/
 FUNCTION: /(?!if\()(?=[\w_]+([\[\]]|[()])+)[\w_\[\]()\/.,' ]+/
 //QUOTED_STRING: "'" /[\s\w\-\/.:+]+/ "'"
-QUOTED_INTERPOLATION: "'" /[\s\w\-\/${}().,:+* ]+/ "'"
+QUOTED_INTERPOLATION: "'" /[\s\w\-\/${}().,:+* ]*/ "'"
 
 MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
 

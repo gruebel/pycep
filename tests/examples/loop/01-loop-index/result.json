@@ -1,4 +1,9 @@
 {
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
   "variables": {
     "stringArray": {
       "value": {

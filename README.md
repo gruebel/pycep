@@ -8,6 +8,7 @@ This is still a very early stage, therefore a lot can and will change.
 - [x] Complete loop support
 - [x] Param decorator
 - [x] Resource/Module decorator
+- [x] Target scope
 - [ ] Output condition
 - [ ] Existing resource keyword
 - [ ] Module alias

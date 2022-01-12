@@ -1,0 +1,55 @@
+{
+  "globals": {
+    "scope": {
+      "value": "subscription"
+    }
+  },
+  "parameters": {
+    "principalId": {
+      "decorators": [],
+      "type": "string",
+      "default": null
+    }
+  },
+  "variables": {
+    "roleName": {
+      "value": "'Bicep Custom Role demo'"
+    }
+  },
+  "resources": {
+    "definition": {
+      "decorators": [],
+      "type": "Microsoft.Authorization/roleDefinitions",
+      "api_version": "2018-01-01-preview",
+      "config": {
+        "name": "guid(roleName)",
+        "properties": {
+          "roleName": "roleName",
+          "description": "'Custom role create with bicep'",
+          "permissions": [
+            {
+              "actions": [
+                "'*/read'"
+              ]
+            }
+          ],
+          "assignableScopes": [
+            "subscription().id"
+          ]
+        }
+      }
+    },
+    "assignment": {
+      "decorators": [],
+      "type": "Microsoft.Authorization/roleAssignments",
+      "api_version": "2020-04-01-preview",
+      "config": {
+        "name": "guid(roleName, principalId, subscription().subscriptionId)",
+        "properties": {
+          "roleDefinitionId": "definition.id",
+          "principalId": "principalId"
+        }
+      }
+    }
+  }
+}

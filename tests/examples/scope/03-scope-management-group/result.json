@@ -1,0 +1,79 @@
+{
+  "globals": {
+    "scope": {
+      "value": "managementGroup"
+    }
+  },
+  "parameters": {
+    "targetMG": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "'Target Management Group'"
+        }
+      ],
+      "type": "string",
+      "default": null
+    },
+    "allowedLocations": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "'An array of the allowed locations, all other locations will be denied by the created policy.'"
+        }
+      ],
+      "type": "array",
+      "default": [
+        "'australiaeast'",
+        "'australiasoutheast'",
+        "'australiacentral'"
+      ]
+    }
+  },
+  "variables": {
+    "mgScope": {
+      "value": "tenantResourceId('Microsoft.Management/managementGroups', targetMG)"
+    },
+    "policyDefinitionName": {
+      "value": "'LocationRestriction'"
+    }
+  },
+  "resources": {
+    "policyDefinition": {
+      "decorators": [],
+      "type": "Microsoft.Authorization/policyDefinitions",
+      "api_version": "2020-03-01",
+      "config": {
+        "name": "policyDefinitionName",
+        "properties": {
+          "policyType": "'Custom'",
+          "mode": "'All'",
+          "parameters": {},
+          "policyRule": {
+            "if": {
+              "not": {
+                "field": "'location'",
+                "in": "allowedLocations"
+              }
+            },
+            "then": {
+              "effect": "'deny'"
+            }
+          }
+        }
+      }
+    },
+    "policyAssignment": {
+      "decorators": [],
+      "type": "Microsoft.Authorization/policyAssignments",
+      "api_version": "2020-03-01",
+      "config": {
+        "name": "'location-lock'",
+        "properties": {
+          "scope": "mgScope",
+          "policyDefinitionId": "extensionResourceId(mgScope, 'Microsoft.Authorization/policyDefinitions', policyDefinition.name)"
+        }
+      }
+    }
+  }
+}
