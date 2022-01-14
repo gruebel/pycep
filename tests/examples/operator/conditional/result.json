@@ -1,0 +1,63 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "variables": {
+    "subnetId": {
+      "value": {
+        "operator": {
+          "type": "conditional",
+          "operands": {
+            "condition": "createNewVnet",
+            "true_value": "subnet.id",
+            "false_value": "resourceId(vnetResourceGroupName, 'Microsoft.Network/virtualNetworks/subnets', vnetName, subnetName)"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "managementGroup": {
+      "decorators": [],
+      "type": "Microsoft.Management/managementGroups",
+      "api_version": "2020-05-01",
+      "config": {
+        "name": "managementGroupId",
+        "properties": {
+          "displayName": "managementGroupDisplayName",
+          "details": {
+            "parent": {
+              "id": {
+                "operator": {
+                  "type": "conditional",
+                  "operands": {
+                    "condition": "empty(parentManagementGroupId)) ",
+                    "true_value": "'/providers/Microsoft.Management/managementGroups/${parentManagementGroupId}'",
+                    "false_value": "null"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "endpoint": {
+      "type": "string",
+      "value": {
+        "operator": {
+          "type": "conditional",
+          "operands": {
+            "condition": "deployStorage",
+            "true_value": "myStorageAccount.properties.primaryEndpoints.blob",
+            "false_value": "''"
+          }
+        }
+      }
+    }
+  }
+}

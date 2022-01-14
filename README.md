@@ -9,10 +9,16 @@ This is still a very early stage, therefore a lot can and will change.
 - [x] Param decorator
 - [x] Resource/Module decorator
 - [x] Target scope
-- [ ] Output condition
 - [ ] Existing resource keyword
 - [ ] Module alias
 - [ ] Deployment condition
+- [ ] Operators
+  - [ ] Logical
+    - [ ] And
+    - [ ] Or
+    - [ ] Not
+    - [ ] Coalesce
+    - [x] Conditional expression
 - [x] Adding line numbers to element blocks
 - [ ] Create a package
 - [ ] Publish package to `pypi`

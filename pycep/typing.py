@@ -4,7 +4,8 @@ from typing import Any, Dict
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
-PossibleValue: TypeAlias = "bool | int | str | list[bool | int | str]"
+# dict[str, Any] -> dict[str, PossibleValue] not supported https://github.com/python/mypy/issues/731
+PossibleValue: TypeAlias = "bool | int | str | list[bool | int | str] | dict[str, Any]"
 ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | TemplateSpecModulePath"
 LoopType: TypeAlias = "LoopIndex | LoopArray | LoopArrayIndex | LoopObject"
 ElementResponse: TypeAlias = "ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse"
@@ -276,6 +277,28 @@ class DecoratorMetadata(TypedDict):
 
 class DecoratorSecure(TypedDict):
     type: Literal["secure"]
+
+
+####################
+#
+# Operators
+#
+####################
+
+
+class ConditionalOperands(TypedDict):
+    condition: str
+    true_value: PossibleValue
+    false_value: PossibleValue
+
+
+class Conditional(TypedDict):
+    type: Literal["conditional"]
+    operands: ConditionalOperands
+
+
+class Operator(TypedDict):
+    operator: Conditional
 
 
 ####################

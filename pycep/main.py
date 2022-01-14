@@ -32,6 +32,7 @@ from pycep.typing import (
     LoopType,
     ModulePath,
     ModuleResponse,
+    Operator,
     OutputResponse,
     ParamResponse,
     PossibleValue,
@@ -227,7 +228,7 @@ class BicepToJson(Transformer[BicepJson]):
         return str(arg[0])
 
     def type_api_pair(self, args: tuple[Token, Token]) -> ApiTypeVersion:
-        type_name, api_version = args
+        type_name, api_version = str(args[0])[1:-1].split("@")
         return {
             "type": str(type_name),
             "api_version": str(api_version),
@@ -393,6 +394,26 @@ class BicepToJson(Transformer[BicepJson]):
     def deco_secure(self, _: Any) -> DecoratorSecure:
         return {
             "type": "secure",
+        }
+
+    ####################
+    #
+    # operators
+    #
+    ####################
+
+    def conditional(self, args: tuple[Token, PossibleValue, PossibleValue]) -> Operator:
+        condition, true_value, false_value = args
+
+        return {
+            "operator": {
+                "type": "conditional",
+                "operands": {
+                    "condition": str(condition),
+                    "true_value": true_value,
+                    "false_value": false_value,
+                },
+            }
         }
 
     ####################

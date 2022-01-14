@@ -21,9 +21,9 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                             -> s
 ?param_value: value
             | MULTI_LINE_STRING                     -> multi_line_string
 
-?var_value: param_value | loop
+?var_value: param_value | loop | conditional
 
-?output_value: param_value | loop
+?output_value: param_value | loop | conditional
 
 ?resource_value: object | loop
 
@@ -33,7 +33,7 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                             -> s
 
 data_type: STRING
 
-type_api_pair: "'" /[\w.\/]+/ "@" /[\d\-]+\w*/ "'"
+type_api_pair: QUOTED_INTERPOLATION
 
 module_path: QUOTED_INTERPOLATION
 
@@ -57,9 +57,9 @@ array: "[" value* "]"
 
 object: "{" pair* "}"
 
-pair: key ":" (value | loop)
+pair: key ":" (value | loop | conditional)
 
-key: string
+key: STRING | QUOTED_INTERPOLATION
 
 // decorators
 
@@ -83,12 +83,15 @@ deco_metadata: "metadata" "(" object ")"
 
 deco_secure: "secure" "(" ")"
 
+// operators
+
+conditional: "("? (STRING | FUNCTION) ")"? "?" param_value ":" param_value
+
 // Terms
 
 STRING: /[\w_.]+/
-FUNCTION: /(?!if\()(?=[\w_]+([\[\]]|[()])+)[\w_\[\]()\/.,' ]+/
-//QUOTED_STRING: "'" /[\s\w\-\/.:+]+/ "'"
-QUOTED_INTERPOLATION: "'" /[\s\w\-\/${}().,:+* ]*/ "'"
+FUNCTION: /(?!if\()(?=[\w_]+([\[\]]|[()])+)[\w_\-\[\]()\/.,'= ]+/
+QUOTED_INTERPOLATION: "'" /[\s\w\-\/${}\[\]().,:+*@"]*/ "'"
 
 MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
 
