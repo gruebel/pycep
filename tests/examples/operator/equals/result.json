@@ -1,0 +1,96 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "intEqual": {
+      "decorators": [],
+      "type": "bool",
+      "default": {
+        "operator": {
+          "type": "equals",
+          "operands": {
+            "operand_1": 5,
+            "operand_2": 6
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "firstBool": {
+      "value": {
+        "operator": {
+          "type": "equals",
+          "operands": {
+            "operand_1": true,
+            "operand_2": false
+          }
+        }
+      }
+    },
+    "elementEqual": {
+      "value": {
+        "operator": {
+          "type": "equals",
+          "operands": {
+            "operand_1": "'demo'",
+            "operand_2": "'demo'"
+          }
+        }
+      }
+    },
+    "arrayEqual": {
+      "value": {
+        "operator": {
+          "type": "equals",
+          "operands": {
+            "operand_1": [
+              1,
+              2,
+              3
+            ],
+            "operand_2": [
+              1,
+              2,
+              3
+            ]
+          }
+        }
+      }
+    },
+    "objectEqual": {
+      "value": {
+        "operator": {
+          "type": "equals",
+          "operands": {
+            "operand_1": {
+              "prop2": "'val2'",
+              "prop1": "'val1'"
+            },
+            "operand_2": {
+              "prop1": "'valX'",
+              "prop2": "'valY'"
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "elementEqual": {
+      "type": "bool",
+      "value": {
+        "operator": {
+          "type": "equals",
+          "operands": {
+            "operand_1": "firstString",
+            "operand_2": "secondString"
+          }
+        }
+      }
+    }
+  }
+}

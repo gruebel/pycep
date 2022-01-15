@@ -20,10 +20,11 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                             -> s
 
 ?param_value: value
             | MULTI_LINE_STRING                     -> multi_line_string
+            | operator
 
-?var_value: param_value | loop | conditional
+?var_value: param_value | loop
 
-?output_value: param_value | loop | conditional
+?output_value: param_value | loop
 
 ?resource_value: object | loop
 
@@ -57,7 +58,7 @@ array: "[" value* "]"
 
 object: "{" pair* "}"
 
-pair: key ":" (value | loop | conditional)
+pair: key ":" (value | loop | operator)
 
 key: STRING | QUOTED_INTERPOLATION
 
@@ -85,13 +86,20 @@ deco_secure: "secure" "(" ")"
 
 // operators
 
-conditional: "("? (STRING | FUNCTION) ")"? "?" param_value ":" param_value
+operator: equals | not_equals | conditional
+
+equals: value "==" value
+
+not_equals: value "!=" value
+
+conditional: "("? (STRING | FUNCTION | equals) ")"? "?" param_value ":" param_value
 
 // Terms
 
 STRING: /[\w_.]+/
 FUNCTION: /(?!if\()(?=[\w_]+([\[\]]|[()])+)[\w_\-\[\]()\/.,'= ]+/
-QUOTED_INTERPOLATION: "'" /[\s\w\-\/${}\[\]().,:+*@"]*/ "'"
+//QUOTED_INTERPOLATION: "'" /[\s\w\-\/${}\[\]().,:+*@"!]*/ "'"
+QUOTED_INTERPOLATION: /'[^']*'/
 
 MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
 

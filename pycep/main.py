@@ -8,39 +8,7 @@ from lark import Lark, Token, Transformer, Tree, v_args
 from lark.tree import Meta
 from typing_extensions import Literal
 
-from pycep.typing import (
-    ApiTypeVersion,
-    BicepJson,
-    BicepRegistryModulePath,
-    Decorator,
-    DecoratorAllowed,
-    DecoratorBatchSize,
-    DecoratorDescription,
-    DecoratorMaxLength,
-    DecoratorMaxValue,
-    DecoratorMetadata,
-    DecoratorMinLength,
-    DecoratorMinValue,
-    DecoratorSecure,
-    ElementResponse,
-    LocalModulePath,
-    Loop,
-    LoopArray,
-    LoopArrayIndex,
-    LoopIndex,
-    LoopObject,
-    LoopType,
-    ModulePath,
-    ModuleResponse,
-    Operator,
-    OutputResponse,
-    ParamResponse,
-    PossibleValue,
-    ResourceResponse,
-    ScopeResponse,
-    TemplateSpecModulePath,
-    VarResponse,
-)
+from pycep import typing as pycep_typing
 
 LARK_GRAMMAR = (Path(__file__).parent / "bicep.lark").read_text()
 
@@ -52,7 +20,7 @@ TEMPLATE_SPEC_PATTERN = re.compile(
 VALID_TARGET_SCOPES = {"resourceGroup", "subscription", "managementGroup", "tenant"}
 
 
-class BicepToJson(Transformer[BicepJson]):
+class BicepToJson(Transformer[pycep_typing.BicepJson]):
     def __init__(self, add_line_numbers: bool) -> None:
         self.add_line_numbers = add_line_numbers
 
@@ -64,8 +32,8 @@ class BicepToJson(Transformer[BicepJson]):
     #
     ####################
 
-    def start(self, args: list[ElementResponse]) -> BicepJson:
-        result: BicepJson = {
+    def start(self, args: list[pycep_typing.ElementResponse]) -> pycep_typing.BicepJson:
+        result: pycep_typing.BicepJson = {
             "globals": {
                 "scope": {
                     "value": "resourceGroup",
@@ -91,13 +59,13 @@ class BicepToJson(Transformer[BicepJson]):
     ####################
 
     @v_args(meta=True)
-    def scope(self, meta: Meta, args: tuple[Token]) -> ScopeResponse:
+    def scope(self, meta: Meta, args: tuple[Token]) -> pycep_typing.ScopeResponse:
         value = cast(Literal["resourceGroup", "subscription", "managementGroup", "tenant"], str(args[0])[1:-1])
 
         if value not in VALID_TARGET_SCOPES:
             raise ValueError(f"target scope is invalid: {value}")
 
-        result: ScopeResponse = {
+        result: pycep_typing.ScopeResponse = {
             "globals": {
                 "__name__": "scope",
                 "__attrs__": {
@@ -113,10 +81,12 @@ class BicepToJson(Transformer[BicepJson]):
         return result
 
     @v_args(meta=True)
-    def param(self, meta: Meta, args: tuple[list[Decorator] | None, str, str, PossibleValue | None]) -> ParamResponse:
+    def param(
+        self, meta: Meta, args: tuple[list[pycep_typing.Decorator] | None, str, str, pycep_typing.PossibleValue | None]
+    ) -> pycep_typing.ParamResponse:
         decorators, name, data_type, default = args
 
-        result: ParamResponse = {
+        result: pycep_typing.ParamResponse = {
             "parameters": {
                 "__name__": name,
                 "__attrs__": {
@@ -134,10 +104,10 @@ class BicepToJson(Transformer[BicepJson]):
         return result
 
     @v_args(meta=True)
-    def var(self, meta: Meta, args: tuple[str, PossibleValue]) -> VarResponse:
+    def var(self, meta: Meta, args: tuple[str, pycep_typing.PossibleValue]) -> pycep_typing.VarResponse:
         name, value = args
 
-        result: VarResponse = {
+        result: pycep_typing.VarResponse = {
             "variables": {
                 "__name__": name,
                 "__attrs__": {
@@ -153,10 +123,10 @@ class BicepToJson(Transformer[BicepJson]):
         return result
 
     @v_args(meta=True)
-    def output(self, meta: Meta, args: tuple[str, str, PossibleValue]) -> OutputResponse:
+    def output(self, meta: Meta, args: tuple[str, str, pycep_typing.PossibleValue]) -> pycep_typing.OutputResponse:
         name, data_type, value = args
 
-        result: OutputResponse = {
+        result: pycep_typing.OutputResponse = {
             "outputs": {
                 "__name__": name,
                 "__attrs__": {
@@ -174,11 +144,13 @@ class BicepToJson(Transformer[BicepJson]):
 
     @v_args(meta=True)
     def resource(
-        self, meta: Meta, args: tuple[list[Decorator] | None, str, ApiTypeVersion, dict[str, Any]]
-    ) -> ResourceResponse:
+        self,
+        meta: Meta,
+        args: tuple[list[pycep_typing.Decorator] | None, str, pycep_typing.ApiTypeVersion, dict[str, Any]],
+    ) -> pycep_typing.ResourceResponse:
         decorators, name, type_api_pair, config = args
 
-        result: ResourceResponse = {
+        result: pycep_typing.ResourceResponse = {
             "resources": {
                 "__name__": name,
                 "__attrs__": {
@@ -197,11 +169,11 @@ class BicepToJson(Transformer[BicepJson]):
 
     @v_args(meta=True)
     def module(
-        self, meta: Meta, args: tuple[list[Decorator] | None, str, ModulePath, dict[str, Any]]
-    ) -> ModuleResponse:
+        self, meta: Meta, args: tuple[list[pycep_typing.Decorator] | None, str, pycep_typing.ModulePath, dict[str, Any]]
+    ) -> pycep_typing.ModuleResponse:
         decorators, name, path, config = args
 
-        result: ModuleResponse = {
+        result: pycep_typing.ModuleResponse = {
             "modules": {
                 "__name__": name,
                 "__attrs__": {
@@ -227,14 +199,14 @@ class BicepToJson(Transformer[BicepJson]):
     def data_type(self, arg: tuple[Token]) -> str:
         return str(arg[0])
 
-    def type_api_pair(self, args: tuple[Token, Token]) -> ApiTypeVersion:
+    def type_api_pair(self, args: tuple[Token, Token]) -> pycep_typing.ApiTypeVersion:
         type_name, api_version = str(args[0])[1:-1].split("@")
         return {
             "type": str(type_name),
             "api_version": str(api_version),
         }
 
-    def module_path(self, args: tuple[Token]) -> ModulePath:
+    def module_path(self, args: tuple[Token]) -> pycep_typing.ModulePath:
         file_path = str(args[0])[1:-1]
 
         if file_path.startswith("br:"):
@@ -242,7 +214,7 @@ class BicepToJson(Transformer[BicepJson]):
             if not m:
                 raise ValueError(f"Bicep registry path is invalid: {file_path}")
 
-            br_result: BicepRegistryModulePath = {
+            br_result: pycep_typing.BicepRegistryModulePath = {
                 "type": "bicep_registry",
                 "detail": {
                     "full": file_path[3:],
@@ -257,7 +229,7 @@ class BicepToJson(Transformer[BicepJson]):
             if not m:
                 raise ValueError(f"Template spec path is invalid: {file_path}")
 
-            ts_result: TemplateSpecModulePath = {
+            ts_result: pycep_typing.TemplateSpecModulePath = {
                 "type": "template_spec",
                 "detail": {
                     "full": file_path[3:],
@@ -269,7 +241,7 @@ class BicepToJson(Transformer[BicepJson]):
             }
             return ts_result
 
-        local_result: LocalModulePath = {
+        local_result: pycep_typing.LocalModulePath = {
             "type": "local",
             "detail": {
                 "full": file_path,
@@ -284,7 +256,7 @@ class BicepToJson(Transformer[BicepJson]):
     #
     ####################
 
-    def loop(self, args: tuple[LoopType, str | None, dict[str, Any]]) -> Loop:
+    def loop(self, args: tuple[pycep_typing.LoopType, str | None, dict[str, Any]]) -> pycep_typing.Loop:
         loop_type, condition, config = args
         return {
             "loop_type": loop_type,
@@ -292,7 +264,7 @@ class BicepToJson(Transformer[BicepJson]):
             "config": config,
         }
 
-    def loop_index(self, args: tuple[Token, Token, Token]) -> LoopIndex:
+    def loop_index(self, args: tuple[Token, Token, Token]) -> pycep_typing.LoopIndex:
         idx_name, start_idx, count = args
         return {
             "type": "index",
@@ -303,7 +275,7 @@ class BicepToJson(Transformer[BicepJson]):
             },
         }
 
-    def loop_array(self, args: tuple[Token, Token]) -> LoopArray:
+    def loop_array(self, args: tuple[Token, Token]) -> pycep_typing.LoopArray:
         item_name, array_name = args
         return {
             "type": "array",
@@ -313,7 +285,7 @@ class BicepToJson(Transformer[BicepJson]):
             },
         }
 
-    def loop_array_index(self, args: tuple[Token, Token, Token]) -> LoopArrayIndex:
+    def loop_array_index(self, args: tuple[Token, Token, Token]) -> pycep_typing.LoopArrayIndex:
         item_name, idx_name, array_name = args
         return {
             "type": "array_index",
@@ -324,7 +296,7 @@ class BicepToJson(Transformer[BicepJson]):
             },
         }
 
-    def loop_object(self, args: tuple[Token, Token]) -> LoopObject:
+    def loop_object(self, args: tuple[Token, Token]) -> pycep_typing.LoopObject:
         item_name, obj_name = args
         return {
             "type": "object",
@@ -340,58 +312,58 @@ class BicepToJson(Transformer[BicepJson]):
     #
     ####################
 
-    def decorator(self, args: list[Decorator]) -> list[Decorator]:
+    def decorator(self, args: list[pycep_typing.Decorator]) -> list[pycep_typing.Decorator]:
         return args
 
-    def deco_allowed(self, args: tuple[list[int | str]]) -> DecoratorAllowed:
+    def deco_allowed(self, args: tuple[list[int | str]]) -> pycep_typing.DecoratorAllowed:
         return {
             "type": "allowed",
             "argument": args[0],
         }
 
-    def deco_batch(self, args: tuple[Token]) -> DecoratorBatchSize:
+    def deco_batch(self, args: tuple[Token]) -> pycep_typing.DecoratorBatchSize:
         return {
             "type": "batchSize",
             "argument": int(args[0]),
         }
 
-    def deco_description(self, args: tuple[Token]) -> DecoratorDescription:
+    def deco_description(self, args: tuple[Token]) -> pycep_typing.DecoratorDescription:
         return {
             "type": "description",
             "argument": str(args[0]),
         }
 
-    def deco_min_len(self, args: tuple[Token]) -> DecoratorMinLength:
+    def deco_min_len(self, args: tuple[Token]) -> pycep_typing.DecoratorMinLength:
         return {
             "type": "min_length",
             "argument": int(args[0]),
         }
 
-    def deco_max_len(self, args: tuple[Token]) -> DecoratorMaxLength:
+    def deco_max_len(self, args: tuple[Token]) -> pycep_typing.DecoratorMaxLength:
         return {
             "type": "max_length",
             "argument": int(args[0]),
         }
 
-    def deco_min_val(self, args: tuple[Token]) -> DecoratorMinValue:
+    def deco_min_val(self, args: tuple[Token]) -> pycep_typing.DecoratorMinValue:
         return {
             "type": "min_value",
             "argument": int(args[0]),
         }
 
-    def deco_max_val(self, args: tuple[Token]) -> DecoratorMaxValue:
+    def deco_max_val(self, args: tuple[Token]) -> pycep_typing.DecoratorMaxValue:
         return {
             "type": "max_value",
             "argument": int(args[0]),
         }
 
-    def deco_metadata(self, args: tuple[dict[str, Any]]) -> DecoratorMetadata:
+    def deco_metadata(self, args: tuple[dict[str, Any]]) -> pycep_typing.DecoratorMetadata:
         return {
             "type": "metadata",
             "argument": args[0],
         }
 
-    def deco_secure(self, _: Any) -> DecoratorSecure:
+    def deco_secure(self, _: Any) -> pycep_typing.DecoratorSecure:
         return {
             "type": "secure",
         }
@@ -402,18 +374,43 @@ class BicepToJson(Transformer[BicepJson]):
     #
     ####################
 
-    def conditional(self, args: tuple[Token, PossibleValue, PossibleValue]) -> Operator:
+    def operator(self, args: tuple[pycep_typing.Operators]) -> pycep_typing.Operator:
+        return {"operator": args[0]}
+
+    def equals(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Equals:
+        operand_1, operand_2 = args
+
+        return {
+            "type": "equals",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+            },
+        }
+
+    def not_equals(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.NotEquals:
+        operand_1, operand_2 = args
+
+        return {
+            "type": "not_equals",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+            },
+        }
+
+    def conditional(
+        self, args: tuple[Token, pycep_typing.PossibleValue, pycep_typing.PossibleValue]
+    ) -> pycep_typing.Conditional:
         condition, true_value, false_value = args
 
         return {
-            "operator": {
-                "type": "conditional",
-                "operands": {
-                    "condition": str(condition),
-                    "true_value": true_value,
-                    "false_value": false_value,
-                },
-            }
+            "type": "conditional",
+            "operands": {
+                "condition": str(condition),
+                "true_value": true_value,
+                "false_value": false_value,
+            },
         }
 
     ####################
@@ -467,7 +464,7 @@ class BicepParser:
 
         return lark_parser.parse(content)
 
-    def json(self) -> BicepJson:
+    def json(self) -> pycep_typing.BicepJson:
         return BicepToJson(add_line_numbers=self.add_line_numbers).transform(self.tree)
 
     def print_tree(self) -> str:

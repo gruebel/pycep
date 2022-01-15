@@ -10,6 +10,7 @@ ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | TemplateSpe
 LoopType: TypeAlias = "LoopIndex | LoopArray | LoopArrayIndex | LoopObject"
 ElementResponse: TypeAlias = "ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse"
 Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"  # noqa: E501, B950
+Operators: TypeAlias = "Equals | NotEquals | Conditional"
 
 
 ####################
@@ -286,7 +287,22 @@ class DecoratorSecure(TypedDict):
 ####################
 
 
-class ConditionalOperands(TypedDict):
+class _EqualsOperands(TypedDict):
+    operand_1: PossibleValue
+    operand_2: PossibleValue
+
+
+class Equals(TypedDict):
+    type: Literal["equals"]
+    operands: _EqualsOperands
+
+
+class NotEquals(TypedDict):
+    type: Literal["not_equals"]
+    operands: _EqualsOperands
+
+
+class _ConditionalOperands(TypedDict):
     condition: str
     true_value: PossibleValue
     false_value: PossibleValue
@@ -294,11 +310,11 @@ class ConditionalOperands(TypedDict):
 
 class Conditional(TypedDict):
     type: Literal["conditional"]
-    operands: ConditionalOperands
+    operands: _ConditionalOperands
 
 
 class Operator(TypedDict):
-    operator: Conditional
+    operator: Operators
 
 
 ####################
