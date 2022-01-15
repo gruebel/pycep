@@ -1,5 +1,8 @@
 # pycep
 
+![PyPI](https://img.shields.io/pypi/v/pycep-parser)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pycep-parser)
+
 A fun little project, which has the goal to parse
 [Azure Bicep](https://github.com/Azure/bicep) files.
 This is still a very early stage, therefore a lot can and will change.
@@ -34,8 +37,8 @@ This is still a very early stage, therefore a lot can and will change.
   - [x] Conditional expression
 
 ### CI/CD
-- [ ] Create a package
-- [ ] Publish package to `pypi`
+- [x] Create a package
+- [x] Publish package to `pypi`
 - [ ] Add GitHub workflow for PR & master branch
 
 ## Considering

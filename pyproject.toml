@@ -1,3 +1,54 @@
+[tool.poetry]
+name = "pycep-parser"
+version = "0.0.1-alpha.0"
+description = "A Python based Bicep parser"
+authors = ["Anton Grübel <anton.gruebel@gmail.com>"]
+license = "Apache-2.0"
+
+readme = "README.md"
+
+packages = [
+    { include = "pycep" }
+]
+
+homepage = "https://github.com/gruebel/pycep"
+repository = "https://github.com/gruebel/pycep"
+
+keywords = ["bicep", "parser", "lark"]
+
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Typing :: Typed"
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+lark = "^1.0.0"
+typing-extensions = "^4.0.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+black = "^21.12b0"
+flake8 = "^4.0.1"
+flake8-bugbear = "^22.1.11"
+flake8-builtins = "^1.5.3"
+flake8-comprehensions = "^3.8.0"
+flake8-pytest-style = "^1.6.0"
+flake8-typing-imports = "^1.12.0"
+isort = "^5.10.1"
+mypy = "^0.931"
+pep8-naming = "^0.12.1"
+pre-commit = "^2.16.0"
+assertpy = "^1.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.bandit]
 recursive = true
 
