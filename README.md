@@ -39,7 +39,7 @@ This is still a very early stage, therefore a lot can and will change.
 ### CI/CD
 - [x] Create a package
 - [x] Publish package to `pypi`
-- [ ] Add GitHub workflow for PR & master branch
+- [x] Add GitHub workflow for PR & master branch
 
 ## Considering
 - Adding line numbers to other parts
