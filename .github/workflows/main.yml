@@ -54,7 +54,17 @@ jobs:
       - name: Install pytest plugin
         run: poetry run pip install pytest-github-actions-annotate-failures
       - name: Run pytest
-        run: poetry run python -m pytest -q tests/
+        run: poetry run python -m pytest tests/
+      - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.7'
+        name: Create coverage report
+        run: |
+          poetry run pip install pytest-cov
+          poetry run python -m pytest -s --cov=pycep --cov-report=xml tests/
+      - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.7' && github.repository == 'gruebel/pycep'
+        name: Upload coverage to codecov
+        uses: codecov/codecov-action@v2
+        with:
+          flags: unittests
 
   publish:
     if: github.event_name == 'push'
