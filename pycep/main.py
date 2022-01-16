@@ -62,7 +62,7 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
     def scope(self, meta: Meta, args: tuple[Token]) -> pycep_typing.ScopeResponse:
         value = cast(Literal["resourceGroup", "subscription", "managementGroup", "tenant"], str(args[0])[1:-1])
 
-        if value not in VALID_TARGET_SCOPES:
+        if value not in VALID_TARGET_SCOPES:  # pragma: no cover
             raise ValueError(f"target scope is invalid: {value}")
 
         result: pycep_typing.ScopeResponse = {
@@ -211,7 +211,7 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
         if file_path.startswith("br:"):
             m = re.match(BICEP_REGISTRY_PATTERN, file_path)
-            if not m:
+            if not m:  # pragma: no cover
                 raise ValueError(f"Bicep registry path is invalid: {file_path}")
 
             br_result: pycep_typing.BicepRegistryModulePath = {
@@ -226,7 +226,7 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             return br_result
         elif file_path.startswith("ts:"):
             m = re.match(TEMPLATE_SPEC_PATTERN, file_path)
-            if not m:
+            if not m:  # pragma: no cover
                 raise ValueError(f"Template spec path is invalid: {file_path}")
 
             ts_result: pycep_typing.TemplateSpecModulePath = {
