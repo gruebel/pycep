@@ -5,12 +5,25 @@ from assertpy import assert_that
 
 from pycep import BicepParser
 
-EXAMPLES_DIR = Path(__file__).parent / "examples/operator"
+EXAMPLES_DIR = Path(__file__).parent / "examples/operator/comparison"
 
 
-def test_parse_conditional() -> None:
+def test_parse_greater_than_or_equals() -> None:
     # given
-    sub_dir_path = EXAMPLES_DIR / "conditional"
+    sub_dir_path = EXAMPLES_DIR / "greater_than_or_equals"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BicepParser(file_path).json()
+
+    # then
+    assert_that(result).is_equal_to(expected_result)
+
+
+def test_parse_greater_than() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "greater_than"
     file_path = sub_dir_path / "main.bicep"
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 

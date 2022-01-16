@@ -86,7 +86,15 @@ deco_secure: "secure" "(" ")"
 
 // operators
 
-operator: equals | not_equals | equals_case_insens | not_equals_case_insens | conditional
+operator: operator_comparison | operator_logical
+
+// operators - comparison
+
+?operator_comparison: greater_than_or_equals | greater_than | equals | not_equals | equals_case_insens | not_equals_case_insens
+
+greater_than_or_equals: value ">=" value
+
+greater_than: value ">" value
 
 equals: value "==" value
 
@@ -95,6 +103,10 @@ not_equals: value "!=" value
 equals_case_insens: value "=~" value
 
 not_equals_case_insens: value "!~" value
+
+// operators - logical
+
+?operator_logical: conditional
 
 conditional: "("? (STRING | FUNCTION | equals) ")"? "?" param_value ":" param_value
 

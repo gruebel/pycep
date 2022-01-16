@@ -377,6 +377,28 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
     def operator(self, args: tuple[pycep_typing.Operators]) -> pycep_typing.Operator:
         return {"operator": args[0]}
 
+    def greater_than_or_equals(self, args: tuple[int | str, int | str]) -> pycep_typing.GreaterThanOrEquals:
+        operand_1, operand_2 = args
+
+        return {
+            "type": "greater_than_or_equals",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+            },
+        }
+
+    def greater_than(self, args: tuple[int | str, int | str]) -> pycep_typing.GreaterThan:
+        operand_1, operand_2 = args
+
+        return {
+            "type": "greater_than",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+            },
+        }
+
     def equals(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Equals:
         operand_1, operand_2 = args
 

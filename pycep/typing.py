@@ -282,7 +282,7 @@ class DecoratorSecure(TypedDict):
 
 ####################
 #
-# Operators
+# Operators - comparison
 #
 ####################
 
@@ -290,6 +290,16 @@ class DecoratorSecure(TypedDict):
 class _EqualsOperands(TypedDict):
     operand_1: PossibleValue
     operand_2: PossibleValue
+
+
+class GreaterThanOrEquals(TypedDict):
+    type: Literal["greater_than_or_equals"]
+    operands: _EqualsOperands
+
+
+class GreaterThan(TypedDict):
+    type: Literal["greater_than"]
+    operands: _EqualsOperands
 
 
 class Equals(TypedDict):
@@ -310,6 +320,13 @@ class EqualsCaseInsensitive(TypedDict):
 class NotEqualsCaseInsensitive(TypedDict):
     type: Literal["not_equals_case_insensitive"]
     operands: _EqualsOperands
+
+
+####################
+#
+# Operators - logical
+#
+####################
 
 
 class _ConditionalOperands(TypedDict):

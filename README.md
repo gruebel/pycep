@@ -21,9 +21,9 @@ This is still a very early stage, therefore a lot can and will change.
 
 ### Operators
 - [ ] Comparison
-  - [ ] Greater than or equal
-  - [ ] Greater than
-  - [ ] Less than or equal
+  - [x] Greater than or equals
+  - [x] Greater than
+  - [ ] Less than or equals
   - [ ] Less than
   - [x] Equals
   - [x] Not equals
