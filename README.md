@@ -40,6 +40,7 @@ This is still a very early stage, therefore a lot can and will change.
 - [x] Create a package
 - [x] Publish package to `pypi`
 - [x] Add GitHub workflow for PR & master branch
+- [ ] Add test coverage
 
 ## Considering
 - Adding line numbers to other parts

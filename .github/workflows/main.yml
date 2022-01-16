@@ -71,6 +71,17 @@ jobs:
           poetry-version: "1.1.12"
       - name: Install dependencies
         run: poetry install --no-dev
+      - name: Bump prerelease version
+        run: |
+          # bump version
+          poetry version prerelease
+          new_version=$(poetry version -s)
+
+          # commit and push
+          git config --global user.name 'gruebel'
+          git config --global user.email 'gruebel@users.noreply.github.com'
+          git commit -m "publish version ${new_version}"
+          git push
       - name: Publish prerelease to PyPI
         env:
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
