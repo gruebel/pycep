@@ -1,5 +1,6 @@
 # pycep
 
+[![codecov](https://codecov.io/gh/gruebel/pycep/branch/master/graph/badge.svg?token=49WHVYGE1D)](https://codecov.io/gh/gruebel/pycep)
 [![PyPI](https://img.shields.io/pypi/v/pycep-parser)](https://pypi.org/project/pycep-parser/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pycep-parser)](https://github.com/gruebel/pycep)
 
@@ -37,10 +38,7 @@ This is still a very early stage, therefore a lot can and will change.
   - [x] Conditional expression
 
 ### CI/CD
-- [x] Create a package
-- [x] Publish package to `pypi`
-- [x] Add GitHub workflow for PR & master branch
-- [ ] Add test coverage
+- [x] Add test coverage
 
 ## Considering
 - Adding line numbers to other parts
