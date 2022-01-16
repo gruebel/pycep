@@ -302,6 +302,16 @@ class NotEquals(TypedDict):
     operands: _EqualsOperands
 
 
+class EqualsCaseInsensitive(TypedDict):
+    type: Literal["equals_case_insensitive"]
+    operands: _EqualsOperands
+
+
+class NotEqualsCaseInsensitive(TypedDict):
+    type: Literal["not_equals_case_insensitive"]
+    operands: _EqualsOperands
+
+
 class _ConditionalOperands(TypedDict):
     condition: str
     true_value: PossibleValue

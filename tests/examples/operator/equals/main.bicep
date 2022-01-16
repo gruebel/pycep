@@ -30,3 +30,15 @@ var objectEqual = {
 
 // elements
 output elementEqual bool = firstString == secondString
+
+// property
+resource pip 'Microsoft.Network/publicIPAddresses@2020-06-01' = {
+  name: publicIp.name
+  location: publicIp.location
+  properties: {
+    ddosSettings: {
+      protectedIP: publicIpLabel == 'public'
+    }
+    publicIPAllocationMethod: 'Static'
+  }
+}

@@ -86,11 +86,15 @@ deco_secure: "secure" "(" ")"
 
 // operators
 
-operator: equals | not_equals | conditional
+operator: equals | not_equals | equals_case_insens | not_equals_case_insens | conditional
 
 equals: value "==" value
 
 not_equals: value "!=" value
+
+equals_case_insens: value "=~" value
+
+not_equals_case_insens: value "!~" value
 
 conditional: "("? (STRING | FUNCTION | equals) ")"? "?" param_value ":" param_value
 

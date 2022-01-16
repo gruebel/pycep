@@ -1,7 +1,7 @@
 # pycep
 
-![PyPI](https://img.shields.io/pypi/v/pycep-parser)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pycep-parser)
+[![PyPI](https://img.shields.io/pypi/v/pycep-parser)](https://pypi.org/project/pycep-parser/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pycep-parser)](https://github.com/gruebel/pycep)
 
 A fun little project, which has the goal to parse
 [Azure Bicep](https://github.com/Azure/bicep) files.
@@ -27,8 +27,8 @@ This is still a very early stage, therefore a lot can and will change.
   - [ ] Less than
   - [x] Equals
   - [x] Not equals
-  - [ ] Equals case-insensitive
-  - [ ] Not equals case-insensitive
+  - [x] Equals case-insensitive
+  - [x] Not equals case-insensitive
 - [ ] Logical
   - [ ] And
   - [ ] Or

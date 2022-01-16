@@ -399,6 +399,28 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def equals_case_insens(self, args: tuple[str, str]) -> pycep_typing.EqualsCaseInsensitive:
+        operand_1, operand_2 = args
+
+        return {
+            "type": "equals_case_insensitive",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+            },
+        }
+
+    def not_equals_case_insens(self, args: tuple[str, str]) -> pycep_typing.NotEqualsCaseInsensitive:
+        operand_1, operand_2 = args
+
+        return {
+            "type": "not_equals_case_insensitive",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+            },
+        }
+
     def conditional(
         self, args: tuple[Token, pycep_typing.PossibleValue, pycep_typing.PossibleValue]
     ) -> pycep_typing.Conditional:
