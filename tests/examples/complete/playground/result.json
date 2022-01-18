@@ -297,5 +297,21 @@
         }
       }
     }
+  },
+  "modules": {
+    "network": {
+      "decorators": [],
+      "type": "local",
+      "detail": {
+        "full": "./network.bicep",
+        "path": "./network.bicep"
+      },
+      "config": {
+        "name": "'network'",
+        "params": {
+          "myIp": "'123.123.123.123'"
+        }
+      }
+    }
   }
 }

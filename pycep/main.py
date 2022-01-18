@@ -399,6 +399,28 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def less_than_or_equals(self, args: tuple[int | str, int | str]) -> pycep_typing.LessThanOrEquals:
+        operand_1, operand_2 = args
+
+        return {
+            "type": "less_than_or_equals",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+            },
+        }
+
+    def less_than(self, args: tuple[int | str, int | str]) -> pycep_typing.LessThan:
+        operand_1, operand_2 = args
+
+        return {
+            "type": "less_than",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+            },
+        }
+
     def equals(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Equals:
         operand_1, operand_2 = args
 

@@ -10,7 +10,9 @@ ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | TemplateSpe
 LoopType: TypeAlias = "LoopIndex | LoopArray | LoopArrayIndex | LoopObject"
 ElementResponse: TypeAlias = "ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse"
 Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"  # noqa: E501, B950
-Operators: TypeAlias = "Equals | NotEquals | Conditional"
+ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOrEquals | LessThan | Equals | NotEquals | EqualsCaseInsensitive | NotEqualsCaseInsensitive"  # noqa: E501, B950
+LogicalOperators: TypeAlias = "Conditional"
+Operators: TypeAlias = "ComparisonOperators | LogicalOperators"
 
 
 ####################
@@ -302,6 +304,16 @@ class GreaterThan(TypedDict):
     operands: _EqualsOperands
 
 
+class LessThanOrEquals(TypedDict):
+    type: Literal["less_than_or_equals"]
+    operands: _EqualsOperands
+
+
+class LessThan(TypedDict):
+    type: Literal["less_than"]
+    operands: _EqualsOperands
+
+
 class Equals(TypedDict):
     type: Literal["equals"]
     operands: _EqualsOperands
@@ -341,7 +353,7 @@ class Conditional(TypedDict):
 
 
 class Operator(TypedDict):
-    operator: Operators
+    operator: ComparisonOperators | LogicalOperators
 
 
 ####################

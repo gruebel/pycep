@@ -21,11 +21,11 @@ This is still a very early stage, therefore a lot can and will change.
 - [x] Adding line numbers to element blocks
 
 ### Operators
-- [ ] Comparison
+- [x] Comparison
   - [x] Greater than or equals
   - [x] Greater than
-  - [ ] Less than or equals
-  - [ ] Less than
+  - [x] Less than or equals
+  - [x] Less than
   - [x] Equals
   - [x] Not equals
   - [x] Equals case-insensitive

@@ -90,11 +90,16 @@ operator: operator_comparison | operator_logical
 
 // operators - comparison
 
-?operator_comparison: greater_than_or_equals | greater_than | equals | not_equals | equals_case_insens | not_equals_case_insens
+?operator_comparison: greater_than_or_equals | greater_than | less_than_or_equals | less_than
+                    | equals | not_equals | equals_case_insens | not_equals_case_insens
 
 greater_than_or_equals: value ">=" value
 
 greater_than: value ">" value
+
+less_than_or_equals: value "<=" value
+
+less_than: value "<" value
 
 equals: value "==" value
 

@@ -1,0 +1,74 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramCompare": {
+      "decorators": [],
+      "type": "bool",
+      "default": {
+        "operator": {
+          "type": "less_than",
+          "operands": {
+            "operand_1": 6,
+            "operand_2": 5
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "varCompare": {
+      "value": {
+        "operator": {
+          "type": "less_than",
+          "operands": {
+            "operand_1": "'demo'",
+            "operand_2": "'damo'"
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "outputCompare": {
+      "type": "bool",
+      "value": {
+        "operator": {
+          "type": "less_than",
+          "operands": {
+            "operand_1": "firstString",
+            "operand_2": "secondString"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "pip": {
+      "decorators": [],
+      "type": "Microsoft.Network/publicIPAddresses",
+      "api_version": "2020-06-01",
+      "config": {
+        "name": "publicIp.name",
+        "location": "publicIp.location",
+        "properties": {
+          "ddosSettings": {
+            "protectedIP": {
+              "operator": {
+                "type": "less_than",
+                "operands": {
+                  "operand_1": "publicIpLabel",
+                  "operand_2": "'public'"
+                }
+              }
+            }
+          },
+          "publicIPAllocationMethod": "'Static'"
+        }
+      }
+    }
+  }
+}
