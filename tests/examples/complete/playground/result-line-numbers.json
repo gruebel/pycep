@@ -2,8 +2,8 @@
   "globals": {
     "scope": {
       "value": "resourceGroup",
-      "__start_line__": 0,
-      "__end_line__": 0
+      "__start_line__": 3,
+      "__end_line__": 3
     }
   },
   "parameters": {
@@ -16,8 +16,8 @@
       ],
       "type": "string",
       "default": "'Standard_DS1_v2'",
-      "__start_line__": 3,
-      "__end_line__": 4
+      "__start_line__": 5,
+      "__end_line__": 6
     },
     "adminUsername": {
       "decorators": [
@@ -28,8 +28,8 @@
       ],
       "type": "string",
       "default": null,
-      "__start_line__": 6,
-      "__end_line__": 7
+      "__start_line__": 8,
+      "__end_line__": 9
     },
     "adminPassword": {
       "decorators": [
@@ -43,8 +43,8 @@
       ],
       "type": "string",
       "default": null,
-      "__start_line__": 9,
-      "__end_line__": 11
+      "__start_line__": 11,
+      "__end_line__": 13
     },
     "storageAccountType": {
       "decorators": [
@@ -62,8 +62,8 @@
       ],
       "type": "string",
       "default": "'Standard_LRS'",
-      "__start_line__": 13,
-      "__end_line__": 18
+      "__start_line__": 15,
+      "__end_line__": 20
     },
     "location": {
       "decorators": [
@@ -74,60 +74,60 @@
       ],
       "type": "string",
       "default": "resourceGroup().location",
-      "__start_line__": 20,
-      "__end_line__": 21
+      "__start_line__": 22,
+      "__end_line__": 23
     }
   },
   "variables": {
     "virtualMachineName": {
       "value": "'VM-MultiNic'",
-      "__start_line__": 23,
-      "__end_line__": 23
-    },
-    "nic1Name": {
-      "value": "'nic-1'",
-      "__start_line__": 24,
-      "__end_line__": 24
-    },
-    "nic2Name": {
-      "value": "'nic-2'",
       "__start_line__": 25,
       "__end_line__": 25
     },
-    "virtualNetworkName": {
-      "value": "'virtualNetwork'",
+    "nic1Name": {
+      "value": "'nic-1'",
       "__start_line__": 26,
       "__end_line__": 26
     },
-    "subnet1Name": {
-      "value": "'subnet-1'",
+    "nic2Name": {
+      "value": "'nic-2'",
       "__start_line__": 27,
       "__end_line__": 27
     },
-    "subnet2Name": {
-      "value": "'subnet-2'",
+    "virtualNetworkName": {
+      "value": "'virtualNetwork'",
       "__start_line__": 28,
       "__end_line__": 28
     },
-    "publicIPAddressName": {
-      "value": "'publicIp'",
+    "subnet1Name": {
+      "value": "'subnet-1'",
       "__start_line__": 29,
       "__end_line__": 29
     },
-    "diagStorageAccountName": {
-      "value": "'diags${uniqueString(resourceGroup().id)}'",
+    "subnet2Name": {
+      "value": "'subnet-2'",
       "__start_line__": 30,
       "__end_line__": 30
     },
-    "networkSecurityGroupName": {
-      "value": "'NSG'",
+    "publicIPAddressName": {
+      "value": "'publicIp'",
       "__start_line__": 31,
       "__end_line__": 31
     },
-    "networkSecurityGroupName2": {
-      "value": "'${subnet2Name}-nsg'",
+    "diagStorageAccountName": {
+      "value": "'diags${uniqueString(resourceGroup().id)}'",
       "__start_line__": 32,
       "__end_line__": 32
+    },
+    "networkSecurityGroupName": {
+      "value": "'NSG'",
+      "__start_line__": 33,
+      "__end_line__": 33
+    },
+    "networkSecurityGroupName2": {
+      "value": "'${subnet2Name}-nsg'",
+      "__start_line__": 34,
+      "__end_line__": 34
     }
   },
   "resources": {
@@ -185,8 +185,8 @@
           }
         }
       },
-      "__start_line__": 35,
-      "__end_line__": 84
+      "__start_line__": 37,
+      "__end_line__": 86
     },
     "diagsAccount": {
       "decorators": [],
@@ -200,8 +200,8 @@
         },
         "kind": "'StorageV2'"
       },
-      "__start_line__": 86,
-      "__end_line__": 93
+      "__start_line__": 88,
+      "__end_line__": 95
     },
     "nsg2": {
       "decorators": [],
@@ -211,8 +211,8 @@
         "name": "networkSecurityGroupName2",
         "location": "location"
       },
-      "__start_line__": 96,
-      "__end_line__": 99
+      "__start_line__": 98,
+      "__end_line__": 101
     },
     "vnet": {
       "decorators": [],
@@ -246,8 +246,8 @@
           ]
         }
       },
-      "__start_line__": 102,
-      "__end_line__": 129
+      "__start_line__": 104,
+      "__end_line__": 131
     },
     "nic1": {
       "decorators": [],
@@ -276,8 +276,8 @@
           }
         }
       },
-      "__start_line__": 132,
-      "__end_line__": 154
+      "__start_line__": 134,
+      "__end_line__": 156
     },
     "nic2": {
       "decorators": [],
@@ -300,8 +300,8 @@
           ]
         }
       },
-      "__start_line__": 157,
-      "__end_line__": 173
+      "__start_line__": 159,
+      "__end_line__": 175
     },
     "pip": {
       "decorators": [],
@@ -314,8 +314,8 @@
           "publicIPAllocationMethod": "'Dynamic'"
         }
       },
-      "__start_line__": 176,
-      "__end_line__": 182
+      "__start_line__": 178,
+      "__end_line__": 184
     },
     "nsg": {
       "decorators": [],
@@ -342,8 +342,26 @@
           ]
         }
       },
-      "__start_line__": 185,
-      "__end_line__": 205
+      "__start_line__": 187,
+      "__end_line__": 207
+    }
+  },
+  "modules": {
+    "network": {
+      "decorators": [],
+      "type": "local",
+      "detail": {
+        "full": "./network.bicep",
+        "path": "./network.bicep"
+      },
+      "config": {
+        "name": "'network'",
+        "params": {
+          "myIp": "'123.123.123.123'"
+        }
+      },
+      "__start_line__": 209,
+      "__end_line__": 214
     }
   }
 }

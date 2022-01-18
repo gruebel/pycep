@@ -1,5 +1,7 @@
 // Offical playground example https://aka.ms/bicepdemo
 
+targetScope = 'resourceGroup'
+
 @description('Virtual machine size (has to be at least the size of Standard_A3 to support 2 NICs)')
 param virtualMachineSize string = 'Standard_DS1_v2'
 
@@ -201,5 +203,12 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2020-06-01' = {
         }
       }
     ]
+  }
+}
+
+module network './network.bicep' = {
+  name: 'network'
+  params: {
+    myIp: '123.123.123.123'
   }
 }
