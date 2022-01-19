@@ -357,6 +357,11 @@ class Or(TypedDict):
     operands: _AndOperands
 
 
+class Coalesce(TypedDict):
+    type: Literal["coalesce"]
+    operands: _AndOperands
+
+
 class _ConditionalOperands(TypedDict):
     condition: str
     true_value: PossibleValue

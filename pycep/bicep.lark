@@ -7,7 +7,8 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                             -> s
        | [decorator] "resource" string type_api_pair "=" resource_value     -> resource
        | [decorator] "module" string module_path "=" module_value           -> module
 
-?value: SIGNED_INT                                  -> int
+?value: "null"                                      -> null
+      | SIGNED_INT                                  -> int
       | "true"                                      -> true
       | "false"                                     -> false
       | QUOTED_INTERPOLATION                        -> string
@@ -111,11 +112,13 @@ not_equals_case_insens: value "!~" value
 
 // operators - logical
 
-?operator_logical: and_op | or_op | conditional
+?operator_logical: and_op | or_op | coalesce | conditional
 
 and_op: value ("&&" value)+
 
 or_op: value ("||" value)+
+
+coalesce: value ("??" value)+
 
 conditional: "("? (STRING | FUNCTION | operator_comparison | and_op | or_op) ")"? "?" param_value ":" param_value
 

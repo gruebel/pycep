@@ -495,6 +495,18 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def coalesce(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Coalesce:
+        operand_1, operand_2, *operand_x = args
+
+        return {
+            "type": "coalesce",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+                **{f"operand_{idx + 3}": op for idx, op in enumerate(operand_x)},  # type: ignore[misc] # dynamic operand creation
+            },
+        }
+
     def conditional(
         self, args: tuple[Token, pycep_typing.PossibleValue, pycep_typing.PossibleValue]
     ) -> pycep_typing.Conditional:
@@ -545,6 +557,9 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
     def false(self, _: Any) -> Literal[False]:
         return False
+
+    def null(self, _: Any) -> None:
+        return None
 
 
 class BicepParser:

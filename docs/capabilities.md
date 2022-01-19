@@ -31,7 +31,7 @@
 - [x] And
 - [x] Or
 - [ ] Not
-- [ ] Coalesce
+- [x] Coalesce
 - [x] Conditional expression
 
 ### Numeric

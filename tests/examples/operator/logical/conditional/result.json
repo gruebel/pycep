@@ -35,7 +35,7 @@
                   "operands": {
                     "condition": "empty(parentManagementGroupId)) ",
                     "true_value": "'/providers/Microsoft.Management/managementGroups/${parentManagementGroupId}'",
-                    "false_value": "null"
+                    "false_value": null
                   }
                 }
               }

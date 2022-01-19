@@ -30,7 +30,7 @@ This is still a very early stage, therefore a lot can and will change.
   - [x] And
   - [x] Or
   - [ ] Not
-  - [ ] Coalesce
+  - [x] Coalesce
   - [x] Conditional expression
 - [ ] Numeric
 
