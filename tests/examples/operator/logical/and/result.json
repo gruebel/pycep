@@ -1,0 +1,89 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramExpr": {
+      "decorators": [],
+      "type": "bool",
+      "default": {
+        "operator": {
+          "type": "and",
+          "operands": {
+            "operand_1": true,
+            "operand_2": false
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "varExpr": {
+      "value": {
+        "operator": {
+          "type": "and",
+          "operands": {
+            "operand_1": true,
+            "operand_2": false
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "managementGroup": {
+      "decorators": [],
+      "type": "Microsoft.Management/managementGroups",
+      "api_version": "2020-05-01",
+      "config": {
+        "name": "managementGroupId",
+        "properties": {
+          "displayName": "managementGroupDisplayName",
+          "details": {
+            "parent": {
+              "id": {
+                "operator": {
+                  "type": "and",
+                  "operands": {
+                    "operand_1": "varExpr",
+                    "operand_2": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "outputExpr": {
+      "type": "bool",
+      "value": {
+        "operator": {
+          "type": "and",
+          "operands": {
+            "operand_1": "paramExpr",
+            "operand_2": "varExpr"
+          }
+        }
+      }
+    },
+    "multiple": {
+      "type": "bool",
+      "value": {
+        "operator": {
+          "type": "and",
+          "operands": {
+            "operand_1": true,
+            "operand_2": "paramExpr",
+            "operand_3": false,
+            "operand_4": "varExpr"
+          }
+        }
+      }
+    }
+  }
+}

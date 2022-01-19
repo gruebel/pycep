@@ -3,5 +3,5 @@
 [flake8]
 max-line-length = 120
 min_python_version = 3.7.0
-ignore = A003,B950
+ignore = A003,B950,E501
 select = C,E,F,W,B9,TYP,A,PT,N

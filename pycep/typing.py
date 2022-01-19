@@ -9,8 +9,8 @@ PossibleValue: TypeAlias = "bool | int | str | list[bool | int | str] | dict[str
 ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | TemplateSpecModulePath"
 LoopType: TypeAlias = "LoopIndex | LoopArray | LoopArrayIndex | LoopObject"
 ElementResponse: TypeAlias = "ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse"
-Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"  # noqa: E501, B950
-ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOrEquals | LessThan | Equals | NotEquals | EqualsCaseInsensitive | NotEqualsCaseInsensitive"  # noqa: E501, B950
+Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"
+ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOrEquals | LessThan | Equals | NotEquals | EqualsCaseInsensitive | NotEqualsCaseInsensitive"
 LogicalOperators: TypeAlias = "Conditional"
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators"
 
@@ -339,6 +339,22 @@ class NotEqualsCaseInsensitive(TypedDict):
 # Operators - logical
 #
 ####################
+
+
+class _AndOperands(TypedDict):
+    operand_1: PossibleValue
+    operand_2: PossibleValue
+    operand_3: NotRequired[PossibleValue]  # and many more possible
+
+
+class And(TypedDict):
+    type: Literal["and"]
+    operands: _AndOperands
+
+
+class Or(TypedDict):
+    type: Literal["or"]
+    operands: _AndOperands
 
 
 class _ConditionalOperands(TypedDict):

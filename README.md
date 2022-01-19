@@ -8,6 +8,10 @@ A fun little project, which has the goal to parse
 [Azure Bicep](https://github.com/Azure/bicep) files.
 This is still a very early stage, therefore a lot can and will change.
 
+## Current capabalities
+
+[Supported capabilities](docs/capabilities.md)
+
 ## Next milestones
 
 ### General
@@ -21,21 +25,14 @@ This is still a very early stage, therefore a lot can and will change.
 - [x] Adding line numbers to element blocks
 
 ### Operators
-- [x] Comparison
-  - [x] Greater than or equals
-  - [x] Greater than
-  - [x] Less than or equals
-  - [x] Less than
-  - [x] Equals
-  - [x] Not equals
-  - [x] Equals case-insensitive
-  - [x] Not equals case-insensitive
+- [ ] Accessor
 - [ ] Logical
-  - [ ] And
-  - [ ] Or
+  - [x] And
+  - [x] Or
   - [ ] Not
   - [ ] Coalesce
   - [x] Conditional expression
+- [ ] Numeric
 
 ### CI/CD
 - [x] Add test coverage

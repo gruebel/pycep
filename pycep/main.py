@@ -370,7 +370,7 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
     ####################
     #
-    # operators
+    # operators - comparison
     #
     ####################
 
@@ -462,6 +462,36 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             "operands": {
                 "operand_1": operand_1,
                 "operand_2": operand_2,
+            },
+        }
+
+    ####################
+    #
+    # Operators - logical
+    #
+    ####################
+
+    def and_op(self, args: tuple[bool | str, ...]) -> pycep_typing.And:
+        operand_1, operand_2, *operand_x = args
+
+        return {
+            "type": "and",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+                **{f"operand_{idx + 3}": op for idx, op in enumerate(operand_x)},  # type: ignore[misc] # dynamic operand creation
+            },
+        }
+
+    def or_op(self, args: tuple[bool | str, ...]) -> pycep_typing.Or:
+        operand_1, operand_2, *operand_x = args
+
+        return {
+            "type": "or",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+                **{f"operand_{idx + 3}": op for idx, op in enumerate(operand_x)},  # type: ignore[misc] # dynamic operand creation
             },
         }
 

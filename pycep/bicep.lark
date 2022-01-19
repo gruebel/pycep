@@ -111,9 +111,13 @@ not_equals_case_insens: value "!~" value
 
 // operators - logical
 
-?operator_logical: conditional
+?operator_logical: and_op | or_op | conditional
 
-conditional: "("? (STRING | FUNCTION | equals) ")"? "?" param_value ":" param_value
+and_op: value ("&&" value)+
+
+or_op: value ("||" value)+
+
+conditional: "("? (STRING | FUNCTION | operator_comparison | and_op | or_op) ")"? "?" param_value ":" param_value
 
 // Terms
 
