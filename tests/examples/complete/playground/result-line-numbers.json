@@ -363,5 +363,13 @@
       "__start_line__": 209,
       "__end_line__": 214
     }
+  },
+  "outputs": {
+    "nsgId": {
+      "type": "string",
+      "value": "nsg.id",
+      "__start_line__": 216,
+      "__end_line__": 216
+    }
   }
 }

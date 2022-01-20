@@ -212,3 +212,5 @@ module network './network.bicep' = {
     myIp: '123.123.123.123'
   }
 }
+
+output nsgId string = nsg.id

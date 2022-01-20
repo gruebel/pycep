@@ -313,5 +313,11 @@
         }
       }
     }
+  },
+  "outputs": {
+    "nsgId": {
+      "type": "string",
+      "value": "nsg.id"
+    }
   }
 }
