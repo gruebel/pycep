@@ -495,6 +495,14 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def not_op(self, args: tuple[bool | str]) -> pycep_typing.Not:
+        return {
+            "type": "not",
+            "operands": {
+                "bool_value": args[0],
+            },
+        }
+
     def coalesce(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Coalesce:
         operand_1, operand_2, *operand_x = args
 

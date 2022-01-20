@@ -1,0 +1,71 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramExpr": {
+      "decorators": [],
+      "type": "bool",
+      "default": {
+        "operator": {
+          "type": "not",
+          "operands": {
+            "bool_value": true
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "varExpr": {
+      "value": {
+        "operator": {
+          "type": "not",
+          "operands": {
+            "bool_value": false
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "managementGroup": {
+      "decorators": [],
+      "type": "Microsoft.Management/managementGroups",
+      "api_version": "2020-05-01",
+      "config": {
+        "name": "managementGroupId",
+        "properties": {
+          "displayName": "managementGroupDisplayName",
+          "details": {
+            "parent": {
+              "id": {
+                "operator": {
+                  "type": "not",
+                  "operands": {
+                    "bool_value": "varExpr"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "outputExpr": {
+      "type": "bool",
+      "value": {
+        "operator": {
+          "type": "not",
+          "operands": {
+            "bool_value": "paramExpr"
+          }
+        }
+      }
+    }
+  }
+}

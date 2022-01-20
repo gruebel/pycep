@@ -11,7 +11,7 @@ LoopType: TypeAlias = "LoopIndex | LoopArray | LoopArrayIndex | LoopObject"
 ElementResponse: TypeAlias = "ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse"
 Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"
 ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOrEquals | LessThan | Equals | NotEquals | EqualsCaseInsensitive | NotEqualsCaseInsensitive"
-LogicalOperators: TypeAlias = "Conditional"
+LogicalOperators: TypeAlias = "And | Or | Not | Coalesce | Conditional"
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators"
 
 
@@ -355,6 +355,15 @@ class And(TypedDict):
 class Or(TypedDict):
     type: Literal["or"]
     operands: _AndOperands
+
+
+class _NotOperands(TypedDict):
+    bool_value: bool | str
+
+
+class Not(TypedDict):
+    type: Literal["not"]
+    operands: _NotOperands
 
 
 class Coalesce(TypedDict):

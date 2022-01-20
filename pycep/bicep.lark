@@ -9,17 +9,19 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                             -> s
 
 ?value: "null"                                      -> null
       | SIGNED_INT                                  -> int
-      | "true"                                      -> true
-      | "false"                                     -> false
       | QUOTED_INTERPOLATION                        -> string
       | FUNCTION                                    -> string
-      | string
+      | bool
       | array
       | object
 
+?bool: "true"                                      -> true
+     | "false"                                     -> false
+     | string
+
 // element values
 
-?param_value: value
+?param_value: "("? value ")"?
             | MULTI_LINE_STRING                     -> multi_line_string
             | operator
 
@@ -112,11 +114,13 @@ not_equals_case_insens: value "!~" value
 
 // operators - logical
 
-?operator_logical: and_op | or_op | coalesce | conditional
+?operator_logical: and_op | or_op | not_op | coalesce | conditional
 
 and_op: value ("&&" value)+
 
 or_op: value ("||" value)+
+
+not_op: "!" "("? (not_op | bool) ")"?
 
 coalesce: value ("??" value)+
 

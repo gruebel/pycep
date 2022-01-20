@@ -30,7 +30,7 @@
 
 - [x] And
 - [x] Or
-- [ ] Not
+- [x] Not (partially, but need firther improvements)
 - [x] Coalesce
 - [x] Conditional expression
 
