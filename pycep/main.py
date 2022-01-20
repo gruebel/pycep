@@ -370,6 +370,29 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
     ####################
     #
+    # functions
+    #
+    ####################
+
+    def function(self, args: tuple[pycep_typing.Functions]) -> pycep_typing.Function:
+        return {"function": args[0]}
+
+    ####################
+    #
+    # functions - any
+    #
+    ####################
+
+    def any_func(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.AnyFunc:
+        return {
+            "type": "any",
+            "parameters": {
+                "value": args[0],
+            },
+        }
+
+    ####################
+    #
     # operators - comparison
     #
     ####################

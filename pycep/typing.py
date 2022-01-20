@@ -10,9 +10,13 @@ ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | TemplateSpe
 LoopType: TypeAlias = "LoopIndex | LoopArray | LoopArrayIndex | LoopObject"
 ElementResponse: TypeAlias = "ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse"
 Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"
+
 ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOrEquals | LessThan | Equals | NotEquals | EqualsCaseInsensitive | NotEqualsCaseInsensitive"
 LogicalOperators: TypeAlias = "And | Or | Not | Coalesce | Conditional"
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators"
+
+AnyFunctions: TypeAlias = "AnyFunc"
+Functions: TypeAlias = "AnyFunctions"
 
 
 ####################
@@ -280,6 +284,33 @@ class DecoratorMetadata(TypedDict):
 
 class DecoratorSecure(TypedDict):
     type: Literal["secure"]
+
+
+####################
+#
+# functions
+#
+####################
+
+
+class Function(TypedDict):
+    function: AnyFunctions
+
+
+####################
+#
+# functions - any
+#
+####################
+
+
+class _AnyParameters(TypedDict):
+    value: PossibleValue
+
+
+class AnyFunc(TypedDict):
+    type: Literal["any"]
+    parameters: _AnyParameters
 
 
 ####################
