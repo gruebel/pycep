@@ -10,10 +10,10 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                             -> s
 ?value: "null"                                      -> null
       | SIGNED_INT                                  -> int
       | QUOTED_INTERPOLATION                        -> string
-      | FUNCTION                                    -> string
       | bool
       | array
       | object
+      | function
 
 ?bool: "true"                                      -> true
      | "false"                                     -> false
@@ -87,6 +87,16 @@ deco_metadata: "metadata" "(" object ")"
 
 deco_secure: "secure" "(" ")"
 
+// functions
+
+function: function_any
+
+// functions - any
+
+?function_any: any_func
+
+any_func: ("any" | "sys.any") "(" value ")"
+
 // operators
 
 operator: operator_comparison | operator_logical
@@ -124,12 +134,12 @@ not_op: "!" "("? (not_op | bool) ")"?
 
 coalesce: value ("??" value)+
 
-conditional: "("? (STRING | FUNCTION | operator_comparison | and_op | or_op) ")"? "?" param_value ":" param_value
+conditional: "("? (STRING | function | operator_comparison | and_op | or_op) ")"? "?" param_value ":" param_value
 
 // Terms
 
 STRING: /[\w_.]+/
-FUNCTION: /(?!if\()(?=[\w_]+([\[\]]|[()])+)[\w_\-\[\]()\/.,'= ]+/
+//FUNCTION: /(?!if\()(?=[\w_]+([\[\]]|[()])+)[\w_\-\[\]()\/.,'= ]+/
 //QUOTED_INTERPOLATION: "'" /[\s\w\-\/${}\[\]().,:+*@"!]*/ "'"
 QUOTED_INTERPOLATION: /'[^']*'/
 

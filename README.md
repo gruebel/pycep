@@ -3,6 +3,7 @@
 [![codecov](https://codecov.io/gh/gruebel/pycep/branch/master/graph/badge.svg?token=49WHVYGE1D)](https://codecov.io/gh/gruebel/pycep)
 [![PyPI](https://img.shields.io/pypi/v/pycep-parser)](https://pypi.org/project/pycep-parser/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pycep-parser)](https://github.com/gruebel/pycep)
+![CodeQL](https://github.com/gruebel/pycep/workflows/CodeQL/badge.svg)
 
 A fun little project, which has the goal to parse
 [Azure Bicep](https://github.com/Azure/bicep) files.
@@ -24,18 +25,36 @@ This is still a very early stage, therefore a lot can and will change.
 - [ ] Deployment condition
 - [x] Adding line numbers to element blocks
 
+### Functions
+- [x] Any
+- [ ] Array
+  - [ ] array
+  - [ ] concat
+  - [ ] contains
+  - [ ] empty
+  - [ ] first
+  - [ ] intersection
+  - [ ] items
+  - [ ] last
+  - [ ] length
+  - [ ] max
+  - [ ] min
+  - [ ] range
+  - [ ] skip
+  - [ ] take
+  - [ ] union
+- [ ] Scope
+  - [ ] managementGroup
+  - [ ] resourceGroup
+  - [ ] subscription
+  - [ ] tenant
+
 ### Operators
 - [ ] Accessor
-- [ ] Logical
-  - [x] And
-  - [x] Or
-  - [ ] Not
-  - [x] Coalesce
-  - [x] Conditional expression
 - [ ] Numeric
 
 ### CI/CD
-- [x] Add test coverage
+- [ ] Fix security issues found by Scorecard
 
 ## Considering
 - Adding line numbers to other parts

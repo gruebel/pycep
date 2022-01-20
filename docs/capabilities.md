@@ -1,5 +1,42 @@
 # Supported capabilities
 
+## Functions
+
+### Any
+
+[Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-any)
+
+- [x] Any
+
+### Array
+
+[Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-array)
+
+- [ ] array
+- [ ] concat
+- [ ] contains
+- [ ] empty
+- [ ] first
+- [ ] intersection
+- [ ] items
+- [ ] last
+- [ ] length
+- [ ] max
+- [ ] min
+- [ ] range
+- [ ] skip
+- [ ] take
+- [ ] union
+
+### Scope
+
+[Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-scope)
+
+- [ ] managementGroup
+- [ ] resourceGroup
+- [ ] subscription
+- [ ] tenant
+
 ## Operators
 
 ### Accessor
