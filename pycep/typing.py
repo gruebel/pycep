@@ -315,6 +315,24 @@ class AnyFunc(TypedDict):
 
 ####################
 #
+# functions - scope
+#
+####################
+
+
+class _ResourceGroupParameters(TypedDict):
+    resource_group_name: str | None
+    subscription_id: str | None
+
+
+class ResourceGroup(TypedDict):
+    type: Literal["resource_group"]
+    parameters: _ResourceGroupParameters
+    property_name: str | None
+
+
+####################
+#
 # Operators - comparison
 #
 ####################

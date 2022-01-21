@@ -33,7 +33,7 @@
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-scope)
 
 - [ ] managementGroup
-- [ ] resourceGroup
+- [x] resourceGroup
 - [ ] subscription
 - [ ] tenant
 

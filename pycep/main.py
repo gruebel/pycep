@@ -393,6 +393,28 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
     ####################
     #
+    # functions - scope
+    #
+    ####################
+
+    def resource_group(self, args: tuple[Token | None, Token | None, Token | None]) -> pycep_typing.ResourceGroup:
+        resource_group_name, subscription_id, property_name = args
+
+        if resource_group_name and subscription_id:
+            # very strange parameter definition
+            resource_group_name, subscription_id = subscription_id, resource_group_name
+
+        return {
+            "type": "resource_group",
+            "parameters": {
+                "resource_group_name": str(resource_group_name) if resource_group_name else None,
+                "subscription_id": str(subscription_id) if subscription_id else None,
+            },
+            "property_name": str(property_name)[1:] if property_name else None,
+        }
+
+    ####################
+    #
     # operators - comparison
     #
     ####################

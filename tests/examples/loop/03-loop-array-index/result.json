@@ -42,7 +42,16 @@
         "condition": null,
         "config": {
           "name": "'${storageAccountNamePrefix}${config.suffix}${i}'",
-          "location": "resourceGroup().location",
+          "location": {
+            "function": {
+              "type": "resource_group",
+              "parameters": {
+                "resource_group_name": null,
+                "subscription_id": null
+              },
+              "property_name": "location"
+            }
+          },
           "sku": {
             "name": "config.sku"
           },
