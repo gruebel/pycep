@@ -90,7 +90,7 @@ deco_secure: "secure" "(" ")"
 
 // functions
 
-function: function_any | function_scope
+function: function_any | function_array | function_scope
 
 // functions - any
 
@@ -98,11 +98,17 @@ function: function_any | function_scope
 
 any_func: ("any" | "sys.any") "(" value ")"
 
+// functions - array
+
+?function_array: union
+
+union: ("union" | "sys.union") "(" value ("," value)+ ")" ["." STRING]
+
 // functions - scope
 
 ?function_scope: resource_group
 
-resource_group: ("resourceGroup" | "az.resourceGroup") "(" [STRING ","? [STRING]] ")" [STRING]
+resource_group: ("resourceGroup" | "az.resourceGroup") "(" [STRING ","? [STRING]] ")" ["." STRING]
 
 // operators
 
@@ -145,7 +151,7 @@ conditional: "("? (STRING | function | operator_comparison | and_op | or_op) ")"
 
 // Terms
 
-STRING: /[\w_.]+/
+STRING: /[\w][\w_.]*/
 FUNCTION: /(?!if\()(?=[\w_]+[\[\]]+)[\w_\-\[\]\/.,'= ]+/
 QUOTED_INTERPOLATION: /'[^']*'/
 

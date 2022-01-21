@@ -16,7 +16,9 @@ LogicalOperators: TypeAlias = "And | Or | Not | Coalesce | Conditional"
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
-Functions: TypeAlias = "AnyFunctions"
+ArrayFunctions: TypeAlias = "UnionFunc"
+ScopeFunctions: TypeAlias = "ResourceGroup"
+Functions: TypeAlias = "AnyFunctions | ArrayFunctions | ScopeFunctions"
 
 
 ####################
@@ -294,7 +296,7 @@ class DecoratorSecure(TypedDict):
 
 
 class Function(TypedDict):
-    function: AnyFunctions
+    function: Functions
 
 
 ####################
@@ -315,6 +317,25 @@ class AnyFunc(TypedDict):
 
 ####################
 #
+# functions - array
+#
+####################
+
+
+class _UnionParameters(TypedDict):
+    arg_1: str
+    arg_2: str
+    arg_3: NotRequired[str]  # and many more possible
+
+
+class UnionFunc(TypedDict):
+    type: Literal["union"]
+    parameters: _UnionParameters
+    property_name: NotRequired[str]
+
+
+####################
+#
 # functions - scope
 #
 ####################
@@ -328,7 +349,7 @@ class _ResourceGroupParameters(TypedDict):
 class ResourceGroup(TypedDict):
     type: Literal["resource_group"]
     parameters: _ResourceGroupParameters
-    property_name: str | None
+    property_name: NotRequired[str]
 
 
 ####################

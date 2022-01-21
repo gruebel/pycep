@@ -26,7 +26,7 @@
 - [ ] range
 - [ ] skip
 - [ ] take
-- [ ] union
+- [x] union
 
 ### Scope
 
