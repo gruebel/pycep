@@ -393,6 +393,29 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
     ####################
     #
+    # functions - array
+    #
+    ####################
+
+    def union(self, args: tuple[str, ...]) -> pycep_typing.UnionFunc:
+        arg_1, arg_2, *arg_x, property_name = args
+
+        result: pycep_typing.UnionFunc = {
+            "type": "union",
+            "parameters": {
+                "arg_1": arg_1,
+                "arg_2": arg_2,
+                **{f"arg_{idx + 3}": arg for idx, arg in enumerate(arg_x)},  # type: ignore[misc] # dynamic operand creation
+            },
+        }
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
+
+    ####################
+    #
     # functions - scope
     #
     ####################
@@ -404,14 +427,18 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             # very strange parameter definition
             resource_group_name, subscription_id = subscription_id, resource_group_name
 
-        return {
+        result: pycep_typing.ResourceGroup = {
             "type": "resource_group",
             "parameters": {
                 "resource_group_name": str(resource_group_name) if resource_group_name else None,
                 "subscription_id": str(subscription_id) if subscription_id else None,
             },
-            "property_name": str(property_name)[1:] if property_name else None,
         }
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
 
     ####################
     #

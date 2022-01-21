@@ -14,8 +14,7 @@
           "parameters": {
             "resource_group_name": null,
             "subscription_id": null
-          },
-          "property_name": null
+          }
         }
       }
     }
@@ -70,8 +69,7 @@
             "parameters": {
               "resource_group_name": "resourceGroupName",
               "subscription_id": null
-            },
-            "property_name": null
+            }
           }
         }
       }
@@ -91,8 +89,7 @@
             "parameters": {
               "resource_group_name": "resourceGroupName",
               "subscription_id": "subscriptionId"
-            },
-            "property_name": null
+            }
           }
         }
       }
@@ -107,8 +104,7 @@
           "parameters": {
             "resource_group_name": null,
             "subscription_id": null
-          },
-          "property_name": null
+          }
         }
       }
     },
@@ -120,8 +116,7 @@
           "parameters": {
             "resource_group_name": null,
             "subscription_id": null
-          },
-          "property_name": null
+          }
         }
       }
     }

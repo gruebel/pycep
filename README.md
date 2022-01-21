@@ -42,7 +42,7 @@ This is still a very early stage, therefore a lot can and will change.
   - [ ] range
   - [ ] skip
   - [ ] take
-  - [ ] union
+  - [x] union
 - [ ] Scope
   - [ ] managementGroup
   - [x] resourceGroup
