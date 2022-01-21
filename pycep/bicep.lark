@@ -10,13 +10,14 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                             -> s
 ?value: "null"                                      -> null
       | SIGNED_INT                                  -> int
       | QUOTED_INTERPOLATION                        -> string
+      | FUNCTION                                    -> string
       | bool
       | array
       | object
       | function
 
-?bool: "true"                                      -> true
-     | "false"                                     -> false
+?bool: "true"                                       -> true
+     | "false"                                      -> false
      | string
 
 // element values
@@ -89,13 +90,19 @@ deco_secure: "secure" "(" ")"
 
 // functions
 
-function: function_any
+function: function_any | function_scope
 
 // functions - any
 
 ?function_any: any_func
 
 any_func: ("any" | "sys.any") "(" value ")"
+
+// functions - scope
+
+?function_scope: resource_group
+
+resource_group: ("resourceGroup" | "az.resourceGroup") "(" [STRING ","? [STRING]] ")" [STRING]
 
 // operators
 
@@ -139,8 +146,7 @@ conditional: "("? (STRING | function | operator_comparison | and_op | or_op) ")"
 // Terms
 
 STRING: /[\w_.]+/
-//FUNCTION: /(?!if\()(?=[\w_]+([\[\]]|[()])+)[\w_\-\[\]()\/.,'= ]+/
-//QUOTED_INTERPOLATION: "'" /[\s\w\-\/${}\[\]().,:+*@"!]*/ "'"
+FUNCTION: /(?!if\()(?=[\w_]+[\[\]]+)[\w_\-\[\]\/.,'= ]+/
 QUOTED_INTERPOLATION: /'[^']*'/
 
 MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"

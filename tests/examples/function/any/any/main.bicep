@@ -22,4 +22,4 @@ resource identityProvider 'Microsoft.ApiManagement/service/identityProviders@202
 output ftpUser string = any(site.properties)
 
 // namespace sys
-output namspace string = sys.any(site.properties)
+output namespace string = sys.any(site.properties)

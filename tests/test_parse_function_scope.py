@@ -5,12 +5,12 @@ from assertpy import assert_that
 
 from pycep import BicepParser
 
-EXAMPLES_DIR = Path(__file__).parent / "examples/function/any"
+EXAMPLES_DIR = Path(__file__).parent / "examples/function/scope"
 
 
-def test_parse_any() -> None:
+def test_parse_resource_group() -> None:
     # given
-    sub_dir_path = EXAMPLES_DIR / "any"
+    sub_dir_path = EXAMPLES_DIR / "resource_group"
     file_path = sub_dir_path / "main.bicep"
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 

@@ -45,7 +45,7 @@ This is still a very early stage, therefore a lot can and will change.
   - [ ] union
 - [ ] Scope
   - [ ] managementGroup
-  - [ ] resourceGroup
+  - [x] resourceGroup
   - [ ] subscription
   - [ ] tenant
 
