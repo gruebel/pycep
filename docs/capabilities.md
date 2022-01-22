@@ -28,6 +28,20 @@
 - [ ] take
 - [x] union
 
+### Resource
+
+[Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-resource)
+
+- [ ] extensionResourceId
+- [ ] getSecret
+- [ ] list*
+- [ ] pickZones
+- [ ] providers (deprecated)
+- [ ] reference
+- [x] resourceId
+- [ ] subscriptionResourceId
+- [ ] tenantResourceId
+
 ### Scope
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-scope)
