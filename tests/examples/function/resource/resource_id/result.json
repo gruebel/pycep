@@ -1,0 +1,126 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "uamiId": {
+      "decorators": [],
+      "type": "string",
+      "default": {
+        "function": {
+          "type": "resource_id",
+          "parameters": {
+            "resource_type": "'Microsoft.ManagedIdentity/userAssignedIdentities'",
+            "resource_name_1": "uamiName",
+            "resource_name_2": null,
+            "resource_group_name": null,
+            "subscription_id": null
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "uamiId": {
+      "value": {
+        "function": {
+          "type": "resource_id",
+          "parameters": {
+            "resource_type": "rgName",
+            "resource_name_1": "'Microsoft.ManagedIdentity/userAssignedIdentities'",
+            "resource_name_2": "uamiName",
+            "resource_group_name": "subId",
+            "subscription_id": null
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "logAnalyticsAutomation": {
+      "decorators": [],
+      "type": "Microsoft.OperationalInsights/workspaces/linkedServices",
+      "api_version": "2020-08-01",
+      "config": {
+        "parent": "logAnalyticsWorkspace",
+        "name": "'Automation'",
+        "properties": {
+          "resourceId": {
+            "function": {
+              "type": "resource_id",
+              "parameters": {
+                "resource_type": "'Microsoft.Automation/automationAccounts'",
+                "resource_name_1": "automationAccountName",
+                "resource_name_2": null,
+                "resource_group_name": null,
+                "subscription_id": null
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "modules": {
+    "exampleModule": {
+      "decorators": [],
+      "type": "local",
+      "detail": {
+        "full": "rgModule.bicep",
+        "path": "rgModule.bicep"
+      },
+      "config": {
+        "name": "'exampleModule'",
+        "params": {
+          "location": "location",
+          "fwname": {
+            "function": {
+              "type": "resource_id",
+              "parameters": {
+                "resource_type": "mi.type",
+                "resource_name_1": "mi.name",
+                "resource_name_2": null,
+                "resource_group_name": null,
+                "subscription_id": null
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "subnetId": {
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "resource_id",
+          "parameters": {
+            "resource_type": "'Microsoft.Network/virtualNetworks/subnets'",
+            "resource_name_1": "vnet.name",
+            "resource_name_2": "subnet1Name",
+            "resource_group_name": "rgName",
+            "subscription_id": "subId"
+          }
+        }
+      }
+    },
+    "namespace": {
+      "type": "object",
+      "value": {
+        "function": {
+          "type": "resource_id",
+          "parameters": {
+            "resource_type": "'Microsoft.Automation/automationAccounts'",
+            "resource_name_1": "automationAccountName",
+            "resource_name_2": null,
+            "resource_group_name": null,
+            "subscription_id": null
+          }
+        }
+      }
+    }
+  }
+}

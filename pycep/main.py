@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, List, cast
 
 from lark import Lark, Token, Transformer, Tree, v_args
 from lark.tree import Meta
@@ -413,6 +413,58 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             result["property_name"] = str(property_name)
 
         return result
+
+    ####################
+    #
+    # functions - resource
+    #
+    ####################
+
+    def resource_id(self, args: List[Token]) -> pycep_typing.ResourceId:
+        # args has between 2-5 items and only for the 2 and 5 items case
+        # it is possible to determine the correct parameter references
+        args_len = len(args)
+        if args_len == 2:
+            subscription_id = None
+            resource_group_name = None
+            resource_type = str(args[0])
+            resource_name_1 = str(args[1])
+            resource_name_2 = None
+        elif args_len == 3:
+            # this case is ambiguous and it could be any of
+            # 0 -> resource_type, 1 -> resource_name_1, 2 -> resource_name_2
+            # 0 -> resource_group_name, 1 -> resource_type, 2 -> resource_name_1
+            subscription_id = None
+            resource_group_name = None
+            resource_type = str(args[0])
+            resource_name_1 = str(args[1])
+            resource_name_2 = str(args[2])
+        elif args_len == 4:
+            # this case is ambiguous and it could be any of
+            # 0 -> resource_group_name, 1 -> resource_type, 2 -> resource_name_1, 3 -> resource_name_2
+            # 0 -> subscription_id, 1 -> resource_group_name, 2 -> resource_type, 3 -> resource_name_1
+            subscription_id = None
+            resource_group_name = str(args[0])
+            resource_type = str(args[1])
+            resource_name_1 = str(args[2])
+            resource_name_2 = str(args[3])
+        else:
+            subscription_id = str(args[0])
+            resource_group_name = str(args[1])
+            resource_type = str(args[2])
+            resource_name_1 = str(args[3])
+            resource_name_2 = str(args[4])
+
+        return {
+            "type": "resource_id",
+            "parameters": {
+                "resource_type": resource_type,
+                "resource_name_1": resource_name_1,
+                "resource_name_2": resource_name_2,
+                "resource_group_name": resource_group_name,
+                "subscription_id": subscription_id,
+            },
+        }
 
     ####################
     #

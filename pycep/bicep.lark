@@ -58,13 +58,15 @@ loop_object: STRING "in" "items" "(" STRING ")"
 
 string: STRING
 
+?quoted_string: STRING | QUOTED_INTERPOLATION
+
 array: "[" value* "]"
 
 object: "{" pair* "}"
 
 pair: key ":" (value | loop | operator)
 
-key: STRING | QUOTED_INTERPOLATION
+key: quoted_string
 
 // decorators
 
@@ -90,7 +92,7 @@ deco_secure: "secure" "(" ")"
 
 // functions
 
-function: function_any | function_array | function_scope
+function: function_any | function_array | function_resource | function_scope
 
 // functions - any
 
@@ -103,6 +105,16 @@ any_func: ("any" | "sys.any") "(" value ")"
 ?function_array: union
 
 union: ("union" | "sys.union") "(" value ("," value)+ ")" ["." STRING]
+
+// functions - resource
+
+?function_resource: resource_id
+
+// this rule results in a weird behaviour of "resourceId" being a TERM
+// and then matching a key named "resourceId" in an object
+//resource_id: ("resourceId" | "az.resourceId") "(" quoted_string ("," quoted_string)~1..4 ")"
+_RESOURCE_ID: /(az.)?resourceId\s*\(/
+resource_id: _RESOURCE_ID quoted_string ("," quoted_string)~1..4 ")"
 
 // functions - scope
 
@@ -156,8 +168,6 @@ FUNCTION: /(?!if\()(?=[\w_]+[\[\]]+)[\w_\-\[\]\/.,'= ]+/
 QUOTED_INTERPOLATION: /'[^']*'/
 
 MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
-
-STRING_INTERPOLATION : "${" /[^}]+/ "}"
 
 %import common.CPP_COMMENT
 %import common.NEWLINE

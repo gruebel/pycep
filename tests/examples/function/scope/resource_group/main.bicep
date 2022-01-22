@@ -1,8 +1,9 @@
 // https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-scope#resourcegroup
 
-// basic declaration
+// param
 param paramObject object = resourceGroup()
 
+// var
 var resourceGroupName = resourceGroup().name
 
 // resource

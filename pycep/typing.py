@@ -17,8 +17,9 @@ Operators: TypeAlias = "ComparisonOperators | LogicalOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
 ArrayFunctions: TypeAlias = "UnionFunc"
+ResourceFunctions: TypeAlias = "ResourceId"
 ScopeFunctions: TypeAlias = "ResourceGroup"
-Functions: TypeAlias = "AnyFunctions | ArrayFunctions | ScopeFunctions"
+Functions: TypeAlias = "AnyFunctions | ArrayFunctions | ResourceFunctions | ScopeFunctions"
 
 
 ####################
@@ -332,6 +333,26 @@ class UnionFunc(TypedDict):
     type: Literal["union"]
     parameters: _UnionParameters
     property_name: NotRequired[str]
+
+
+####################
+#
+# functions - scope
+#
+####################
+
+
+class _ResourceIdParameters(TypedDict):
+    resource_type: str
+    resource_name_1: str
+    resource_name_2: str | None
+    resource_group_name: str | None
+    subscription_id: str | None
+
+
+class ResourceId(TypedDict):
+    type: Literal["resource_id"]
+    parameters: _ResourceIdParameters
 
 
 ####################

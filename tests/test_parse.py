@@ -161,5 +161,4 @@ def test_parse_resource_module_decorator() -> None:
     result = BicepParser(file_path).json()
 
     # then
-    print(json.dumps(result, indent=2))
     assert_that(result).is_equal_to(expected_result)
