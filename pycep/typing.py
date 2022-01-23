@@ -364,6 +364,18 @@ class ResourceId(TypedDict):
     parameters: _ResourceIdParameters
 
 
+class _SubscriptionResourceIdParameters(TypedDict):
+    resource_type: str
+    resource_name_1: str
+    resource_name_2: str | None
+    subscription_id: str | None
+
+
+class SubscriptionResourceId(TypedDict):
+    type: Literal["subscription_resource_id"]
+    parameters: _SubscriptionResourceIdParameters
+
+
 ####################
 #
 # functions - scope

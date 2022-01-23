@@ -474,6 +474,39 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def subscription_resource_id(self, args: List[Token]) -> pycep_typing.SubscriptionResourceId:
+        # args has between 2-4 items and only for the 2 and 4 items case
+        # it is possible to determine the correct parameter references
+        args_len = len(args)
+        if args_len == 2:
+            subscription_id = None
+            resource_type = str(args[0])
+            resource_name_1 = str(args[1])
+            resource_name_2 = None
+        elif args_len == 3:
+            # this case is ambiguous and it could be any of
+            # 0 -> resource_type, 1 -> resource_name_1, 2 -> resource_name_2
+            # 0 -> subscription_id, 1 -> resource_type, 2 -> resource_name_1
+            subscription_id = None
+            resource_type = str(args[0])
+            resource_name_1 = str(args[1])
+            resource_name_2 = str(args[2])
+        else:
+            subscription_id = str(args[0])
+            resource_type = str(args[1])
+            resource_name_1 = str(args[2])
+            resource_name_2 = str(args[3])
+
+        return {
+            "type": "subscription_resource_id",
+            "parameters": {
+                "resource_type": resource_type,
+                "resource_name_1": resource_name_1,
+                "resource_name_2": resource_name_2,
+                "subscription_id": subscription_id,
+            },
+        }
+
     ####################
     #
     # functions - scope
@@ -714,7 +747,7 @@ class BicepParser:
 
     def _create_tree(self) -> Tree:
         content = self.file_path.read_text()
-        lark_parser = Lark(grammar=LARK_GRAMMAR, parser="lalr", propagate_positions=True)
+        lark_parser = Lark(grammar=LARK_GRAMMAR, parser="earley", propagate_positions=True)
 
         return lark_parser.parse(content)
 
