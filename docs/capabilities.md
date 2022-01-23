@@ -32,7 +32,7 @@
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-resource)
 
-- [ ] extensionResourceId
+- [x] extensionResourceId
 - [ ] getSecret
 - [ ] list*
 - [ ] pickZones
