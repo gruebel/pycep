@@ -816,6 +816,8 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
 
 class BicepParser:
+    lark_parser = Lark(grammar=LARK_GRAMMAR, parser="lalr", propagate_positions=True)
+
     def __init__(self, file_path: Path, add_line_numbers: bool = False) -> None:
         self.file_path = file_path
         self.add_line_numbers = add_line_numbers
@@ -824,9 +826,8 @@ class BicepParser:
 
     def _create_tree(self) -> Tree:
         content = self.file_path.read_text()
-        lark_parser = Lark(grammar=LARK_GRAMMAR, parser="earley", propagate_positions=True)
 
-        return lark_parser.parse(content)
+        return self.lark_parser.parse(content)
 
     def json(self) -> pycep_typing.BicepJson:
         return BicepToJson(add_line_numbers=self.add_line_numbers).transform(self.tree)
