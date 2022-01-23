@@ -5,7 +5,7 @@ from assertpy import assert_that
 
 from pycep import BicepParser
 
-EXAMPLES_DIR = Path(__file__).parent / "examples/function/string"
+EXAMPLES_DIR = Path(__file__).parent / "examples/string"
 
 
 def test_parse_guid() -> None:

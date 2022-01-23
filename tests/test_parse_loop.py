@@ -5,12 +5,12 @@ from assertpy import assert_that
 
 from pycep import BicepParser
 
-EXAMPLES_DIR = Path(__file__).parent / "examples/operator/logical"
+EXAMPLES_DIR = Path(__file__).parent / "examples/loop"
 
 
-def test_parse_and() -> None:
+def test_parse_loop_index() -> None:
     # given
-    sub_dir_path = EXAMPLES_DIR / "and"
+    sub_dir_path = EXAMPLES_DIR / "index"
     file_path = sub_dir_path / "main.bicep"
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
@@ -21,9 +21,9 @@ def test_parse_and() -> None:
     assert_that(result).is_equal_to(expected_result)
 
 
-def test_parse_or() -> None:
+def test_parse_loop_array() -> None:
     # given
-    sub_dir_path = EXAMPLES_DIR / "or"
+    sub_dir_path = EXAMPLES_DIR / "array"
     file_path = sub_dir_path / "main.bicep"
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
@@ -34,9 +34,9 @@ def test_parse_or() -> None:
     assert_that(result).is_equal_to(expected_result)
 
 
-def test_parse_not() -> None:
+def test_parse_loop_array_index() -> None:
     # given
-    sub_dir_path = EXAMPLES_DIR / "not"
+    sub_dir_path = EXAMPLES_DIR / "array-index"
     file_path = sub_dir_path / "main.bicep"
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
@@ -47,9 +47,9 @@ def test_parse_not() -> None:
     assert_that(result).is_equal_to(expected_result)
 
 
-def test_parse_coalesce() -> None:
+def test_parse_loop_object() -> None:
     # given
-    sub_dir_path = EXAMPLES_DIR / "coalesce"
+    sub_dir_path = EXAMPLES_DIR / "object"
     file_path = sub_dir_path / "main.bicep"
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
@@ -60,9 +60,9 @@ def test_parse_coalesce() -> None:
     assert_that(result).is_equal_to(expected_result)
 
 
-def test_parse_conditional() -> None:
+def test_parse_loop_condition() -> None:
     # given
-    sub_dir_path = EXAMPLES_DIR / "conditional"
+    sub_dir_path = EXAMPLES_DIR / "condition"
     file_path = sub_dir_path / "main.bicep"
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
