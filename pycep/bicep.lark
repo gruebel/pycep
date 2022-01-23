@@ -110,13 +110,15 @@ empty: ("empty" | "sys.empty") "(" value ")"
 
 // functions - resource
 
-?function_resource: resource_id
+?function_resource: resource_id | subscription_resource_id
 
 // this rule results in a weird behaviour of "resourceId" being a TERM
-// and then matching a key named "resourceId" in an object
-//resource_id: ("resourceId" | "az.resourceId") "(" quoted_string ("," quoted_string)~1..4 ")"
-_RESOURCE_ID: /(az.)?resourceId\s*\(/
-resource_id: _RESOURCE_ID quoted_string ("," quoted_string)~1..4 ")"
+// and then matching a key named "resourceId" in an object -> switching to earley for now
+//_RESOURCE_ID: /(az.)?resourceId\s*\(/
+//resource_id: _RESOURCE_ID quoted_string ("," quoted_string)~1..4 ")"
+resource_id: ("resourceId" | "az.resourceId") "(" quoted_string ("," quoted_string)~1..4 ")"
+
+subscription_resource_id: ("subscriptionResourceId" | "az.subscriptionResourceId") "(" quoted_string ("," quoted_string)~1..3 ")"
 
 // functions - scope
 

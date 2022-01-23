@@ -54,9 +54,19 @@
       "type": "Microsoft.Authorization/roleAssignments",
       "api_version": "2020-04-01-preview",
       "config": {
-        "name": "guid(roleAssignmentName)",
+        "name": "roleAssignmentName",
         "properties": {
-          "roleDefinitionId": "subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)",
+          "roleDefinitionId": {
+            "function": {
+              "type": "subscription_resource_id",
+              "parameters": {
+                "resource_type": "'Microsoft.Authorization/roleDefinitions'",
+                "resource_name_1": "roleDefinitionId",
+                "resource_name_2": null,
+                "subscription_id": null
+              }
+            }
+          },
           "principalId": "principalId"
         }
       }

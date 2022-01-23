@@ -39,7 +39,7 @@
 - [ ] providers (deprecated)
 - [ ] reference
 - [x] resourceId
-- [ ] subscriptionResourceId
+- [x] subscriptionResourceId
 - [ ] tenantResourceId
 
 ### Scope

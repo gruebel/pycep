@@ -20,7 +20,7 @@ resource dontDeleteLock 'Microsoft.Authorization/locks@2016-09-01' = {
 }
 
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
-  name: guid(roleAssignmentName)
+  name: roleAssignmentName
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
     principalId: principalId
