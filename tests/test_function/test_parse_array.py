@@ -5,12 +5,12 @@ from assertpy import assert_that
 
 from pycep import BicepParser
 
-EXAMPLES_DIR = Path(__file__).parent / "examples/function/scope"
+EXAMPLES_DIR = Path(__file__).parent / "examples/array"
 
 
-def test_parse_resource_group() -> None:
+def test_parse_empty() -> None:
     # given
-    sub_dir_path = EXAMPLES_DIR / "resource_group"
+    sub_dir_path = EXAMPLES_DIR / "empty"
     file_path = sub_dir_path / "main.bicep"
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
@@ -21,9 +21,9 @@ def test_parse_resource_group() -> None:
     assert_that(result).is_equal_to(expected_result)
 
 
-def test_parse_subscription() -> None:
+def test_parse_union() -> None:
     # given
-    sub_dir_path = EXAMPLES_DIR / "subscription"
+    sub_dir_path = EXAMPLES_DIR / "union"
     file_path = sub_dir_path / "main.bicep"
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
@@ -31,5 +31,4 @@ def test_parse_subscription() -> None:
     result = BicepParser(file_path).json()
 
     # then
-    print(json.dumps(result, indent=2))
     assert_that(result).is_equal_to(expected_result)

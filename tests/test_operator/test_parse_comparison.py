@@ -5,7 +5,7 @@ from assertpy import assert_that
 
 from pycep import BicepParser
 
-EXAMPLES_DIR = Path(__file__).parent / "examples/operator/comparison"
+EXAMPLES_DIR = Path(__file__).parent / "examples/comparison"
 
 
 def test_parse_greater_than_or_equals() -> None:
