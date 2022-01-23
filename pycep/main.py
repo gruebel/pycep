@@ -550,6 +550,25 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
     ####################
     #
+    # functions - string
+    #
+    ####################
+
+    def guid(self, args: tuple[str, ...]) -> pycep_typing.Guid:
+        base_string, *extra_string_x = args
+
+        result: pycep_typing.Guid = {
+            "type": "guid",
+            "parameters": {
+                "base_string": base_string,
+                **{f"extra_string_{idx + 1}": extra for idx, extra in enumerate(extra_string_x)},  # type: ignore[misc] # dynamic operand creation
+            },
+        }
+
+        return result
+
+    ####################
+    #
     # operators - comparison
     #
     ####################
