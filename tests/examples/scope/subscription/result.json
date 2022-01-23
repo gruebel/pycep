@@ -22,7 +22,14 @@
       "type": "Microsoft.Authorization/roleDefinitions",
       "api_version": "2018-01-01-preview",
       "config": {
-        "name": "guid(roleName)",
+        "name": {
+          "function": {
+            "type": "guid",
+            "parameters": {
+              "base_string": "roleName"
+            }
+          }
+        },
         "properties": {
           "roleName": "roleName",
           "description": "'Custom role create with bicep'",
@@ -34,7 +41,15 @@
             }
           ],
           "assignableScopes": [
-            "subscription().id"
+            {
+              "function": {
+                "type": "subscription",
+                "parameters": {
+                  "subscription_id": null
+                },
+                "property_name": "id"
+              }
+            }
           ]
         }
       }
@@ -44,7 +59,24 @@
       "type": "Microsoft.Authorization/roleAssignments",
       "api_version": "2020-04-01-preview",
       "config": {
-        "name": "guid(roleName, principalId, subscription().subscriptionId)",
+        "name": {
+          "function": {
+            "type": "guid",
+            "parameters": {
+              "base_string": "roleName",
+              "extra_string_1": "principalId",
+              "extra_string_2": {
+                "function": {
+                  "type": "subscription",
+                  "parameters": {
+                    "subscription_id": null
+                  },
+                  "property_name": "subscriptionId"
+                }
+              }
+            }
+          }
+        },
         "properties": {
           "roleDefinitionId": "definition.id",
           "principalId": "principalId"

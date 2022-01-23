@@ -19,7 +19,8 @@ AnyFunctions: TypeAlias = "AnyFunc"
 ArrayFunctions: TypeAlias = "Empty | UnionFunc"
 ResourceFunctions: TypeAlias = "ResourceId | SubscriptionResourceId"
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
-Functions: TypeAlias = "AnyFunctions | ArrayFunctions | ResourceFunctions | ScopeFunctions"
+StringFunctions: TypeAlias = "Guid"
+Functions: TypeAlias = "AnyFunctions | ArrayFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
 
 ####################
@@ -402,6 +403,23 @@ class Subscription(TypedDict):
     type: Literal["subscription"]
     parameters: _SubscriptionParameters
     property_name: NotRequired[str]
+
+
+####################
+#
+# functions - resource
+#
+####################
+
+
+class _GuidParameters(TypedDict):
+    base_string: str
+    extra_string_1: NotRequired[str]  # and many more possible
+
+
+class Guid(TypedDict):
+    type: Literal["guid"]
+    parameters: _GuidParameters
 
 
 ####################

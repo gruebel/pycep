@@ -51,6 +51,14 @@
 - [x] subscription
 - [ ] tenant
 
+### String
+
+[Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-string)
+
+- [ ] ...
+- [x] guid
+- [ ] ...
+
 ## Operators
 
 ### Accessor

@@ -92,7 +92,7 @@ deco_secure: "secure" "(" ")"
 
 // functions
 
-function: function_any | function_array | function_resource | function_scope
+function: function_any | function_array | function_resource | function_scope | function_string
 
 // functions - any
 
@@ -127,6 +127,12 @@ subscription_resource_id: ("subscriptionResourceId" | "az.subscriptionResourceId
 resource_group: ("resourceGroup" | "az.resourceGroup") "(" [quoted_string ","? [quoted_string]] ")" ["." STRING]
 
 subscription: ("subscription" | "az.subscription") "(" [quoted_string] ")" ["." STRING]
+
+// functions - string
+
+?function_string: guid
+
+guid: ("guid" | "sys.guid") "(" value ("," value)* ")"
 
 // operators
 
