@@ -17,7 +17,7 @@ Operators: TypeAlias = "ComparisonOperators | LogicalOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
 ArrayFunctions: TypeAlias = "Empty | UnionFunc"
-ResourceFunctions: TypeAlias = "ResourceId | SubscriptionResourceId"
+ResourceFunctions: TypeAlias = "ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
 StringFunctions: TypeAlias = "Guid"
 Functions: TypeAlias = "AnyFunctions | ArrayFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
@@ -375,6 +375,17 @@ class _SubscriptionResourceIdParameters(TypedDict):
 class SubscriptionResourceId(TypedDict):
     type: Literal["subscription_resource_id"]
     parameters: _SubscriptionResourceIdParameters
+
+
+class _TenantResourceIdParameters(TypedDict):
+    resource_type: str
+    resource_name_1: str
+    resource_name_2: str | None
+
+
+class TenantResourceId(TypedDict):
+    type: Literal["tenant_resource_id"]
+    parameters: _TenantResourceIdParameters
 
 
 ####################
