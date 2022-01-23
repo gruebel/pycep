@@ -15,7 +15,7 @@
 - [ ] array
 - [ ] concat
 - [ ] contains
-- [ ] empty
+- [x] empty
 - [ ] first
 - [ ] intersection
 - [ ] items

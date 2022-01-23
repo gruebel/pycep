@@ -12,7 +12,18 @@
           "operands": {
             "condition": "createNewVnet",
             "true_value": "subnet.id",
-            "false_value": "resourceId(vnetResourceGroupName, 'Microsoft.Network/virtualNetworks/subnets', vnetName, subnetName)"
+            "false_value": {
+              "function": {
+                "type": "resource_id",
+                "parameters": {
+                  "resource_type": "'Microsoft.Network/virtualNetworks/subnets'",
+                  "resource_name_1": "vnetName",
+                  "resource_name_2": "subnetName",
+                  "resource_group_name": "vnetResourceGroupName",
+                  "subscription_id": null
+                }
+              }
+            }
           }
         }
       }
@@ -33,7 +44,14 @@
                 "operator": {
                   "type": "conditional",
                   "operands": {
-                    "condition": "empty(parentManagementGroupId)) ",
+                    "condition": {
+                      "function": {
+                        "type": "empty",
+                        "parameters": {
+                          "item_to_test": "parentManagementGroupId"
+                        }
+                      }
+                    },
                     "true_value": "'/providers/Microsoft.Management/managementGroups/${parentManagementGroupId}'",
                     "false_value": null
                   }

@@ -414,6 +414,14 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
         return result
 
+    def empty(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.Empty:
+        return {
+            "type": "empty",
+            "parameters": {
+                "item_to_test": args[0],
+            },
+        }
+
     ####################
     #
     # functions - resource
@@ -640,14 +648,17 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
         }
 
     def conditional(
-        self, args: tuple[Token, pycep_typing.PossibleValue, pycep_typing.PossibleValue]
+        self, args: tuple[Token | pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleValue]
     ) -> pycep_typing.Conditional:
         condition, true_value, false_value = args
+
+        if isinstance(condition, Token):
+            condition = str(condition)
 
         return {
             "type": "conditional",
             "operands": {
-                "condition": str(condition),
+                "condition": condition,
                 "true_value": true_value,
                 "false_value": false_value,
             },

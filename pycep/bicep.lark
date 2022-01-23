@@ -102,9 +102,11 @@ any_func: ("any" | "sys.any") "(" value ")"
 
 // functions - array
 
-?function_array: union
+?function_array: empty | union
 
 union: ("union" | "sys.union") "(" value ("," value)+ ")" ["." STRING]
+
+empty: ("empty" | "sys.empty") "(" value ")"
 
 // functions - resource
 

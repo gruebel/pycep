@@ -16,7 +16,7 @@ LogicalOperators: TypeAlias = "And | Or | Not | Coalesce | Conditional"
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
-ArrayFunctions: TypeAlias = "UnionFunc"
+ArrayFunctions: TypeAlias = "Empty | UnionFunc"
 ResourceFunctions: TypeAlias = "ResourceId"
 ScopeFunctions: TypeAlias = "ResourceGroup"
 Functions: TypeAlias = "AnyFunctions | ArrayFunctions | ResourceFunctions | ScopeFunctions"
@@ -323,6 +323,15 @@ class AnyFunc(TypedDict):
 ####################
 
 
+class _EmptyParameters(TypedDict):
+    item_to_test: PossibleValue
+
+
+class Empty(TypedDict):
+    type: Literal["empty"]
+    parameters: _EmptyParameters
+
+
 class _UnionParameters(TypedDict):
     arg_1: str
     arg_2: str
@@ -463,7 +472,7 @@ class Coalesce(TypedDict):
 
 
 class _ConditionalOperands(TypedDict):
-    condition: str
+    condition: PossibleValue
     true_value: PossibleValue
     false_value: PossibleValue
 
