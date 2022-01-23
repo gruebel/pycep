@@ -48,7 +48,7 @@
 
 - [ ] managementGroup
 - [x] resourceGroup
-- [ ] subscription
+- [x] subscription
 - [ ] tenant
 
 ## Operators

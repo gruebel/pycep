@@ -55,7 +55,7 @@ This is still a very early stage, therefore a lot can and will change.
 - [ ] Scope
   - [ ] managementGroup
   - [x] resourceGroup
-  - [ ] subscription
+  - [x] subscription
   - [ ] tenant
 
 ### Operators

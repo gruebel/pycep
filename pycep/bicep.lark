@@ -122,9 +122,11 @@ subscription_resource_id: ("subscriptionResourceId" | "az.subscriptionResourceId
 
 // functions - scope
 
-?function_scope: resource_group
+?function_scope: resource_group | subscription
 
-resource_group: ("resourceGroup" | "az.resourceGroup") "(" [STRING ","? [STRING]] ")" ["." STRING]
+resource_group: ("resourceGroup" | "az.resourceGroup") "(" [quoted_string ","? [quoted_string]] ")" ["." STRING]
+
+subscription: ("subscription" | "az.subscription") "(" [quoted_string] ")" ["." STRING]
 
 // operators
 
