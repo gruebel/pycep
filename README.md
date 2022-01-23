@@ -51,7 +51,7 @@ This is still a very early stage, therefore a lot can and will change.
   - [ ] reference
   - [x] resourceId
   - [x] subscriptionResourceId
-  - [ ] tenantResourceId
+  - [x] tenantResourceId
 - [ ] Scope
   - [ ] managementGroup
   - [x] resourceGroup

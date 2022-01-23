@@ -507,6 +507,26 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def tenant_resource_id(self, args: List[Token]) -> pycep_typing.TenantResourceId:
+        args_len = len(args)
+        if args_len == 2:
+            resource_type = str(args[0])
+            resource_name_1 = str(args[1])
+            resource_name_2 = None
+        else:
+            resource_type = str(args[0])
+            resource_name_1 = str(args[1])
+            resource_name_2 = str(args[2])
+
+        return {
+            "type": "tenant_resource_id",
+            "parameters": {
+                "resource_type": resource_type,
+                "resource_name_1": resource_name_1,
+                "resource_name_2": resource_name_2,
+            },
+        }
+
     ####################
     #
     # functions - scope

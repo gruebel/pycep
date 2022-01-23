@@ -40,7 +40,7 @@
 - [ ] reference
 - [x] resourceId
 - [x] subscriptionResourceId
-- [ ] tenantResourceId
+- [x] tenantResourceId
 
 ### Scope
 
