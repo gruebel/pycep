@@ -1,0 +1,98 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramObject": {
+      "decorators": [],
+      "type": "object",
+      "default": {
+        "function": {
+          "type": "subscription",
+          "parameters": {
+            "subscription_id": null
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "subId": {
+      "value": {
+        "function": {
+          "type": "subscription",
+          "parameters": {
+            "subscription_id": null
+          },
+          "property_name": "id"
+        }
+      }
+    }
+  },
+  "resources": {
+    "managedidentity": {
+      "decorators": [],
+      "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+      "api_version": "2018-11-30",
+      "config": {
+        "name": "uamiName",
+        "subId": {
+          "function": {
+            "type": "subscription",
+            "parameters": {
+              "subscription_id": null
+            },
+            "property_name": "subscriptionId"
+          }
+        }
+      }
+    }
+  },
+  "modules": {
+    "exampleModule": {
+      "decorators": [],
+      "type": "local",
+      "detail": {
+        "full": "rgModule.bicep",
+        "path": "rgModule.bicep"
+      },
+      "config": {
+        "name": "'exampleModule'",
+        "scope": {
+          "function": {
+            "type": "subscription",
+            "parameters": {
+              "subscription_id": "subscriptionId"
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "subscriptionOutput": {
+      "type": "object",
+      "value": {
+        "function": {
+          "type": "subscription",
+          "parameters": {
+            "subscription_id": null
+          }
+        }
+      }
+    },
+    "namespace": {
+      "type": "object",
+      "value": {
+        "function": {
+          "type": "subscription",
+          "parameters": {
+            "subscription_id": null
+          }
+        }
+      }
+    }
+  }
+}

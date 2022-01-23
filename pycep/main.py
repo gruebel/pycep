@@ -533,6 +533,21 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
         return result
 
+    def subscription(self, args: tuple[Token | None, Token | None]) -> pycep_typing.Subscription:
+        subscription_id, property_name = args
+
+        result: pycep_typing.Subscription = {
+            "type": "subscription",
+            "parameters": {
+                "subscription_id": str(subscription_id) if subscription_id else None,
+            },
+        }
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
+
     ####################
     #
     # operators - comparison
