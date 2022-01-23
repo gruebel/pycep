@@ -112,17 +112,20 @@ empty: ("empty" | "sys.empty") "(" value ")"
 
 ?function_resource: extension_resource_id | resource_id | subscription_resource_id | tenant_resource_id
 
-extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" quoted_string ("," quoted_string)~2..3 ")"
+_EXTENSION_RESOURCE_ID: /(az.)?extensionResourceId\s*\(/
+extension_resource_id: _EXTENSION_RESOURCE_ID quoted_string ("," quoted_string)~2..3 ")"
 
 // this rule results in a weird behaviour of "resourceId" being a TERM
-// and then matching a key named "resourceId" in an object -> switching to earley for now
-//_RESOURCE_ID: /(az.)?resourceId\s*\(/
-//resource_id: _RESOURCE_ID quoted_string ("," quoted_string)~1..4 ")"
-resource_id: ("resourceId" | "az.resourceId") "(" quoted_string ("," quoted_string)~1..4 ")"
+// and then matching a key named "resourceId" in an object
+//resource_id: ("resourceId" | "az.resourceId") "(" quoted_string ("," quoted_string)~1..4 ")"
+_RESOURCE_ID: /(az.)?resourceId\s*\(/
+resource_id: _RESOURCE_ID quoted_string ("," quoted_string)~1..4 ")"
 
-subscription_resource_id: ("subscriptionResourceId" | "az.subscriptionResourceId") "(" quoted_string ("," quoted_string)~1..3 ")"
+_SUBSCRIPTION_RESOURCE_ID: /(az.)?subscriptionResourceId\s*\(/
+subscription_resource_id: _SUBSCRIPTION_RESOURCE_ID quoted_string ("," quoted_string)~1..3 ")"
 
-tenant_resource_id: ("tenantResourceId" | "az.tenantResourceId") "(" quoted_string ("," quoted_string)~1..2 ")"
+_TENANT_RESOURCE_ID: /(az.)?tenantResourceId\s*\(/
+tenant_resource_id: _TENANT_RESOURCE_ID quoted_string ("," quoted_string)~1..2 ")"
 
 // functions - scope
 
