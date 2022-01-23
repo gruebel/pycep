@@ -428,6 +428,29 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
     #
     ####################
 
+    def extension_resource_id(self, args: List[Token]) -> pycep_typing.ExtensionResourceId:
+        args_len = len(args)
+        if args_len == 3:
+            resource_id = str(args[0])
+            resource_type = str(args[1])
+            resource_name_1 = str(args[2])
+            resource_name_2 = None
+        else:
+            resource_id = str(args[0])
+            resource_type = str(args[1])
+            resource_name_1 = str(args[2])
+            resource_name_2 = str(args[3])
+
+        return {
+            "type": "extension_resource_id",
+            "parameters": {
+                "resource_id": resource_id,
+                "resource_type": resource_type,
+                "resource_name_1": resource_name_1,
+                "resource_name_2": resource_name_2,
+            },
+        }
+
     def resource_id(self, args: List[Token]) -> pycep_typing.ResourceId:
         # args has between 2-5 items and only for the 2 and 5 items case
         # it is possible to determine the correct parameter references

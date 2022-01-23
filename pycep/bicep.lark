@@ -110,7 +110,9 @@ empty: ("empty" | "sys.empty") "(" value ")"
 
 // functions - resource
 
-?function_resource: resource_id | subscription_resource_id | tenant_resource_id
+?function_resource: extension_resource_id | resource_id | subscription_resource_id | tenant_resource_id
+
+extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" quoted_string ("," quoted_string)~2..3 ")"
 
 // this rule results in a weird behaviour of "resourceId" being a TERM
 // and then matching a key named "resourceId" in an object -> switching to earley for now

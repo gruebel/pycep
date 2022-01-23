@@ -32,7 +32,16 @@
   },
   "variables": {
     "mgScope": {
-      "value": "tenantResourceId('Microsoft.Management/managementGroups', targetMG)"
+      "value": {
+        "function": {
+          "type": "tenant_resource_id",
+          "parameters": {
+            "resource_type": "'Microsoft.Management/managementGroups'",
+            "resource_name_1": "targetMG",
+            "resource_name_2": null
+          }
+        }
+      }
     },
     "policyDefinitionName": {
       "value": "'LocationRestriction'"
@@ -71,7 +80,17 @@
         "name": "'location-lock'",
         "properties": {
           "scope": "mgScope",
-          "policyDefinitionId": "extensionResourceId(mgScope, 'Microsoft.Authorization/policyDefinitions', policyDefinition.name)"
+          "policyDefinitionId": {
+            "function": {
+              "type": "extension_resource_id",
+              "parameters": {
+                "resource_id": "mgScope",
+                "resource_type": "'Microsoft.Authorization/policyDefinitions'",
+                "resource_name_1": "policyDefinition.name",
+                "resource_name_2": null
+              }
+            }
+          }
         }
       }
     }
