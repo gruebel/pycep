@@ -28,6 +28,17 @@
 - [ ] take
 - [x] union
 
+### Object
+
+[Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-object)
+
+- [ ] contains
+- [x] empty
+- [ ] intersection
+- [x] json
+- [ ] length
+- [x] union
+
 ### Resource
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-resource)

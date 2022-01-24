@@ -92,7 +92,7 @@ deco_secure: "secure" "(" ")"
 
 // functions
 
-function: function_any | function_array | function_resource | function_scope | function_string
+function: function_any | function_array | function_object | function_resource | function_scope | function_string
 
 // functions - any
 
@@ -107,6 +107,12 @@ any_func: ("any" | "sys.any") "(" value ")"
 union: ("union" | "sys.union") "(" value ("," value)+ ")" ["." STRING]
 
 empty: ("empty" | "sys.empty") "(" value ")"
+
+// functions - object
+
+?function_object: json_func
+
+json_func: ("json" | "sys.json") "(" value ")"
 
 // functions - resource
 
@@ -184,7 +190,7 @@ conditional: "("? (STRING | function | operator_comparison | and_op | or_op) ")"
 
 STRING: /[\w][\w_.]*/
 FUNCTION: /(?!if\()(?=[\w_]+[\[\]]+)[\w_\-\[\]\/.,'= ]+/
-QUOTED_INTERPOLATION: /'[^']*'/
+QUOTED_INTERPOLATION: /'(\\'|[^'])*'/
 
 MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
 

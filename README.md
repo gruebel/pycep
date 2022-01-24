@@ -43,6 +43,13 @@ This is still a very early stage, therefore a lot can and will change.
   - [ ] skip
   - [ ] take
   - [x] union
+- Object
+  - [ ] contains
+  - [x] empty
+  - [ ] intersection
+  - [x] json
+  - [ ] length
+  - [x] union
 - Resource
   - [x] extensionResourceId
   - [ ] getSecret

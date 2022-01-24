@@ -17,10 +17,13 @@ Operators: TypeAlias = "ComparisonOperators | LogicalOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
 ArrayFunctions: TypeAlias = "Empty | UnionFunc"
+ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = "ExtensionResourceId | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
 StringFunctions: TypeAlias = "Guid"
-Functions: TypeAlias = "AnyFunctions | ArrayFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
+Functions: TypeAlias = (
+    "AnyFunctions | ArrayFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
+)
 
 
 ####################
@@ -343,6 +346,22 @@ class UnionFunc(TypedDict):
     type: Literal["union"]
     parameters: _UnionParameters
     property_name: NotRequired[str]
+
+
+####################
+#
+# functions - object
+#
+####################
+
+
+class _JsonParameters(TypedDict):
+    arg_1: PossibleValue
+
+
+class Json(TypedDict):
+    type: Literal["json"]
+    parameters: _JsonParameters
 
 
 ####################
