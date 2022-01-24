@@ -102,11 +102,13 @@ any_func: ("any" | "sys.any") "(" value ")"
 
 // functions - array
 
-?function_array: empty | union
+?function_array: contains | empty | union
 
-union: ("union" | "sys.union") "(" value ("," value)+ ")" ["." STRING]
+contains: ("contains" | "sys.contains") "(" value "," value ")"
 
 empty: ("empty" | "sys.empty") "(" value ")"
+
+union: ("union" | "sys.union") "(" value ("," value)+ ")" ["." STRING]
 
 // functions - object
 

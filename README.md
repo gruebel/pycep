@@ -30,7 +30,7 @@ This is still a very early stage, therefore a lot can and will change.
 - [ ] Array
   - [ ] array
   - [ ] concat
-  - [ ] contains
+  - [x] contains
   - [x] empty
   - [ ] first
   - [ ] intersection
@@ -43,14 +43,14 @@ This is still a very early stage, therefore a lot can and will change.
   - [ ] skip
   - [ ] take
   - [x] union
-- Object
-  - [ ] contains
+- [ ] Object
+  - [x] contains
   - [x] empty
   - [ ] intersection
   - [x] json
   - [ ] length
   - [x] union
-- Resource
+- [ ] Resource
   - [x] extensionResourceId
   - [ ] getSecret
   - [ ] list*

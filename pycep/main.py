@@ -397,6 +397,25 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
     #
     ####################
 
+    def empty(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.Empty:
+        return {
+            "type": "empty",
+            "parameters": {
+                "item_to_test": args[0],
+            },
+        }
+
+    def contains(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Contains:
+        container, item_to_find = args
+
+        return {
+            "type": "contains",
+            "parameters": {
+                "container": container,
+                "item_to_find": item_to_find,
+            },
+        }
+
     def union(self, args: tuple[str, ...]) -> pycep_typing.UnionFunc:
         arg_1, arg_2, *arg_x, property_name = args
 
@@ -413,14 +432,6 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             result["property_name"] = str(property_name)
 
         return result
-
-    def empty(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.Empty:
-        return {
-            "type": "empty",
-            "parameters": {
-                "item_to_test": args[0],
-            },
-        }
 
     ####################
     #

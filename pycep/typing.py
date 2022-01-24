@@ -336,6 +336,16 @@ class Empty(TypedDict):
     parameters: _EmptyParameters
 
 
+class _ContainsParameters(TypedDict):
+    container: PossibleValue
+    item_to_find: PossibleValue
+
+
+class Contains(TypedDict):
+    type: Literal["contains"]
+    parameters: _ContainsParameters
+
+
 class _UnionParameters(TypedDict):
     arg_1: str
     arg_2: str

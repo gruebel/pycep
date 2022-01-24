@@ -14,7 +14,7 @@
 
 - [ ] array
 - [ ] concat
-- [ ] contains
+- [x] contains
 - [x] empty
 - [ ] first
 - [ ] intersection
@@ -32,7 +32,7 @@
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-object)
 
-- [ ] contains
+- [x] contains
 - [x] empty
 - [ ] intersection
 - [x] json
