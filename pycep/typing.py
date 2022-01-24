@@ -20,7 +20,7 @@ ArrayFunctions: TypeAlias = "Empty | UnionFunc"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = "ExtensionResourceId | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
-StringFunctions: TypeAlias = "Guid"
+StringFunctions: TypeAlias = "Guid | Split"
 Functions: TypeAlias = (
     "AnyFunctions | ArrayFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 )
@@ -462,6 +462,16 @@ class _GuidParameters(TypedDict):
 class Guid(TypedDict):
     type: Literal["guid"]
     parameters: _GuidParameters
+
+
+class _SplitParameters(TypedDict):
+    input_string: PossibleValue
+    delimiter: PossibleValue
+
+
+class Split(TypedDict):
+    type: Literal["split"]
+    parameters: _SplitParameters
 
 
 ####################

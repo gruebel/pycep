@@ -18,5 +18,4 @@ def test_parse_json() -> None:
     result = BicepParser(file_path).json()
 
     # then
-    print(json.dumps(result, indent=2))
     assert_that(result).is_equal_to(expected_result)

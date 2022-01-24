@@ -614,7 +614,7 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
     def guid(self, args: tuple[str, ...]) -> pycep_typing.Guid:
         base_string, *extra_string_x = args
 
-        result: pycep_typing.Guid = {
+        return {
             "type": "guid",
             "parameters": {
                 "base_string": base_string,
@@ -622,7 +622,16 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
-        return result
+    def split(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Split:
+        input_string, delimiter = args
+
+        return {
+            "type": "split",
+            "parameters": {
+                "input_string": input_string,
+                "delimiter": delimiter,
+            },
+        }
 
     ####################
     #

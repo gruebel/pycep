@@ -143,9 +143,11 @@ subscription: ("subscription" | "az.subscription") "(" [quoted_string] ")" ["." 
 
 // functions - string
 
-?function_string: guid
+?function_string: guid | split
 
 guid: ("guid" | "sys.guid") "(" value ("," value)* ")"
+
+split: ("split" | "sys.split") "(" value "," value ")"
 
 // operators
 
