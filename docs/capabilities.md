@@ -77,6 +77,9 @@
 - [ ] replace
 - [ ] skip
 - [x] split
+- [ ] startsWith
+- [x] string
+- [x] substring
 - [ ] ...
 
 ## Operators

@@ -676,6 +676,28 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def string_func(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.String:
+        return {
+            "type": "string",
+            "parameters": {
+                "value_to_convert": args[0],
+            },
+        }
+
+    def substring(
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleValue]
+    ) -> pycep_typing.Substring:
+        string_to_parse, start_index, length = args
+
+        return {
+            "type": "substring",
+            "parameters": {
+                "string_to_parse": string_to_parse,
+                "start_index": start_index,
+                "length": length,
+            },
+        }
+
     ####################
     #
     # operators - comparison

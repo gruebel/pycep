@@ -16,11 +16,11 @@ LogicalOperators: TypeAlias = "And | Or | Not | Coalesce | Conditional"
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
-ArrayFunctions: TypeAlias = "Empty | UnionFunc"
+ArrayFunctions: TypeAlias = "Empty | Length | UnionFunc"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = "ExtensionResourceId | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
-StringFunctions: TypeAlias = "Guid | Split"
+StringFunctions: TypeAlias = "Guid | IndexOf | LastIndexOf | Split | Substring"
 Functions: TypeAlias = (
     "AnyFunctions | ArrayFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 )
@@ -468,7 +468,7 @@ class Subscription(TypedDict):
 
 ####################
 #
-# functions - resource
+# functions - string
 #
 ####################
 
@@ -506,6 +506,26 @@ class _SplitParameters(TypedDict):
 class Split(TypedDict):
     type: Literal["split"]
     parameters: _SplitParameters
+
+
+class _StringParameters(TypedDict):
+    value_to_convert: PossibleValue
+
+
+class String(TypedDict):
+    type: Literal["string"]
+    parameters: _StringParameters
+
+
+class _SubstringParameters(TypedDict):
+    string_to_parse: PossibleValue
+    start_index: PossibleValue
+    length: PossibleValue
+
+
+class Substring(TypedDict):
+    type: Literal["substring"]
+    parameters: _SubstringParameters
 
 
 ####################

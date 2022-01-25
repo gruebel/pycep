@@ -147,7 +147,7 @@ subscription: ("subscription" | "az.subscription") "(" [quoted_string] ")" ["." 
 
 // functions - string
 
-?function_string: guid | index_of | last_index_of | split
+?function_string: guid | index_of | last_index_of | split | string_func | substring
 
 guid: ("guid" | "sys.guid") "(" value ("," value)* ")"
 
@@ -156,6 +156,11 @@ index_of: ("indexOf" | "sys.indexOf") "(" value "," value ")"
 last_index_of: ("lastIndexOf" | "sys.lastIndexOf") "(" value "," value ")"
 
 split: ("split" | "sys.split") "(" value "," value ")"
+
+_STRING_FUNC: /(sys.)?string\s*\(/
+string_func: _STRING_FUNC value ")"
+
+substring: ("substring" | "sys.substring") "(" value "," value ["," value] ")"
 
 // operators
 

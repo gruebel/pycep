@@ -58,3 +58,29 @@ def test_parse_split() -> None:
 
     # then
     assert_that(result).is_equal_to(expected_result)
+
+
+def test_parse_string() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "string"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BicepParser(file_path).json()
+
+    # then
+    assert_that(result).is_equal_to(expected_result)
+
+
+def test_parse_substring() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "substring"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BicepParser(file_path).json()
+
+    # then
+    assert_that(result).is_equal_to(expected_result)
