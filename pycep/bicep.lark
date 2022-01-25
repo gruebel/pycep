@@ -145,9 +145,13 @@ subscription: ("subscription" | "az.subscription") "(" [quoted_string] ")" ["." 
 
 // functions - string
 
-?function_string: guid | split
+?function_string: guid | index_of | last_index_of | split
 
 guid: ("guid" | "sys.guid") "(" value ("," value)* ")"
+
+index_of: ("indexOf" | "sys.indexOf") "(" value "," value ")"
+
+last_index_of: ("lastIndexOf" | "sys.lastIndexOf") "(" value "," value ")"
 
 split: ("split" | "sys.split") "(" value "," value ")"
 

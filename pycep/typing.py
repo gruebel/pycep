@@ -474,6 +474,21 @@ class Guid(TypedDict):
     parameters: _GuidParameters
 
 
+class _IndexOfParameters(TypedDict):
+    string_to_search: PossibleValue
+    string_to_find: PossibleValue
+
+
+class IndexOf(TypedDict):
+    type: Literal["index_of"]
+    parameters: _IndexOfParameters
+
+
+class LastIndexOf(TypedDict):
+    type: Literal["last_index_of"]
+    parameters: _IndexOfParameters
+
+
 class _SplitParameters(TypedDict):
     input_string: PossibleValue
     delimiter: PossibleValue

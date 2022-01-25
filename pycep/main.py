@@ -633,6 +633,30 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def index_of(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.IndexOf:
+        string_to_search, string_to_find = args
+
+        return {
+            "type": "index_of",
+            "parameters": {
+                "string_to_search": string_to_search,
+                "string_to_find": string_to_find,
+            },
+        }
+
+    def last_index_of(
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]
+    ) -> pycep_typing.LastIndexOf:
+        string_to_search, string_to_find = args
+
+        return {
+            "type": "last_index_of",
+            "parameters": {
+                "string_to_search": string_to_search,
+                "string_to_find": string_to_find,
+            },
+        }
+
     def split(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Split:
         input_string, delimiter = args
 
@@ -861,7 +885,7 @@ class BicepParser:
     def _create_tree(self) -> Tree:
         content = self.file_path.read_text()
 
-        return self.lark_parser.parse(content)
+        return BicepParser.lark_parser.parse(content)
 
     def json(self) -> pycep_typing.BicepJson:
         return BicepToJson(add_line_numbers=self.add_line_numbers).transform(self.tree)

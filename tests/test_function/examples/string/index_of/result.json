@@ -1,0 +1,83 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramStr": {
+      "decorators": [],
+      "type": "int",
+      "default": {
+        "function": {
+          "type": "index_of",
+          "parameters": {
+            "string_to_search": "'one,two,three'",
+            "string_to_find": "','"
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "varStr": {
+      "value": {
+        "function": {
+          "type": "index_of",
+          "parameters": {
+            "string_to_search": "administratorAccountUsername",
+            "string_to_find": "'@'"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "assignment": {
+      "decorators": [],
+      "type": "Microsoft.Authorization/roleAssignments",
+      "api_version": "2020-04-01-preview",
+      "config": {
+        "name": {
+          "function": {
+            "type": "index_of",
+            "parameters": {
+              "string_to_search": "roleName",
+              "string_to_find": "searchStr"
+            }
+          }
+        },
+        "properties": {
+          "roleDefinitionId": "definition.id",
+          "principalId": "principalId"
+        }
+      }
+    }
+  },
+  "outputs": {
+    "ftpUser": {
+      "type": "int",
+      "value": {
+        "function": {
+          "type": "index_of",
+          "parameters": {
+            "string_to_search": "site.properties",
+            "string_to_find": "'/'"
+          }
+        }
+      }
+    },
+    "namespace": {
+      "type": "int",
+      "value": {
+        "function": {
+          "type": "index_of",
+          "parameters": {
+            "string_to_search": "site.properties",
+            "string_to_find": "'/'"
+          }
+        }
+      }
+    }
+  }
+}

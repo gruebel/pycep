@@ -68,7 +68,14 @@
 
 - [ ] ...
 - [x] guid
-- [ ] ...
+- [x] indexOf
+- [ ] last
+- [x] lastIndexOf
+- [ ] length
+- [ ] newGuid
+- [ ] padLeft
+- [ ] replace
+- [ ] skip
 - [x] split
 - [ ] ...
 
