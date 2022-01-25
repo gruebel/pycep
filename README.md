@@ -36,7 +36,7 @@ This is still a very early stage, therefore a lot can and will change.
   - [ ] intersection
   - [ ] items
   - [ ] last
-  - [ ] length
+  - [x] length
   - [ ] max
   - [ ] min
   - [ ] range
@@ -48,7 +48,7 @@ This is still a very early stage, therefore a lot can and will change.
   - [x] empty
   - [ ] intersection
   - [x] json
-  - [ ] length
+  - [x] length
   - [x] union
 - [ ] Resource
   - [x] extensionResourceId

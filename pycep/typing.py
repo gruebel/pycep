@@ -327,6 +327,16 @@ class AnyFunc(TypedDict):
 ####################
 
 
+class _ContainsParameters(TypedDict):
+    container: PossibleValue
+    item_to_find: PossibleValue
+
+
+class Contains(TypedDict):
+    type: Literal["contains"]
+    parameters: _ContainsParameters
+
+
 class _EmptyParameters(TypedDict):
     item_to_test: PossibleValue
 
@@ -336,14 +346,13 @@ class Empty(TypedDict):
     parameters: _EmptyParameters
 
 
-class _ContainsParameters(TypedDict):
-    container: PossibleValue
-    item_to_find: PossibleValue
+class _LengthParameters(TypedDict):
+    arg_1: PossibleValue
 
 
-class Contains(TypedDict):
-    type: Literal["contains"]
-    parameters: _ContainsParameters
+class Length(TypedDict):
+    type: Literal["length"]
+    parameters: _LengthParameters
 
 
 class _UnionParameters(TypedDict):

@@ -20,7 +20,7 @@
 - [ ] intersection
 - [ ] items
 - [ ] last
-- [ ] length
+- [x] length
 - [ ] max
 - [ ] min
 - [ ] range
@@ -36,7 +36,7 @@
 - [x] empty
 - [ ] intersection
 - [x] json
-- [ ] length
+- [x] length
 - [x] union
 
 ### Resource
@@ -71,7 +71,7 @@
 - [x] indexOf
 - [ ] last
 - [x] lastIndexOf
-- [ ] length
+- [x] length
 - [ ] newGuid
 - [ ] padLeft
 - [ ] replace

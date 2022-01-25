@@ -102,9 +102,11 @@ any_func: ("any" | "sys.any") "(" value ")"
 
 // functions - array
 
-?function_array: contains | empty | union
+?function_array: contains | empty | length | union
 
 contains: ("contains" | "sys.contains") "(" value "," value ")"
+
+length: ("length" | "sys.length") "(" value ")"
 
 empty: ("empty" | "sys.empty") "(" value ")"
 
