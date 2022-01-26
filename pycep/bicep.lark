@@ -1,24 +1,22 @@
 start: element*
 
 element: "targetScope" "=" QUOTED_INTERPOLATION                             -> scope
-       | [decorator] "param" string data_type ["=" param_value]             -> param
-       | "var" string "=" var_value                                         -> var
-       | "output" string data_type "=" output_value                         -> output
-       | [decorator] "resource" string type_api_pair "=" resource_value     -> resource
-       | [decorator] "module" string module_path "=" module_value           -> module
+       | [decorator] "param" STRING data_type ["=" param_value]             -> param
+       | "var" STRING "=" var_value                                         -> var
+       | "output" STRING data_type "=" output_value                         -> output
+       | [decorator] "resource" STRING type_api_pair "=" resource_value     -> resource
+       | [decorator] "module" STRING module_path "=" module_value           -> module
 
 ?value: "null"                                      -> null
+      | "true"                                      -> true
+      | "false"                                     -> false
       | SIGNED_INT                                  -> int
+      | STRING                                      -> string
       | QUOTED_INTERPOLATION                        -> string
-      | FUNCTION                                    -> string
-      | bool
+      | INDEXED                                     -> string
       | array
       | object
       | function
-
-?bool: "true"                                       -> true
-     | "false"                                      -> false
-     | string
 
 // element values
 
@@ -44,19 +42,17 @@ module_path: QUOTED_INTERPOLATION
 
 // loops
 
-loop: "[" "for" (loop_index | loop_array | loop_array_index | loop_object) ":" ["if" "(" string ")"] value "]"
+loop: "[" "for" (loop_index | loop_array | loop_array_index | loop_object) ":" ["if" "(" value ")"] value "]"
 
-loop_index: STRING "in" "range" "(" STRING "," STRING ")"
+loop_index: STRING "in" "range" "(" value "," value ")"
 
-loop_array: STRING "in" STRING
+loop_array: STRING "in" value
 
-loop_array_index: "(" STRING "," STRING ")" "in" STRING
+loop_array_index: "(" STRING "," STRING ")" "in" value
 
-loop_object: STRING "in" "items" "(" STRING ")"
+loop_object: STRING "in" "items" "(" value ")"
 
 // data types
-
-string: STRING
 
 ?quoted_string: STRING | QUOTED_INTERPOLATION
 
@@ -157,8 +153,7 @@ last_index_of: ("lastIndexOf" | "sys.lastIndexOf") "(" value "," value ")"
 
 split: ("split" | "sys.split") "(" value "," value ")"
 
-_STRING_FUNC: /(sys.)?string\s*\(/
-string_func: _STRING_FUNC value ")"
+string_func: ("string" | "sys.string") "(" value ")"
 
 substring: ("substring" | "sys.substring") "(" value "," value ["," value] ")"
 
@@ -195,7 +190,7 @@ and_op: value ("&&" value)+
 
 or_op: value ("||" value)+
 
-not_op: "!" "("? (not_op | bool) ")"?
+not_op: "!" "("? (not_op | value) ")"?
 
 coalesce: value ("??" value)+
 
@@ -203,8 +198,8 @@ conditional: "("? (STRING | function | operator_comparison | and_op | or_op) ")"
 
 // Terms
 
-STRING: /[\w][\w_.]*/
-FUNCTION: /(?!if\()(?=[\w_]+[\[\]]+)[\w_\-\[\]\/.,'= ]+/
+STRING: /[a-zA-Z][\w_.]*/
+INDEXED: /(?=[\w_]+[\[\]]+)[\w_\-\[\]\/.,'= ]+/
 QUOTED_INTERPOLATION: /'(\\'|[^'])*'/
 
 MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
