@@ -124,5 +124,5 @@
 - [ ] Divide
 - [ ] Modulo
 - [ ] Add
-- [ ] Subtract
+- [x] Subtract
 - [ ] Minus

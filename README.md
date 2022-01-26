@@ -27,47 +27,14 @@ This is still a very early stage, therefore a lot can and will change.
 
 ### Functions
 - [x] Any
-- [ ] Array
-  - [ ] array
-  - [ ] concat
-  - [x] contains
-  - [x] empty
-  - [ ] first
-  - [ ] intersection
-  - [ ] items
-  - [ ] last
-  - [x] length
-  - [ ] max
-  - [ ] min
-  - [ ] range
-  - [ ] skip
-  - [ ] take
-  - [x] union
-- [ ] Object
-  - [x] contains
-  - [x] empty
-  - [ ] intersection
-  - [x] json
-  - [x] length
-  - [x] union
-- [ ] Resource
-  - [x] extensionResourceId
-  - [ ] getSecret
-  - [ ] list*
-  - [ ] pickZones
-  - [ ] reference
-  - [x] resourceId
-  - [x] subscriptionResourceId
-  - [x] tenantResourceId
-- [ ] Scope
-  - [ ] managementGroup
-  - [x] resourceGroup
-  - [x] subscription
-  - [ ] tenant
+- [ ] Array (in progress)
+- [ ] Object (in progress)
+- [ ] Resource (in progress)
+- [ ] Scope (in progress)
 
 ### Operators
 - [ ] Accessor
-- [ ] Numeric
+- [ ] Numeric (in progress)
 
 ### CI/CD
 - [ ] Fix security issues found by Scorecard

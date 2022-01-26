@@ -861,6 +861,26 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
     ####################
     #
+    # operators - numeric
+    #
+    ####################
+
+    def operator_numeric(self, args: tuple[pycep_typing.Operators]) -> pycep_typing.Operator:
+        return {"operator": args[0]}
+
+    def substract(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Substract:
+        operand_1, operand_2 = args
+
+        return {
+            "type": "substract",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+            },
+        }
+
+    ####################
+    #
     # data types
     #
     ####################

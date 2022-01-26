@@ -13,14 +13,15 @@ Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescrip
 
 ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOrEquals | LessThan | Equals | NotEquals | EqualsCaseInsensitive | NotEqualsCaseInsensitive"
 LogicalOperators: TypeAlias = "And | Or | Not | Coalesce | Conditional"
-Operators: TypeAlias = "ComparisonOperators | LogicalOperators"
+NumericOperators: TypeAlias = "Substract"
+Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
 ArrayFunctions: TypeAlias = "Empty | Length | UnionFunc"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = "ExtensionResourceId | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
-StringFunctions: TypeAlias = "Guid | IndexOf | LastIndexOf | Split | Substring"
+StringFunctions: TypeAlias = "Guid | IndexOf | LastIndexOf | Split | Substring | String"
 Functions: TypeAlias = (
     "AnyFunctions | ArrayFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 )
@@ -530,6 +531,17 @@ class Substring(TypedDict):
 
 ####################
 #
+# Operators
+#
+####################
+
+
+class Operator(TypedDict):
+    operator: Operators
+
+
+####################
+#
 # Operators - comparison
 #
 ####################
@@ -628,8 +640,21 @@ class Conditional(TypedDict):
     operands: _ConditionalOperands
 
 
-class Operator(TypedDict):
-    operator: ComparisonOperators | LogicalOperators
+####################
+#
+# Operators - numeric
+#
+####################
+
+
+class _SubstractOperands(TypedDict):
+    operand_1: PossibleValue
+    operand_2: PossibleValue
+
+
+class Substract(TypedDict):
+    type: Literal["substract"]
+    operands: _SubstractOperands
 
 
 ####################

@@ -10,17 +10,21 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                             -> s
 ?value: "null"                                      -> null
       | "true"                                      -> true
       | "false"                                     -> false
-      | SIGNED_INT                                  -> int
+      | INT                                         -> int
       | STRING                                      -> string
       | QUOTED_INTERPOLATION                        -> string
       | INDEXED                                     -> string
       | array
       | object
       | function
+      | operator_numeric
+
+?value_brackets: value
+               | "(" value ")"
 
 // element values
 
-?param_value: "("? value ")"?
+?param_value: value_brackets
             | MULTI_LINE_STRING                     -> multi_line_string
             | operator
 
@@ -42,25 +46,25 @@ module_path: QUOTED_INTERPOLATION
 
 // loops
 
-loop: "[" "for" (loop_index | loop_array | loop_array_index | loop_object) ":" ["if" "(" value ")"] value "]"
+loop: "[" "for" (loop_index | loop_array | loop_array_index | loop_object) ":" ["if" "(" value_brackets ")"] value_brackets "]"
 
-loop_index: STRING "in" "range" "(" value "," value ")"
+loop_index: STRING "in" "range" "(" value_brackets "," value_brackets ")"
 
-loop_array: STRING "in" value
+loop_array: STRING "in" value_brackets
 
-loop_array_index: "(" STRING "," STRING ")" "in" value
+loop_array_index: "(" STRING "," STRING ")" "in" value_brackets
 
-loop_object: STRING "in" "items" "(" value ")"
+loop_object: STRING "in" "items" "(" value_brackets ")"
 
 // data types
 
 ?quoted_string: STRING | QUOTED_INTERPOLATION
 
-array: "[" value* "]"
+array: "[" value_brackets* "]"
 
 object: "{" pair* "}"
 
-pair: key ":" (value | loop | operator)
+pair: key ":" (value_brackets | loop | operator)
 
 key: quoted_string
 
@@ -94,25 +98,25 @@ function: function_any | function_array | function_object | function_resource | 
 
 ?function_any: any_func
 
-any_func: ("any" | "sys.any") "(" value ")"
+any_func: ("any" | "sys.any") "(" value_brackets ")"
 
 // functions - array
 
 ?function_array: contains | empty | length | union
 
-contains: ("contains" | "sys.contains") "(" value "," value ")"
+contains: ("contains" | "sys.contains") "(" value_brackets "," value_brackets ")"
 
-length: ("length" | "sys.length") "(" value ")"
+length: ("length" | "sys.length") "(" value_brackets ")"
 
-empty: ("empty" | "sys.empty") "(" value ")"
+empty: ("empty" | "sys.empty") "(" value_brackets ")"
 
-union: ("union" | "sys.union") "(" value ("," value)+ ")" ["." STRING]
+union: ("union" | "sys.union") "(" value_brackets ("," value_brackets)+ ")" ["." STRING]
 
 // functions - object
 
 ?function_object: json_func
 
-json_func: ("json" | "sys.json") "(" value ")"
+json_func: ("json" | "sys.json") "(" value_brackets ")"
 
 // functions - resource
 
@@ -145,17 +149,17 @@ subscription: ("subscription" | "az.subscription") "(" [quoted_string] ")" ["." 
 
 ?function_string: guid | index_of | last_index_of | split | string_func | substring
 
-guid: ("guid" | "sys.guid") "(" value ("," value)* ")"
+guid: ("guid" | "sys.guid") "(" value_brackets ("," value_brackets)* ")"
 
-index_of: ("indexOf" | "sys.indexOf") "(" value "," value ")"
+index_of: ("indexOf" | "sys.indexOf") "(" value_brackets "," value_brackets ")"
 
-last_index_of: ("lastIndexOf" | "sys.lastIndexOf") "(" value "," value ")"
+last_index_of: ("lastIndexOf" | "sys.lastIndexOf") "(" value_brackets "," value_brackets ")"
 
-split: ("split" | "sys.split") "(" value "," value ")"
+split: ("split" | "sys.split") "(" value_brackets "," value_brackets ")"
 
-string_func: ("string" | "sys.string") "(" value ")"
+string_func: ("string" | "sys.string") "(" value_brackets ")"
 
-substring: ("substring" | "sys.substring") "(" value "," value ["," value] ")"
+substring: ("substring" | "sys.substring") "(" value_brackets "," value_brackets ["," value_brackets] ")"
 
 // operators
 
@@ -166,35 +170,42 @@ operator: operator_comparison | operator_logical
 ?operator_comparison: greater_than_or_equals | greater_than | less_than_or_equals | less_than
                     | equals | not_equals | equals_case_insens | not_equals_case_insens
 
-greater_than_or_equals: value ">=" value
+greater_than_or_equals: value_brackets ">=" value_brackets
 
-greater_than: value ">" value
+greater_than: value_brackets ">" value_brackets
 
-less_than_or_equals: value "<=" value
+less_than_or_equals: value_brackets "<=" value_brackets
 
-less_than: value "<" value
+less_than: value_brackets "<" value_brackets
 
-equals: value "==" value
+equals: value_brackets "==" value_brackets
 
-not_equals: value "!=" value
+not_equals: value_brackets "!=" value_brackets
 
-equals_case_insens: value "=~" value
+equals_case_insens: value_brackets "=~" value_brackets
 
-not_equals_case_insens: value "!~" value
+not_equals_case_insens: value_brackets "!~" value_brackets
 
 // operators - logical
 
 ?operator_logical: and_op | or_op | not_op | coalesce | conditional
 
-and_op: value ("&&" value)+
+and_op: value_brackets ("&&" value_brackets)+
 
-or_op: value ("||" value)+
+or_op: value_brackets ("||" value_brackets)+
 
-not_op: "!" "("? (not_op | value) ")"?
+not_op: "!" "("? (not_op | value_brackets) ")"?
 
-coalesce: value ("??" value)+
+coalesce: value_brackets ("??" value_brackets)+
 
 conditional: "("? (STRING | function | operator_comparison | and_op | or_op) ")"? "?" param_value ":" param_value
+
+// operators - numeric
+
+// make it a rule for now, till the general operator rule is fixed
+operator_numeric: substract
+
+substract: value_brackets "-" value_brackets
 
 // Terms
 
@@ -206,7 +217,7 @@ MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
 
 %import common.CPP_COMMENT
 %import common.NEWLINE
-%import common.SIGNED_INT
+%import common.INT
 %import common.WS
 %ignore CPP_COMMENT
 %ignore NEWLINE
