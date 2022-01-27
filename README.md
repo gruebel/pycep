@@ -28,7 +28,7 @@ This is still a very early stage, therefore a lot can and will change.
 ### Functions
 - [x] Any
 - [ ] Array (in progress)
-- [ ] Object (in progress)
+- [x] Object
 - [ ] Resource (in progress)
 - [ ] Scope (in progress)
 

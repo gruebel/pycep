@@ -102,13 +102,15 @@ any_func: ("any" | "sys.any") "(" value_brackets ")"
 
 // functions - array
 
-?function_array: contains | empty | length | union
+?function_array: contains | empty | intersection | length | union
 
 contains: ("contains" | "sys.contains") "(" value_brackets "," value_brackets ")"
 
-length: ("length" | "sys.length") "(" value_brackets ")"
-
 empty: ("empty" | "sys.empty") "(" value_brackets ")"
+
+intersection: ("intersection" | "sys.intersection") "(" value_brackets ("," value_brackets)+ ")" ["." STRING]
+
+length: ("length" | "sys.length") "(" value_brackets ")"
 
 union: ("union" | "sys.union") "(" value_brackets ("," value_brackets)+ ")" ["." STRING]
 

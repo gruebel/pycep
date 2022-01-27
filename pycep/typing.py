@@ -17,7 +17,7 @@ NumericOperators: TypeAlias = "Substract"
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
-ArrayFunctions: TypeAlias = "Empty | Length | UnionFunc"
+ArrayFunctions: TypeAlias = "Contains | Empty | Intersection | Length | UnionFunc"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = "ExtensionResourceId | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
@@ -345,6 +345,12 @@ class _EmptyParameters(TypedDict):
 class Empty(TypedDict):
     type: Literal["empty"]
     parameters: _EmptyParameters
+
+
+class Intersection(TypedDict):
+    type: Literal["intersection"]
+    parameters: _UnionParameters
+    property_name: NotRequired[str]
 
 
 class _LengthParameters(TypedDict):

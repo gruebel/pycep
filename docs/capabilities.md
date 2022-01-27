@@ -17,7 +17,7 @@
 - [x] contains
 - [x] empty
 - [ ] first
-- [ ] intersection
+- [x] intersection
 - [ ] items
 - [ ] last
 - [x] length
@@ -34,7 +34,7 @@
 
 - [x] contains
 - [x] empty
-- [ ] intersection
+- [x] intersection
 - [x] json
 - [x] length
 - [x] union

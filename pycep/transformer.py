@@ -413,6 +413,23 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def intersection(self, args: tuple[str, ...]) -> pycep_typing.Intersection:
+        arg_1, arg_2, *arg_x, property_name = args
+
+        result: pycep_typing.Intersection = {
+            "type": "intersection",
+            "parameters": {
+                "arg_1": arg_1,
+                "arg_2": arg_2,
+                **{f"arg_{idx + 3}": arg for idx, arg in enumerate(arg_x)},  # type: ignore[misc] # dynamic operand creation
+            },
+        }
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
+
     def length(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.Length:
         return {
             "type": "length",
