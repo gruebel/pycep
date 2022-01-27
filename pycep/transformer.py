@@ -655,6 +655,30 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
     #
     ####################
 
+    def base64_func(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.Base64:
+        return {
+            "type": "base64",
+            "parameters": {
+                "input_string": args[0],
+            },
+        }
+
+    def base64_to_json(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.Base64ToJson:
+        return {
+            "type": "base64_to_json",
+            "parameters": {
+                "base64_value": args[0],
+            },
+        }
+
+    def base64_to_string(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.Base64ToString:
+        return {
+            "type": "base64_to_string",
+            "parameters": {
+                "base64_value": args[0],
+            },
+        }
+
     def guid(self, args: tuple[str, ...]) -> pycep_typing.Guid:
         base_string, *extra_string_x = args
 

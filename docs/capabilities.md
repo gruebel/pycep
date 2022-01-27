@@ -66,9 +66,9 @@
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-string)
 
-- [ ] base64
-- [ ] base64ToJson
-- [ ] base64ToString
+- [x] base64
+- [x] base64ToJson
+- [x] base64ToString
 - [ ] concat
 - [x] contains
 - [ ] dataUri

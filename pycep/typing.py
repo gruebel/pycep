@@ -21,7 +21,7 @@ ArrayFunctions: TypeAlias = "Contains | Empty | Intersection | Length | Take | U
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = "ExtensionResourceId | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
-StringFunctions: TypeAlias = "Guid | IndexOf | LastIndexOf | Split | Substring | String | ToLower | ToUpper"
+StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Guid | IndexOf | LastIndexOf | Split | Substring | String | ToLower | ToUpper"
 Functions: TypeAlias = (
     "AnyFunctions | ArrayFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 )
@@ -488,6 +488,29 @@ class Subscription(TypedDict):
 # functions - string
 #
 ####################
+
+
+class _Base64Parameters(TypedDict):
+    input_string: PossibleValue
+
+
+class Base64(TypedDict):
+    type: Literal["base64"]
+    parameters: _Base64Parameters
+
+
+class _Base64ToJsonParameters(TypedDict):
+    base64_value: PossibleValue
+
+
+class Base64ToJson(TypedDict):
+    type: Literal["base64_to_json"]
+    parameters: _Base64ToJsonParameters
+
+
+class Base64ToString(TypedDict):
+    type: Literal["base64_to_string"]
+    parameters: _Base64ToJsonParameters
 
 
 class _GuidParameters(TypedDict):

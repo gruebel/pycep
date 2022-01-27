@@ -151,7 +151,14 @@ subscription: ("subscription" | "az.subscription") "(" [quoted_string] ")" ["." 
 
 // functions - string
 
-?function_string: guid | index_of | last_index_of | split | string_func | substring | to_lower | to_upper
+?function_string: base64_func | base64_to_json | base64_to_string | guid | index_of | last_index_of | split
+                | string_func | substring | to_lower | to_upper
+
+base64_func: ("base64" | "sys.base64") "(" value_brackets ")"
+
+base64_to_json: ("base64ToJson" | "sys.base64ToJson") "(" value_brackets ")"
+
+base64_to_string: ("base64ToString" | "sys.base64ToString") "(" value_brackets ")"
 
 guid: ("guid" | "sys.guid") "(" value_brackets ("," value_brackets)* ")"
 
