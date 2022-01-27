@@ -66,7 +66,17 @@
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-string)
 
-- [ ] ...
+- [ ] base64
+- [ ] base64ToJson
+- [ ] base64ToString
+- [ ] concat
+- [x] contains
+- [ ] dataUri
+- [ ] dataUriToString
+- [x] empty
+- [ ] endsWith
+- [ ] first
+- [ ] format
 - [x] guid
 - [x] indexOf
 - [ ] last
@@ -80,7 +90,14 @@
 - [ ] startsWith
 - [x] string
 - [x] substring
-- [ ] ...
+- [ ] take
+- [x] toLower
+- [x] toUpper
+- [ ] trim
+- [ ] uniqueString
+- [ ] uri
+- [ ] uriComponent
+- [ ] uriComponentToString
 
 ## Operators
 

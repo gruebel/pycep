@@ -149,7 +149,7 @@ subscription: ("subscription" | "az.subscription") "(" [quoted_string] ")" ["." 
 
 // functions - string
 
-?function_string: guid | index_of | last_index_of | split | string_func | substring
+?function_string: guid | index_of | last_index_of | split | string_func | substring | to_lower | to_upper
 
 guid: ("guid" | "sys.guid") "(" value_brackets ("," value_brackets)* ")"
 
@@ -162,6 +162,10 @@ split: ("split" | "sys.split") "(" value_brackets "," value_brackets ")"
 string_func: ("string" | "sys.string") "(" value_brackets ")"
 
 substring: ("substring" | "sys.substring") "(" value_brackets "," value_brackets ["," value_brackets] ")"
+
+to_lower: ("toLower" | "sys.toLower") "(" value_brackets ")"
+
+to_upper: ("toUpper" | "sys.toUpper") "(" value_brackets ")"
 
 // operators
 

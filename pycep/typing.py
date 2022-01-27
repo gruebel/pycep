@@ -535,6 +535,20 @@ class Substring(TypedDict):
     parameters: _SubstringParameters
 
 
+class _ToLowerParameters(TypedDict):
+    string_to_change: PossibleValue
+
+
+class ToLower(TypedDict):
+    type: Literal["to_lower"]
+    parameters: _ToLowerParameters
+
+
+class ToUpper(TypedDict):
+    type: Literal["to_upper"]
+    parameters: _ToLowerParameters
+
+
 ####################
 #
 # Operators

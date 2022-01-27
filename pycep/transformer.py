@@ -712,6 +712,22 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def to_lower(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.ToLower:
+        return {
+            "type": "to_lower",
+            "parameters": {
+                "string_to_change": args[0],
+            },
+        }
+
+    def to_upper(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.ToUpper:
+        return {
+            "type": "to_upper",
+            "parameters": {
+                "string_to_change": args[0],
+            },
+        }
+
     ####################
     #
     # operators - comparison
