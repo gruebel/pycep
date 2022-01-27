@@ -25,7 +25,7 @@
 - [ ] min
 - [ ] range
 - [ ] skip
-- [ ] take
+- [x] take
 - [x] union
 
 ### Object
@@ -90,7 +90,7 @@
 - [ ] startsWith
 - [x] string
 - [x] substring
-- [ ] take
+- [x] take
 - [x] toLower
 - [x] toUpper
 - [ ] trim

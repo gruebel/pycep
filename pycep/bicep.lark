@@ -102,7 +102,7 @@ any_func: ("any" | "sys.any") "(" value_brackets ")"
 
 // functions - array
 
-?function_array: contains | empty | intersection | length | union
+?function_array: contains | empty | intersection | length | take | union
 
 contains: ("contains" | "sys.contains") "(" value_brackets "," value_brackets ")"
 
@@ -111,6 +111,8 @@ empty: ("empty" | "sys.empty") "(" value_brackets ")"
 intersection: ("intersection" | "sys.intersection") "(" value_brackets ("," value_brackets)+ ")" ["." STRING]
 
 length: ("length" | "sys.length") "(" value_brackets ")"
+
+take: ("take" | "sys.take") "(" value_brackets "," value_brackets ")"
 
 union: ("union" | "sys.union") "(" value_brackets ("," value_brackets)+ ")" ["." STRING]
 
@@ -217,7 +219,7 @@ substract: value_brackets "-" value_brackets
 
 STRING: /[a-zA-Z][\w_.]*/
 INDEXED: /(?=[\w_]+[\[\]]+)[\w_\-\[\]\/.,'= ]+/
-QUOTED_INTERPOLATION: /'(\\'|[^'])*'/
+QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}{]+|(?R))*+}|\\'|[^'])*'/
 
 MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
 

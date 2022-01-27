@@ -30,6 +30,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.7"
 lark = "^1.0.0"
+regex = "^2022.1.18"
 typing-extensions = "^4.0.1"
 
 [tool.poetry.dev-dependencies]

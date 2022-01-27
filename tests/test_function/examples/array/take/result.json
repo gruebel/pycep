@@ -1,0 +1,83 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramStr": {
+      "decorators": [],
+      "type": "string",
+      "default": {
+        "function": {
+          "type": "take",
+          "parameters": {
+            "original_value": "'something'",
+            "number_to_take": 4
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "varstr": {
+      "value": {
+        "function": {
+          "type": "take",
+          "parameters": {
+            "original_value": "firstArray",
+            "number_to_take": "intValue"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "identityProvider": {
+      "decorators": [],
+      "type": "Microsoft.ApiManagement/service/identityProviders",
+      "api_version": "2020-06-01-preview",
+      "config": {
+        "name": "'exmple'",
+        "properties": {
+          "function": {
+            "type": "take",
+            "parameters": {
+              "original_value": "firstObject.names",
+              "number_to_take": "name"
+            }
+          }
+        },
+        "dependsOn": [
+          "apiManagementService"
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "ftpUser": {
+      "type": "array",
+      "value": {
+        "function": {
+          "type": "take",
+          "parameters": {
+            "original_value": "firstArray",
+            "number_to_take": 2
+          }
+        }
+      }
+    },
+    "namespace": {
+      "type": "array",
+      "value": {
+        "function": {
+          "type": "take",
+          "parameters": {
+            "original_value": "firstArray",
+            "number_to_take": 1
+          }
+        }
+      }
+    }
+  }
+}

@@ -438,6 +438,17 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def take(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Take:
+        original_value, number_to_take = args
+
+        return {
+            "type": "take",
+            "parameters": {
+                "original_value": original_value,
+                "number_to_take": number_to_take,
+            },
+        }
+
     def union(self, args: tuple[str, ...]) -> pycep_typing.UnionFunc:
         arg_1, arg_2, *arg_x, property_name = args
 

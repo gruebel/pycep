@@ -17,11 +17,11 @@ NumericOperators: TypeAlias = "Substract"
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
-ArrayFunctions: TypeAlias = "Contains | Empty | Intersection | Length | UnionFunc"
+ArrayFunctions: TypeAlias = "Contains | Empty | Intersection | Length | Take | UnionFunc"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = "ExtensionResourceId | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
-StringFunctions: TypeAlias = "Guid | IndexOf | LastIndexOf | Split | Substring | String"
+StringFunctions: TypeAlias = "Guid | IndexOf | LastIndexOf | Split | Substring | String | ToLower | ToUpper"
 Functions: TypeAlias = (
     "AnyFunctions | ArrayFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 )
@@ -360,6 +360,16 @@ class _LengthParameters(TypedDict):
 class Length(TypedDict):
     type: Literal["length"]
     parameters: _LengthParameters
+
+
+class _TakeParameters(TypedDict):
+    original_value: PossibleValue
+    number_to_take: PossibleValue
+
+
+class Take(TypedDict):
+    type: Literal["take"]
+    parameters: _TakeParameters
 
 
 class _UnionParameters(TypedDict):

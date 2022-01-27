@@ -12,7 +12,7 @@ LARK_GRAMMAR = (Path(__file__).parent / "bicep.lark").read_text()
 
 
 class BicepParser:
-    lark_parser = Lark(grammar=LARK_GRAMMAR, parser="lalr", propagate_positions=True)
+    lark_parser = Lark(grammar=LARK_GRAMMAR, parser="lalr", propagate_positions=True, regex=True)
 
     def __init__(self, file_path: Path, add_line_numbers: bool = False) -> None:
         self.file_path = file_path
