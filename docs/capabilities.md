@@ -84,7 +84,7 @@
 - [x] length
 - [ ] newGuid
 - [ ] padLeft
-- [ ] replace
+- [x] replace
 - [ ] skip
 - [x] split
 - [ ] startsWith
@@ -94,7 +94,7 @@
 - [x] toLower
 - [x] toUpper
 - [ ] trim
-- [ ] uniqueString
+- [x] uniqueString
 - [ ] uri
 - [ ] uriComponent
 - [ ] uriComponentToString

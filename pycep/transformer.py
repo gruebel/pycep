@@ -679,7 +679,7 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
-    def guid(self, args: tuple[str, ...]) -> pycep_typing.Guid:
+    def guid(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Guid:
         base_string, *extra_string_x = args
 
         return {
@@ -711,6 +711,20 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             "parameters": {
                 "string_to_search": string_to_search,
                 "string_to_find": string_to_find,
+            },
+        }
+
+    def replace(
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleValue]
+    ) -> pycep_typing.Replace:
+        original_string, old_string, new_string = args
+
+        return {
+            "type": "replace",
+            "parameters": {
+                "original_string": original_string,
+                "old_string": old_string,
+                "new_string": new_string,
             },
         }
 
@@ -760,6 +774,17 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             "type": "to_upper",
             "parameters": {
                 "string_to_change": args[0],
+            },
+        }
+
+    def unique_string(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.UniqueString:
+        base_string, *extra_string_x = args
+
+        return {
+            "type": "unique_string",
+            "parameters": {
+                "base_string": base_string,
+                **{f"extra_string_{idx + 1}": extra for idx, extra in enumerate(extra_string_x)},  # type: ignore[misc] # dynamic operand creation
             },
         }
 

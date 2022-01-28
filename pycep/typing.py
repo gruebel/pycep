@@ -21,7 +21,7 @@ ArrayFunctions: TypeAlias = "Contains | Empty | Intersection | Length | Take | U
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = "ExtensionResourceId | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
-StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Guid | IndexOf | LastIndexOf | Split | Substring | String | ToLower | ToUpper"
+StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Guid | IndexOf | LastIndexOf | Split | Substring | String | ToLower | ToUpper | UniqueString"
 Functions: TypeAlias = (
     "AnyFunctions | ArrayFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 )
@@ -538,6 +538,17 @@ class LastIndexOf(TypedDict):
     parameters: _IndexOfParameters
 
 
+class _ReplaceParameters(TypedDict):
+    original_string: PossibleValue
+    old_string: PossibleValue
+    new_string: PossibleValue
+
+
+class Replace(TypedDict):
+    type: Literal["replace"]
+    parameters: _ReplaceParameters
+
+
 class _SplitParameters(TypedDict):
     input_string: PossibleValue
     delimiter: PossibleValue
@@ -580,6 +591,11 @@ class ToLower(TypedDict):
 class ToUpper(TypedDict):
     type: Literal["to_upper"]
     parameters: _ToLowerParameters
+
+
+class UniqueString(TypedDict):
+    type: Literal["unique_string"]
+    parameters: _GuidParameters
 
 
 ####################

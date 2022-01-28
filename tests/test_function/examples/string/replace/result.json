@@ -1,0 +1,88 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "roleAssignmentName": {
+      "decorators": [],
+      "type": "string",
+      "default": {
+        "function": {
+          "type": "replace",
+          "parameters": {
+            "original_string": "principalId",
+            "old_string": "'/'",
+            "new_string": "''"
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "varStr": {
+      "value": {
+        "function": {
+          "type": "replace",
+          "parameters": {
+            "original_string": "'something'",
+            "old_string": "'e'",
+            "new_string": "'f'"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "assignment": {
+      "decorators": [],
+      "type": "Microsoft.Authorization/roleAssignments",
+      "api_version": "2020-04-01-preview",
+      "config": {
+        "name": {
+          "function": {
+            "type": "replace",
+            "parameters": {
+              "original_string": "roleName",
+              "old_string": "principalId",
+              "new_string": "otherId"
+            }
+          }
+        },
+        "properties": {
+          "roleDefinitionId": "definition.id",
+          "principalId": "principalId"
+        }
+      }
+    }
+  },
+  "outputs": {
+    "ftpUser": {
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "replace",
+          "parameters": {
+            "original_string": "site.properties",
+            "old_string": "'{0}'",
+            "new_string": "'osdisk'"
+          }
+        }
+      }
+    },
+    "namespace": {
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "replace",
+          "parameters": {
+            "original_string": "site.properties",
+            "old_string": "'{0}'",
+            "new_string": "'osdisk'"
+          }
+        }
+      }
+    }
+  }
+}
