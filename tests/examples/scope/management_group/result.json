@@ -52,6 +52,7 @@
       "decorators": [],
       "type": "Microsoft.Authorization/policyDefinitions",
       "api_version": "2020-03-01",
+      "existing": false,
       "config": {
         "name": "policyDefinitionName",
         "properties": {
@@ -76,6 +77,7 @@
       "decorators": [],
       "type": "Microsoft.Authorization/policyAssignments",
       "api_version": "2020-03-01",
+      "existing": false,
       "config": {
         "name": "'location-lock'",
         "properties": {

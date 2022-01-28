@@ -38,6 +38,7 @@
       "decorators": [],
       "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
       "api_version": "2018-11-30",
+      "existing": false,
       "config": {
         "name": "uamiName",
         "location": {

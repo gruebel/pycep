@@ -41,6 +41,7 @@
       "decorators": [],
       "type": "Microsoft.OperationalInsights/workspaces/linkedServices",
       "api_version": "2020-08-01",
+      "existing": false,
       "config": {
         "parent": "logAnalyticsWorkspace",
         "name": "'Automation'",

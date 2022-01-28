@@ -98,6 +98,7 @@
       "decorators": [],
       "type": "Microsoft.Network/publicIPAddresses",
       "api_version": "2020-06-01",
+      "existing": false,
       "config": {
         "name": "publicIp.name",
         "location": "publicIp.location",

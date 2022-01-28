@@ -37,6 +37,7 @@
       "decorators": [],
       "type": "Microsoft.ApiManagement/service/identityProviders",
       "api_version": "2020-06-01-preview",
+      "existing": false,
       "config": {
         "name": "'exmple'",
         "properties": {

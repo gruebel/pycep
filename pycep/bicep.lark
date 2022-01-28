@@ -1,11 +1,11 @@
 start: element*
 
-element: "targetScope" "=" QUOTED_INTERPOLATION                             -> scope
-       | [decorator] "param" STRING data_type ["=" param_value]             -> param
-       | "var" STRING "=" var_value                                         -> var
-       | "output" STRING data_type "=" output_value                         -> output
-       | [decorator] "resource" STRING type_api_pair "=" resource_value     -> resource
-       | [decorator] "module" STRING module_path "=" module_value           -> module
+element: "targetScope" "=" QUOTED_INTERPOLATION                                         -> scope
+       | [decorator] "param" STRING data_type ["=" param_value]                         -> param
+       | "var" STRING "=" var_value                                                     -> var
+       | "output" STRING data_type "=" output_value                                     -> output
+       | [decorator] "resource" STRING type_api_pair [EXISTING] "=" resource_value      -> resource
+       | [decorator] "module" STRING module_path "=" module_value                       -> module
 
 ?value: "null"                                      -> null
       | "true"                                      -> true
@@ -227,6 +227,8 @@ operator_numeric: substract
 substract: value_brackets "-" value_brackets
 
 // Terms
+
+EXISTING: "existing"
 
 STRING: /[a-zA-Z][\w_.]*/
 INDEXED: /(?=[\w_]+(.list[a-zA-Z]*\(\)|[\[\]])+)(.list[a-zA-Z]*\(\)|[\w_\-\[\]\/.,'= ])+/

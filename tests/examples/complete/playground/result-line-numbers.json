@@ -144,6 +144,7 @@
       "decorators": [],
       "type": "Microsoft.Compute/virtualMachines",
       "api_version": "2020-06-01",
+      "existing": false,
       "config": {
         "name": "virtualMachineName",
         "location": "location",
@@ -201,6 +202,7 @@
       "decorators": [],
       "type": "Microsoft.Storage/storageAccounts",
       "api_version": "2019-06-01",
+      "existing": false,
       "config": {
         "name": "diagStorageAccountName",
         "location": "location",
@@ -216,6 +218,7 @@
       "decorators": [],
       "type": "Microsoft.Network/networkSecurityGroups",
       "api_version": "2020-06-01",
+      "existing": false,
       "config": {
         "name": "networkSecurityGroupName2",
         "location": "location"
@@ -227,6 +230,7 @@
       "decorators": [],
       "type": "Microsoft.Network/virtualNetworks",
       "api_version": "2020-06-01",
+      "existing": false,
       "config": {
         "name": "virtualNetworkName",
         "location": "location",
@@ -262,6 +266,7 @@
       "decorators": [],
       "type": "Microsoft.Network/networkInterfaces",
       "api_version": "2020-06-01",
+      "existing": false,
       "config": {
         "name": "nic1Name",
         "location": "location",
@@ -303,6 +308,7 @@
       "decorators": [],
       "type": "Microsoft.Network/networkInterfaces",
       "api_version": "2020-06-01",
+      "existing": false,
       "config": {
         "name": "nic2Name",
         "location": "location",
@@ -338,6 +344,7 @@
       "decorators": [],
       "type": "Microsoft.Network/publicIPAddresses",
       "api_version": "2020-06-01",
+      "existing": false,
       "config": {
         "name": "publicIPAddressName",
         "location": "location",
@@ -352,6 +359,7 @@
       "decorators": [],
       "type": "Microsoft.Network/networkSecurityGroups",
       "api_version": "2020-06-01",
+      "existing": false,
       "config": {
         "name": "networkSecurityGroupName",
         "location": "location",

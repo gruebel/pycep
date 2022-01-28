@@ -25,6 +25,7 @@
       "decorators": [],
       "type": "Microsoft.Network/networkSecurityGroups",
       "api_version": "2020-06-01",
+      "existing": false,
       "config": {
         "loop_type": {
           "type": "object",

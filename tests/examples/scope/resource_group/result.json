@@ -41,6 +41,7 @@
       "decorators": [],
       "type": "Microsoft.Authorization/locks",
       "api_version": "2016-09-01",
+      "existing": false,
       "config": {
         "name": "'DontDelete'",
         "properties": {
@@ -53,6 +54,7 @@
       "decorators": [],
       "type": "Microsoft.Authorization/roleAssignments",
       "api_version": "2020-04-01-preview",
+      "existing": false,
       "config": {
         "name": "roleAssignmentName",
         "properties": {

@@ -9,6 +9,7 @@
       "decorators": [],
       "type": "Microsoft.Example/examples",
       "api_version": "2020-06-06",
+      "existing": false,
       "config": {
         "loop_type": {
           "type": "array",

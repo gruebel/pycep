@@ -9,6 +9,7 @@
       "decorators": [],
       "type": "Microsoft.Storage/storageAccounts",
       "api_version": "2019-06-01",
+      "existing": false,
       "config": {
         "name": "'${toLower(storageNamePrefix)}${uniqueString(resourceGroup().id)}'",
         "location": {

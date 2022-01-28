@@ -30,6 +30,7 @@
       "decorators": [],
       "type": "Microsoft.Storage/storageAccounts",
       "api_version": "2021-06-01",
+      "existing": false,
       "config": {
         "loop_type": {
           "type": "array_index",

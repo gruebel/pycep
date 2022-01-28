@@ -109,6 +109,7 @@ class _ResourceAttributes(TypedDict):
     decorators: list[Decorator]
     type: str
     api_version: str
+    existing: bool
     config: Dict[str, Any]
     __start_line__: NotRequired[int]
     __end_line__: NotRequired[int]

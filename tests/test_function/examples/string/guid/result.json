@@ -38,6 +38,7 @@
       "decorators": [],
       "type": "Microsoft.Authorization/roleAssignments",
       "api_version": "2020-04-01-preview",
+      "existing": false,
       "config": {
         "name": {
           "function": {

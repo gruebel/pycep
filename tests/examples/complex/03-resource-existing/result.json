@@ -1,0 +1,24 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "resources": {
+    "stg": {
+      "decorators": [],
+      "type": "Microsoft.Storage/storageAccounts",
+      "api_version": "2019-06-01",
+      "existing": true,
+      "config": {
+        "name": "'examplestorage'"
+      }
+    }
+  },
+  "outputs": {
+    "blobEndpoint": {
+      "type": "string",
+      "value": "stg.properties.primaryEndpoints.blob"
+    }
+  }
+}

@@ -143,9 +143,9 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
     def resource(
         self,
         meta: Meta,
-        args: tuple[list[pycep_typing.Decorator] | None, str, pycep_typing.ApiTypeVersion, dict[str, Any]],
+        args: tuple[list[pycep_typing.Decorator] | None, str, pycep_typing.ApiTypeVersion, Token, dict[str, Any]],
     ) -> pycep_typing.ResourceResponse:
-        decorators, name, type_api_pair, config = args
+        decorators, name, type_api_pair, existing, config = args
 
         result: pycep_typing.ResourceResponse = {
             "resources": {
@@ -153,6 +153,7 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
                 "__attrs__": {
                     "decorators": decorators if decorators else [],
                     **type_api_pair,  # type: ignore[misc] # https://github.com/python/mypy/issues/11753
+                    "existing": True if existing else False,
                     "config": config,
                 },
             }
