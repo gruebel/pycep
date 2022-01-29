@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import itertools
 import re
 from typing import Any, cast
 
@@ -20,6 +21,8 @@ VALID_TARGET_SCOPES = {"resourceGroup", "subscription", "managementGroup", "tena
 class BicepToJson(Transformer[pycep_typing.BicepJson]):
     def __init__(self, add_line_numbers: bool) -> None:
         self.add_line_numbers = add_line_numbers
+
+        self.child_resources: list[pycep_typing.ResourceResponse] = []
 
         super().__init__()
 
@@ -43,7 +46,7 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             result["globals"]["scope"]["__start_line__"] = 0
             result["globals"]["scope"]["__end_line__"] = 0
 
-        for arg in args:
+        for arg in itertools.chain(args, self.child_resources):
             for key, value in arg.items():
                 result.setdefault(key, {})[value["__name__"]] = value["__attrs__"]  # type: ignore[misc, index]
 
@@ -143,13 +146,18 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
     def resource(
         self,
         meta: Meta,
-        args: tuple[list[pycep_typing.Decorator] | None, str, pycep_typing.ApiTypeVersion, Token, dict[str, Any]],
+        args: tuple[
+            list[pycep_typing.Decorator] | None, Token, pycep_typing.ApiTypeVersion, Token | None, dict[str, Any]
+        ],
     ) -> pycep_typing.ResourceResponse:
         decorators, name, type_api_pair, existing, config = args
+        name_str = str(name)
+
+        self.process_child_resource(parent_resource_name=name_str, parent_type_api_pair=type_api_pair, config=config)
 
         result: pycep_typing.ResourceResponse = {
             "resources": {
-                "__name__": name,
+                "__name__": name_str,
                 "__attrs__": {
                     "decorators": decorators if decorators else [],
                     **type_api_pair,  # type: ignore[misc] # https://github.com/python/mypy/issues/11753
@@ -164,6 +172,29 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             result["resources"]["__attrs__"]["__end_line__"] = meta.end_line
 
         return result
+
+    @v_args(meta=True)
+    def child_resource(
+        self, meta: Meta, args: tuple[Token, Token, Token | None, dict[str, Any]]
+    ) -> tuple[Literal["__child_resource__"], pycep_typing.Resource]:
+        name, type_name, existing, config = args
+
+        result: pycep_typing.Resource = {
+            "__name__": str(name),
+            "__attrs__": {
+                "decorators": [],
+                "type": str(type_name)[1:-1],
+                "api_version": "",  # will be set later with the parent resource api version
+                "existing": True if existing else False,
+                "config": config,
+            },
+        }
+
+        if self.add_line_numbers:
+            result["__attrs__"]["__start_line__"] = meta.line
+            result["__attrs__"]["__end_line__"] = meta.end_line
+
+        return ("__child_resource__", result)
 
     @v_args(meta=True)
     def module(
@@ -959,9 +990,6 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
     #
     ####################
 
-    def operator_numeric(self, args: tuple[pycep_typing.Operators]) -> pycep_typing.Operator:
-        return {"operator": args[0]}
-
     def substract(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Substract:
         operand_1, operand_2 = args
 
@@ -1012,3 +1040,41 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
     def null(self, _: Any) -> None:
         return None
+
+    ####################
+    #
+    # helper methods
+    #
+    ####################
+
+    def process_child_resource(
+        self, parent_resource_name: str, parent_type_api_pair: pycep_typing.ApiTypeVersion, config: dict[str, Any]
+    ) -> None:
+        """Extracts child resources from a resource config.
+
+        Beware that this method is not idempotent, it modifies the passed in `config`.
+        """
+        if "__child_resource__" in config.keys():
+            child_resource = config.pop("__child_resource__")
+
+            # inherit type and api version info from parent resource
+            child_type_api_pair: pycep_typing.ApiTypeVersion = {
+                "type": f"{parent_type_api_pair['type']}/{child_resource['__attrs__']['type']}",
+                "api_version": parent_type_api_pair["api_version"],
+            }
+
+            child_resource["__attrs__"]["type"] = child_type_api_pair["type"]
+            child_resource["__attrs__"]["api_version"] = child_type_api_pair["api_version"]
+            child_resource["__attrs__"].setdefault("depends_on", []).append(parent_resource_name)
+
+            self.child_resources.append(
+                {
+                    "resources": child_resource,
+                }
+            )
+
+            self.process_child_resource(
+                parent_resource_name=child_resource["__name__"],
+                parent_type_api_pair=child_type_api_pair,
+                config=child_resource["__attrs__"]["config"],
+            )

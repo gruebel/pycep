@@ -79,9 +79,23 @@
           "type": "or",
           "operands": {
             "operand_1": true,
-            "operand_2": "paramExpr",
-            "operand_3": false,
-            "operand_4": "varExpr"
+            "operand_2": {
+              "operator": {
+                "type": "or",
+                "operands": {
+                  "operand_1": "paramExpr",
+                  "operand_2": {
+                    "operator": {
+                      "type": "or",
+                      "operands": {
+                        "operand_1": false,
+                        "operand_2": "varExpr"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

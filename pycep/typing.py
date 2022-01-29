@@ -115,13 +115,13 @@ class _ResourceAttributes(TypedDict):
     __end_line__: NotRequired[int]
 
 
-class _Resources(TypedDict):
+class Resource(TypedDict):
     __name__: str
     __attrs__: _ResourceAttributes
 
 
 class ResourceResponse(TypedDict):
-    resources: _Resources
+    resources: Resource
 
 
 class _ModuleAttributes(TypedDict):

@@ -17,7 +17,7 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
       | array
       | object
       | function
-      | operator_numeric
+      | operator
 
 ?value_brackets: value
                | "(" value ")"
@@ -26,7 +26,6 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
 
 ?param_value: value_brackets
             | MULTI_LINE_STRING                     -> multi_line_string
-            | operator
 
 ?var_value: param_value | loop
 
@@ -35,6 +34,8 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
 ?resource_value: object | loop
 
 ?module_value: object | loop
+
+child_resource: "resource" STRING QUOTED_INTERPOLATION [EXISTING] "=" object
 
 // element type extras
 
@@ -62,9 +63,9 @@ loop_object: STRING "in" "items" "(" value_brackets ")"
 
 array: "[" value_brackets* "]"
 
-object: "{" pair* "}"
+object: "{" (pair | child_resource)* "}"
 
-pair: key ":" (value_brackets | loop | operator)
+pair: key ":" (value_brackets | loop)
 
 key: quoted_string
 
@@ -182,7 +183,7 @@ unique_string: ("uniqueString" | "sys.uniqueString") "(" value_brackets ("," val
 
 // operators
 
-operator: operator_comparison | operator_logical
+operator: operator_comparison | operator_logical | operator_numeric
 
 // operators - comparison
 
@@ -213,16 +214,16 @@ and_op: value_brackets ("&&" value_brackets)+
 
 or_op: value_brackets ("||" value_brackets)+
 
-not_op: "!" "("? (not_op | value_brackets) ")"?
+not_op: "!" value_brackets
 
 coalesce: value_brackets ("??" value_brackets)+
 
-conditional: "("? (STRING | function | operator_comparison | and_op | or_op) ")"? "?" param_value ":" param_value
+conditional: value_brackets "?" value_brackets ":" value_brackets
 
 // operators - numeric
 
 // make it a rule for now, till the general operator rule is fixed
-operator_numeric: substract
+?operator_numeric: substract
 
 substract: value_brackets "-" value_brackets
 
@@ -230,7 +231,7 @@ substract: value_brackets "-" value_brackets
 
 EXISTING: "existing"
 
-STRING: /[a-zA-Z][\w_.]*/
+STRING: /[a-zA-Z](::|[\w_.])*/
 INDEXED: /(?=[\w_]+(.list[a-zA-Z]*\(\)|[\[\]])+)(.list[a-zA-Z]*\(\)|[\w_\-\[\]\/.,'= ])+/
 QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}{]+|(?R))*+}|\\'|[^'])*'/
 

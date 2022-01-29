@@ -22,7 +22,7 @@ This is still a very early stage, therefore a lot can and will change.
 - [x] Resource/Module decorator
 - [x] Target scope
 - [x] Existing resource keyword
-- [ ] Child resources
+- [x] Child resources
 - [ ] Module alias
 - [ ] Deployment condition
 - [x] Adding line numbers to element blocks
