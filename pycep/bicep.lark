@@ -1,7 +1,7 @@
-start: element*
+start: ((element _CPP_COMMENT_NL) | _CPP_COMMENT_NL)*
 
 element: "targetScope" "=" QUOTED_INTERPOLATION                                         -> scope
-       | [decorator] "param" STRING data_type ["=" value_brackets]                         -> param
+       | [decorator] "param" STRING data_type ["=" value_brackets]                      -> param
        | "var" STRING "=" var_value                                                     -> var
        | "output" STRING data_type "=" output_value                                     -> output
        | [decorator] "resource" STRING type_api_pair [EXISTING] "=" resource_value      -> resource
@@ -33,7 +33,7 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
 
 ?module_value: object | loop
 
-child_resource: "resource" STRING QUOTED_INTERPOLATION [EXISTING] "=" object
+child_resource: "resource" STRING QUOTED_INTERPOLATION [EXISTING] "=" object _CPP_COMMENT_NL
 
 // element type extras
 
@@ -59,17 +59,17 @@ loop_object: STRING "in" "items" "(" value_brackets ")"
 
 ?quoted_string: STRING | QUOTED_INTERPOLATION
 
-array: "[" value_brackets* "]"
+array: "[" _CPP_COMMENT_NL~0..5 (value_brackets _CPP_COMMENT_NL)* "]"
 
-object: "{" (pair | child_resource)* "}"
+object: "{" _CPP_COMMENT_NL~0..5 (pair | child_resource)* "}"
 
-pair: key ":" (value_brackets | loop)
+pair: key ":" (value_brackets | loop) _CPP_COMMENT_NL+
 
-key: quoted_string
+!key: "resource" | quoted_string
 
 // decorators
 
-decorator: ("@" (deco_allowed | deco_batch | deco_description | deco_min_len | deco_max_len | deco_min_val | deco_max_val | deco_metadata | deco_secure))+
+decorator: ("@" (deco_allowed | deco_batch | deco_description | deco_min_len | deco_max_len | deco_min_val | deco_max_val | deco_metadata | deco_secure) _CPP_COMMENT_NL)+
 
 deco_allowed: "allowed" "(" array ")"
 
@@ -132,22 +132,17 @@ json_func: ("json" | "sys.json") "(" value_brackets ")"
 
 // functions - resource
 
-?function_resource: extension_resource_id | resource_id | subscription_resource_id | tenant_resource_id
+?function_resource: extension_resource_id | reference | resource_id | subscription_resource_id | tenant_resource_id
 
-_EXTENSION_RESOURCE_ID: /(az.)?extensionResourceId\s*\(/
-extension_resource_id: _EXTENSION_RESOURCE_ID quoted_string ("," quoted_string)~2..3 ")"
+extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" quoted_string ("," quoted_string)~2..3 ")"
 
-// this rule results in a weird behaviour of "resourceId" being a TERM
-// and then matching a key named "resourceId" in an object
-//resource_id: ("resourceId" | "az.resourceId") "(" quoted_string ("," quoted_string)~1..4 ")"
-_RESOURCE_ID: /(az.)?resourceId\s*\(/
-resource_id: _RESOURCE_ID quoted_string ("," quoted_string)~1..4 ")"
+reference: ("reference" | "az.reference") "(" value_brackets ["," value_brackets ["," value_brackets]] ")" ["." STRING]
 
-_SUBSCRIPTION_RESOURCE_ID: /(az.)?subscriptionResourceId\s*\(/
-subscription_resource_id: _SUBSCRIPTION_RESOURCE_ID quoted_string ("," quoted_string)~1..3 ")"
+resource_id: ("resourceId" | "az.resourceId") "(" quoted_string ("," quoted_string)~1..4 ")"
 
-_TENANT_RESOURCE_ID: /(az.)?tenantResourceId\s*\(/
-tenant_resource_id: _TENANT_RESOURCE_ID quoted_string ("," quoted_string)~1..2 ")"
+subscription_resource_id: ("subscriptionResourceId" | "az.subscriptionResourceId") "(" quoted_string ("," quoted_string)~1..3 ")"
+
+tenant_resource_id: ("tenantResourceId" | "az.tenantResourceId") "(" quoted_string ("," quoted_string)~1..2 ")"
 
 // functions - scope
 
@@ -217,19 +212,18 @@ not_equals_case_insens: value_brackets "!~" value_brackets
 
 ?operator_logical: and_op | or_op | not_op | coalesce | conditional
 
-and_op: value_brackets ("&&" value_brackets)+
+and_op: value_brackets "&&" value_brackets
 
-or_op: value_brackets ("||" value_brackets)+
+or_op: value_brackets "||" value_brackets
 
 not_op: "!" value_brackets
 
-coalesce: value_brackets ("??" value_brackets)+
+coalesce: value_brackets "??" value_brackets
 
 conditional: value_brackets "?" value_brackets ":" value_brackets
 
 // operators - numeric
 
-// make it a rule for now, till the general operator rule is fixed
 ?operator_numeric: substract
 
 substract: value_brackets "-" value_brackets
@@ -244,10 +238,11 @@ QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}{]+|(?R))*+}|\\'|[^'])*'/
 
 MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
 
+_NEWLINE: NEWLINE
+_CPP_COMMENT_NL: [CPP_COMMENT] NEWLINE
+
 %import common.CPP_COMMENT
 %import common.NEWLINE
 %import common.INT
-%import common.WS
-%ignore CPP_COMMENT
-%ignore NEWLINE
-%ignore WS
+%import common.WS_INLINE
+%ignore WS_INLINE

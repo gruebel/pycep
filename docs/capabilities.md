@@ -55,7 +55,7 @@
 - [ ] list*
 - [ ] pickZones
 - [ ] providers (deprecated)
-- [ ] reference
+- [x] reference
 - [x] resourceId
 - [x] subscriptionResourceId
 - [x] tenantResourceId

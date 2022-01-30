@@ -82,7 +82,7 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
     @v_args(meta=True)
     def param(
-        self, meta: Meta, args: tuple[list[pycep_typing.Decorator] | None, str, str, pycep_typing.PossibleValue | None]
+        self, meta: Meta, args: tuple[list[pycep_typing.Decorator] | None, str, str, pycep_typing.PossibleNoneValue]
     ) -> pycep_typing.ParamResponse:
         decorators, name, data_type, default = args
 
@@ -192,7 +192,8 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
         if self.add_line_numbers:
             result["__attrs__"]["__start_line__"] = meta.line
-            result["__attrs__"]["__end_line__"] = meta.end_line
+            # remove one line, because the new line is counted for child resources
+            result["__attrs__"]["__end_line__"] = meta.end_line - 1
 
         return ("__child_resource__", result)
 
@@ -505,7 +506,7 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
     ####################
 
     def date_time_add(
-        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleValue | None]
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleNoneValue]
     ) -> pycep_typing.DateTimeAdd:
         base, duration, format_str = args
 
@@ -518,7 +519,7 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
-    def utc_now(self, args: tuple[pycep_typing.PossibleValue | None]) -> pycep_typing.UtcNow:
+    def utc_now(self, args: tuple[pycep_typing.PossibleNoneValue]) -> pycep_typing.UtcNow:
         return {
             "type": "utc_now",
             "parameters": {
@@ -568,6 +569,31 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
                 "resource_name_2": resource_name_2,
             },
         }
+
+    def reference(
+        self,
+        args: tuple[
+            pycep_typing.PossibleValue,
+            pycep_typing.PossibleNoneValue,
+            pycep_typing.PossibleNoneValue,
+            pycep_typing.PossibleNoneValue,
+        ],
+    ) -> pycep_typing.Reference:
+        resource_dentifier, api_version, full, property_name = args
+
+        result: pycep_typing.Reference = {
+            "type": "reference",
+            "parameters": {
+                "resource_dentifier": resource_dentifier,
+                "api_version": api_version,
+                "full": full,
+            },
+        }
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
 
     def resource_id(self, args: list[Token]) -> pycep_typing.ResourceId:
         # args has between 2-5 items and only for the 2 and 5 items case
@@ -999,9 +1025,6 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
         self, args: tuple[Token | pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleValue]
     ) -> pycep_typing.Conditional:
         condition, true_value, false_value = args
-
-        if isinstance(condition, Token):
-            condition = str(condition)
 
         return {
             "type": "conditional",

@@ -1,0 +1,117 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "uamiId": {
+      "decorators": [],
+      "type": "object",
+      "default": {
+        "function": {
+          "type": "reference",
+          "parameters": {
+            "resource_dentifier": "refId",
+            "api_version": "apiVersion",
+            "full": null
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "uamiId": {
+      "value": {
+        "function": {
+          "type": "reference",
+          "parameters": {
+            "resource_dentifier": "refId",
+            "api_version": "'2020-09-01'",
+            "full": "'full'"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "logAnalyticsAutomation": {
+      "decorators": [],
+      "type": "Microsoft.OperationalInsights/workspaces/linkedServices",
+      "api_version": "2020-08-01",
+      "existing": false,
+      "config": {
+        "parent": "logAnalyticsWorkspace",
+        "name": "'Automation'",
+        "properties": {
+          "reference": {
+            "function": {
+              "type": "reference",
+              "parameters": {
+                "resource_dentifier": "refId",
+                "api_version": "apiVersion",
+                "full": null
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "modules": {
+    "exampleModule": {
+      "decorators": [],
+      "type": "local",
+      "detail": {
+        "full": "rgModule.bicep",
+        "path": "rgModule.bicep"
+      },
+      "config": {
+        "name": "'exampleModule'",
+        "params": {
+          "location": "location",
+          "fwname": {
+            "function": {
+              "type": "reference",
+              "parameters": {
+                "resource_dentifier": "refId",
+                "api_version": "apiVersion",
+                "full": null
+              }
+            }
+          },
+          "reference": "id"
+        }
+      }
+    }
+  },
+  "outputs": {
+    "subnetId": {
+      "type": "object",
+      "value": {
+        "function": {
+          "type": "reference",
+          "parameters": {
+            "resource_dentifier": "refId",
+            "api_version": null,
+            "full": null
+          },
+          "property_name": "primaryEndpoints.blob"
+        }
+      }
+    },
+    "namespace": {
+      "type": "object",
+      "value": {
+        "function": {
+          "type": "reference",
+          "parameters": {
+            "resource_dentifier": "refId",
+            "api_version": null,
+            "full": null
+          }
+        }
+      }
+    }
+  }
+}

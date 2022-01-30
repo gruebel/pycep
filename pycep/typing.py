@@ -6,6 +6,8 @@ from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
 # dict[str, Any] -> dict[str, PossibleValue] not supported https://github.com/python/mypy/issues/731
 PossibleValue: TypeAlias = "bool | int | str | list[bool | int | str] | dict[str, Any]"
+PossibleNoneValue: TypeAlias = "PossibleValue | None"
+
 ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | TemplateSpecModulePath"
 LoopType: TypeAlias = "LoopIndex | LoopArray | LoopArrayIndex | LoopObject"
 ElementResponse: TypeAlias = "ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse"
@@ -20,7 +22,9 @@ AnyFunctions: TypeAlias = "AnyFunc"
 ArrayFunctions: TypeAlias = "Contains | Empty | Intersection | Length | Take | UnionFunc"
 DateFunctions: TypeAlias = "DateTimeAdd | UtcNow"
 ObjectFunctions: TypeAlias = "Json"
-ResourceFunctions: TypeAlias = "ExtensionResourceId | ResourceId | SubscriptionResourceId | TenantResourceId"
+ResourceFunctions: TypeAlias = (
+    "ExtensionResourceId | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
+)
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
 StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Guid | IndexOf | LastIndexOf | Split | Substring | String | ToLower | ToUpper | UniqueString"
 Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
@@ -59,7 +63,7 @@ class ScopeResponse(TypedDict):
 class _ParameterAttributes(TypedDict):
     decorators: list[Decorator]
     type: str
-    default: PossibleValue | None
+    default: PossibleNoneValue
     __start_line__: NotRequired[int]
     __end_line__: NotRequired[int]
 
@@ -394,7 +398,7 @@ class UnionFunc(TypedDict):
 class _DateTimeAddParameters(TypedDict):
     base: PossibleValue
     duration: PossibleValue
-    format: PossibleValue | None
+    format: PossibleNoneValue
 
 
 class DateTimeAdd(TypedDict):
@@ -403,7 +407,7 @@ class DateTimeAdd(TypedDict):
 
 
 class _UtcNowParameters(TypedDict):
-    format: PossibleValue | None
+    format: PossibleNoneValue
 
 
 class UtcNow(TypedDict):
@@ -444,6 +448,18 @@ class _ExtensionResourceIdParameters(TypedDict):
 class ExtensionResourceId(TypedDict):
     type: Literal["extension_resource_id"]
     parameters: _ExtensionResourceIdParameters
+
+
+class _ReferenceParameters(TypedDict):
+    resource_dentifier: PossibleValue
+    api_version: PossibleNoneValue
+    full: PossibleNoneValue
+
+
+class Reference(TypedDict):
+    type: Literal["reference"]
+    parameters: _ReferenceParameters
+    property_name: NotRequired[str]
 
 
 class _ResourceIdParameters(TypedDict):
