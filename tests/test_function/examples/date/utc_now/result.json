@@ -1,0 +1,33 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "currentTime": {
+      "decorators": [],
+      "type": "string",
+      "default": {
+        "function": {
+          "type": "utc_now",
+          "parameters": {
+            "format": null
+          }
+        }
+      }
+    },
+    "utcShortValue": {
+      "decorators": [],
+      "type": "string",
+      "default": {
+        "function": {
+          "type": "utc_now",
+          "parameters": {
+            "format": "'d'"
+          }
+        }
+      }
+    }
+  }
+}

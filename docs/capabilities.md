@@ -28,6 +28,13 @@
 - [x] take
 - [x] union
 
+### Date
+
+[Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-date)
+
+- [x] dateTimeAdd
+- [x] utcNow
+
 ### Object
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-object)

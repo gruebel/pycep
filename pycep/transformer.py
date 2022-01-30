@@ -500,6 +500,34 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
     ####################
     #
+    # functions - date
+    #
+    ####################
+
+    def date_time_add(
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleValue | None]
+    ) -> pycep_typing.DateTimeAdd:
+        base, duration, format_str = args
+
+        return {
+            "type": "date_time_add",
+            "parameters": {
+                "base": base,
+                "duration": duration,
+                "format": format_str,
+            },
+        }
+
+    def utc_now(self, args: tuple[pycep_typing.PossibleValue | None]) -> pycep_typing.UtcNow:
+        return {
+            "type": "utc_now",
+            "parameters": {
+                "format": args[0],
+            },
+        }
+
+    ####################
+    #
     # functions - object
     #
     ####################

@@ -18,13 +18,12 @@ Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperator
 
 AnyFunctions: TypeAlias = "AnyFunc"
 ArrayFunctions: TypeAlias = "Contains | Empty | Intersection | Length | Take | UnionFunc"
+DateFunctions: TypeAlias = "DateTimeAdd | UtcNow"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = "ExtensionResourceId | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
 StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Guid | IndexOf | LastIndexOf | Split | Substring | String | ToLower | ToUpper | UniqueString"
-Functions: TypeAlias = (
-    "AnyFunctions | ArrayFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
-)
+Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
 
 ####################
@@ -383,6 +382,33 @@ class UnionFunc(TypedDict):
     type: Literal["union"]
     parameters: _UnionParameters
     property_name: NotRequired[str]
+
+
+####################
+#
+# functions - date
+#
+####################
+
+
+class _DateTimeAddParameters(TypedDict):
+    base: PossibleValue
+    duration: PossibleValue
+    format: PossibleValue | None
+
+
+class DateTimeAdd(TypedDict):
+    type: Literal["date_time_add"]
+    parameters: _DateTimeAddParameters
+
+
+class _UtcNowParameters(TypedDict):
+    format: PossibleValue | None
+
+
+class UtcNow(TypedDict):
+    type: Literal["utc_now"]
+    parameters: _UtcNowParameters
 
 
 ####################

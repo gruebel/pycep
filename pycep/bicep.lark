@@ -1,19 +1,20 @@
 start: element*
 
 element: "targetScope" "=" QUOTED_INTERPOLATION                                         -> scope
-       | [decorator] "param" STRING data_type ["=" param_value]                         -> param
+       | [decorator] "param" STRING data_type ["=" value_brackets]                         -> param
        | "var" STRING "=" var_value                                                     -> var
        | "output" STRING data_type "=" output_value                                     -> output
        | [decorator] "resource" STRING type_api_pair [EXISTING] "=" resource_value      -> resource
        | [decorator] "module" STRING module_path "=" module_value                       -> module
 
-?value: "null"                                      -> null
-      | "true"                                      -> true
-      | "false"                                     -> false
-      | INT                                         -> int
-      | STRING                                      -> string
-      | QUOTED_INTERPOLATION                        -> string
-      | INDEXED                                     -> string
+?value: "null"                      -> null
+      | "true"                      -> true
+      | "false"                     -> false
+      | INT                         -> int
+      | STRING                      -> string
+      | QUOTED_INTERPOLATION        -> string
+      | INDEXED                     -> string
+      | MULTI_LINE_STRING           -> multi_line_string
       | array
       | object
       | function
@@ -24,12 +25,9 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
 
 // element values
 
-?param_value: value_brackets
-            | MULTI_LINE_STRING                     -> multi_line_string
+?var_value: value_brackets | loop
 
-?var_value: param_value | loop
-
-?output_value: param_value | loop
+?output_value: value_brackets | loop
 
 ?resource_value: object | loop
 
@@ -93,7 +91,8 @@ deco_secure: "secure" "(" ")"
 
 // functions
 
-function: function_any | function_array | function_object | function_resource | function_scope | function_string
+function: function_any | function_array | function_date | function_object | function_resource | function_scope
+        | function_string
 
 // functions - any
 
@@ -116,6 +115,14 @@ length: ("length" | "sys.length") "(" value_brackets ")"
 take: ("take" | "sys.take") "(" value_brackets "," value_brackets ")"
 
 union: ("union" | "sys.union") "(" value_brackets ("," value_brackets)+ ")" ["." STRING]
+
+// functions - date
+
+?function_date: date_time_add | utc_now
+
+date_time_add: ("dateTimeAdd" | "sys.dateTimeAdd") "(" value_brackets "," value_brackets ["," value_brackets]  ")"
+
+utc_now: ("utcNow" | "sys.utcNow") "(" [value_brackets] ")"
 
 // functions - object
 
