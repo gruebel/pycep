@@ -164,18 +164,18 @@
         }
       }
     },
-    "diagsAccount": {
+    "storage": {
       "decorators": [],
       "type": "Microsoft.Storage/storageAccounts",
-      "api_version": "2019-06-01",
+      "api_version": "2021-02-01",
       "existing": false,
       "config": {
         "name": "diagStorageAccountName",
         "location": "location",
+        "kind": "'StorageV2'",
         "sku": {
           "name": "storageAccountType"
-        },
-        "kind": "'StorageV2'"
+        }
       }
     },
     "nsg2": {
@@ -335,6 +335,30 @@
           ]
         }
       }
+    },
+    "service": {
+      "decorators": [],
+      "type": "Microsoft.Storage/storageAccounts/fileServices",
+      "api_version": "2021-02-01",
+      "existing": false,
+      "config": {
+        "name": "'default'"
+      },
+      "depends_on": [
+        "storage"
+      ]
+    },
+    "share": {
+      "decorators": [],
+      "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+      "api_version": "2021-02-01",
+      "existing": false,
+      "config": {
+        "name": "'diagShare'"
+      },
+      "depends_on": [
+        "service"
+      ]
     }
   },
   "modules": {

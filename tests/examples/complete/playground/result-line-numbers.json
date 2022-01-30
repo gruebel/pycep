@@ -198,21 +198,21 @@
       "__start_line__": 37,
       "__end_line__": 86
     },
-    "diagsAccount": {
+    "storage": {
       "decorators": [],
       "type": "Microsoft.Storage/storageAccounts",
-      "api_version": "2019-06-01",
+      "api_version": "2021-02-01",
       "existing": false,
       "config": {
         "name": "diagStorageAccountName",
         "location": "location",
+        "kind": "'StorageV2'",
         "sku": {
           "name": "storageAccountType"
-        },
-        "kind": "'StorageV2'"
+        }
       },
       "__start_line__": 88,
-      "__end_line__": 95
+      "__end_line__": 103
     },
     "nsg2": {
       "decorators": [],
@@ -223,8 +223,8 @@
         "name": "networkSecurityGroupName2",
         "location": "location"
       },
-      "__start_line__": 98,
-      "__end_line__": 101
+      "__start_line__": 106,
+      "__end_line__": 109
     },
     "vnet": {
       "decorators": [],
@@ -259,8 +259,8 @@
           ]
         }
       },
-      "__start_line__": 104,
-      "__end_line__": 131
+      "__start_line__": 112,
+      "__end_line__": 139
     },
     "nic1": {
       "decorators": [],
@@ -301,8 +301,8 @@
           }
         }
       },
-      "__start_line__": 134,
-      "__end_line__": 156
+      "__start_line__": 142,
+      "__end_line__": 164
     },
     "nic2": {
       "decorators": [],
@@ -337,8 +337,8 @@
           ]
         }
       },
-      "__start_line__": 159,
-      "__end_line__": 175
+      "__start_line__": 167,
+      "__end_line__": 183
     },
     "pip": {
       "decorators": [],
@@ -352,8 +352,8 @@
           "publicIPAllocationMethod": "'Dynamic'"
         }
       },
-      "__start_line__": 178,
-      "__end_line__": 184
+      "__start_line__": 186,
+      "__end_line__": 192
     },
     "nsg": {
       "decorators": [],
@@ -381,8 +381,36 @@
           ]
         }
       },
-      "__start_line__": 187,
-      "__end_line__": 207
+      "__start_line__": 195,
+      "__end_line__": 215
+    },
+    "service": {
+      "decorators": [],
+      "type": "Microsoft.Storage/storageAccounts/fileServices",
+      "api_version": "2021-02-01",
+      "existing": false,
+      "config": {
+        "name": "'default'"
+      },
+      "__start_line__": 96,
+      "__end_line__": 102,
+      "depends_on": [
+        "storage"
+      ]
+    },
+    "share": {
+      "decorators": [],
+      "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+      "api_version": "2021-02-01",
+      "existing": false,
+      "config": {
+        "name": "'diagShare'"
+      },
+      "__start_line__": 99,
+      "__end_line__": 101,
+      "depends_on": [
+        "service"
+      ]
     }
   },
   "modules": {
@@ -399,16 +427,16 @@
           "myIp": "'123.123.123.123'"
         }
       },
-      "__start_line__": 209,
-      "__end_line__": 214
+      "__start_line__": 217,
+      "__end_line__": 222
     }
   },
   "outputs": {
     "nsgId": {
       "type": "string",
       "value": "nsg.id",
-      "__start_line__": 216,
-      "__end_line__": 216
+      "__start_line__": 224,
+      "__end_line__": 224
     }
   }
 }

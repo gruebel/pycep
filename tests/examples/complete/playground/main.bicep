@@ -85,13 +85,21 @@ resource vm 'Microsoft.Compute/virtualMachines@2020-06-01' = {
   }
 }
 
-resource diagsAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
+resource storage 'Microsoft.Storage/storageAccounts@2021-02-01' = {
   name: diagStorageAccountName
   location: location
+  kind: 'StorageV2'
   sku: {
     name: storageAccountType
   }
-  kind: 'StorageV2'
+
+  resource service 'fileServices' = {
+    name: 'default'
+
+    resource share 'shares' = {
+      name: 'diagShare'
+    }
+  }
 }
 
 // Simple Network Security Group for subnet2
