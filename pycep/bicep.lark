@@ -57,7 +57,7 @@ loop_object: STRING "in" "items" "(" value_brackets ")"
 
 // data types
 
-?quoted_string: STRING | QUOTED_INTERPOLATION
+?quoted_string: STRING | QUOTED_STRING | QUOTED_INTERPOLATION
 
 array: "[" _CPP_COMMENT_NL~0..5 (value_brackets _CPP_COMMENT_NL)* "]"
 
@@ -132,9 +132,11 @@ json_func: ("json" | "sys.json") "(" value_brackets ")"
 
 // functions - resource
 
-?function_resource: extension_resource_id | reference | resource_id | subscription_resource_id | tenant_resource_id
+?function_resource: extension_resource_id | list_keys | reference | resource_id | subscription_resource_id | tenant_resource_id
 
 extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" quoted_string ("," quoted_string)~2..3 ")"
+
+list_keys: ("listKeys" | "az.listKeys") "(" value_brackets "," value_brackets ")" ["." STRING]
 
 reference: ("reference" | "az.reference") "(" value_brackets ["," value_brackets ["," value_brackets]] ")" ["." STRING]
 
@@ -233,6 +235,7 @@ substract: value_brackets "-" value_brackets
 EXISTING: "existing"
 
 STRING: /[a-zA-Z](::|[\w_.])*/
+QUOTED_STRING: "'" STRING "'"
 INDEXED: /(?=[\w_]+(.list[a-zA-Z]*\(\)|[\[\]])+)(.list[a-zA-Z]*\(\)|[\w_\-\[\]\/.,'= ])+/
 QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}{]+|(?R))*+}|\\'|[^'])*'/
 

@@ -23,7 +23,7 @@ ArrayFunctions: TypeAlias = "Contains | Empty | Intersection | Length | Take | U
 DateFunctions: TypeAlias = "DateTimeAdd | UtcNow"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = (
-    "ExtensionResourceId | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
+    "ExtensionResourceId | ListKeys | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 )
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
 StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Guid | IndexOf | LastIndexOf | Split | Substring | String | ToLower | ToUpper | UniqueString"
@@ -450,8 +450,19 @@ class ExtensionResourceId(TypedDict):
     parameters: _ExtensionResourceIdParameters
 
 
+class _ListKeysParameters(TypedDict):
+    resource_identifier: PossibleValue
+    api_version: PossibleValue
+
+
+class ListKeys(TypedDict):
+    type: Literal["list_keys"]
+    parameters: _ListKeysParameters
+    property_name: NotRequired[str]
+
+
 class _ReferenceParameters(TypedDict):
-    resource_dentifier: PossibleValue
+    resource_identifier: PossibleValue
     api_version: PossibleNoneValue
     full: PossibleNoneValue
 

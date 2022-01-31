@@ -21,6 +21,19 @@ def test_parse_extension_resource_id() -> None:
     assert_that(result).is_equal_to(expected_result)
 
 
+def test_parse_list_keys() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "list_keys"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BicepParser(file_path).json()
+
+    # then
+    assert_that(result).is_equal_to(expected_result)
+
+
 def test_parse_reference() -> None:
     # given
     sub_dir_path = EXAMPLES_DIR / "reference"

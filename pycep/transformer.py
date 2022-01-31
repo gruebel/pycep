@@ -570,6 +570,24 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def list_keys(
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleNoneValue]
+    ) -> pycep_typing.ListKeys:
+        resource_identifier, api_version, property_name = args
+
+        result: pycep_typing.ListKeys = {
+            "type": "list_keys",
+            "parameters": {
+                "resource_identifier": resource_identifier,
+                "api_version": api_version,
+            },
+        }
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
+
     def reference(
         self,
         args: tuple[
@@ -579,12 +597,12 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             pycep_typing.PossibleNoneValue,
         ],
     ) -> pycep_typing.Reference:
-        resource_dentifier, api_version, full, property_name = args
+        resource_identifier, api_version, full, property_name = args
 
         result: pycep_typing.Reference = {
             "type": "reference",
             "parameters": {
-                "resource_dentifier": resource_dentifier,
+                "resource_identifier": resource_identifier,
                 "api_version": api_version,
                 "full": full,
             },

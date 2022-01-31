@@ -52,7 +52,7 @@
 
 - [x] extensionResourceId
 - [ ] getSecret
-- [ ] list*
+- [x] listKeys (deprecated)
 - [ ] pickZones
 - [ ] providers (deprecated)
 - [x] reference

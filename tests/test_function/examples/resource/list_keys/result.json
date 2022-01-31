@@ -10,11 +10,10 @@
       "type": "object",
       "default": {
         "function": {
-          "type": "reference",
+          "type": "list_keys",
           "parameters": {
             "resource_identifier": "refId",
-            "api_version": "apiVersion",
-            "full": null
+            "api_version": "apiVersion"
           }
         }
       }
@@ -24,11 +23,10 @@
     "uamiId": {
       "value": {
         "function": {
-          "type": "reference",
+          "type": "list_keys",
           "parameters": {
             "resource_identifier": "refId",
-            "api_version": "'2020-09-01'",
-            "full": "'full'"
+            "api_version": "'2020-09-01'"
           }
         }
       }
@@ -44,13 +42,12 @@
         "parent": "logAnalyticsWorkspace",
         "name": "'Automation'",
         "properties": {
-          "reference": {
+          "listKeys": {
             "function": {
-              "type": "reference",
+              "type": "list_keys",
               "parameters": {
                 "resource_identifier": "refId",
-                "api_version": "apiVersion",
-                "full": null
+                "api_version": "apiVersion"
               }
             }
           }
@@ -72,15 +69,14 @@
           "location": "location",
           "fwname": {
             "function": {
-              "type": "reference",
+              "type": "list_keys",
               "parameters": {
                 "resource_identifier": "refId",
-                "api_version": "apiVersion",
-                "full": null
+                "api_version": "apiVersion"
               }
             }
           },
-          "reference": "id"
+          "listKeys": "id"
         }
       }
     }
@@ -90,11 +86,10 @@
       "type": "object",
       "value": {
         "function": {
-          "type": "reference",
+          "type": "list_keys",
           "parameters": {
             "resource_identifier": "refId",
-            "api_version": null,
-            "full": null
+            "api_version": "apiVersion"
           },
           "property_name": "primaryEndpoints.blob"
         }
@@ -104,11 +99,10 @@
       "type": "object",
       "value": {
         "function": {
-          "type": "reference",
+          "type": "list_keys",
           "parameters": {
             "resource_identifier": "refId",
-            "api_version": null,
-            "full": null
+            "api_version": "apiVersion"
           }
         }
       }
