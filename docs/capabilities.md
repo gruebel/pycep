@@ -83,7 +83,7 @@
 - [x] empty
 - [ ] endsWith
 - [ ] first
-- [ ] format
+- [x] format
 - [x] guid
 - [x] indexOf
 - [ ] last

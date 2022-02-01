@@ -7,14 +7,15 @@
   "parameters": {
     "paramStr": {
       "decorators": [],
-      "type": "string",
+      "type": "array",
       "default": {
         "function": {
-          "type": "date_time_add",
+          "type": "format",
           "parameters": {
-            "base": "'2020-04-07 14:53:14Z'",
-            "duration": "'P3Y'",
-            "format": null
+            "format_string": "'{0}, {1}. Formatted number: {2:N0}'",
+            "arg_1": "greeting",
+            "arg_2": "name",
+            "arg_3": "numberToFormat"
           }
         }
       }
@@ -24,11 +25,10 @@
     "cpuCores": {
       "value": {
         "function": {
-          "type": "date_time_add",
+          "type": "format",
           "parameters": {
-            "base": "baseTime",
-            "duration": "duration",
-            "format": null
+            "format_string": "'-{0}-'",
+            "arg_1": "greeting"
           }
         }
       }
@@ -41,19 +41,16 @@
       "api_version": "2020-06-01-preview",
       "existing": false,
       "config": {
-        "name": {
+        "name": "'exmple'",
+        "properties": {
           "function": {
-            "type": "date_time_add",
+            "type": "format",
             "parameters": {
-              "base": "baseTime",
-              "duration": "duration",
-              "format": "formatStr"
+              "format_string": "'{0}, {1}'",
+              "arg_1": "greeting",
+              "arg_2": "name"
             }
           }
-        },
-        "properties": {
-          "clientId": "'googleClientId'",
-          "clientSecret": "googleClientSecret"
         },
         "dependsOn": [
           "apiManagementService"
@@ -63,27 +60,27 @@
   },
   "outputs": {
     "ftpUser": {
-      "type": "string",
+      "type": "object",
       "value": {
         "function": {
-          "type": "date_time_add",
+          "type": "format",
           "parameters": {
-            "base": "site.properties",
-            "duration": "'PT1H'",
-            "format": null
+            "format_string": "'{0}, {1}'",
+            "arg_1": "greeting",
+            "arg_2": "name"
           }
         }
       }
     },
     "namespace": {
-      "type": "string",
+      "type": "array",
       "value": {
         "function": {
-          "type": "date_time_add",
+          "type": "format",
           "parameters": {
-            "base": "site.properties",
-            "duration": "'PT1H'",
-            "format": null
+            "format_string": "'{0}, {1}'",
+            "arg_1": "greeting",
+            "arg_2": "name"
           }
         }
       }

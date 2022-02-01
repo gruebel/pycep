@@ -8,7 +8,7 @@ var cpuCores = dateTimeAdd(baseTime, duration)
 
 // resource
 resource identityProvider 'Microsoft.ApiManagement/service/identityProviders@2020-06-01-preview' = {
-  name: dateTimeAdd(baseTime, duration, format)
+  name: dateTimeAdd(baseTime, duration, formatStr)
   properties: {
     clientId: 'googleClientId'
     clientSecret: googleClientSecret

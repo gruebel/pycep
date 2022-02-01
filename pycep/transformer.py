@@ -796,6 +796,17 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def format(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Format:
+        format_string, *arg_x = args
+
+        return {
+            "type": "format",
+            "parameters": {
+                "format_string": format_string,
+                **{f"arg_{idx + 1}": extra for idx, extra in enumerate(arg_x)},  # type: ignore[misc] # dynamic operand creation
+            },
+        }
+
     def guid(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Guid:
         base_string, *extra_string_x = args
 
