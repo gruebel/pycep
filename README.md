@@ -24,7 +24,7 @@ This is still a very early stage, therefore a lot can and will change.
 - [x] Existing resource keyword
 - [x] Child resources
 - [ ] Module alias
-- [ ] Deployment condition
+- [x] Deployment condition
 - [x] Adding line numbers to element blocks
 
 ### Functions

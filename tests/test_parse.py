@@ -123,3 +123,16 @@ def test_parse_child_resource() -> None:
 
     # then
     assert_that(result).is_equal_to(expected_result)
+
+
+def test_parse_deploy_condition() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "complex/05-deploy-condition"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BicepParser(file_path).json()
+
+    # then
+    assert_that(result).is_equal_to(expected_result)

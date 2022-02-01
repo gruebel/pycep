@@ -243,7 +243,19 @@ class LoopObject(TypedDict):
 
 class Loop(TypedDict):
     loop_type: LoopType
-    condition: str | None
+    condition: PossibleNoneValue
+    config: dict[str, Any]
+
+
+####################
+#
+# deploy condition
+#
+####################
+
+
+class DeployCondition(TypedDict):
+    condition: PossibleValue
     config: dict[str, Any]
 
 

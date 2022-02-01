@@ -1,0 +1,57 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "resources": {
+    "sa": {
+      "decorators": [],
+      "type": "Microsoft.Storage/storageAccounts",
+      "api_version": "2019-06-01",
+      "existing": false,
+      "config": {
+        "condition": {
+          "operator": {
+            "type": "equals",
+            "operands": {
+              "operand_1": "newOrExisting",
+              "operand_2": "'new'"
+            }
+          }
+        },
+        "config": {
+          "name": "storageAccountName",
+          "location": "location",
+          "sku": {
+            "name": "'Standard_LRS'",
+            "tier": "'Standard'"
+          },
+          "kind": "'StorageV2'",
+          "properties": {
+            "accessTier": "'Hot'"
+          }
+        }
+      }
+    }
+  },
+  "modules": {
+    "apimUsers": {
+      "decorators": [],
+      "type": "local",
+      "detail": {
+        "full": "./users.bicep",
+        "path": "./users.bicep"
+      },
+      "config": {
+        "condition": "deployUsers",
+        "config": {
+          "params": {
+            "apimInstanceName": "apiManagement.name"
+          },
+          "name": "'apimUsers'"
+        }
+      }
+    }
+  }
+}

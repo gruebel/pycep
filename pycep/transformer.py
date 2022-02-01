@@ -338,6 +338,19 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
     ####################
     #
+    # deploy condition
+    #
+    ####################
+
+    def deploy_condition(self, args: tuple[pycep_typing.PossibleValue, dict[str, Any]]) -> pycep_typing.DeployCondition:
+        condition, config = args
+        return {
+            "condition": condition,
+            "config": config,
+        }
+
+    ####################
+    #
     # decorators
     #
     ####################

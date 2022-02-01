@@ -29,9 +29,9 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
 
 ?output_value: value_brackets | loop
 
-?resource_value: object | loop
+?resource_value: object | loop | deploy_condition
 
-?module_value: object | loop
+?module_value: object | loop | deploy_condition
 
 child_resource: "resource" STRING QUOTED_INTERPOLATION [EXISTING] "=" object _CPP_COMMENT_NL
 
@@ -54,6 +54,10 @@ loop_array: STRING "in" value_brackets
 loop_array_index: "(" STRING "," STRING ")" "in" value_brackets
 
 loop_object: STRING "in" "items" "(" value_brackets ")"
+
+// deploy condition
+
+deploy_condition: "if" "(" value_brackets ")" value_brackets
 
 // data types
 
