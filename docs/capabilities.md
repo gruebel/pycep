@@ -149,4 +149,4 @@
 - [ ] Modulo
 - [ ] Add
 - [x] Subtract
-- [ ] Minus
+- [x] Minus

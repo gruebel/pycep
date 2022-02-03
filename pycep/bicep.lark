@@ -232,7 +232,9 @@ conditional: value_brackets "?" value_brackets ":" value_brackets
 
 // operators - numeric
 
-?operator_numeric: substract
+?operator_numeric: minus | substract
+
+minus: "-" value_brackets
 
 substract: value_brackets "-" value_brackets
 
@@ -242,7 +244,7 @@ EXISTING: "existing"
 
 STRING: /[a-zA-Z](::|[\w_.])*/
 QUOTED_STRING: "'" STRING "'"
-INDEXED: /(?=[\w_]+(.list[a-zA-Z]*\(\)|[\[\]])+)(.list[a-zA-Z]*\(\)|[\w_\-\[\]\/.,'= ])+/
+INDEXED: /(?=[\w_.]+(.list[a-zA-Z]*\(('[\w-]+')?\)|[\[\]])+)(.list[a-zA-Z]*\(('[\w-]+')?\)|\[[\w\[\]_']+\]|[\w_\-\/.,'= ])+/
 QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}{]+|(?R))*+}|\\'|[^'])*'/
 
 MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"

@@ -1,0 +1,90 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramExpr": {
+      "decorators": [],
+      "type": "int",
+      "default": {
+        "operator": {
+          "type": "minus",
+          "operands": {
+            "integer_value": 2
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "varExpr": {
+      "value": {
+        "operator": {
+          "type": "minus",
+          "operands": {
+            "integer_value": 4
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "managementGroup": {
+      "decorators": [],
+      "type": "Microsoft.Management/managementGroups",
+      "api_version": "2020-05-01",
+      "existing": false,
+      "config": {
+        "name": "managementGroupId",
+        "properties": {
+          "displayName": "managementGroupDisplayName",
+          "details": {
+            "parent": {
+              "id": {
+                "operator": {
+                  "type": "minus",
+                  "operands": {
+                    "integer_value": "varExpr"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "outputExpr": {
+      "type": "int",
+      "value": {
+        "operator": {
+          "type": "minus",
+          "operands": {
+            "integer_value": 5
+          }
+        }
+      }
+    },
+    "multiple": {
+      "type": "bool",
+      "value": {
+        "operator": {
+          "type": "minus",
+          "operands": {
+            "integer_value": {
+              "operator": {
+                "type": "minus",
+                "operands": {
+                  "integer_value": 5
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
