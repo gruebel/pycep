@@ -147,6 +147,6 @@
 - [ ] Multiply
 - [ ] Divide
 - [ ] Modulo
-- [ ] Add
+- [x] Add
 - [x] Subtract
 - [x] Minus

@@ -128,7 +128,7 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
         result: pycep_typing.OutputResponse = {
             "outputs": {
-                "__name__": name,
+                "__name__": str(name),
                 "__attrs__": {
                     "type": data_type,
                     "value": value,
@@ -1082,6 +1082,17 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
     # operators - numeric
     #
     ####################
+
+    def add(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Add:
+        operand_1, operand_2 = args
+
+        return {
+            "type": "add",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+            },
+        }
 
     def minus(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.Minus:
         return {

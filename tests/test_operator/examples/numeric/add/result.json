@@ -10,7 +10,7 @@
       "type": "int",
       "default": {
         "operator": {
-          "type": "substract",
+          "type": "add",
           "operands": {
             "operand_1": 1,
             "operand_2": 2
@@ -23,7 +23,7 @@
     "varExpr": {
       "value": {
         "operator": {
-          "type": "substract",
+          "type": "add",
           "operands": {
             "operand_1": 2,
             "operand_2": 3
@@ -46,7 +46,7 @@
             "parent": {
               "id": {
                 "operator": {
-                  "type": "substract",
+                  "type": "add",
                   "operands": {
                     "operand_1": "varExpr",
                     "operand_2": 5
@@ -64,7 +64,7 @@
       "type": "int",
       "value": {
         "operator": {
-          "type": "substract",
+          "type": "add",
           "operands": {
             "operand_1": "paramExpr",
             "operand_2": "varExpr"
@@ -76,12 +76,12 @@
       "type": "int",
       "value": {
         "operator": {
-          "type": "substract",
+          "type": "add",
           "operands": {
             "operand_1": "paramExpr",
             "operand_2": {
               "operator": {
-                "type": "substract",
+                "type": "add",
                 "operands": {
                   "operand_1": "varExpr",
                   "operand_2": 5

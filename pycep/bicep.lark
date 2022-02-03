@@ -232,7 +232,9 @@ conditional: value_brackets "?" value_brackets ":" value_brackets
 
 // operators - numeric
 
-?operator_numeric: minus | substract
+?operator_numeric: add | minus | substract
+
+add: value_brackets "+" value_brackets
 
 minus: "-" value_brackets
 

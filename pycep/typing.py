@@ -15,7 +15,7 @@ Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescrip
 
 ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOrEquals | LessThan | Equals | NotEquals | EqualsCaseInsensitive | NotEqualsCaseInsensitive"
 LogicalOperators: TypeAlias = "And | Or | Not | Coalesce | Conditional"
-NumericOperators: TypeAlias = "Minus | Substract"
+NumericOperators: TypeAlias = "Add | Minus | Substract"
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
@@ -791,6 +791,11 @@ class Conditional(TypedDict):
 # Operators - numeric
 #
 ####################
+
+
+class Add(TypedDict):
+    type: Literal["add"]
+    operands: _SubstractOperands
 
 
 class _MinusOperands(TypedDict):
