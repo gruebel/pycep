@@ -102,11 +102,15 @@ function: function_any | function_array | function_date | function_object | func
 
 ?function_any: any_func
 
-any_func: ("any" | "sys.any") "(" value_brackets ")"
+any_func: ("any" | "sys.any") "(" value_brackets ")" ["." STRING]
 
 // functions - array
 
-?function_array: contains | empty | intersection | length | take | union
+?function_array: array_func | concat | contains | empty | intersection | length | take | union
+
+array_func: ("array" | "sys.array") "(" value_brackets ")"
+
+concat: ("concat" | "sys.concat") "(" value_brackets ("," value_brackets)+ ")"
 
 contains: ("contains" | "sys.contains") "(" value_brackets "," value_brackets ")"
 
@@ -254,8 +258,11 @@ MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
 _NEWLINE: NEWLINE
 _CPP_COMMENT_NL: [CPP_COMMENT] NEWLINE
 
+%import common.C_COMMENT
 %import common.CPP_COMMENT
-%import common.NEWLINE
 %import common.INT
+%import common.NEWLINE
 %import common.WS_INLINE
+
+%ignore C_COMMENT
 %ignore WS_INLINE

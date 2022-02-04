@@ -19,7 +19,7 @@ NumericOperators: TypeAlias = "Add | Minus | Substract"
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
-ArrayFunctions: TypeAlias = "Contains | Empty | Intersection | Length | Take | UnionFunc"
+ArrayFunctions: TypeAlias = "Array | Concat | Contains | Empty | Intersection | Length | Take | UnionFunc"
 DateFunctions: TypeAlias = "DateTimeAdd | UtcNow"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = (
@@ -342,6 +342,20 @@ class AnyFunc(TypedDict):
 # functions - array
 #
 ####################
+
+
+class _ArrayParameters(TypedDict):
+    convert_to_array: PossibleValue
+
+
+class Array(TypedDict):
+    type: Literal["array"]
+    parameters: _ArrayParameters
+
+
+class Concat(TypedDict):
+    type: Literal["concat"]
+    parameters: _UnionParameters
 
 
 class _ContainsParameters(TypedDict):

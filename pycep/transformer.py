@@ -440,6 +440,26 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
     #
     ####################
 
+    def array_func(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Array:
+        return {
+            "type": "array",
+            "parameters": {
+                "convert_to_array": args[0],
+            },
+        }
+
+    def concat(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Concat:
+        arg_1, arg_2, *arg_x = args
+
+        return {
+            "type": "concat",
+            "parameters": {
+                "arg_1": arg_1,
+                "arg_2": arg_2,
+                **{f"arg_{idx + 3}": arg for idx, arg in enumerate(arg_x)},  # type: ignore[misc] # dynamic operand creation
+            },
+        }
+
     def contains(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Contains:
         container, item_to_find = args
 

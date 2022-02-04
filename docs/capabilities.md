@@ -12,8 +12,8 @@
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-array)
 
-- [ ] array
-- [ ] concat
+- [x] array
+- [x] concat
 - [x] contains
 - [x] empty
 - [ ] first
@@ -76,7 +76,7 @@
 - [x] base64
 - [x] base64ToJson
 - [x] base64ToString
-- [ ] concat
+- [x] concat
 - [x] contains
 - [ ] dataUri
 - [ ] dataUriToString
