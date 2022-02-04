@@ -562,6 +562,32 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
     ####################
     #
+    # functions - deployment
+    #
+    ####################
+
+    def deployment(self, args: tuple[str | None]) -> pycep_typing.Deployment:
+        property_name = args[0]
+
+        result: pycep_typing.Deployment = {"type": "deployment"}
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
+
+    def environment(self, args: tuple[str | None]) -> pycep_typing.Environment:
+        property_name = args[0]
+
+        result: pycep_typing.Environment = {"type": "environment"}
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
+
+    ####################
+    #
     # functions - object
     #
     ####################

@@ -31,6 +31,7 @@ This is still a very early stage, therefore a lot can and will change.
 - [x] Any
 - [ ] Array (in progress)
 - [x] Date
+- [x] Deployment
 - [x] Object
 - [ ] Resource (in progress)
 - [ ] Scope (in progress)

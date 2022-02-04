@@ -21,13 +21,14 @@ Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperator
 AnyFunctions: TypeAlias = "AnyFunc"
 ArrayFunctions: TypeAlias = "Array | Concat | Contains | Empty | Intersection | Length | Take | UnionFunc"
 DateFunctions: TypeAlias = "DateTimeAdd | UtcNow"
+DeploymentFunctions: TypeAlias = "Deployment | Environment"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = (
     "ExtensionResourceId | ListKeys | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 )
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
 StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Format | Guid | IndexOf | LastIndexOf | Split | Substring | String | ToLower | ToUpper | UniqueString"
-Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
+Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
 
 ####################
@@ -439,6 +440,23 @@ class _UtcNowParameters(TypedDict):
 class UtcNow(TypedDict):
     type: Literal["utc_now"]
     parameters: _UtcNowParameters
+
+
+####################
+#
+# functions - deployment
+#
+####################
+
+
+class Deployment(TypedDict):
+    type: Literal["deployment"]
+    property_name: NotRequired[str]
+
+
+class Environment(TypedDict):
+    type: Literal["environment"]
+    property_name: NotRequired[str]
 
 
 ####################

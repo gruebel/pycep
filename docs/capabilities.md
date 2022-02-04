@@ -35,6 +35,13 @@
 - [x] dateTimeAdd
 - [x] utcNow
 
+### Deployment
+
+[Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-deployment)
+
+- [x] deployment
+- [x] environment
+
 ### Object
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-object)
