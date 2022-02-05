@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+
+permissions: read-all
+
+env:
+  POETRY_VERSION: "1.1.12"
+  PYTHON_VERSION: "3.7"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.POETRY_VERSION }}
+      - name: Set up poetry ${{ env.PYTHON_VERSION }}
+        uses: abatilo/actions-poetry@7044c9c69e0265717d52471f66033b8d0e2a69ff  # v2.1.4
+        with:
+          poetry-version: ${{ env.POETRY_VERSION }}
+      - name: Install dependencies
+        run: poetry install --no-dev
+      - name: Release version ${{ github.ref_name }}
+        run: |
+          # bump version
+          poetry version $GITHUB_REF_NAME
+          new_version=$(poetry version -s)
+
+          # commit and push
+          git config --global user.name 'gruebel'
+          git config --global user.email 'gruebel@users.noreply.github.com'
+          git add pyproject.toml
+          git commit -m "publish version ${new_version}"
+          git push
+      - name: Publish to PyPI
+        env:
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
+        run: poetry publish --build
+      - name: Extract release notes
+        id: extract-release-notes
+        uses: ffurrer2/extract-release-notes@c24866884b7a0d2fd2095be2e406b6f260479da8  # v1.11.0
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@1e07f4398721186383de40550babbdf2b84acfc5  # v0.1.14
+        with:
+          body: ${{ steps.extract-release-notes.outputs.release_notes }}
