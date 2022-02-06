@@ -18,6 +18,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: master
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
