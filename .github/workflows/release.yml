@@ -17,10 +17,10 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579  # v2.4.0
         with:
           ref: master
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@7f80679172b057fc5e90d70d197929d454754a5a  # v2.3.2
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
