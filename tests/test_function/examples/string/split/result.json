@@ -45,7 +45,8 @@
             "parameters": {
               "input_string": "roleName",
               "delimiter": "'.'"
-            }
+            },
+            "index": 0
           }
         },
         "properties": {

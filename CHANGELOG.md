@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support `first` function
 - Support `last` function
 - Support `bool` function
+- Support `newGuid` function
 
 ## 0.1.0 - 2022-02-06
 

@@ -110,7 +110,7 @@ any_func: ("any" | "sys.any") "(" value_brackets ")" ["." STRING]
 
 array_func: ("array" | "sys.array") "(" value_brackets ")"
 
-concat: ("concat" | "sys.concat") "(" value_brackets ("," value_brackets)+ ")"
+concat: ("concat" | "sys.concat") "(" value_brackets ("," value_brackets)* ")"
 
 contains: ("contains" | "sys.contains") "(" value_brackets "," value_brackets ")"
 
@@ -182,8 +182,8 @@ subscription: ("subscription" | "az.subscription") "(" [quoted_string] ")" ["." 
 
 // functions - string
 
-?function_string: base64_func | base64_to_json | base64_to_string | format | guid | index_of | last_index_of | replace
-                | split | string_func | substring | to_lower | to_upper | unique_string
+?function_string: base64_func | base64_to_json | base64_to_string | format | guid | index_of | last_index_of | new_guid
+                | replace | split | string_func | substring | to_lower | to_upper | unique_string
 
 base64_func: ("base64" | "sys.base64") "(" value_brackets ")"
 
@@ -199,9 +199,11 @@ index_of: ("indexOf" | "sys.indexOf") "(" value_brackets "," value_brackets ")"
 
 last_index_of: ("lastIndexOf" | "sys.lastIndexOf") "(" value_brackets "," value_brackets ")"
 
+new_guid: ("newGuid" | "sys.newGuid") "(" ")"
+
 replace: ("replace" | "sys.replace") "(" value_brackets ("," value_brackets)~2 ")"
 
-split: ("split" | "sys.split") "(" value_brackets "," value_brackets ")"
+split: ("split" | "sys.split") "(" value_brackets "," value_brackets ")" ["[" INT "]"]
 
 string_func: ("string" | "sys.string") "(" value_brackets ")"
 

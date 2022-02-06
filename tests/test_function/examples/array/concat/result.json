@@ -44,8 +44,7 @@
           "function": {
             "type": "concat",
             "parameters": {
-              "arg_1": "firstArray",
-              "arg_2": "secondArray"
+              "arg_1": "firstArray"
             }
           }
         },

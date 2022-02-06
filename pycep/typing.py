@@ -30,7 +30,7 @@ ResourceFunctions: TypeAlias = (
     "ExtensionResourceId | ListKeys | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 )
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
-StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Format | Guid | IndexOf | LastIndexOf | Split | Substring | String | ToLower | ToUpper | UniqueString"
+StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | Substring | String | ToLower | ToUpper | UniqueString"
 Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | LogicalFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
 
@@ -674,6 +674,10 @@ class LastIndexOf(TypedDict):
     parameters: _IndexOfParameters
 
 
+class NewGuid(TypedDict):
+    type: Literal["new_guid"]
+
+
 class _ReplaceParameters(TypedDict):
     original_string: PossibleValue
     old_string: PossibleValue
@@ -693,6 +697,7 @@ class _SplitParameters(TypedDict):
 class Split(TypedDict):
     type: Literal["split"]
     parameters: _SplitParameters
+    index: NotRequired[int]
 
 
 class _StringParameters(TypedDict):

@@ -102,7 +102,7 @@
 - [x] last
 - [x] lastIndexOf
 - [x] length
-- [ ] newGuid
+- [x] newGuid
 - [ ] padLeft
 - [x] replace
 - [ ] skip

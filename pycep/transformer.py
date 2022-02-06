@@ -449,14 +449,13 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
         }
 
     def concat(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Concat:
-        arg_1, arg_2, *arg_x = args
+        arg_1, *arg_x = args
 
         return {
             "type": "concat",
             "parameters": {
                 "arg_1": arg_1,
-                "arg_2": arg_2,
-                **{f"arg_{idx + 3}": arg for idx, arg in enumerate(arg_x)},  # type: ignore[misc] # dynamic operand creation
+                **{f"arg_{idx + 2}": arg for idx, arg in enumerate(arg_x)},  # type: ignore[misc] # dynamic operand creation
             },
         }
 
@@ -932,6 +931,9 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def new_guid(self, _args: tuple[object]) -> pycep_typing.NewGuid:
+        return {"type": "new_guid"}
+
     def replace(
         self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleValue]
     ) -> pycep_typing.Replace:
@@ -946,16 +948,23 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
-    def split(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Split:
-        input_string, delimiter = args
+    def split(
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue, Token | None]
+    ) -> pycep_typing.Split:
+        input_string, delimiter, index = args
 
-        return {
+        result: pycep_typing.Split = {
             "type": "split",
             "parameters": {
                 "input_string": input_string,
                 "delimiter": delimiter,
             },
         }
+
+        if index:
+            result["index"] = int(index)
+
+        return result
 
     def string_func(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.String:
         return {

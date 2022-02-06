@@ -8,7 +8,7 @@ var varStr = split(administratorAccountUsername, '@')
 
 // resource
 resource assignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
-  name: split(roleName, '.')
+  name: split(roleName, '.')[0]
   properties: {
     roleDefinitionId: definition.id
     principalId: principalId

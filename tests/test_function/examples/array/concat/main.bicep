@@ -9,7 +9,7 @@ var cpuCores = concat(firstArray, secondArray)
 // resource
 resource identityProvider 'Microsoft.ApiManagement/service/identityProviders@2020-06-01-preview' = {
   name: 'exmple'
-  properties: concat(firstArray, secondArray)
+  properties: concat(firstArray)
   dependsOn: [
     apiManagementService
   ]
