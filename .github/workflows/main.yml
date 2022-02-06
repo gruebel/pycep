@@ -30,12 +30,10 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.7", "3.8", "3.9", "3.10"]
-        poetry-version: ["${{ env.POETRY_VERSION }}"]
         experimental: [false]
         include:
           - os: ubuntu-latest
             python-version: "3.11-dev"
-            poetry-version: ${{ env.POETRY_VERSION }}
             experimental: true
       fail-fast: false
     continue-on-error: ${{ matrix.experimental }}
@@ -51,10 +49,10 @@ jobs:
       - name: Get full Python version
         id: full-python-version
         run: echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
-      - name: Set up poetry ${{ matrix.poetry-version }}
+      - name: Set up poetry ${{ env.POETRY_VERSION }}
         uses: abatilo/actions-poetry@7044c9c69e0265717d52471f66033b8d0e2a69ff  # v2.1.4
         with:
-          poetry-version: ${{ matrix.poetry-version }}
+          poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies
         run: poetry install
       - name: Install pytest plugin
