@@ -1220,11 +1220,44 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def divide(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Divide:
+        operand_1, operand_2 = args
+
+        return {
+            "type": "divide",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+            },
+        }
+
     def minus(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.Minus:
         return {
             "type": "minus",
             "operands": {
                 "integer_value": args[0],
+            },
+        }
+
+    def modulo(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Modulo:
+        operand_1, operand_2 = args
+
+        return {
+            "type": "modulo",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
+            },
+        }
+
+    def multiply(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Multiply:
+        operand_1, operand_2 = args
+
+        return {
+            "type": "multiply",
+            "operands": {
+                "operand_1": operand_1,
+                "operand_2": operand_2,
             },
         }
 

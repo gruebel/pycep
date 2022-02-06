@@ -15,7 +15,7 @@ Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescrip
 
 ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOrEquals | LessThan | Equals | NotEquals | EqualsCaseInsensitive | NotEqualsCaseInsensitive"
 LogicalOperators: TypeAlias = "And | Or | Not | Coalesce | Conditional"
-NumericOperators: TypeAlias = "Add | Minus | Substract"
+NumericOperators: TypeAlias = "Add | Divide | Minus | Modulo | Multiply | Substract"
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
@@ -890,6 +890,11 @@ class Add(TypedDict):
     operands: _SubstractOperands
 
 
+class Divide(TypedDict):
+    type: Literal["divide"]
+    operands: _SubstractOperands
+
+
 class _MinusOperands(TypedDict):
     integer_value: PossibleValue
 
@@ -897,6 +902,16 @@ class _MinusOperands(TypedDict):
 class Minus(TypedDict):
     type: Literal["minus"]
     operands: _MinusOperands
+
+
+class Modulo(TypedDict):
+    type: Literal["modulo"]
+    operands: _SubstractOperands
+
+
+class Multiply(TypedDict):
+    type: Literal["multiply"]
+    operands: _SubstractOperands
 
 
 class _SubstractOperands(TypedDict):

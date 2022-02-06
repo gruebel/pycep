@@ -263,11 +263,17 @@ conditional: value_brackets "?" value_brackets ":" value_brackets
 
 // operators - numeric
 
-?operator_numeric: add | minus | substract
+?operator_numeric: add | divide | minus | modulo | multiply | substract
 
 add: value_brackets "+" value_brackets
 
+divide: value_brackets "/" value_brackets
+
 minus: "-" value_brackets
+
+modulo: value_brackets "%" value_brackets
+
+multiply: value_brackets "*" value_brackets
 
 substract: value_brackets "-" value_brackets
 

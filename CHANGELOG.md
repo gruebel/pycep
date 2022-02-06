@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support `uri` function
 - Support `uriComponent` function
 - Support `uriComponentToString` function
+- Support `divide` operator
+- Support `modulo` operator
+- Support `multiply` operator
 
 ## 0.1.0 - 2022-02-06
 

@@ -1,0 +1,96 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramExpr": {
+      "decorators": [],
+      "type": "int",
+      "default": {
+        "operator": {
+          "type": "multiply",
+          "operands": {
+            "operand_1": 1,
+            "operand_2": 2
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "varExpr": {
+      "value": {
+        "operator": {
+          "type": "multiply",
+          "operands": {
+            "operand_1": 2,
+            "operand_2": 3
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "managementGroup": {
+      "decorators": [],
+      "type": "Microsoft.Management/managementGroups",
+      "api_version": "2020-05-01",
+      "existing": false,
+      "config": {
+        "name": "managementGroupId",
+        "properties": {
+          "displayName": "managementGroupDisplayName",
+          "details": {
+            "parent": {
+              "id": {
+                "operator": {
+                  "type": "multiply",
+                  "operands": {
+                    "operand_1": "varExpr",
+                    "operand_2": 5
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "outputExpr": {
+      "type": "int",
+      "value": {
+        "operator": {
+          "type": "multiply",
+          "operands": {
+            "operand_1": "paramExpr",
+            "operand_2": "varExpr"
+          }
+        }
+      }
+    },
+    "multiple": {
+      "type": "int",
+      "value": {
+        "operator": {
+          "type": "multiply",
+          "operands": {
+            "operand_1": "paramExpr",
+            "operand_2": {
+              "operator": {
+                "type": "multiply",
+                "operands": {
+                  "operand_1": "varExpr",
+                  "operand_2": 5
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -39,7 +39,7 @@ This is still a very early stage, therefore a lot can and will change.
 
 ### Operators
 - [ ] Accessor
-- [ ] Numeric (in progress)
+- [x] Numeric
 
 ### CI/CD
 - [ ] Fix security issues found by Scorecard

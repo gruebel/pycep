@@ -157,9 +157,9 @@
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/operators-numeric)
 
-- [ ] Multiply
-- [ ] Divide
-- [ ] Modulo
+- [x] Multiply
+- [x] Divide
+- [x] Modulo
 - [x] Add
 - [x] Subtract
 - [x] Minus
