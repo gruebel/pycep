@@ -9,7 +9,7 @@ permissions: read-all
 
 env:
   POETRY_VERSION: "1.1.12"
-  PYTHON_VERSION: "3.7"
+  MIN_PYTHON_VERSION: "3.7"
 
 jobs:
   release:
@@ -20,8 +20,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: ${{ env.POETRY_VERSION }}
-      - name: Set up poetry ${{ env.PYTHON_VERSION }}
+          python-version: ${{ env.MIN_PYTHON_VERSION }}
+      - name: Set up poetry ${{ env.POETRY_VERSION }}
         uses: abatilo/actions-poetry@7044c9c69e0265717d52471f66033b8d0e2a69ff  # v2.1.4
         with:
           poetry-version: ${{ env.POETRY_VERSION }}
