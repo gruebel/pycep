@@ -19,7 +19,9 @@ NumericOperators: TypeAlias = "Add | Minus | Substract"
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
-ArrayFunctions: TypeAlias = "Array | Concat | Contains | Empty | Intersection | Length | Take | UnionFunc"
+ArrayFunctions: TypeAlias = (
+    "Array | Concat | Contains | Empty | First | Intersection | Last | Length | Take | UnionFunc"
+)
 DateFunctions: TypeAlias = "DateTimeAdd | UtcNow"
 DeploymentFunctions: TypeAlias = "Deployment | Environment"
 ObjectFunctions: TypeAlias = "Json"
@@ -378,9 +380,21 @@ class Empty(TypedDict):
     parameters: _EmptyParameters
 
 
+class First(TypedDict):
+    type: Literal["first"]
+    parameters: _LengthParameters
+    property_name: NotRequired[str]
+
+
 class Intersection(TypedDict):
     type: Literal["intersection"]
     parameters: _UnionParameters
+    property_name: NotRequired[str]
+
+
+class Last(TypedDict):
+    type: Literal["last"]
+    parameters: _LengthParameters
     property_name: NotRequired[str]
 
 

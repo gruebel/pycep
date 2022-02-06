@@ -106,7 +106,7 @@ any_func: ("any" | "sys.any") "(" value_brackets ")" ["." STRING]
 
 // functions - array
 
-?function_array: array_func | concat | contains | empty | intersection | length | take | union
+?function_array: array_func | concat | contains | empty | first | intersection | last | length | take | union
 
 array_func: ("array" | "sys.array") "(" value_brackets ")"
 
@@ -116,7 +116,11 @@ contains: ("contains" | "sys.contains") "(" value_brackets "," value_brackets ")
 
 empty: ("empty" | "sys.empty") "(" value_brackets ")"
 
+first: ("first" | "sys.first") "(" value_brackets ")" ["." STRING]
+
 intersection: ("intersection" | "sys.intersection") "(" value_brackets ("," value_brackets)+ ")" ["." STRING]
+
+last: ("last" | "sys.last") "(" value_brackets ")" ["." STRING]
 
 length: ("length" | "sys.length") "(" value_brackets ")"
 

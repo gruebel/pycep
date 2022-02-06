@@ -60,9 +60,35 @@ def test_parse_empty() -> None:
     assert_that(result).is_equal_to(expected_result)
 
 
+def test_parse_first() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "first"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BicepParser(file_path).json()
+
+    # then
+    assert_that(result).is_equal_to(expected_result)
+
+
 def test_parse_intersection() -> None:
     # given
     sub_dir_path = EXAMPLES_DIR / "intersection"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BicepParser(file_path).json()
+
+    # then
+    assert_that(result).is_equal_to(expected_result)
+
+
+def test_parse_last() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "last"
     file_path = sub_dir_path / "main.bicep"
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 

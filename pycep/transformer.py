@@ -479,6 +479,21 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def first(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleNoneValue]) -> pycep_typing.First:
+        arg_1, property_name = args
+
+        result: pycep_typing.First = {
+            "type": "first",
+            "parameters": {
+                "arg_1": arg_1,
+            },
+        }
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
+
     def intersection(self, args: tuple[str, ...]) -> pycep_typing.Intersection:
         arg_1, arg_2, *arg_x, property_name = args
 
@@ -488,6 +503,21 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
                 "arg_1": arg_1,
                 "arg_2": arg_2,
                 **{f"arg_{idx + 3}": arg for idx, arg in enumerate(arg_x)},  # type: ignore[misc] # dynamic operand creation
+            },
+        }
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
+
+    def last(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleNoneValue]) -> pycep_typing.Last:
+        arg_1, property_name = args
+
+        result: pycep_typing.Last = {
+            "type": "last",
+            "parameters": {
+                "arg_1": arg_1,
             },
         }
 
