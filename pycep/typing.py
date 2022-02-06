@@ -24,13 +24,14 @@ ArrayFunctions: TypeAlias = (
 )
 DateFunctions: TypeAlias = "DateTimeAdd | UtcNow"
 DeploymentFunctions: TypeAlias = "Deployment | Environment"
+LogicalFunctions: TypeAlias = "BoolFunc"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = (
     "ExtensionResourceId | ListKeys | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 )
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
 StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Format | Guid | IndexOf | LastIndexOf | Split | Substring | String | ToLower | ToUpper | UniqueString"
-Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
+Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | LogicalFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
 
 ####################
@@ -471,6 +472,18 @@ class Deployment(TypedDict):
 class Environment(TypedDict):
     type: Literal["environment"]
     property_name: NotRequired[str]
+
+
+####################
+#
+# functions - logical
+#
+####################
+
+
+class BoolFunc(TypedDict):
+    type: Literal["bool"]
+    parameters: _JsonParameters
 
 
 ####################

@@ -32,6 +32,7 @@ This is still a very early stage, therefore a lot can and will change.
 - [ ] Array (in progress)
 - [x] Date
 - [x] Deployment
+- [x] Logical
 - [x] Object
 - [ ] Resource (in progress)
 - [ ] Scope (in progress)

@@ -16,10 +16,10 @@
 - [x] concat
 - [x] contains
 - [x] empty
-- [ ] first
+- [x] first
 - [x] intersection
 - [ ] items
-- [ ] last
+- [x] last
 - [x] length
 - [ ] max
 - [ ] min
@@ -41,6 +41,12 @@
 
 - [x] deployment
 - [x] environment
+
+### Logical
+
+[Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-logical)
+
+- [x] bool
 
 ### Object
 
@@ -89,11 +95,11 @@
 - [ ] dataUriToString
 - [x] empty
 - [ ] endsWith
-- [ ] first
+- [x] first
 - [x] format
 - [x] guid
 - [x] indexOf
-- [ ] last
+- [x] last
 - [x] lastIndexOf
 - [x] length
 - [ ] newGuid

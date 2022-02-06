@@ -618,6 +618,20 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
     ####################
     #
+    # functions - logical
+    #
+    ####################
+
+    def bool_func(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.BoolFunc:
+        return {
+            "type": "bool",
+            "parameters": {
+                "arg_1": args[0],
+            },
+        }
+
+    ####################
+    #
     # functions - object
     #
     ####################
