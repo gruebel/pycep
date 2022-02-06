@@ -1,0 +1,79 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramStr": {
+      "decorators": [],
+      "type": "string",
+      "default": {
+        "function": {
+          "type": "uri_component_to_string",
+          "parameters": {
+            "uri_encoded_string": "'http%3A%2F%2Fcontoso.com%2Fresources%2F'"
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "varStr": {
+      "value": {
+        "function": {
+          "type": "uri_component_to_string",
+          "parameters": {
+            "uri_encoded_string": "administratorAccountUsername"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "assignment": {
+      "decorators": [],
+      "type": "Microsoft.Authorization/roleAssignments",
+      "api_version": "2020-04-01-preview",
+      "existing": false,
+      "config": {
+        "name": {
+          "function": {
+            "type": "uri_component_to_string",
+            "parameters": {
+              "uri_encoded_string": "roleName"
+            }
+          }
+        },
+        "properties": {
+          "roleDefinitionId": "definition.id",
+          "principalId": "principalId"
+        }
+      }
+    }
+  },
+  "outputs": {
+    "ftpUser": {
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "uri_component_to_string",
+          "parameters": {
+            "uri_encoded_string": "site.properties"
+          }
+        }
+      }
+    },
+    "namespace": {
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "uri_component_to_string",
+          "parameters": {
+            "uri_encoded_string": "site.properties"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramStr": {
+      "decorators": [],
+      "type": "string",
+      "default": {
+        "function": {
+          "type": "uri",
+          "parameters": {
+            "base_uri": "'http://contoso.com/resources/'",
+            "relative_uri": "'nested/azuredeploy.json'"
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "varStr": {
+      "value": {
+        "function": {
+          "type": "uri",
+          "parameters": {
+            "base_uri": "administratorAccountUsername",
+            "relative_uri": "'nested/azuredeploy.json'"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "assignment": {
+      "decorators": [],
+      "type": "Microsoft.Authorization/roleAssignments",
+      "api_version": "2020-04-01-preview",
+      "existing": false,
+      "config": {
+        "name": {
+          "function": {
+            "type": "uri",
+            "parameters": {
+              "base_uri": "roleName",
+              "relative_uri": "searchStr"
+            }
+          }
+        },
+        "properties": {
+          "roleDefinitionId": "definition.id",
+          "principalId": "principalId"
+        }
+      }
+    }
+  },
+  "outputs": {
+    "ftpUser": {
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "uri",
+          "parameters": {
+            "base_uri": "site.properties",
+            "relative_uri": "'nested/azuredeploy.json'"
+          }
+        }
+      }
+    },
+    "namespace": {
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "uri",
+          "parameters": {
+            "base_uri": "site.properties",
+            "relative_uri": "'nested/azuredeploy.json'"
+          }
+        }
+      }
+    }
+  }
+}

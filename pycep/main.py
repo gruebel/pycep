@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from importlib import resources
 from pathlib import Path
 
 from lark import Lark, Tree
@@ -8,7 +9,7 @@ from pycep import typing as pycep_typing
 
 from .transformer import BicepToJson
 
-LARK_GRAMMAR = (Path(__file__).parent / "bicep.lark").read_text()
+LARK_GRAMMAR = resources.read_text(__package__, "bicep.lark")
 
 
 class BicepParser:

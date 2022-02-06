@@ -183,7 +183,8 @@ subscription: ("subscription" | "az.subscription") "(" [quoted_string] ")" ["." 
 // functions - string
 
 ?function_string: base64_func | base64_to_json | base64_to_string | format | guid | index_of | last_index_of | new_guid
-                | replace | split | string_func | substring | to_lower | to_upper | unique_string
+                | replace | split | string_func | substring | to_lower | to_upper | unique_string | uri | uri_component
+                | uri_component_to_string
 
 base64_func: ("base64" | "sys.base64") "(" value_brackets ")"
 
@@ -214,6 +215,12 @@ to_lower: ("toLower" | "sys.toLower") "(" value_brackets ")"
 to_upper: ("toUpper" | "sys.toUpper") "(" value_brackets ")"
 
 unique_string: ("uniqueString" | "sys.uniqueString") "(" value_brackets ("," value_brackets)* ")"
+
+uri: ("uri" | "sys.uri") "(" value_brackets "," value_brackets ")"
+
+uri_component: ("uriComponent" | "sys.uriComponent") "(" value_brackets ")"
+
+uri_component_to_string: ("uriComponentToString" | "sys.uriComponentToString") "(" value_brackets ")"
 
 // operators
 
@@ -268,7 +275,7 @@ substract: value_brackets "-" value_brackets
 
 EXISTING: "existing"
 
-STRING: /[a-zA-Z](::|[\w_.])*/
+STRING: /[a-zA-Z_](::|[\w_.])*/
 QUOTED_STRING: "'" STRING "'"
 INDEXED: /(?=[\w_.]+(.list[a-zA-Z]*\(('[\w-]+')?\)|[\[\]])+)(.list[a-zA-Z]*\(('[\w-]+')?\)|\[[\w\[\]_']+\]|[\w_\-\/.,'= ])+/
 QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}{]+|(?R))*+}|\\'|[^'])*'/

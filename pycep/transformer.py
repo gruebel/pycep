@@ -1015,6 +1015,33 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             },
         }
 
+    def uri(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Uri:
+        base_uri, relative_uri = args
+
+        return {
+            "type": "uri",
+            "parameters": {
+                "base_uri": base_uri,
+                "relative_uri": relative_uri,
+            },
+        }
+
+    def uri_component(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.UriComponent:
+        return {
+            "type": "uri_component",
+            "parameters": {
+                "string_to_encode": args[0],
+            },
+        }
+
+    def uri_component_to_string(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.UriComponentToString:
+        return {
+            "type": "uri_component_to_string",
+            "parameters": {
+                "uri_encoded_string": args[0],
+            },
+        }
+
     ####################
     #
     # operators - comparison

@@ -30,7 +30,7 @@ ResourceFunctions: TypeAlias = (
     "ExtensionResourceId | ListKeys | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 )
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
-StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | Substring | String | ToLower | ToUpper | UniqueString"
+StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | Substring | String | ToLower | ToUpper | UniqueString | Uri | UriComponent | UriComponentToString"
 Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | LogicalFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
 
@@ -737,6 +737,34 @@ class ToUpper(TypedDict):
 class UniqueString(TypedDict):
     type: Literal["unique_string"]
     parameters: _GuidParameters
+
+
+class _UriParameters(TypedDict):
+    base_uri: PossibleValue
+    relative_uri: PossibleValue
+
+
+class Uri(TypedDict):
+    type: Literal["uri"]
+    parameters: _UriParameters
+
+
+class _UriComponentParameters(TypedDict):
+    string_to_encode: PossibleValue
+
+
+class UriComponent(TypedDict):
+    type: Literal["uri_component"]
+    parameters: _UriComponentParameters
+
+
+class _UriComponentToStringParameters(TypedDict):
+    uri_encoded_string: PossibleValue
+
+
+class UriComponentToString(TypedDict):
+    type: Literal["uri_component_to_string"]
+    parameters: _UriComponentToStringParameters
 
 
 ####################

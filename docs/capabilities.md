@@ -115,9 +115,9 @@
 - [x] toUpper
 - [ ] trim
 - [x] uniqueString
-- [ ] uri
-- [ ] uriComponent
-- [ ] uriComponentToString
+- [x] uri
+- [x] uriComponent
+- [x] uriComponentToString
 
 ## Operators
 
