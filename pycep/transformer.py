@@ -294,14 +294,17 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
             "config": config,
         }
 
-    def loop_index(self, args: tuple[Token, Token, Token]) -> pycep_typing.LoopIndex:
-        idx_name, start_idx, count = args
+    def loop_range(
+        self, args: tuple[Token, Token | None, pycep_typing.PossibleValue, pycep_typing.PossibleValue]
+    ) -> pycep_typing.LoopRange:
+        item_name, idx_name, start_idx, count = args
         return {
-            "type": "index",
+            "type": "range",
             "detail": {
+                "item_name": str(item_name) if item_name else None,
                 "index_name": str(idx_name),
-                "start_index": str(start_idx),
-                "count": str(count),
+                "start_index": start_idx,
+                "count": count,
             },
         }
 

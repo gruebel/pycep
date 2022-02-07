@@ -8,10 +8,11 @@
     "stringArray": {
       "value": {
         "loop_type": {
-          "type": "index",
+          "type": "range",
           "detail": {
+            "item_name": null,
             "index_name": "i",
-            "start_index": "0",
+            "start_index": 0,
             "count": "itemCount"
           }
         },
@@ -25,10 +26,11 @@
       "type": "array",
       "value": {
         "loop_type": {
-          "type": "index",
+          "type": "range",
           "detail": {
+            "item_name": "item",
             "index_name": "i",
-            "start_index": "0",
+            "start_index": 0,
             "count": "storageCount"
           }
         },
@@ -49,11 +51,12 @@
       "existing": false,
       "config": {
         "loop_type": {
-          "type": "index",
+          "type": "range",
           "detail": {
+            "item_name": null,
             "index_name": "i",
-            "start_index": "0",
-            "count": "2"
+            "start_index": 0,
+            "count": 2
           }
         },
         "condition": null,
@@ -78,10 +81,11 @@
       },
       "config": {
         "loop_type": {
-          "type": "index",
+          "type": "range",
           "detail": {
+            "item_name": null,
             "index_name": "i",
-            "start_index": "0",
+            "start_index": 0,
             "count": "storageCount"
           }
         },

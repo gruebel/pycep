@@ -20,6 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support `modulo` operator
 - Support `multiply` operator
 
+### Changed
+
+- Rename `loop_index` to `loop_range` and adjust the behaviour to allow iterating over item + index
+- Prioritize `substract` over `minus` operator
+
 ## 0.1.0 - 2022-02-06
 
 ### Added

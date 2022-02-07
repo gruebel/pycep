@@ -45,15 +45,15 @@ module_path: QUOTED_INTERPOLATION
 
 // loops
 
-loop: "[" "for" (loop_index | loop_array | loop_array_index | loop_object) ":" ["if" "(" value_brackets ")"] value_brackets "]"
-
-loop_index: STRING "in" "range" "(" value_brackets "," value_brackets ")"
+loop: "[" "for" (loop_array | loop_array_index | loop_object | loop_range) ":" ["if" "(" value_brackets ")"] value_brackets "]"
 
 loop_array: STRING "in" value_brackets
 
 loop_array_index: "(" STRING "," STRING ")" "in" value_brackets
 
 loop_object: STRING "in" "items" "(" value_brackets ")"
+
+loop_range: ["(" STRING ","] STRING ")"? "in" "range" "(" value_brackets "," value_brackets ")"
 
 // deploy condition
 
@@ -176,9 +176,9 @@ tenant_resource_id: ("tenantResourceId" | "az.tenantResourceId") "(" quoted_stri
 
 ?function_scope: resource_group | subscription
 
-resource_group: ("resourceGroup" | "az.resourceGroup") "(" [quoted_string ","? [quoted_string]] ")" ["." STRING]
+resource_group: ("resourceGroup" | "az.resourceGroup") "(" [value_brackets ","? [value_brackets]] ")" ["." STRING]
 
-subscription: ("subscription" | "az.subscription") "(" [quoted_string] ")" ["." STRING]
+subscription: ("subscription" | "az.subscription") "(" [value_brackets] ")" ["." STRING]
 
 // functions - string
 
@@ -275,7 +275,7 @@ modulo: value_brackets "%" value_brackets
 
 multiply: value_brackets "*" value_brackets
 
-substract: value_brackets "-" value_brackets
+substract.1: value_brackets "-" value_brackets
 
 // Terms
 

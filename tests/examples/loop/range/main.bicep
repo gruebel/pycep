@@ -2,7 +2,7 @@
 var stringArray = [for i in range(0, itemCount): 'item${(i + 1)}']
 
 // output
-output storageInfo array = [for i in range(0, storageCount): {
+output storageInfo array = [for (item, i) in range(0, storageCount): {
   id: storageAcct[i].id
   blobEndpoint: storageAcct[i].properties.primaryEndpoints.blob
   status: storageAcct[i].properties.statusOfPrimary

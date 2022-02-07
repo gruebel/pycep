@@ -51,10 +51,11 @@
       },
       "config": {
         "loop_type": {
-          "type": "index",
+          "type": "range",
           "detail": {
+            "item_name": null,
             "index_name": "i",
-            "start_index": "0",
+            "start_index": 0,
             "count": "storageCount"
           }
         },

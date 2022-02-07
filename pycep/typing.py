@@ -9,7 +9,7 @@ PossibleValue: TypeAlias = "bool | int | str | list[bool | int | str] | dict[str
 PossibleNoneValue: TypeAlias = "PossibleValue | None"
 
 ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | TemplateSpecModulePath"
-LoopType: TypeAlias = "LoopIndex | LoopArray | LoopArrayIndex | LoopObject"
+LoopType: TypeAlias = "LoopArray | LoopArrayIndex | LoopObject | LoopRange"
 ElementResponse: TypeAlias = "ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse"
 Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"
 
@@ -203,15 +203,16 @@ class TemplateSpecModulePath(TypedDict):
 ####################
 
 
-class _LoopIndexDetail(TypedDict):
+class _LoopRangeDetail(TypedDict):
+    item_name: str | None
     index_name: str
-    start_index: str
-    count: str
+    start_index: PossibleValue
+    count: PossibleValue
 
 
-class LoopIndex(TypedDict):
-    type: Literal["index"]
-    detail: _LoopIndexDetail
+class LoopRange(TypedDict):
+    type: Literal["range"]
+    detail: _LoopRangeDetail
 
 
 class _LoopArrayDetail(TypedDict):
