@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support `divide` operator
 - Support `modulo` operator
 - Support `multiply` operator
+- Support `pickZones` function
 
 ### Changed
 

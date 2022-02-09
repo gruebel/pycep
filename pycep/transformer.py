@@ -693,6 +693,31 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
 
         return result
 
+    def pick_zones(self, args: list[pycep_typing.PossibleNoneValue]) -> pycep_typing.PickZones:
+        args_len = len(args)
+
+        provider_namespace = cast(pycep_typing.PossibleValue, args[0])
+        resource_type = cast(pycep_typing.PossibleValue, args[1])
+        location = cast(pycep_typing.PossibleValue, args[2])
+        number_of_zones = None
+        offset = None
+
+        if args_len >= 4:
+            number_of_zones = args[3]
+            if args_len == 5:
+                offset = args[4]
+
+        return {
+            "type": "pick_zones",
+            "parameters": {
+                "provider_namespace": provider_namespace,
+                "resource_type": resource_type,
+                "location": location,
+                "number_of_zones": number_of_zones,
+                "offset": offset,
+            },
+        }
+
     def reference(
         self,
         args: tuple[

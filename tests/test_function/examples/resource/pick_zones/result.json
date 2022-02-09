@@ -1,0 +1,127 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "uamiId": {
+      "decorators": [],
+      "type": "array",
+      "default": {
+        "function": {
+          "type": "pick_zones",
+          "parameters": {
+            "provider_namespace": "'Microsoft.Compute'",
+            "resource_type": "'virtualMachines'",
+            "location": "'westus2'",
+            "number_of_zones": null,
+            "offset": null
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "uamiId": {
+      "value": {
+        "function": {
+          "type": "pick_zones",
+          "parameters": {
+            "provider_namespace": "'Microsoft.ManagedIdentity'",
+            "resource_type": "uamiName",
+            "location": "location",
+            "number_of_zones": 2,
+            "offset": null
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "logAnalyticsAutomation": {
+      "decorators": [],
+      "type": "Microsoft.OperationalInsights/workspaces/linkedServices",
+      "api_version": "2020-08-01",
+      "existing": false,
+      "config": {
+        "parent": "logAnalyticsWorkspace",
+        "name": "'Automation'",
+        "properties": {
+          "pickZones": {
+            "function": {
+              "type": "pick_zones",
+              "parameters": {
+                "provider_namespace": "'Microsoft.Automation'",
+                "resource_type": "automationAccountName",
+                "location": "location",
+                "number_of_zones": "zones",
+                "offset": "offset"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "modules": {
+    "exampleModule": {
+      "decorators": [],
+      "type": "local",
+      "detail": {
+        "full": "rgModule.bicep",
+        "path": "rgModule.bicep"
+      },
+      "config": {
+        "name": "'exampleModule'",
+        "params": {
+          "location": "location",
+          "fwname": {
+            "function": {
+              "type": "pick_zones",
+              "parameters": {
+                "provider_namespace": "mi.type",
+                "resource_type": "mi.name",
+                "location": "mi.location",
+                "number_of_zones": null,
+                "offset": null
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "subnetId": {
+      "type": "array",
+      "value": {
+        "function": {
+          "type": "pick_zones",
+          "parameters": {
+            "provider_namespace": "'Microsoft.Network'",
+            "resource_type": "vnet.name",
+            "location": "subnet1Name",
+            "number_of_zones": null,
+            "offset": null
+          }
+        }
+      }
+    },
+    "namespace": {
+      "type": "array",
+      "value": {
+        "function": {
+          "type": "pick_zones",
+          "parameters": {
+            "provider_namespace": "'Microsoft.Network'",
+            "resource_type": "vnet.name",
+            "location": "subnet1Name",
+            "number_of_zones": null,
+            "offset": null
+          }
+        }
+      }
+    }
+  }
+}

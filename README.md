@@ -34,8 +34,9 @@ This is still a very early stage, therefore a lot can and will change.
 - [x] Deployment
 - [x] Logical
 - [x] Object
-- [ ] Resource (in progress)
+- [x] Resource (in progress)
 - [ ] Scope (in progress)
+- [ ] String (in progress)
 
 ### Operators
 - [ ] Accessor

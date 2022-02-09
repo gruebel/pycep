@@ -64,9 +64,9 @@
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-resource)
 
 - [x] extensionResourceId
-- [ ] getSecret
+- [ ] getSecret (used as a resource accessor)
 - [x] listKeys (deprecated)
-- [ ] pickZones
+- [x] pickZones
 - [ ] providers (deprecated)
 - [x] reference
 - [x] resourceId

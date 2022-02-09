@@ -27,7 +27,7 @@ DeploymentFunctions: TypeAlias = "Deployment | Environment"
 LogicalFunctions: TypeAlias = "BoolFunc"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = (
-    "ExtensionResourceId | ListKeys | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
+    "ExtensionResourceId | ListKeys | PickZones | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 )
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
 StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | Substring | String | ToLower | ToUpper | UniqueString | Uri | UriComponent | UriComponentToString"
@@ -531,6 +531,19 @@ class ListKeys(TypedDict):
     type: Literal["list_keys"]
     parameters: _ListKeysParameters
     property_name: NotRequired[str]
+
+
+class _PickZonesParameters(TypedDict):
+    provider_namespace: PossibleValue
+    resource_type: PossibleValue
+    location: PossibleValue
+    number_of_zones: PossibleNoneValue
+    offset: PossibleNoneValue
+
+
+class PickZones(TypedDict):
+    type: Literal["pick_zones"]
+    parameters: _PickZonesParameters
 
 
 class _ReferenceParameters(TypedDict):

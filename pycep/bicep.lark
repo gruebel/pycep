@@ -158,11 +158,13 @@ json_func: ("json" | "sys.json") "(" value_brackets ")"
 
 // functions - resource
 
-?function_resource: extension_resource_id | list_keys | reference | resource_id | subscription_resource_id | tenant_resource_id
+?function_resource: extension_resource_id | list_keys | pick_zones | reference | resource_id | subscription_resource_id | tenant_resource_id
 
 extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" quoted_string ("," quoted_string)~2..3 ")"
 
-list_keys: ("listKeys" | "az.listKeys") "(" value_brackets "," value_brackets ")" ["." STRING]
+list_keys: ("listKeys" | "az.listKeys") "(" value_brackets "," value_brackets ")" ["." (STRING | INDEXED)]
+
+pick_zones: ("pickZones" | "az.pickZones") "(" value_brackets ("," value_brackets)~2..4 ")"
 
 reference: ("reference" | "az.reference") "(" value_brackets ["," value_brackets ["," value_brackets]] ")" ["." STRING]
 
@@ -283,8 +285,8 @@ EXISTING: "existing"
 
 STRING: /[a-zA-Z_](::|[\w_.])*/
 QUOTED_STRING: "'" STRING "'"
-INDEXED: /(?=[\w_.]+(.list[a-zA-Z]*\(('[\w-]+')?\)|[\[\]])+)(.list[a-zA-Z]*\(('[\w-]+')?\)|\[[\w\[\]_']+\]|[\w_\-\/.,'= ])+/
-QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}{]+|(?R))*+}|\\'|[^'])*'/
+INDEXED: /(?=[\w][\w_.]+(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|[\[\]])+)(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|\[[\w\[\]_']+\]|[\w_\-\/.,'= ])+/
+QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}'{]+|(?R))*+}|\\'|[^'])*'/
 
 MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
 
