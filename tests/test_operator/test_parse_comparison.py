@@ -15,7 +15,7 @@ def test_parse_greater_than_or_equals() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -28,7 +28,7 @@ def test_parse_greater_than() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -41,7 +41,7 @@ def test_parse_less_than_or_equals() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -54,7 +54,7 @@ def test_parse_less_than() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -67,7 +67,7 @@ def test_parse_equals() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -80,7 +80,7 @@ def test_parse_not_equals() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -93,7 +93,7 @@ def test_parse_equals_case_insensitive() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -106,7 +106,7 @@ def test_parse_not_equals_case_insensitive() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)

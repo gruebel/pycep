@@ -15,7 +15,7 @@ def test_parse_base64() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -28,7 +28,7 @@ def test_parse_base64_to_json() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -41,7 +41,7 @@ def test_parse_base64_to_string() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -54,7 +54,7 @@ def test_parse_format() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -67,7 +67,7 @@ def test_parse_guid() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -80,7 +80,7 @@ def test_parse_index_of() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -93,7 +93,7 @@ def test_parse_last_index_of() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -106,7 +106,7 @@ def test_parse_new_guid() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -119,7 +119,7 @@ def test_parse_replace() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -132,7 +132,7 @@ def test_parse_split() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -145,7 +145,7 @@ def test_parse_string() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -158,7 +158,7 @@ def test_parse_substring() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -171,7 +171,7 @@ def test_parse_to_lower() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -184,7 +184,7 @@ def test_parse_to_upper() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -197,7 +197,7 @@ def test_parse_unique_string() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -210,7 +210,7 @@ def test_parse_uri() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -223,7 +223,7 @@ def test_parse_uri_component() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -236,7 +236,7 @@ def test_parse_uri_component_to_string() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)

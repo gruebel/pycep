@@ -15,7 +15,7 @@ def test_parse_bool() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path).json()
+    result = BicepParser(file_path=file_path).json()
 
     # then
     assert_that(result).is_equal_to(expected_result)

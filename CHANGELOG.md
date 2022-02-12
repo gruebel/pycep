@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Possibility to pass Bicep template via `str` or `Path`
 - Support `first` function
 - Support `last` function
 - Support `bool` function
