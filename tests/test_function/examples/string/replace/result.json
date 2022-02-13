@@ -13,8 +13,8 @@
           "type": "replace",
           "parameters": {
             "original_string": "principalId",
-            "old_string": "'/'",
-            "new_string": "''"
+            "old_string": "/",
+            "new_string": ""
           }
         }
       }
@@ -26,9 +26,9 @@
         "function": {
           "type": "replace",
           "parameters": {
-            "original_string": "'something'",
-            "old_string": "'e'",
-            "new_string": "'f'"
+            "original_string": "something",
+            "old_string": "e",
+            "new_string": "f"
           }
         }
       }
@@ -66,8 +66,8 @@
           "type": "replace",
           "parameters": {
             "original_string": "site.properties",
-            "old_string": "'{0}'",
-            "new_string": "'osdisk'"
+            "old_string": "{0}",
+            "new_string": "osdisk"
           }
         }
       }
@@ -79,8 +79,8 @@
           "type": "replace",
           "parameters": {
             "original_string": "site.properties",
-            "old_string": "'{0}'",
-            "new_string": "'osdisk'"
+            "old_string": "{0}",
+            "new_string": "osdisk"
           }
         }
       }

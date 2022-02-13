@@ -27,8 +27,8 @@
           "type": "reference",
           "parameters": {
             "resource_identifier": "refId",
-            "api_version": "'2020-09-01'",
-            "full": "'full'"
+            "api_version": "2020-09-01",
+            "full": "full"
           }
         }
       }
@@ -42,7 +42,7 @@
       "existing": false,
       "config": {
         "parent": "logAnalyticsWorkspace",
-        "name": "'Automation'",
+        "name": "Automation",
         "properties": {
           "reference": {
             "function": {
@@ -67,7 +67,7 @@
         "path": "rgModule.bicep"
       },
       "config": {
-        "name": "'exampleModule'",
+        "name": "exampleModule",
         "params": {
           "location": "location",
           "fwname": {

@@ -6,7 +6,7 @@
   },
   "variables": {
     "stringVar": {
-      "value": "'this is multi-line\n  string with formatting\n  preserved.\n'"
+      "value": "this is multi-line\n  string with formatting\n  preserved.\n"
     },
     "exampleBool": {
       "value": true
@@ -28,11 +28,11 @@
         },
         1,
         true,
-        "'example string'"
+        "example string"
       ]
     },
     "storageName": {
-      "value": "'${toLower(storageNamePrefix)}${uniqueString(resourceGroup().id)}'"
+      "value": "${toLower(storageNamePrefix)}${uniqueString(resourceGroup().id)}"
     }
   }
 }

@@ -11,7 +11,7 @@
       "api_version": "2019-06-01",
       "existing": false,
       "config": {
-        "name": "'${toLower(storageNamePrefix)}${uniqueString(resourceGroup().id)}'",
+        "name": "${toLower(storageNamePrefix)}${uniqueString(resourceGroup().id)}",
         "location": {
           "function": {
             "type": "resource_group",
@@ -25,28 +25,28 @@
         "sku": {
           "name": "storageAccountType"
         },
-        "kind": "'StorageV2'",
+        "kind": "StorageV2",
         "properties": {
           "networkAcls": {
-            "bypass": "'string'",
-            "defaultAction": "'string'",
+            "bypass": "string",
+            "defaultAction": "string",
             "ipRules": [
               {
-                "action": "'Allow'",
-                "value": "'string'"
+                "action": "Allow",
+                "value": "string"
               }
             ],
             "resourceAccessRules": [
               {
-                "resourceId": "'string'",
-                "tenantId": "'string'"
+                "resourceId": "string",
+                "tenantId": "string"
               }
             ],
             "virtualNetworkRules": [
               {
-                "action": "'Allow'",
-                "id": "'string'",
-                "state": "'string'"
+                "action": "Allow",
+                "id": "string",
+                "state": "string"
               }
             ]
           }

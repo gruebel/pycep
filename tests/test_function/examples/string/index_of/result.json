@@ -12,8 +12,8 @@
         "function": {
           "type": "index_of",
           "parameters": {
-            "string_to_search": "'one,two,three'",
-            "string_to_find": "','"
+            "string_to_search": "one,two,three",
+            "string_to_find": ","
           }
         }
       }
@@ -26,7 +26,7 @@
           "type": "index_of",
           "parameters": {
             "string_to_search": "administratorAccountUsername",
-            "string_to_find": "'@'"
+            "string_to_find": "@"
           }
         }
       }
@@ -63,7 +63,7 @@
           "type": "index_of",
           "parameters": {
             "string_to_search": "site.properties",
-            "string_to_find": "'/'"
+            "string_to_find": "/"
           }
         }
       }
@@ -75,7 +75,7 @@
           "type": "index_of",
           "parameters": {
             "string_to_search": "site.properties",
-            "string_to_find": "'/'"
+            "string_to_find": "/"
           }
         }
       }

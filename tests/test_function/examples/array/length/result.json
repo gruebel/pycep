@@ -12,7 +12,7 @@
         "function": {
           "type": "length",
           "parameters": {
-            "arg_1": "'one,two,three'"
+            "arg_1": "one,two,three"
           }
         }
       }

@@ -63,7 +63,7 @@
         "path": "rgModule.bicep"
       },
       "config": {
-        "name": "'exampleModule'",
+        "name": "exampleModule",
         "scope": {
           "function": {
             "type": "resource_group",
@@ -83,7 +83,7 @@
         "path": "rgModule.bicep"
       },
       "config": {
-        "name": "'exampleModule'",
+        "name": "exampleModule",
         "scope": {
           "function": {
             "type": "resource_group",

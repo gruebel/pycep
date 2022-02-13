@@ -11,7 +11,7 @@
       "api_version": "2021-02-01",
       "existing": false,
       "config": {
-        "name": "'examplestorage'",
+        "name": "examplestorage",
         "location": {
           "function": {
             "type": "resource_group",
@@ -22,9 +22,9 @@
             "property_name": "location"
           }
         },
-        "kind": "'StorageV2'",
+        "kind": "StorageV2",
         "sku": {
-          "name": "'Standard_LRS'"
+          "name": "Standard_LRS"
         }
       }
     },
@@ -52,7 +52,7 @@
       "api_version": "2021-02-01",
       "existing": false,
       "config": {
-        "name": "'default'"
+        "name": "default"
       },
       "depends_on": [
         "storage"
@@ -64,7 +64,7 @@
       "api_version": "2021-02-01",
       "existing": false,
       "config": {
-        "name": "'exampleshare'"
+        "name": "exampleshare"
       },
       "depends_on": [
         "service"

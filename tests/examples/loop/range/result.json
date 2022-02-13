@@ -17,7 +17,7 @@
           }
         },
         "condition": null,
-        "config": "'item${(i + 1)}'"
+        "config": "item${(i + 1)}"
       }
     }
   },
@@ -61,12 +61,12 @@
         },
         "condition": null,
         "config": {
-          "name": "'${i}storage${uniqueString(resourceGroup().id)}'",
+          "name": "${i}storage${uniqueString(resourceGroup().id)}",
           "location": "location",
           "sku": {
-            "name": "'Standard_LRS'"
+            "name": "Standard_LRS"
           },
-          "kind": "'Storage'"
+          "kind": "Storage"
         }
       }
     }
@@ -91,9 +91,9 @@
         },
         "condition": null,
         "config": {
-          "name": "'${i}deploy${baseName}'",
+          "name": "${i}deploy${baseName}",
           "params": {
-            "storageName": "'${i}${baseName}'",
+            "storageName": "${i}${baseName}",
             "location": "location"
           }
         }

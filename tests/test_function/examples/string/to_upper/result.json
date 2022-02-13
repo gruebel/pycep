@@ -24,7 +24,7 @@
         "function": {
           "type": "to_upper",
           "parameters": {
-            "string_to_change": "'something'"
+            "string_to_change": "something"
           }
         }
       }
@@ -41,7 +41,7 @@
           "function": {
             "type": "to_upper",
             "parameters": {
-              "string_to_change": "'ONE two Three'"
+              "string_to_change": "ONE two Three"
             }
           }
         },

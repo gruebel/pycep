@@ -27,12 +27,12 @@
         },
         "condition": null,
         "config": {
-          "name": "'${i}storage${uniqueString(resourceGroup().id)}'",
+          "name": "${i}storage${uniqueString(resourceGroup().id)}",
           "location": "location",
           "sku": {
-            "name": "'Standard_LRS'"
+            "name": "Standard_LRS"
           },
-          "kind": "'Storage'"
+          "kind": "Storage"
         }
       }
     }
@@ -61,7 +61,7 @@
         },
         "condition": null,
         "config": {
-          "name": "'sqlLogicalServer-${index}'",
+          "name": "sqlLogicalServer-${index}",
           "params": {
             "sqlLogicalServer": {
               "function": {

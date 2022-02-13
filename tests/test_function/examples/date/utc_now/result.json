@@ -24,7 +24,7 @@
         "function": {
           "type": "utc_now",
           "parameters": {
-            "format": "'d'"
+            "format": "d"
           }
         }
       }

@@ -12,9 +12,9 @@
         "function": {
           "type": "pick_zones",
           "parameters": {
-            "provider_namespace": "'Microsoft.Compute'",
-            "resource_type": "'virtualMachines'",
-            "location": "'westus2'",
+            "provider_namespace": "Microsoft.Compute",
+            "resource_type": "virtualMachines",
+            "location": "westus2",
             "number_of_zones": null,
             "offset": null
           }
@@ -28,7 +28,7 @@
         "function": {
           "type": "pick_zones",
           "parameters": {
-            "provider_namespace": "'Microsoft.ManagedIdentity'",
+            "provider_namespace": "Microsoft.ManagedIdentity",
             "resource_type": "uamiName",
             "location": "location",
             "number_of_zones": 2,
@@ -46,13 +46,13 @@
       "existing": false,
       "config": {
         "parent": "logAnalyticsWorkspace",
-        "name": "'Automation'",
+        "name": "Automation",
         "properties": {
           "pickZones": {
             "function": {
               "type": "pick_zones",
               "parameters": {
-                "provider_namespace": "'Microsoft.Automation'",
+                "provider_namespace": "Microsoft.Automation",
                 "resource_type": "automationAccountName",
                 "location": "location",
                 "number_of_zones": "zones",
@@ -73,7 +73,7 @@
         "path": "rgModule.bicep"
       },
       "config": {
-        "name": "'exampleModule'",
+        "name": "exampleModule",
         "params": {
           "location": "location",
           "fwname": {
@@ -99,7 +99,7 @@
         "function": {
           "type": "pick_zones",
           "parameters": {
-            "provider_namespace": "'Microsoft.Network'",
+            "provider_namespace": "Microsoft.Network",
             "resource_type": "vnet.name",
             "location": "subnet1Name",
             "number_of_zones": null,
@@ -114,7 +114,7 @@
         "function": {
           "type": "pick_zones",
           "parameters": {
-            "provider_namespace": "'Microsoft.Network'",
+            "provider_namespace": "Microsoft.Network",
             "resource_type": "vnet.name",
             "location": "subnet1Name",
             "number_of_zones": null,

@@ -38,7 +38,7 @@
           }
         },
         "properties": {
-          "clientId": "'googleClientId'",
+          "clientId": "googleClientId",
           "clientSecret": "googleClientSecret"
         },
         "dependsOn": [

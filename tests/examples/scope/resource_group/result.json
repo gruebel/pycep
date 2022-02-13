@@ -9,7 +9,7 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'principalId of the user that will be given contributor access to the resourceGroup'"
+          "argument": "principalId of the user that will be given contributor access to the resourceGroup"
         }
       ],
       "type": "string",
@@ -19,7 +19,7 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'roleDefinition to apply to the resourceGroup - default is contributor'"
+          "argument": "roleDefinition to apply to the resourceGroup - default is contributor"
         }
       ],
       "type": "string",
@@ -29,7 +29,7 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'Unique name for the roleAssignment in the format of a guid'"
+          "argument": "Unique name for the roleAssignment in the format of a guid"
         }
       ],
       "type": "string",
@@ -43,10 +43,10 @@
       "api_version": "2016-09-01",
       "existing": false,
       "config": {
-        "name": "'DontDelete'",
+        "name": "DontDelete",
         "properties": {
-          "level": "'CanNotDelete'",
-          "notes": "'Prevent deletion of the resourceGroup'"
+          "level": "CanNotDelete",
+          "notes": "Prevent deletion of the resourceGroup"
         }
       }
     },
@@ -62,7 +62,7 @@
             "function": {
               "type": "subscription_resource_id",
               "parameters": {
-                "resource_type": "'Microsoft.Authorization/roleDefinitions'",
+                "resource_type": "Microsoft.Authorization/roleDefinitions",
                 "resource_name_1": "roleDefinitionId",
                 "resource_name_2": null,
                 "subscription_id": null

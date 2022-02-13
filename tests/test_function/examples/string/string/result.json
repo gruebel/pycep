@@ -24,7 +24,7 @@
         "function": {
           "type": "string",
           "parameters": {
-            "value_to_convert": "'something'"
+            "value_to_convert": "something"
           }
         }
       }

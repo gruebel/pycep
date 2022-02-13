@@ -18,7 +18,7 @@
     "demoParam": {
       "decorators": [],
       "type": "string",
-      "default": "'Contoso'"
+      "default": "Contoso"
     },
     "demoBool": {
       "decorators": [],
@@ -41,7 +41,7 @@
         },
         1,
         true,
-        "'example string'"
+        "example string"
       ]
     },
     "location": {
@@ -61,12 +61,12 @@
     "siteName": {
       "decorators": [],
       "type": "string",
-      "default": "'site-${uniqueString(resourceGroup().id)}'"
+      "default": "site-${uniqueString(resourceGroup().id)}"
     },
     "multilineOutput": {
       "decorators": [],
       "type": "string",
-      "default": "'this is multi-line\n  string with formatting\n  preserved.\n'"
+      "default": "this is multi-line\n  string with formatting\n  preserved.\n"
     }
   }
 }

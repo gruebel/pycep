@@ -26,8 +26,8 @@
         "function": {
           "type": "unique_string",
           "parameters": {
-            "base_string": "'something'",
-            "extra_string_1": "'else'"
+            "base_string": "something",
+            "extra_string_1": "else"
           }
         }
       }

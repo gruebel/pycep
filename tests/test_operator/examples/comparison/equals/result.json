@@ -36,8 +36,8 @@
         "operator": {
           "type": "equals",
           "operands": {
-            "operand_1": "'demo'",
-            "operand_2": "'demo'"
+            "operand_1": "demo",
+            "operand_2": "demo"
           }
         }
       }
@@ -67,12 +67,12 @@
           "type": "equals",
           "operands": {
             "operand_1": {
-              "prop2": "'val2'",
-              "prop1": "'val1'"
+              "prop2": "val2",
+              "prop1": "val1"
             },
             "operand_2": {
-              "prop1": "'valX'",
-              "prop2": "'valY'"
+              "prop1": "valX",
+              "prop2": "valY"
             }
           }
         }
@@ -109,12 +109,12 @@
                 "type": "equals",
                 "operands": {
                   "operand_1": "publicIpLabel",
-                  "operand_2": "'public'"
+                  "operand_2": "public"
                 }
               }
             }
           },
-          "publicIPAllocationMethod": "'Static'"
+          "publicIPAllocationMethod": "Static"
         }
       }
     }

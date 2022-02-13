@@ -11,11 +11,11 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'Virtual machine size (has to be at least the size of Standard_A3 to support 2 NICs)'"
+          "argument": "Virtual machine size (has to be at least the size of Standard_A3 to support 2 NICs)"
         }
       ],
       "type": "string",
-      "default": "'Standard_DS1_v2'",
+      "default": "Standard_DS1_v2",
       "__start_line__": 5,
       "__end_line__": 6
     },
@@ -23,7 +23,7 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'Default Admin username'"
+          "argument": "Default Admin username"
         }
       ],
       "type": "string",
@@ -35,7 +35,7 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'Default Admin password'"
+          "argument": "Default Admin password"
         },
         {
           "type": "secure"
@@ -50,18 +50,18 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'Storage Account type for the VM and VM diagnostic storage'"
+          "argument": "Storage Account type for the VM and VM diagnostic storage"
         },
         {
           "type": "allowed",
           "argument": [
-            "'Standard_LRS'",
-            "'Premium_LRS'"
+            "Standard_LRS",
+            "Premium_LRS"
           ]
         }
       ],
       "type": "string",
-      "default": "'Standard_LRS'",
+      "default": "Standard_LRS",
       "__start_line__": 15,
       "__end_line__": 20
     },
@@ -69,7 +69,7 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'Location for all resources.'"
+          "argument": "Location for all resources."
         }
       ],
       "type": "string",
@@ -89,52 +89,52 @@
   },
   "variables": {
     "virtualMachineName": {
-      "value": "'VM-MultiNic'",
+      "value": "VM-MultiNic",
       "__start_line__": 25,
       "__end_line__": 25
     },
     "nic1Name": {
-      "value": "'nic-1'",
+      "value": "nic-1",
       "__start_line__": 26,
       "__end_line__": 26
     },
     "nic2Name": {
-      "value": "'nic-2'",
+      "value": "nic-2",
       "__start_line__": 27,
       "__end_line__": 27
     },
     "virtualNetworkName": {
-      "value": "'virtualNetwork'",
+      "value": "virtualNetwork",
       "__start_line__": 28,
       "__end_line__": 28
     },
     "subnet1Name": {
-      "value": "'subnet-1'",
+      "value": "subnet-1",
       "__start_line__": 29,
       "__end_line__": 29
     },
     "subnet2Name": {
-      "value": "'subnet-2'",
+      "value": "subnet-2",
       "__start_line__": 30,
       "__end_line__": 30
     },
     "publicIPAddressName": {
-      "value": "'publicIp'",
+      "value": "publicIp",
       "__start_line__": 31,
       "__end_line__": 31
     },
     "diagStorageAccountName": {
-      "value": "'diags${uniqueString(resourceGroup().id)}'",
+      "value": "diags${uniqueString(resourceGroup().id)}",
       "__start_line__": 32,
       "__end_line__": 32
     },
     "networkSecurityGroupName": {
-      "value": "'NSG'",
+      "value": "NSG",
       "__start_line__": 33,
       "__end_line__": 33
     },
     "networkSecurityGroupName2": {
-      "value": "'${subnet2Name}-nsg'",
+      "value": "${subnet2Name}-nsg",
       "__start_line__": 34,
       "__end_line__": 34
     }
@@ -162,13 +162,13 @@
           },
           "storageProfile": {
             "imageReference": {
-              "publisher": "'MicrosoftWindowsServer'",
-              "offer": "'WindowsServer'",
-              "sku": "'2019-Datacenter'",
-              "version": "'latest'"
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2019-Datacenter",
+              "version": "latest"
             },
             "osDisk": {
-              "createOption": "'FromImage'"
+              "createOption": "FromImage"
             }
           },
           "networkProfile": {
@@ -206,7 +206,7 @@
       "config": {
         "name": "diagStorageAccountName",
         "location": "location",
-        "kind": "'StorageV2'",
+        "kind": "StorageV2",
         "sku": {
           "name": "storageAccountType"
         }
@@ -237,20 +237,20 @@
         "properties": {
           "addressSpace": {
             "addressPrefixes": [
-              "'10.0.0.0/16'"
+              "10.0.0.0/16"
             ]
           },
           "subnets": [
             {
               "name": "subnet1Name",
               "properties": {
-                "addressPrefix": "'10.0.0.0/24'"
+                "addressPrefix": "10.0.0.0/24"
               }
             },
             {
               "name": "subnet2Name",
               "properties": {
-                "addressPrefix": "'10.0.1.0/24'",
+                "addressPrefix": "10.0.1.0/24",
                 "networkSecurityGroup": {
                   "id": "nsg2.id"
                 }
@@ -273,14 +273,14 @@
         "properties": {
           "ipConfigurations": [
             {
-              "name": "'ipconfig1'",
+              "name": "ipconfig1",
               "properties": {
                 "subnet": {
                   "id": {
                     "function": {
                       "type": "resource_id",
                       "parameters": {
-                        "resource_type": "'Microsoft.Network/virtualNetworks/subnets'",
+                        "resource_type": "Microsoft.Network/virtualNetworks/subnets",
                         "resource_name_1": "vnet.name",
                         "resource_name_2": "subnet1Name",
                         "resource_group_name": null,
@@ -289,7 +289,7 @@
                     }
                   }
                 },
-                "privateIPAllocationMethod": "'Dynamic'",
+                "privateIPAllocationMethod": "Dynamic",
                 "publicIPAddress": {
                   "id": "pip.id"
                 }
@@ -315,14 +315,14 @@
         "properties": {
           "ipConfigurations": [
             {
-              "name": "'ipconfig1'",
+              "name": "ipconfig1",
               "properties": {
                 "subnet": {
                   "id": {
                     "function": {
                       "type": "resource_id",
                       "parameters": {
-                        "resource_type": "'Microsoft.Network/virtualNetworks/subnets'",
+                        "resource_type": "Microsoft.Network/virtualNetworks/subnets",
                         "resource_name_1": "vnet.name",
                         "resource_name_2": "subnet2Name",
                         "resource_group_name": null,
@@ -331,7 +331,7 @@
                     }
                   }
                 },
-                "privateIPAllocationMethod": "'Dynamic'"
+                "privateIPAllocationMethod": "Dynamic"
               }
             }
           ]
@@ -349,7 +349,7 @@
         "name": "publicIPAddressName",
         "location": "location",
         "properties": {
-          "publicIPAllocationMethod": "'Dynamic'"
+          "publicIPAllocationMethod": "Dynamic"
         }
       },
       "__start_line__": 186,
@@ -366,16 +366,16 @@
         "properties": {
           "securityRules": [
             {
-              "name": "'default-allow-rdp'",
+              "name": "default-allow-rdp",
               "properties": {
                 "priority": 1000,
-                "sourceAddressPrefix": "'*'",
-                "protocol": "'Tcp'",
-                "destinationPortRange": "'3389'",
-                "access": "'Allow'",
-                "direction": "'Inbound'",
-                "sourcePortRange": "'*'",
-                "destinationAddressPrefix": "'*'"
+                "sourceAddressPrefix": "*",
+                "protocol": "Tcp",
+                "destinationPortRange": "3389",
+                "access": "Allow",
+                "direction": "Inbound",
+                "sourcePortRange": "*",
+                "destinationAddressPrefix": "*"
               }
             }
           ]
@@ -390,7 +390,7 @@
       "api_version": "2021-02-01",
       "existing": false,
       "config": {
-        "name": "'default'"
+        "name": "default"
       },
       "__start_line__": 96,
       "__end_line__": 102,
@@ -404,7 +404,7 @@
       "api_version": "2021-02-01",
       "existing": false,
       "config": {
-        "name": "'diagShare'"
+        "name": "diagShare"
       },
       "__start_line__": 99,
       "__end_line__": 101,
@@ -422,9 +422,9 @@
         "path": "./network.bicep"
       },
       "config": {
-        "name": "'network'",
+        "name": "network",
         "params": {
-          "myIp": "'123.123.123.123'"
+          "myIp": "123.123.123.123"
         }
       },
       "__start_line__": 217,

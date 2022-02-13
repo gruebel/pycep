@@ -24,8 +24,8 @@
         {
           "type": "allowed",
           "argument": [
-            "'one'",
-            "'two'"
+            "one",
+            "two"
           ]
         }
       ],
@@ -36,11 +36,11 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'Must be at least Standard_A3 to support 2 NICs.'"
+          "argument": "Must be at least Standard_A3 to support 2 NICs."
         }
       ],
       "type": "string",
-      "default": "'Standard_DS1_v2'"
+      "default": "Standard_DS1_v2"
     },
     "storageAccountName": {
       "decorators": [
@@ -87,9 +87,9 @@
         {
           "type": "metadata",
           "argument": {
-            "name": "'Module name'",
-            "version": "'Module version or specify latest to get the latest version'",
-            "uri": "'Module package uri, e.g. https://www.powershellgallery.com/api/v2/package'"
+            "name": "Module name",
+            "version": "Module version or specify latest to get the latest version",
+            "uri": "Module package uri, e.g. https://www.powershellgallery.com/api/v2/package"
           }
         }
       ],
@@ -109,7 +109,7 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'Password for the Virtual Machine.'"
+          "argument": "Password for the Virtual Machine."
         },
         {
           "type": "min_length",

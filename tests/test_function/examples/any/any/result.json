@@ -24,7 +24,7 @@
         "function": {
           "type": "any",
           "parameters": {
-            "value": "'0.5'"
+            "value": "0.5"
           }
         }
       }
@@ -41,12 +41,12 @@
           "function": {
             "type": "any",
             "parameters": {
-              "value": "'${apiManagementService.name}/google'"
+              "value": "${apiManagementService.name}/google"
             }
           }
         },
         "properties": {
-          "clientId": "'googleClientId'",
+          "clientId": "googleClientId",
           "clientSecret": "googleClientSecret"
         },
         "dependsOn": [

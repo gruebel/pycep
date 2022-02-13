@@ -16,7 +16,7 @@
               "function": {
                 "type": "resource_id",
                 "parameters": {
-                  "resource_type": "'Microsoft.Network/virtualNetworks/subnets'",
+                  "resource_type": "Microsoft.Network/virtualNetworks/subnets",
                   "resource_name_1": "vnetName",
                   "resource_name_2": "subnetName",
                   "resource_group_name": "vnetResourceGroupName",
@@ -53,7 +53,7 @@
                         }
                       }
                     },
-                    "true_value": "'/providers/Microsoft.Management/managementGroups/${parentManagementGroupId}'",
+                    "true_value": "/providers/Microsoft.Management/managementGroups/${parentManagementGroupId}",
                     "false_value": null
                   }
                 }
@@ -73,7 +73,7 @@
           "operands": {
             "condition": "deployStorage",
             "true_value": "myStorageAccount.properties.primaryEndpoints.blob",
-            "false_value": "''"
+            "false_value": ""
           }
         }
       }

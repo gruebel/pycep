@@ -24,7 +24,7 @@
         "function": {
           "type": "base64",
           "parameters": {
-            "input_string": "'something'"
+            "input_string": "something"
           }
         }
       }
@@ -41,7 +41,7 @@
           "function": {
             "type": "base64",
             "parameters": {
-              "input_string": "'123'"
+              "input_string": "123"
             }
           }
         },

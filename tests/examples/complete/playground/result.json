@@ -9,17 +9,17 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'Virtual machine size (has to be at least the size of Standard_A3 to support 2 NICs)'"
+          "argument": "Virtual machine size (has to be at least the size of Standard_A3 to support 2 NICs)"
         }
       ],
       "type": "string",
-      "default": "'Standard_DS1_v2'"
+      "default": "Standard_DS1_v2"
     },
     "adminUsername": {
       "decorators": [
         {
           "type": "description",
-          "argument": "'Default Admin username'"
+          "argument": "Default Admin username"
         }
       ],
       "type": "string",
@@ -29,7 +29,7 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'Default Admin password'"
+          "argument": "Default Admin password"
         },
         {
           "type": "secure"
@@ -42,24 +42,24 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'Storage Account type for the VM and VM diagnostic storage'"
+          "argument": "Storage Account type for the VM and VM diagnostic storage"
         },
         {
           "type": "allowed",
           "argument": [
-            "'Standard_LRS'",
-            "'Premium_LRS'"
+            "Standard_LRS",
+            "Premium_LRS"
           ]
         }
       ],
       "type": "string",
-      "default": "'Standard_LRS'"
+      "default": "Standard_LRS"
     },
     "location": {
       "decorators": [
         {
           "type": "description",
-          "argument": "'Location for all resources.'"
+          "argument": "Location for all resources."
         }
       ],
       "type": "string",
@@ -77,34 +77,34 @@
   },
   "variables": {
     "virtualMachineName": {
-      "value": "'VM-MultiNic'"
+      "value": "VM-MultiNic"
     },
     "nic1Name": {
-      "value": "'nic-1'"
+      "value": "nic-1"
     },
     "nic2Name": {
-      "value": "'nic-2'"
+      "value": "nic-2"
     },
     "virtualNetworkName": {
-      "value": "'virtualNetwork'"
+      "value": "virtualNetwork"
     },
     "subnet1Name": {
-      "value": "'subnet-1'"
+      "value": "subnet-1"
     },
     "subnet2Name": {
-      "value": "'subnet-2'"
+      "value": "subnet-2"
     },
     "publicIPAddressName": {
-      "value": "'publicIp'"
+      "value": "publicIp"
     },
     "diagStorageAccountName": {
-      "value": "'diags${uniqueString(resourceGroup().id)}'"
+      "value": "diags${uniqueString(resourceGroup().id)}"
     },
     "networkSecurityGroupName": {
-      "value": "'NSG'"
+      "value": "NSG"
     },
     "networkSecurityGroupName2": {
-      "value": "'${subnet2Name}-nsg'"
+      "value": "${subnet2Name}-nsg"
     }
   },
   "resources": {
@@ -130,13 +130,13 @@
           },
           "storageProfile": {
             "imageReference": {
-              "publisher": "'MicrosoftWindowsServer'",
-              "offer": "'WindowsServer'",
-              "sku": "'2019-Datacenter'",
-              "version": "'latest'"
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2019-Datacenter",
+              "version": "latest"
             },
             "osDisk": {
-              "createOption": "'FromImage'"
+              "createOption": "FromImage"
             }
           },
           "networkProfile": {
@@ -172,7 +172,7 @@
       "config": {
         "name": "diagStorageAccountName",
         "location": "location",
-        "kind": "'StorageV2'",
+        "kind": "StorageV2",
         "sku": {
           "name": "storageAccountType"
         }
@@ -199,20 +199,20 @@
         "properties": {
           "addressSpace": {
             "addressPrefixes": [
-              "'10.0.0.0/16'"
+              "10.0.0.0/16"
             ]
           },
           "subnets": [
             {
               "name": "subnet1Name",
               "properties": {
-                "addressPrefix": "'10.0.0.0/24'"
+                "addressPrefix": "10.0.0.0/24"
               }
             },
             {
               "name": "subnet2Name",
               "properties": {
-                "addressPrefix": "'10.0.1.0/24'",
+                "addressPrefix": "10.0.1.0/24",
                 "networkSecurityGroup": {
                   "id": "nsg2.id"
                 }
@@ -233,14 +233,14 @@
         "properties": {
           "ipConfigurations": [
             {
-              "name": "'ipconfig1'",
+              "name": "ipconfig1",
               "properties": {
                 "subnet": {
                   "id": {
                     "function": {
                       "type": "resource_id",
                       "parameters": {
-                        "resource_type": "'Microsoft.Network/virtualNetworks/subnets'",
+                        "resource_type": "Microsoft.Network/virtualNetworks/subnets",
                         "resource_name_1": "vnet.name",
                         "resource_name_2": "subnet1Name",
                         "resource_group_name": null,
@@ -249,7 +249,7 @@
                     }
                   }
                 },
-                "privateIPAllocationMethod": "'Dynamic'",
+                "privateIPAllocationMethod": "Dynamic",
                 "publicIPAddress": {
                   "id": "pip.id"
                 }
@@ -273,14 +273,14 @@
         "properties": {
           "ipConfigurations": [
             {
-              "name": "'ipconfig1'",
+              "name": "ipconfig1",
               "properties": {
                 "subnet": {
                   "id": {
                     "function": {
                       "type": "resource_id",
                       "parameters": {
-                        "resource_type": "'Microsoft.Network/virtualNetworks/subnets'",
+                        "resource_type": "Microsoft.Network/virtualNetworks/subnets",
                         "resource_name_1": "vnet.name",
                         "resource_name_2": "subnet2Name",
                         "resource_group_name": null,
@@ -289,7 +289,7 @@
                     }
                   }
                 },
-                "privateIPAllocationMethod": "'Dynamic'"
+                "privateIPAllocationMethod": "Dynamic"
               }
             }
           ]
@@ -305,7 +305,7 @@
         "name": "publicIPAddressName",
         "location": "location",
         "properties": {
-          "publicIPAllocationMethod": "'Dynamic'"
+          "publicIPAllocationMethod": "Dynamic"
         }
       }
     },
@@ -320,16 +320,16 @@
         "properties": {
           "securityRules": [
             {
-              "name": "'default-allow-rdp'",
+              "name": "default-allow-rdp",
               "properties": {
                 "priority": 1000,
-                "sourceAddressPrefix": "'*'",
-                "protocol": "'Tcp'",
-                "destinationPortRange": "'3389'",
-                "access": "'Allow'",
-                "direction": "'Inbound'",
-                "sourcePortRange": "'*'",
-                "destinationAddressPrefix": "'*'"
+                "sourceAddressPrefix": "*",
+                "protocol": "Tcp",
+                "destinationPortRange": "3389",
+                "access": "Allow",
+                "direction": "Inbound",
+                "sourcePortRange": "*",
+                "destinationAddressPrefix": "*"
               }
             }
           ]
@@ -342,7 +342,7 @@
       "api_version": "2021-02-01",
       "existing": false,
       "config": {
-        "name": "'default'"
+        "name": "default"
       },
       "depends_on": [
         "storage"
@@ -354,7 +354,7 @@
       "api_version": "2021-02-01",
       "existing": false,
       "config": {
-        "name": "'diagShare'"
+        "name": "diagShare"
       },
       "depends_on": [
         "service"
@@ -370,9 +370,9 @@
         "path": "./network.bicep"
       },
       "config": {
-        "name": "'network'",
+        "name": "network",
         "params": {
-          "myIp": "'123.123.123.123'"
+          "myIp": "123.123.123.123"
         }
       }
     }

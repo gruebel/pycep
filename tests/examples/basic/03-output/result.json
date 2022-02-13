@@ -15,7 +15,7 @@
     },
     "storageName": {
       "type": "string",
-      "value": "'${toLower(storageNamePrefix)}${uniqueString(resourceGroup().id)}'"
+      "value": "${toLower(storageNamePrefix)}${uniqueString(resourceGroup().id)}"
     },
     "location": {
       "type": "string",
@@ -32,7 +32,7 @@
     },
     "multilineOutput": {
       "type": "string",
-      "value": "'this is multi-line\n  string with formatting\n  preserved.\n'"
+      "value": "this is multi-line\n  string with formatting\n  preserved.\n"
     }
   }
 }

@@ -12,7 +12,7 @@
         "function": {
           "type": "empty",
           "parameters": {
-            "item_to_test": "''"
+            "item_to_test": ""
           }
         }
       }
@@ -24,7 +24,7 @@
         "function": {
           "type": "empty",
           "parameters": {
-            "item_to_test": "'0.5'"
+            "item_to_test": "0.5"
           }
         }
       }
@@ -41,12 +41,12 @@
           "function": {
             "type": "empty",
             "parameters": {
-              "item_to_test": "'${apiManagementService.name}/google'"
+              "item_to_test": "${apiManagementService.name}/google"
             }
           }
         },
         "properties": {
-          "clientId": "'googleClientId'",
+          "clientId": "googleClientId",
           "clientSecret": "googleClientSecret"
         },
         "dependsOn": [

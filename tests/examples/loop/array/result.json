@@ -38,12 +38,12 @@
         },
         "condition": null,
         "config": {
-          "name": "'${name}${uniqueString(resourceGroup().id)}'",
+          "name": "${name}${uniqueString(resourceGroup().id)}",
           "location": "location",
           "sku": {
-            "name": "'Standard_LRS'"
+            "name": "Standard_LRS"
           },
-          "kind": "'Storage'"
+          "kind": "Storage"
         }
       }
     },
@@ -101,7 +101,7 @@
         },
         "condition": null,
         "config": {
-          "name": "'sqlFirewallRule-${uniqueString(sqlLogicalServer.name)}'",
+          "name": "sqlFirewallRule-${uniqueString(sqlLogicalServer.name)}",
           "params": {
             "sqlFirewallRule": "firewallRules",
             "sqlServerName": "sqlLogicalServer.name"

@@ -12,8 +12,8 @@
         "function": {
           "type": "split",
           "parameters": {
-            "input_string": "'one,two,three'",
-            "delimiter": "','"
+            "input_string": "one,two,three",
+            "delimiter": ","
           }
         }
       }
@@ -26,7 +26,7 @@
           "type": "split",
           "parameters": {
             "input_string": "administratorAccountUsername",
-            "delimiter": "'@'"
+            "delimiter": "@"
           }
         }
       }
@@ -44,7 +44,7 @@
             "type": "split",
             "parameters": {
               "input_string": "roleName",
-              "delimiter": "'.'"
+              "delimiter": "."
             },
             "index": 0
           }
@@ -64,7 +64,7 @@
           "type": "split",
           "parameters": {
             "input_string": "site.properties",
-            "delimiter": "'/'"
+            "delimiter": "/"
           }
         }
       }
@@ -76,7 +76,7 @@
           "type": "split",
           "parameters": {
             "input_string": "site.properties",
-            "delimiter": "'/'"
+            "delimiter": "/"
           }
         }
       }

@@ -16,7 +16,7 @@
             "type": "equals",
             "operands": {
               "operand_1": "newOrExisting",
-              "operand_2": "'new'"
+              "operand_2": "new"
             }
           }
         },
@@ -24,12 +24,12 @@
           "name": "storageAccountName",
           "location": "location",
           "sku": {
-            "name": "'Standard_LRS'",
-            "tier": "'Standard'"
+            "name": "Standard_LRS",
+            "tier": "Standard"
           },
-          "kind": "'StorageV2'",
+          "kind": "StorageV2",
           "properties": {
-            "accessTier": "'Hot'"
+            "accessTier": "Hot"
           }
         }
       }
@@ -49,7 +49,7 @@
           "params": {
             "apimInstanceName": "apiManagement.name"
           },
-          "name": "'apimUsers'"
+          "name": "apimUsers"
         }
       }
     }

@@ -12,8 +12,8 @@
         "function": {
           "type": "tenant_resource_id",
           "parameters": {
-            "resource_type": "'Microsoft.ManagedIdentity/userAssignedIdentities'",
-            "resource_name_1": "'acdd72a7-3385-48ef-bd42-f606fba81ae7'",
+            "resource_type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+            "resource_name_1": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
             "resource_name_2": null
           }
         }
@@ -26,7 +26,7 @@
         "function": {
           "type": "tenant_resource_id",
           "parameters": {
-            "resource_type": "'Microsoft.ManagedIdentity/userAssignedIdentities'",
+            "resource_type": "Microsoft.ManagedIdentity/userAssignedIdentities",
             "resource_name_1": "uami",
             "resource_name_2": "name"
           }
@@ -42,13 +42,13 @@
       "existing": false,
       "config": {
         "parent": "logAnalyticsWorkspace",
-        "name": "'Automation'",
+        "name": "Automation",
         "properties": {
           "tenantResourceId": {
             "function": {
               "type": "tenant_resource_id",
               "parameters": {
-                "resource_type": "'Microsoft.Automation/automationAccounts'",
+                "resource_type": "Microsoft.Automation/automationAccounts",
                 "resource_name_1": "automationAccountName",
                 "resource_name_2": null
               }
@@ -67,7 +67,7 @@
         "path": "rgModule.bicep"
       },
       "config": {
-        "name": "'exampleModule'",
+        "name": "exampleModule",
         "params": {
           "location": "location",
           "fwname": {
@@ -92,7 +92,7 @@
         "function": {
           "type": "tenant_resource_id",
           "parameters": {
-            "resource_type": "'Microsoft.Network/virtualNetworks/subnets'",
+            "resource_type": "Microsoft.Network/virtualNetworks/subnets",
             "resource_name_1": "vnet.name",
             "resource_name_2": "subnet1Name"
           }
@@ -105,7 +105,7 @@
         "function": {
           "type": "tenant_resource_id",
           "parameters": {
-            "resource_type": "'Microsoft.Automation/automationAccounts'",
+            "resource_type": "Microsoft.Automation/automationAccounts",
             "resource_name_1": "automationAccountName",
             "resource_name_2": null
           }

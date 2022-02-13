@@ -12,7 +12,7 @@
         "function": {
           "type": "uri_component_to_string",
           "parameters": {
-            "uri_encoded_string": "'http%3A%2F%2Fcontoso.com%2Fresources%2F'"
+            "uri_encoded_string": "http%3A%2F%2Fcontoso.com%2Fresources%2F"
           }
         }
       }

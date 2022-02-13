@@ -24,7 +24,7 @@
         "function": {
           "type": "base64_to_json",
           "parameters": {
-            "base64_value": "'J3tcJ29uZVwnOiBcJ2FcJ30n'"
+            "base64_value": "J3tcJ29uZVwnOiBcJ2FcJ30n"
           }
         }
       }
@@ -41,7 +41,7 @@
           "function": {
             "type": "base64_to_json",
             "parameters": {
-              "base64_value": "'J3tcJ29uZVwnOiBcJ2FcJ30n'"
+              "base64_value": "J3tcJ29uZVwnOiBcJ2FcJ30n"
             }
           }
         },

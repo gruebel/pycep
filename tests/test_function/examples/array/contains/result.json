@@ -39,7 +39,7 @@
       "api_version": "2020-06-01-preview",
       "existing": false,
       "config": {
-        "name": "'exmple'",
+        "name": "exmple",
         "properties": {
           "function": {
             "type": "contains",
@@ -63,7 +63,7 @@
           "type": "contains",
           "parameters": {
             "container": "firstObject",
-            "item_to_find": "'some'"
+            "item_to_find": "some"
           }
         }
       }

@@ -12,8 +12,8 @@
         "operator": {
           "type": "equals_case_insensitive",
           "operands": {
-            "operand_1": "'demo'",
-            "operand_2": "'Demo'"
+            "operand_1": "demo",
+            "operand_2": "Demo"
           }
         }
       }
@@ -25,8 +25,8 @@
         "operator": {
           "type": "equals_case_insensitive",
           "operands": {
-            "operand_1": "'demo'",
-            "operand_2": "'Demo'"
+            "operand_1": "demo",
+            "operand_2": "Demo"
           }
         }
       }
@@ -62,12 +62,12 @@
                 "type": "equals_case_insensitive",
                 "operands": {
                   "operand_1": "publicIpLabel",
-                  "operand_2": "'public'"
+                  "operand_2": "public"
                 }
               }
             }
           },
-          "publicIPAllocationMethod": "'Static'"
+          "publicIPAllocationMethod": "Static"
         }
       }
     }

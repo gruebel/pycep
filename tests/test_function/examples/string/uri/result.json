@@ -12,8 +12,8 @@
         "function": {
           "type": "uri",
           "parameters": {
-            "base_uri": "'http://contoso.com/resources/'",
-            "relative_uri": "'nested/azuredeploy.json'"
+            "base_uri": "http://contoso.com/resources/",
+            "relative_uri": "nested/azuredeploy.json"
           }
         }
       }
@@ -26,7 +26,7 @@
           "type": "uri",
           "parameters": {
             "base_uri": "administratorAccountUsername",
-            "relative_uri": "'nested/azuredeploy.json'"
+            "relative_uri": "nested/azuredeploy.json"
           }
         }
       }
@@ -63,7 +63,7 @@
           "type": "uri",
           "parameters": {
             "base_uri": "site.properties",
-            "relative_uri": "'nested/azuredeploy.json'"
+            "relative_uri": "nested/azuredeploy.json"
           }
         }
       }
@@ -75,7 +75,7 @@
           "type": "uri",
           "parameters": {
             "base_uri": "site.properties",
-            "relative_uri": "'nested/azuredeploy.json'"
+            "relative_uri": "nested/azuredeploy.json"
           }
         }
       }

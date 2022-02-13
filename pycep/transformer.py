@@ -18,6 +18,12 @@ TEMPLATE_SPEC_PATTERN = re.compile(
 VALID_TARGET_SCOPES = {"resourceGroup", "subscription", "managementGroup", "tenant"}
 
 
+class BicepElement(str):
+    """An alias to differentiate between a string and a Bicep element."""
+
+    pass
+
+
 class BicepToJson(Transformer[pycep_typing.BicepJson]):
     def __init__(self, add_line_numbers: bool) -> None:
         self.add_line_numbers = add_line_numbers
@@ -374,9 +380,10 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
         }
 
     def deco_description(self, args: tuple[Token]) -> pycep_typing.DecoratorDescription:
+        argument = self.transform_string_token(args[0])
         return {
             "type": "description",
-            "argument": str(args[0]),
+            "argument": argument,
         }
 
     def deco_min_len(self, args: tuple[Token]) -> pycep_typing.DecoratorMinLength:
@@ -1324,12 +1331,13 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
         return int(arg[0])
 
     def string(self, arg: tuple[Token]) -> str:
-        return str(arg[0])
+        result = self.transform_string_token(arg[0])
+        return result
 
     def multi_line_string(self, arg: tuple[Token]) -> str:
-        value = arg[0].value[3:-3]
+        value = str(arg[0])[3:-3]
         value = value[1:] if value.startswith("\n") else value
-        return f"'{value}'"
+        return value
 
     def true(self, _: Any) -> Literal[True]:
         return True
@@ -1377,3 +1385,13 @@ class BicepToJson(Transformer[pycep_typing.BicepJson]):
                 parent_type_api_pair=child_type_api_pair,
                 config=child_resource["__attrs__"]["config"],
             )
+
+    def transform_string_token(self, value: Token) -> str | BicepElement:
+        """Transforms string typed Token to a `str` or `BicepElement`.
+
+        Additionally, removes surrounding single quotes.
+        """
+        if value.type not in ("QUOTED_STRING", "QUOTED_INTERPOLATION"):
+            return BicepElement(value)
+
+        return str(value)[1:-1]

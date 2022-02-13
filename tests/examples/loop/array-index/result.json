@@ -42,7 +42,7 @@
         },
         "condition": null,
         "config": {
-          "name": "'${storageAccountNamePrefix}${config.suffix}${i}'",
+          "name": "${storageAccountNamePrefix}${config.suffix}${i}",
           "location": {
             "function": {
               "type": "resource_group",
@@ -56,7 +56,7 @@
           "sku": {
             "name": "config.sku"
           },
-          "kind": "'StorageV2'"
+          "kind": "StorageV2"
         }
       }
     }
@@ -80,7 +80,7 @@
         },
         "condition": null,
         "config": {
-          "name": "'sqlLogicalServer-${index}'",
+          "name": "sqlLogicalServer-${index}",
           "params": {
             "sqlLogicalServer": {
               "function": {

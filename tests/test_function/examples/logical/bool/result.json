@@ -24,7 +24,7 @@
         "function": {
           "type": "bool",
           "parameters": {
-            "arg_1": "'0.5'"
+            "arg_1": "0.5"
           }
         }
       }
@@ -41,12 +41,12 @@
           "function": {
             "type": "bool",
             "parameters": {
-              "arg_1": "'${apiManagementService.name}/google'"
+              "arg_1": "${apiManagementService.name}/google"
             }
           }
         },
         "properties": {
-          "clientId": "'googleClientId'",
+          "clientId": "googleClientId",
           "clientSecret": "googleClientSecret"
         }
       }

@@ -61,9 +61,9 @@
         },
         "condition": "createNewStorage",
         "config": {
-          "name": "'${i}deploy${baseName}'",
+          "name": "${i}deploy${baseName}",
           "params": {
-            "storageName": "'${i}${baseName}'",
+            "storageName": "${i}${baseName}",
             "location": "location"
           }
         }

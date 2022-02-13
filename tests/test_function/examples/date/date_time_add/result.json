@@ -12,8 +12,8 @@
         "function": {
           "type": "date_time_add",
           "parameters": {
-            "base": "'2020-04-07 14:53:14Z'",
-            "duration": "'P3Y'",
+            "base": "2020-04-07 14:53:14Z",
+            "duration": "P3Y",
             "format": null
           }
         }
@@ -52,7 +52,7 @@
           }
         },
         "properties": {
-          "clientId": "'googleClientId'",
+          "clientId": "googleClientId",
           "clientSecret": "googleClientSecret"
         },
         "dependsOn": [
@@ -69,7 +69,7 @@
           "type": "date_time_add",
           "parameters": {
             "base": "site.properties",
-            "duration": "'PT1H'",
+            "duration": "PT1H",
             "format": null
           }
         }
@@ -82,7 +82,7 @@
           "type": "date_time_add",
           "parameters": {
             "base": "site.properties",
-            "duration": "'PT1H'",
+            "duration": "PT1H",
             "format": null
           }
         }

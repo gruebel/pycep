@@ -9,7 +9,7 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'Target Management Group'"
+          "argument": "Target Management Group"
         }
       ],
       "type": "string",
@@ -19,14 +19,14 @@
       "decorators": [
         {
           "type": "description",
-          "argument": "'An array of the allowed locations, all other locations will be denied by the created policy.'"
+          "argument": "An array of the allowed locations, all other locations will be denied by the created policy."
         }
       ],
       "type": "array",
       "default": [
-        "'australiaeast'",
-        "'australiasoutheast'",
-        "'australiacentral'"
+        "australiaeast",
+        "australiasoutheast",
+        "australiacentral"
       ]
     }
   },
@@ -36,7 +36,7 @@
         "function": {
           "type": "tenant_resource_id",
           "parameters": {
-            "resource_type": "'Microsoft.Management/managementGroups'",
+            "resource_type": "Microsoft.Management/managementGroups",
             "resource_name_1": "targetMG",
             "resource_name_2": null
           }
@@ -44,7 +44,7 @@
       }
     },
     "policyDefinitionName": {
-      "value": "'LocationRestriction'"
+      "value": "LocationRestriction"
     }
   },
   "resources": {
@@ -56,18 +56,18 @@
       "config": {
         "name": "policyDefinitionName",
         "properties": {
-          "policyType": "'Custom'",
-          "mode": "'All'",
+          "policyType": "Custom",
+          "mode": "All",
           "parameters": {},
           "policyRule": {
             "if": {
               "not": {
-                "field": "'location'",
+                "field": "location",
                 "in": "allowedLocations"
               }
             },
             "then": {
-              "effect": "'deny'"
+              "effect": "deny"
             }
           }
         }
@@ -79,7 +79,7 @@
       "api_version": "2020-03-01",
       "existing": false,
       "config": {
-        "name": "'location-lock'",
+        "name": "location-lock",
         "properties": {
           "scope": "mgScope",
           "policyDefinitionId": {
@@ -87,7 +87,7 @@
               "type": "extension_resource_id",
               "parameters": {
                 "resource_id": "mgScope",
-                "resource_type": "'Microsoft.Authorization/policyDefinitions'",
+                "resource_type": "Microsoft.Authorization/policyDefinitions",
                 "resource_name_1": "policyDefinition.name",
                 "resource_name_2": null
               }

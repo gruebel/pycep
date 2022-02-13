@@ -12,7 +12,7 @@
         "function": {
           "type": "uri_component",
           "parameters": {
-            "string_to_encode": "'http://contoso.com/resources/'"
+            "string_to_encode": "http://contoso.com/resources/"
           }
         }
       }

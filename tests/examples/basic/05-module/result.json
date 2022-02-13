@@ -13,9 +13,9 @@
         "path": "../storageAccount.bicep"
       },
       "config": {
-        "name": "'storageDeploy'",
+        "name": "storageDeploy",
         "params": {
-          "storagePrefix": "'examplestg1'"
+          "storagePrefix": "examplestg1"
         }
       }
     },
@@ -29,9 +29,9 @@
         "tag": "v1"
       },
       "config": {
-        "name": "'storageDeploy'",
+        "name": "storageDeploy",
         "params": {
-          "storagePrefix": "'examplestg1'"
+          "storagePrefix": "examplestg1"
         }
       }
     },
@@ -46,9 +46,9 @@
         "version": "2.0"
       },
       "config": {
-        "name": "'storageDeploy'",
+        "name": "storageDeploy",
         "params": {
-          "storagePrefix": "'examplestg1'"
+          "storagePrefix": "examplestg1"
         }
       }
     }

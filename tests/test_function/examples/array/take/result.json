@@ -12,7 +12,7 @@
         "function": {
           "type": "take",
           "parameters": {
-            "original_value": "'something'",
+            "original_value": "something",
             "number_to_take": 4
           }
         }
@@ -39,7 +39,7 @@
       "api_version": "2020-06-01-preview",
       "existing": false,
       "config": {
-        "name": "'exmple'",
+        "name": "exmple",
         "properties": {
           "function": {
             "type": "take",

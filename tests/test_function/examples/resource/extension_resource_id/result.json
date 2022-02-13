@@ -13,7 +13,7 @@
           "type": "extension_resource_id",
           "parameters": {
             "resource_id": "resourceId",
-            "resource_type": "'Microsoft.ManagedIdentity/userAssignedIdentities'",
+            "resource_type": "Microsoft.ManagedIdentity/userAssignedIdentities",
             "resource_name_1": "uamiName",
             "resource_name_2": null
           }
@@ -28,7 +28,7 @@
           "type": "extension_resource_id",
           "parameters": {
             "resource_id": "id",
-            "resource_type": "'Microsoft.ManagedIdentity/userAssignedIdentities'",
+            "resource_type": "Microsoft.ManagedIdentity/userAssignedIdentities",
             "resource_name_1": "uamiName",
             "resource_name_2": null
           }
@@ -44,14 +44,14 @@
       "existing": false,
       "config": {
         "parent": "logAnalyticsWorkspace",
-        "name": "'Automation'",
+        "name": "Automation",
         "properties": {
           "extensionResourceId": {
             "function": {
               "type": "extension_resource_id",
               "parameters": {
                 "resource_id": "id",
-                "resource_type": "'Microsoft.Automation/automationAccounts'",
+                "resource_type": "Microsoft.Automation/automationAccounts",
                 "resource_name_1": "automationAccountName",
                 "resource_name_2": null
               }
@@ -70,7 +70,7 @@
         "path": "rgModule.bicep"
       },
       "config": {
-        "name": "'exampleModule'",
+        "name": "exampleModule",
         "params": {
           "location": "location",
           "fwname": {
@@ -97,7 +97,7 @@
           "type": "extension_resource_id",
           "parameters": {
             "resource_id": "rId",
-            "resource_type": "'Microsoft.Network/virtualNetworks/subnets'",
+            "resource_type": "Microsoft.Network/virtualNetworks/subnets",
             "resource_name_1": "vnet.name",
             "resource_name_2": "subnet1Name"
           }
@@ -111,7 +111,7 @@
           "type": "extension_resource_id",
           "parameters": {
             "resource_id": "rId",
-            "resource_type": "'Microsoft.Automation/automationAccounts'",
+            "resource_type": "Microsoft.Automation/automationAccounts",
             "resource_name_1": "automationAccountName",
             "resource_name_2": null
           }

@@ -160,7 +160,7 @@ json_func: ("json" | "sys.json") "(" value_brackets ")"
 
 ?function_resource: extension_resource_id | list_keys | pick_zones | reference | resource_id | subscription_resource_id | tenant_resource_id
 
-extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" quoted_string ("," quoted_string)~2..3 ")"
+extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" value_brackets ("," value_brackets)~2..3 ")"
 
 list_keys: ("listKeys" | "az.listKeys") "(" value_brackets "," value_brackets ")" ["." (STRING | INDEXED)]
 
@@ -168,17 +168,19 @@ pick_zones: ("pickZones" | "az.pickZones") "(" value_brackets ("," value_bracket
 
 reference: ("reference" | "az.reference") "(" value_brackets ["," value_brackets ["," value_brackets]] ")" ["." STRING]
 
-resource_id: ("resourceId" | "az.resourceId") "(" quoted_string ("," quoted_string)~1..4 ")"
+_RESOURCE_ID.1: ("resourceId" | "az.resourceId") "("
+resource_id: _RESOURCE_ID value_brackets ("," value_brackets)~1..4 ")"
 
-subscription_resource_id: ("subscriptionResourceId" | "az.subscriptionResourceId") "(" quoted_string ("," quoted_string)~1..3 ")"
+subscription_resource_id: ("subscriptionResourceId" | "az.subscriptionResourceId") "(" value_brackets ("," value_brackets)~1..3 ")"
 
-tenant_resource_id: ("tenantResourceId" | "az.tenantResourceId") "(" quoted_string ("," quoted_string)~1..2 ")"
+tenant_resource_id: ("tenantResourceId" | "az.tenantResourceId") "(" value_brackets ("," value_brackets)~1..2 ")"
 
 // functions - scope
 
 ?function_scope: resource_group | subscription
 
-resource_group: ("resourceGroup" | "az.resourceGroup") "(" [value_brackets ","? [value_brackets]] ")" ["." STRING]
+_RESOURCE_GROUP.1: ("resourceGroup" | "az.resourceGroup") "("
+resource_group: _RESOURCE_GROUP [value_brackets ","? [value_brackets]] ")" ["." STRING]
 
 subscription: ("subscription" | "az.subscription") "(" [value_brackets] ")" ["." STRING]
 

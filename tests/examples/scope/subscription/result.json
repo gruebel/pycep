@@ -13,7 +13,7 @@
   },
   "variables": {
     "roleName": {
-      "value": "'Bicep Custom Role demo'"
+      "value": "Bicep Custom Role demo"
     }
   },
   "resources": {
@@ -33,11 +33,11 @@
         },
         "properties": {
           "roleName": "roleName",
-          "description": "'Custom role create with bicep'",
+          "description": "Custom role create with bicep",
           "permissions": [
             {
               "actions": [
-                "'*/read'"
+                "*/read"
               ]
             }
           ],

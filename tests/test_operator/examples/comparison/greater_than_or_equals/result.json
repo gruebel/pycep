@@ -25,8 +25,8 @@
         "operator": {
           "type": "greater_than_or_equals",
           "operands": {
-            "operand_1": "'demo'",
-            "operand_2": "'damo'"
+            "operand_1": "demo",
+            "operand_2": "damo"
           }
         }
       }
@@ -62,12 +62,12 @@
                 "type": "greater_than_or_equals",
                 "operands": {
                   "operand_1": "publicIpLabel",
-                  "operand_2": "'public'"
+                  "operand_2": "public"
                 }
               }
             }
           },
-          "publicIPAllocationMethod": "'Static'"
+          "publicIPAllocationMethod": "Static"
         }
       }
     }

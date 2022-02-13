@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Possibility to pass Bicep template via `str` or `Path`
+- Add `BicepElement` to `json` output to differentiate between strings and element references
 - Support `first` function
 - Support `last` function
 - Support `bool` function
@@ -26,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Rename `loop_index` to `loop_range` and adjust the behaviour to allow iterating over item + index
 - Prioritize `substract` over `minus` operator
+- Prioritize `_RESOURCE_ID` and `_RESOURCE_GROUP` over `STRING` terminal
 
 ## 0.1.0 - 2022-02-06
 
