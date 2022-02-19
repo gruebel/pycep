@@ -543,6 +543,28 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
 
+    def max_func(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Max:
+        arg_1, *arg_x = args
+
+        return {
+            "type": "max",
+            "parameters": {
+                "arg_1": arg_1,
+                **{f"arg_{idx + 2}": arg for idx, arg in enumerate(arg_x)},  # type: ignore[misc] # dynamic operand creation
+            },
+        }
+
+    def min_func(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Min:
+        arg_1, *arg_x = args
+
+        return {
+            "type": "min",
+            "parameters": {
+                "arg_1": arg_1,
+                **{f"arg_{idx + 2}": arg for idx, arg in enumerate(arg_x)},  # type: ignore[misc] # dynamic operand creation
+            },
+        }
+
     def take(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Take:
         original_value, number_to_take = args
 

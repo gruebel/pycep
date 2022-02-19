@@ -112,6 +112,32 @@ def test_parse_length() -> None:
     assert_that(result).is_equal_to(expected_result)
 
 
+def test_parse_max() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "max"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BicepParser(file_path=file_path).json()
+
+    # then
+    assert_that(result).is_equal_to(expected_result)
+
+
+def test_parse_min() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "min"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BicepParser(file_path=file_path).json()
+
+    # then
+    assert_that(result).is_equal_to(expected_result)
+
+
 def test_parse_take() -> None:
     # given
     sub_dir_path = EXAMPLES_DIR / "take"

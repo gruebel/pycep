@@ -21,8 +21,8 @@
 - [ ] items
 - [x] last
 - [x] length
-- [ ] max
-- [ ] min
+- [x] max
+- [x] min
 - [ ] range
 - [ ] skip
 - [x] take
@@ -47,6 +47,14 @@
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-logical)
 
 - [x] bool
+
+### Numeric
+
+[Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-numeric)
+
+- [ ] int
+- [x] max
+- [x] min
 
 ### Object
 
