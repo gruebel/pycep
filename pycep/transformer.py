@@ -24,7 +24,7 @@ class BicepElement(str):
     pass
 
 
-class BicepToJson(Transformer[pycep_typing.BicepJson]):
+class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     def __init__(self, add_line_numbers: bool) -> None:
         self.add_line_numbers = add_line_numbers
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 from importlib import resources
 from pathlib import Path
 
-from lark import Lark, Tree
+from lark import Lark, Token, Tree
 
 from pycep import typing as pycep_typing
 
@@ -31,7 +31,7 @@ class BicepParser:
         self.add_line_numbers = add_line_numbers
         self.tree = self._create_tree(bicep_text)
 
-    def _create_tree(self, text: str) -> Tree:
+    def _create_tree(self, text: str) -> Tree[Token]:
         return BicepParser.lark_parser.parse(text)
 
     def json(self) -> pycep_typing.BicepJson:

@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+import pytest
 from assertpy import assert_that
 
 from pycep import BicepParser
@@ -47,6 +48,7 @@ def test_parse_playground_with_line_numbers() -> None:
 
 
 def test_parse_playground_and_check_bicep_elements() -> None:
+    # given
     sub_dir_path = EXAMPLES_DIR / "complete/playground"
     file_path = sub_dir_path / "main.bicep"
 
@@ -61,3 +63,25 @@ def test_parse_playground_and_check_bicep_elements() -> None:
     assert_that(vm_config["properties"]["osProfile"]["adminUsername"]).is_instance_of(BicepElement)
     assert_that(vm_config["properties"]["osProfile"]["adminPassword"]).is_instance_of(BicepElement)
     assert_that(vm_config["properties"]["hardwareProfile"]["vmSize"]).is_instance_of(BicepElement)
+
+
+def test_constructor_error_with_text_and_file_path_parameters() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "complete/playground"
+    file_path = sub_dir_path / "main.bicep"
+
+    # when
+    with pytest.raises(TypeError) as exc_info:
+        BicepParser(file_path=file_path, text=file_path.read_text())
+
+    # then
+    assert_that(str(exc_info.value)).is_equal_to("Either 'text' or 'file_path' can be set")
+
+
+def test_constructor_error_with_missing_parameters() -> None:
+    # when
+    with pytest.raises(TypeError) as exc_info:
+        BicepParser()
+
+    # then
+    assert_that(str(exc_info.value)).is_equal_to("Either 'text' or 'file_path' has to be set")

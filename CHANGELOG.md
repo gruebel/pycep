@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+## 0.2.0 - 2022-02-13
+
+### Added
+
 - Possibility to pass Bicep template via `str` or `Path`
 - Add `BicepElement` to `json` output to differentiate between strings and element references
 - Support `first` function

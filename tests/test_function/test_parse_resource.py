@@ -44,7 +44,6 @@ def test_parse_pick_zones() -> None:
     result = BicepParser(file_path=file_path).json()
 
     # then
-    print(json.dumps(result, indent=2))
     assert_that(result).is_equal_to(expected_result)
 
 

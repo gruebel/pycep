@@ -31,7 +31,7 @@ classifiers = [
 python = "^3.7"
 lark = "^1.1.1"
 regex = "^2022.1.18"
-typing-extensions = "^4.0.1"
+typing-extensions = "^4.1.1"
 
 [tool.poetry.dev-dependencies]
 assertpy = "^1.1"
