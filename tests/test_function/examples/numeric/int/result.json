@@ -1,0 +1,79 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramStr": {
+      "decorators": [],
+      "type": "int",
+      "default": {
+        "function": {
+          "type": "int",
+          "parameters": {
+            "value_to_convert": 1
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "cpuCores": {
+      "value": {
+        "function": {
+          "type": "int",
+          "parameters": {
+            "value_to_convert": "0.5"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "identityProvider": {
+      "decorators": [],
+      "type": "Microsoft.ApiManagement/service/identityProviders",
+      "api_version": "2020-06-01-preview",
+      "existing": false,
+      "config": {
+        "name": {
+          "function": {
+            "type": "int",
+            "parameters": {
+              "value_to_convert": "value"
+            }
+          }
+        },
+        "properties": {
+          "clientId": "googleClientId",
+          "clientSecret": "googleClientSecret"
+        }
+      }
+    }
+  },
+  "outputs": {
+    "ftpUser": {
+      "type": "int",
+      "value": {
+        "function": {
+          "type": "int",
+          "parameters": {
+            "value_to_convert": "site.properties"
+          }
+        }
+      }
+    },
+    "namespace": {
+      "type": "int",
+      "value": {
+        "function": {
+          "type": "int",
+          "parameters": {
+            "value_to_convert": "site.properties"
+          }
+        }
+      }
+    }
+  }
+}

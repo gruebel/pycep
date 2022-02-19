@@ -663,6 +663,20 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
     ####################
     #
+    # functions - numeric
+    #
+    ####################
+
+    def int_func(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.IntFunc:
+        return {
+            "type": "int",
+            "parameters": {
+                "value_to_convert": args[0],
+            },
+        }
+
+    ####################
+    #
     # functions - object
     #
     ####################

@@ -25,13 +25,14 @@ ArrayFunctions: TypeAlias = (
 DateFunctions: TypeAlias = "DateTimeAdd | UtcNow"
 DeploymentFunctions: TypeAlias = "Deployment | Environment"
 LogicalFunctions: TypeAlias = "BoolFunc"
+NumericFunctions: TypeAlias = "IntFunc"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = (
     "ExtensionResourceId | ListKeys | PickZones | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 )
 ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
 StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | Substring | String | ToLower | ToUpper | UniqueString | Uri | UriComponent | UriComponentToString"
-Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | LogicalFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
+Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
 
 ####################
@@ -495,6 +496,18 @@ class Environment(TypedDict):
 class BoolFunc(TypedDict):
     type: Literal["bool"]
     parameters: _JsonParameters
+
+
+####################
+#
+# functions - numeric
+#
+####################
+
+
+class IntFunc(TypedDict):
+    type: Literal["int"]
+    parameters: _StringParameters
 
 
 ####################

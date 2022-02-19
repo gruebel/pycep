@@ -52,7 +52,7 @@
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-numeric)
 
-- [ ] int
+- [x] int
 - [x] max
 - [x] min
 

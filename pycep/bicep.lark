@@ -95,8 +95,8 @@ deco_secure: "secure" "(" ")"
 
 // functions
 
-function: function_any | function_array | function_date | function_deployment | function_logical | function_object
-        | function_resource | function_scope | function_string
+function: function_any | function_array | function_date | function_deployment | function_logical | function_numeric
+        | function_object | function_resource | function_scope | function_string
 
 // functions - any
 
@@ -154,6 +154,12 @@ environment: ("environment" | "az.environment") "(" ")" ["." STRING]
 ?function_logical: bool_func
 
 bool_func: ("bool" | "sys.bool") "(" value_brackets ")"
+
+// functions - numeric
+
+?function_numeric: int_func
+
+int_func: ("int" | "sys.int") "(" value_brackets ")"
 
 // functions - object
 
