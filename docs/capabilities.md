@@ -42,6 +42,13 @@
 - [x] deployment
 - [x] environment
 
+### File
+
+[Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-files)
+
+- [ ] loadFileAsBase64
+- [ ] loadTextContent
+
 ### Logical
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-logical)
@@ -85,7 +92,7 @@
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-scope)
 
-- [ ] managementGroup
+- [x] managementGroup
 - [x] resourceGroup
 - [x] subscription
 - [ ] tenant

@@ -30,7 +30,7 @@ ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = (
     "ExtensionResourceId | ListKeys | PickZones | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 )
-ScopeFunctions: TypeAlias = "ResourceGroup | Subscription"
+ScopeFunctions: TypeAlias = "ManagementGroup | ResourceGroup | Subscription"
 StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | Substring | String | ToLower | ToUpper | UniqueString | Uri | UriComponent | UriComponentToString"
 Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
@@ -632,6 +632,16 @@ class TenantResourceId(TypedDict):
 # functions - scope
 #
 ####################
+
+
+class _ManagementGroupParameters(TypedDict):
+    identifier: PossibleNoneValue
+
+
+class ManagementGroup(TypedDict):
+    type: Literal["management_group"]
+    parameters: _ManagementGroupParameters
+    property_name: NotRequired[str]
 
 
 class _ResourceGroupParameters(TypedDict):

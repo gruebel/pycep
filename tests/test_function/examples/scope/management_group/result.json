@@ -1,0 +1,99 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramObject": {
+      "decorators": [],
+      "type": "object",
+      "default": {
+        "function": {
+          "type": "management_group",
+          "parameters": {
+            "identifier": null
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "id": {
+      "value": {
+        "function": {
+          "type": "management_group",
+          "parameters": {
+            "identifier": null
+          },
+          "property_name": "id"
+        }
+      }
+    }
+  },
+  "resources": {
+    "managedidentity": {
+      "decorators": [],
+      "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+      "api_version": "2018-11-30",
+      "existing": false,
+      "config": {
+        "name": "uamiName",
+        "id": {
+          "function": {
+            "type": "management_group",
+            "parameters": {
+              "identifier": null
+            },
+            "property_name": "id"
+          }
+        }
+      }
+    }
+  },
+  "modules": {
+    "exampleModule": {
+      "decorators": [],
+      "type": "local",
+      "detail": {
+        "full": "rgModule.bicep",
+        "path": "rgModule.bicep"
+      },
+      "config": {
+        "name": "exampleModule",
+        "scope": {
+          "function": {
+            "type": "management_group",
+            "parameters": {
+              "identifier": "/providers/Microsoft.Management/managementGroups/examplemg1"
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "subscriptionOutput": {
+      "type": "object",
+      "value": {
+        "function": {
+          "type": "management_group",
+          "parameters": {
+            "identifier": null
+          }
+        }
+      }
+    },
+    "namespace": {
+      "type": "object",
+      "value": {
+        "function": {
+          "type": "management_group",
+          "parameters": {
+            "identifier": null
+          }
+        }
+      }
+    }
+  }
+}

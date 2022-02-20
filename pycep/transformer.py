@@ -902,6 +902,23 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     #
     ####################
 
+    def management_group(
+        self, args: tuple[pycep_typing.PossibleNoneValue, Token | None]
+    ) -> pycep_typing.ManagementGroup:
+        identifier, property_name = args
+
+        result: pycep_typing.ManagementGroup = {
+            "type": "management_group",
+            "parameters": {
+                "identifier": identifier,
+            },
+        }
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
+
     def resource_group(self, args: tuple[Token | None, Token | None, Token | None]) -> pycep_typing.ResourceGroup:
         resource_group_name, subscription_id, property_name = args
 
