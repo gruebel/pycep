@@ -20,7 +20,7 @@ Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperator
 
 AnyFunctions: TypeAlias = "AnyFunc"
 ArrayFunctions: TypeAlias = (
-    "Array | Concat | Contains | Empty | First | Intersection | Last | Length | Max | Min | Take | UnionFunc"
+    "Array | Concat | Contains | Empty | First | Intersection | Last | Length | Max | Min | Skip | Take | UnionFunc"
 )
 DateFunctions: TypeAlias = "DateTimeAdd | UtcNow"
 DeploymentFunctions: TypeAlias = "Deployment | Environment"
@@ -418,6 +418,16 @@ class Max(TypedDict):
 class Min(TypedDict):
     type: Literal["min"]
     parameters: _UnionParameters
+
+
+class _SkipParameters(TypedDict):
+    original_value: PossibleValue
+    number_to_skip: PossibleValue
+
+
+class Skip(TypedDict):
+    type: Literal["skip"]
+    parameters: _SkipParameters
 
 
 class _TakeParameters(TypedDict):

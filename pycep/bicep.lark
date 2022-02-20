@@ -107,7 +107,7 @@ any_func: ("any" | "sys.any") "(" value_brackets ")" ["." STRING]
 // functions - array
 
 ?function_array: array_func | concat | contains | empty | first | intersection | last | length | max_func | min_func
-               | take | union
+               | skip | take | union
 
 array_func: ("array" | "sys.array") "(" value_brackets ")"
 
@@ -128,6 +128,8 @@ length: ("length" | "sys.length") "(" value_brackets ")"
 max_func: ("max" | "sys.max") "(" value_brackets ("," value_brackets)* ")"
 
 min_func: ("min" | "sys.min") "(" value_brackets ("," value_brackets)* ")"
+
+skip: ("skip" | "sys.skip") "(" value_brackets "," value_brackets ")"
 
 take: ("take" | "sys.take") "(" value_brackets "," value_brackets ")"
 

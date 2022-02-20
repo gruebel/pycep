@@ -24,7 +24,7 @@
 - [x] max
 - [x] min
 - [ ] range
-- [ ] skip
+- [x] skip
 - [x] take
 - [x] union
 
@@ -113,7 +113,7 @@
 - [x] newGuid
 - [ ] padLeft
 - [x] replace
-- [ ] skip
+- [x] skip
 - [x] split
 - [ ] startsWith
 - [x] string

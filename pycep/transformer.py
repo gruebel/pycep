@@ -565,6 +565,17 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
 
+    def skip(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Skip:
+        original_value, number_to_skip = args
+
+        return {
+            "type": "skip",
+            "parameters": {
+                "original_value": original_value,
+                "number_to_skip": number_to_skip,
+            },
+        }
+
     def take(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Take:
         original_value, number_to_take = args
 
