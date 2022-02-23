@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support `int` function
 - Support `skip` function
 - Support `managementGroup` function
+- Support `tenant` function
 
 ## 0.2.0 - 2022-02-13
 

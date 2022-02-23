@@ -1,0 +1,85 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramObject": {
+      "decorators": [],
+      "type": "object",
+      "default": {
+        "function": {
+          "type": "tenant",
+          "property_name": "[None]"
+        }
+      }
+    }
+  },
+  "variables": {
+    "id": {
+      "value": {
+        "function": {
+          "type": "tenant",
+          "property_name": "[Token('STRING', 'id')]"
+        }
+      }
+    }
+  },
+  "resources": {
+    "managedidentity": {
+      "decorators": [],
+      "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+      "api_version": "2018-11-30",
+      "existing": false,
+      "config": {
+        "name": "uamiName",
+        "id": {
+          "function": {
+            "type": "tenant",
+            "property_name": "[Token('STRING', 'id')]"
+          }
+        }
+      }
+    }
+  },
+  "modules": {
+    "exampleModule": {
+      "decorators": [],
+      "type": "local",
+      "detail": {
+        "full": "rgModule.bicep",
+        "path": "rgModule.bicep"
+      },
+      "config": {
+        "name": "exampleModule",
+        "scope": {
+          "function": {
+            "type": "tenant",
+            "property_name": "[None]"
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "subscriptionOutput": {
+      "type": "object",
+      "value": {
+        "function": {
+          "type": "tenant",
+          "property_name": "[None]"
+        }
+      }
+    },
+    "namespace": {
+      "type": "object",
+      "value": {
+        "function": {
+          "type": "tenant",
+          "property_name": "[None]"
+        }
+      }
+    }
+  }
+}

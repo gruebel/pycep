@@ -201,7 +201,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             # remove one line, because the new line is counted for child resources
             result["__attrs__"]["__end_line__"] = meta.end_line - 1
 
-        return ("__child_resource__", result)
+        return "__child_resource__", result
 
     @v_args(meta=True)
     def module(
@@ -919,7 +919,9 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
         return result
 
-    def resource_group(self, args: tuple[Token | None, Token | None, Token | None]) -> pycep_typing.ResourceGroup:
+    def resource_group(
+        self, args: tuple[pycep_typing.PossibleNoneValue, pycep_typing.PossibleNoneValue, Token | None]
+    ) -> pycep_typing.ResourceGroup:
         resource_group_name, subscription_id, property_name = args
 
         if resource_group_name and subscription_id:
@@ -929,8 +931,8 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         result: pycep_typing.ResourceGroup = {
             "type": "resource_group",
             "parameters": {
-                "resource_group_name": str(resource_group_name) if resource_group_name else None,
-                "subscription_id": str(subscription_id) if subscription_id else None,
+                "resource_group_name": resource_group_name,
+                "subscription_id": subscription_id,
             },
         }
 
@@ -939,15 +941,25 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
         return result
 
-    def subscription(self, args: tuple[Token | None, Token | None]) -> pycep_typing.Subscription:
+    def subscription(self, args: tuple[pycep_typing.PossibleNoneValue, Token | None]) -> pycep_typing.Subscription:
         subscription_id, property_name = args
 
         result: pycep_typing.Subscription = {
             "type": "subscription",
             "parameters": {
-                "subscription_id": str(subscription_id) if subscription_id else None,
+                "subscription_id": subscription_id,
             },
         }
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
+
+    def tenant(self, args: tuple[Token | None]) -> pycep_typing.Tenant:
+        property_name = args
+
+        result: pycep_typing.Tenant = {"type": "tenant"}
 
         if property_name:
             result["property_name"] = str(property_name)
@@ -1386,7 +1398,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
     def pair(self, args: tuple[str, bool | int | Token]) -> tuple[str, bool | int | str]:
         key, value = args
-        return (key, value.value if isinstance(value, Token) else value)
+        return key, value.value if isinstance(value, Token) else value
 
     def key(self, arg: tuple[Token]) -> str:
         return str(arg[0])

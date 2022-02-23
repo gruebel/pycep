@@ -190,7 +190,7 @@ tenant_resource_id: ("tenantResourceId" | "az.tenantResourceId") "(" value_brack
 
 // functions - scope
 
-?function_scope: management_group | resource_group | subscription
+?function_scope: management_group | resource_group | subscription | tenant
 
 _MANAGEMENT_GROUP.1: ("managementGroup" | "az.managementGroup") "("
 management_group: _MANAGEMENT_GROUP [value_brackets] ")" ["." STRING]
@@ -199,6 +199,9 @@ _RESOURCE_GROUP.1: ("resourceGroup" | "az.resourceGroup") "("
 resource_group: _RESOURCE_GROUP [value_brackets ","? [value_brackets]] ")" ["." STRING]
 
 subscription: ("subscription" | "az.subscription") "(" [value_brackets] ")" ["." STRING]
+
+_TENANT.1: ("tenant" | "az.tenant") "("
+tenant: _TENANT ")" ["." STRING]
 
 // functions - string
 

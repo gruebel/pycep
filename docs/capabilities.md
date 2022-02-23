@@ -95,7 +95,7 @@
 - [x] managementGroup
 - [x] resourceGroup
 - [x] subscription
-- [ ] tenant
+- [x] tenant
 
 ### String
 
