@@ -1077,6 +1077,19 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
         return result
 
+    def starts_with(
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]
+    ) -> pycep_typing.StartsWith:
+        string_to_search, string_to_find = args
+
+        return {
+            "type": "starts_with",
+            "parameters": {
+                "string_to_search": string_to_search,
+                "string_to_find": string_to_find,
+            },
+        }
+
     def string_func(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.String:
         return {
             "type": "string",

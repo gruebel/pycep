@@ -122,7 +122,7 @@
 - [x] replace
 - [x] skip
 - [x] split
-- [ ] startsWith
+- [x] startsWith
 - [x] string
 - [x] substring
 - [x] take
