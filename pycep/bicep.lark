@@ -205,15 +205,17 @@ tenant: _TENANT ")" ["." STRING]
 
 // functions - string
 
-?function_string: base64_func | base64_to_json | base64_to_string | format | guid | index_of | last_index_of | new_guid
-                | replace | split | starts_with | string_func | substring | to_lower | to_upper | unique_string | uri
-                | uri_component | uri_component_to_string
+?function_string: base64_func | base64_to_json | base64_to_string | ends_with | format | guid | index_of | last_index_of
+                | new_guid | replace | split | starts_with | string_func | substring | to_lower | to_upper
+                | unique_string | uri | uri_component | uri_component_to_string
 
 base64_func: ("base64" | "sys.base64") "(" value_brackets ")"
 
 base64_to_json: ("base64ToJson" | "sys.base64ToJson") "(" value_brackets ")"
 
 base64_to_string: ("base64ToString" | "sys.base64ToString") "(" value_brackets ")"
+
+ends_with: ("endsWith" | "sys.endsWith") "(" value_brackets "," value_brackets ")"
 
 format: ("format" | "sys.format") "(" value_brackets ("," value_brackets)+ ")"
 

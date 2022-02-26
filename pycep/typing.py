@@ -31,7 +31,7 @@ ResourceFunctions: TypeAlias = (
     "ExtensionResourceId | ListKeys | PickZones | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 )
 ScopeFunctions: TypeAlias = "ManagementGroup | ResourceGroup | Subscription | Tenant"
-StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | StartsWith | String | Substring | ToLower | ToUpper | UniqueString | Uri | UriComponent | UriComponentToString"
+StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | EndsWith | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | StartsWith | String | Substring | ToLower | ToUpper | UniqueString | Uri | UriComponent | UriComponentToString"
 Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
 
@@ -698,6 +698,11 @@ class Base64ToJson(TypedDict):
 class Base64ToString(TypedDict):
     type: Literal["base64_to_string"]
     parameters: _Base64ToJsonParameters
+
+
+class EndsWith(TypedDict):
+    type: Literal["ends_with"]
+    parameters: _StartsWithParameters
 
 
 class _FormatParameters(TypedDict):

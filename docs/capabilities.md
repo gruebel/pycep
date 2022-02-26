@@ -109,7 +109,7 @@
 - [ ] dataUri
 - [ ] dataUriToString
 - [x] empty
-- [ ] endsWith
+- [x] endsWith
 - [x] first
 - [x] format
 - [x] guid

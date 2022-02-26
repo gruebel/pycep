@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support `managementGroup` function
 - Support `tenant` function
 - Support `startsWith` function
+- Support `endsWith` function
 
 ## 0.2.0 - 2022-02-13
 
