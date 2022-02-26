@@ -128,7 +128,7 @@
 - [x] take
 - [x] toLower
 - [x] toUpper
-- [ ] trim
+- [x] trim
 - [x] uniqueString
 - [x] uri
 - [x] uriComponent

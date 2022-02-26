@@ -31,7 +31,7 @@ ResourceFunctions: TypeAlias = (
     "ExtensionResourceId | ListKeys | PickZones | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 )
 ScopeFunctions: TypeAlias = "ManagementGroup | ResourceGroup | Subscription | Tenant"
-StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | EndsWith | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | StartsWith | String | Substring | ToLower | ToUpper | UniqueString | Uri | UriComponent | UriComponentToString"
+StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | EndsWith | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | StartsWith | String | Substring | ToLower | ToUpper | Trim | UniqueString | Uri | UriComponent | UriComponentToString"
 Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
 
@@ -809,6 +809,15 @@ class ToLower(TypedDict):
 class ToUpper(TypedDict):
     type: Literal["to_upper"]
     parameters: _ToLowerParameters
+
+
+class _TrimParameters(TypedDict):
+    string_to_trim: PossibleValue
+
+
+class Trim(TypedDict):
+    type: Literal["trim"]
+    parameters: _TrimParameters
 
 
 class UniqueString(TypedDict):

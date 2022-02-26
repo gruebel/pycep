@@ -32,10 +32,11 @@ This is still a very early stage, therefore a lot can and will change.
 - [ ] Array (in progress)
 - [x] Date
 - [x] Deployment
+- [ ] File
 - [x] Logical
 - [x] Numeric
 - [x] Object
-- [x] Resource (in progress)
+- [x] Resource
 - [x] Scope
 - [ ] String (in progress)
 

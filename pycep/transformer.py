@@ -1139,6 +1139,14 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
 
+    def trim(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.Trim:
+        return {
+            "type": "trim",
+            "parameters": {
+                "string_to_trim": args[0],
+            },
+        }
+
     def unique_string(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.UniqueString:
         base_string, *extra_string_x = args
 

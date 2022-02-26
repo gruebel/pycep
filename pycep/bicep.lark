@@ -206,7 +206,7 @@ tenant: _TENANT ")" ["." STRING]
 // functions - string
 
 ?function_string: base64_func | base64_to_json | base64_to_string | ends_with | format | guid | index_of | last_index_of
-                | new_guid | replace | split | starts_with | string_func | substring | to_lower | to_upper
+                | new_guid | replace | split | starts_with | string_func | substring | to_lower | to_upper | trim
                 | unique_string | uri | uri_component | uri_component_to_string
 
 base64_func: ("base64" | "sys.base64") "(" value_brackets ")"
@@ -240,6 +240,8 @@ substring: ("substring" | "sys.substring") "(" value_brackets "," value_brackets
 to_lower: ("toLower" | "sys.toLower") "(" value_brackets ")"
 
 to_upper: ("toUpper" | "sys.toUpper") "(" value_brackets ")"
+
+trim: ("trim" | "sys.trim") "(" value_brackets ")"
 
 unique_string: ("uniqueString" | "sys.uniqueString") "(" value_brackets ("," value_brackets)* ")"
 
