@@ -745,6 +745,17 @@ class NewGuid(TypedDict):
     type: Literal["new_guid"]
 
 
+class _PadLeftParameters(TypedDict):
+    value_to_pad: PossibleValue
+    total_length: PossibleValue
+    padding_character: PossibleNoneValue
+
+
+class PadLeft(TypedDict):
+    type: Literal["pad_left"]
+    parameters: _PadLeftParameters
+
+
 class _ReplaceParameters(TypedDict):
     original_string: PossibleValue
     old_string: PossibleValue
@@ -789,7 +800,7 @@ class String(TypedDict):
 class _SubstringParameters(TypedDict):
     string_to_parse: PossibleValue
     start_index: PossibleValue
-    length: PossibleValue
+    length: PossibleNoneValue
 
 
 class Substring(TypedDict):

@@ -118,7 +118,7 @@
 - [x] lastIndexOf
 - [x] length
 - [x] newGuid
-- [ ] padLeft
+- [x] padLeft
 - [x] replace
 - [x] skip
 - [x] split

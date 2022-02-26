@@ -206,8 +206,8 @@ tenant: _TENANT ")" ["." STRING]
 // functions - string
 
 ?function_string: base64_func | base64_to_json | base64_to_string | ends_with | format | guid | index_of | last_index_of
-                | new_guid | replace | split | starts_with | string_func | substring | to_lower | to_upper | trim
-                | unique_string | uri | uri_component | uri_component_to_string
+                | new_guid | pad_left | replace | split | starts_with | string_func | substring | to_lower | to_upper
+                | trim | unique_string | uri | uri_component | uri_component_to_string
 
 base64_func: ("base64" | "sys.base64") "(" value_brackets ")"
 
@@ -226,6 +226,8 @@ index_of: ("indexOf" | "sys.indexOf") "(" value_brackets "," value_brackets ")"
 last_index_of: ("lastIndexOf" | "sys.lastIndexOf") "(" value_brackets "," value_brackets ")"
 
 new_guid: ("newGuid" | "sys.newGuid") "(" ")"
+
+pad_left: ("padLeft" | "sys.padLeft") "(" value_brackets "," value_brackets ["," value_brackets] ")"
 
 replace: ("replace" | "sys.replace") "(" value_brackets ("," value_brackets)~2 ")"
 

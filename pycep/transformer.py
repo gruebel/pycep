@@ -1056,6 +1056,20 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     def new_guid(self, _args: tuple[object]) -> pycep_typing.NewGuid:
         return {"type": "new_guid"}
 
+    def pad_left(
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleNoneValue]
+    ) -> pycep_typing.PadLeft:
+        value_to_pad, total_length, padding_character = args
+
+        return {
+            "type": "pad_left",
+            "parameters": {
+                "value_to_pad": value_to_pad,
+                "total_length": total_length,
+                "padding_character": padding_character,
+            },
+        }
+
     def replace(
         self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleValue]
     ) -> pycep_typing.Replace:
@@ -1110,7 +1124,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         }
 
     def substring(
-        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleValue]
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleNoneValue]
     ) -> pycep_typing.Substring:
         string_to_parse, start_index, length = args
 
