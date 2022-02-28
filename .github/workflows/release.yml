@@ -47,7 +47,7 @@ jobs:
         run: poetry publish --build
       - name: Extract release notes
         id: extract-release-notes
-        uses: ffurrer2/extract-release-notes@c24866884b7a0d2fd2095be2e406b6f260479da8  # v1.11.0
+        uses: ffurrer2/extract-release-notes@48637c28a2d9725d8f4bc0f1094e7b8e2bea7142  # v1.11.0
       - name: Create GitHub Release
         uses: softprops/action-gh-release@1e07f4398721186383de40550babbdf2b84acfc5  # v0.1.14
         with:
