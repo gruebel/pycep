@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support `endsWith` function
 - Support `trim` function
 - Support `padLeft` function
+- Support `dataUri` function
 
 ## 0.2.0 - 2022-02-13
 

@@ -106,7 +106,7 @@
 - [x] base64ToString
 - [x] concat
 - [x] contains
-- [ ] dataUri
+- [x] dataUri
 - [ ] dataUriToString
 - [x] empty
 - [x] endsWith

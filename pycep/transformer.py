@@ -996,6 +996,14 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
 
+    def data_uri(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.DataUri:
+        return {
+            "type": "data_uri",
+            "parameters": {
+                "string_to_convert": args[0],
+            },
+        }
+
     def ends_with(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.EndsWith:
         string_to_search, string_to_find = args
 

@@ -1,0 +1,79 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "roleAssignmentName": {
+      "decorators": [],
+      "type": "string",
+      "default": {
+        "function": {
+          "type": "data_uri",
+          "parameters": {
+            "string_to_convert": "principalId"
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "varStr": {
+      "value": {
+        "function": {
+          "type": "data_uri",
+          "parameters": {
+            "string_to_convert": "something"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "assignment": {
+      "decorators": [],
+      "type": "Microsoft.Authorization/roleAssignments",
+      "api_version": "2020-04-01-preview",
+      "existing": false,
+      "config": {
+        "name": {
+          "function": {
+            "type": "data_uri",
+            "parameters": {
+              "string_to_convert": "ONE two Three"
+            }
+          }
+        },
+        "properties": {
+          "roleDefinitionId": "definition.id",
+          "principalId": "principalId"
+        }
+      }
+    }
+  },
+  "outputs": {
+    "ftpUser": {
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "data_uri",
+          "parameters": {
+            "string_to_convert": "site.properties"
+          }
+        }
+      }
+    },
+    "namespace": {
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "data_uri",
+          "parameters": {
+            "string_to_convert": "site.properties"
+          }
+        }
+      }
+    }
+  }
+}
