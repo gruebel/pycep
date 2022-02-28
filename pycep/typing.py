@@ -31,7 +31,7 @@ ResourceFunctions: TypeAlias = (
     "ExtensionResourceId | ListKeys | PickZones | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 )
 ScopeFunctions: TypeAlias = "ManagementGroup | ResourceGroup | Subscription | Tenant"
-StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | DataUri | EndsWith | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | StartsWith | String | Substring | ToLower | ToUpper | Trim | UniqueString | Uri | UriComponent | UriComponentToString"
+StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | DataUri | DataUriToString | EndsWith | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | StartsWith | String | Substring | ToLower | ToUpper | Trim | UniqueString | Uri | UriComponent | UriComponentToString"
 Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
 
@@ -707,6 +707,15 @@ class _DataUriParameters(TypedDict):
 class DataUri(TypedDict):
     type: Literal["data_uri"]
     parameters: _DataUriParameters
+
+
+class _DataUriToStringParameters(TypedDict):
+    data_uri_to_convert: PossibleValue
+
+
+class DataUriToString(TypedDict):
+    type: Literal["data_uri_to_string"]
+    parameters: _DataUriToStringParameters
 
 
 class EndsWith(TypedDict):

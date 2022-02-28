@@ -38,7 +38,7 @@ This is still a very early stage, therefore a lot can and will change.
 - [x] Object
 - [x] Resource
 - [x] Scope
-- [ ] String (in progress)
+- [x] String
 
 ### Operators
 - [ ] Accessor

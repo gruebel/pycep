@@ -107,7 +107,7 @@
 - [x] concat
 - [x] contains
 - [x] dataUri
-- [ ] dataUriToString
+- [x] dataUriToString
 - [x] empty
 - [x] endsWith
 - [x] first
