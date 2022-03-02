@@ -13,7 +13,9 @@ LARK_GRAMMAR = resources.read_text(__package__, "bicep.lark")
 
 
 class BicepParser:
-    lark_parser = Lark(grammar=LARK_GRAMMAR, parser="lalr", propagate_positions=True, regex=True)
+    """Wrapper class for Lark"""
+
+    lark_parser = Lark(grammar=LARK_GRAMMAR, parser="lalr", propagate_positions=True, regex=True, cache=True)
 
     def __init__(
         self, *, text: str | None = None, file_path: Path | None = None, add_line_numbers: bool = False

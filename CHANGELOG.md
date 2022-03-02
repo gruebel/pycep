@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- First release to be able to parse all the official examples of Bicep [201](https://github.com/Azure/bicep/tree/main/docs/examples/201) and [301](https://github.com/Azure/bicep/tree/main/docs/examples/301).
+- Enable caching of compiled parser
 - Support `max` function
 - Support `min` function
 - Support `int` function
