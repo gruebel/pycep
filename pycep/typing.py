@@ -42,15 +42,15 @@ Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | Deployme
 ####################
 
 
-class _GlobalsAttributes(TypedDict):
-    scope: _ScopeAttributes
+class GlobalsAttributes(TypedDict):
+    scope: ScopeAttributes
 
 
 class Globals(TypedDict):
-    globals: _GlobalsAttributes
+    globals: GlobalsAttributes
 
 
-class _ScopeAttributes(TypedDict):
+class ScopeAttributes(TypedDict):
     value: Literal["resourceGroup", "subscription", "managementGroup", "tenant"]
     __start_line__: NotRequired[int]
     __end_line__: NotRequired[int]
@@ -58,14 +58,14 @@ class _ScopeAttributes(TypedDict):
 
 class _Scope(TypedDict):
     __name__: Literal["scope"]
-    __attrs__: _ScopeAttributes
+    __attrs__: ScopeAttributes
 
 
 class ScopeResponse(TypedDict):
     globals: _Scope
 
 
-class _ParameterAttributes(TypedDict):
+class ParameterAttributes(TypedDict):
     decorators: list[Decorator]
     type: str
     default: PossibleNoneValue
@@ -75,14 +75,14 @@ class _ParameterAttributes(TypedDict):
 
 class _Parameters(TypedDict):
     __name__: str
-    __attrs__: _ParameterAttributes
+    __attrs__: ParameterAttributes
 
 
 class ParamResponse(TypedDict):
     parameters: _Parameters
 
 
-class _VariableAttributes(TypedDict):
+class VariableAttributes(TypedDict):
     value: PossibleValue
     __start_line__: NotRequired[int]
     __end_line__: NotRequired[int]
@@ -90,14 +90,14 @@ class _VariableAttributes(TypedDict):
 
 class _Variables(TypedDict):
     __name__: str
-    __attrs__: _VariableAttributes
+    __attrs__: VariableAttributes
 
 
 class VarResponse(TypedDict):
     variables: _Variables
 
 
-class _OutputAttributes(TypedDict):
+class OutputAttributes(TypedDict):
     type: str
     value: PossibleValue
     __start_line__: NotRequired[int]
@@ -106,14 +106,14 @@ class _OutputAttributes(TypedDict):
 
 class _Outputs(TypedDict):
     __name__: str
-    __attrs__: _OutputAttributes
+    __attrs__: OutputAttributes
 
 
 class OutputResponse(TypedDict):
     outputs: _Outputs
 
 
-class _ResourceAttributes(TypedDict):
+class ResourceAttributes(TypedDict):
     decorators: list[Decorator]
     type: str
     api_version: str
@@ -125,14 +125,14 @@ class _ResourceAttributes(TypedDict):
 
 class Resource(TypedDict):
     __name__: str
-    __attrs__: _ResourceAttributes
+    __attrs__: ResourceAttributes
 
 
 class ResourceResponse(TypedDict):
     resources: Resource
 
 
-class _ModuleAttributes(TypedDict):
+class ModuleAttributes(TypedDict):
     decorators: list[Decorator]
     type: Literal["local"] | Literal["bicep_registry"] | Literal["template_spec"]
     detail: _LocalModulePathDetail | _BicepRegistryModulePathDetail | _TemplateSpecModulePathDetail
@@ -143,7 +143,7 @@ class _ModuleAttributes(TypedDict):
 
 class _Modules(TypedDict):
     __name__: str
-    __attrs__: _ModuleAttributes
+    __attrs__: ModuleAttributes
 
 
 class ModuleResponse(TypedDict):
@@ -1047,9 +1047,9 @@ class Substract(TypedDict):
 
 
 class BicepJson(TypedDict):
-    globals: _GlobalsAttributes
-    parameters: NotRequired[dict[str, _ParameterAttributes]]
-    variables: NotRequired[dict[str, _VariableAttributes]]
-    resources: NotRequired[dict[str, _ResourceAttributes]]
-    modules: NotRequired[dict[str, _ModuleAttributes]]
-    outputs: NotRequired[dict[str, _OutputAttributes]]
+    globals: GlobalsAttributes
+    parameters: NotRequired[dict[str, ParameterAttributes]]
+    variables: NotRequired[dict[str, VariableAttributes]]
+    resources: NotRequired[dict[str, ResourceAttributes]]
+    modules: NotRequired[dict[str, ModuleAttributes]]
+    outputs: NotRequired[dict[str, OutputAttributes]]

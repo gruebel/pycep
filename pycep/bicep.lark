@@ -328,9 +328,11 @@ _CPP_COMMENT_NL: [CPP_COMMENT] NEWLINE
 
 %import common.C_COMMENT
 %import common.CPP_COMMENT
+%import common.SH_COMMENT
 %import common.INT
 %import common.NEWLINE
 %import common.WS_INLINE
 
 %ignore C_COMMENT
+%ignore SH_COMMENT
 %ignore WS_INLINE
