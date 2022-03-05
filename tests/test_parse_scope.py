@@ -6,6 +6,7 @@ from assertpy import assert_that
 from pycep import BicepParser
 
 EXAMPLES_DIR = Path(__file__).parent / "examples/scope"
+BICEP_PARSER = BicepParser()
 
 
 def test_parse_scope_resource_group() -> None:
@@ -14,7 +15,7 @@ def test_parse_scope_resource_group() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -26,7 +27,7 @@ def test_parse_scope_subscription() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -38,7 +39,7 @@ def test_parse_scope_management_group() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -50,7 +51,7 @@ def test_parse_scope_tenant() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)

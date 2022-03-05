@@ -6,6 +6,7 @@ from assertpy import assert_that
 from pycep import BicepParser
 
 EXAMPLES_DIR = Path(__file__).parent / "examples"
+BICEP_PARSER = BicepParser()
 
 
 def test_parse_param() -> None:
@@ -15,7 +16,7 @@ def test_parse_param() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -28,7 +29,7 @@ def test_parse_var() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -41,7 +42,7 @@ def test_parse_output() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -54,7 +55,7 @@ def test_parse_resource() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -67,7 +68,7 @@ def test_parse_module() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -80,7 +81,7 @@ def test_parse_param_decorator() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -93,7 +94,7 @@ def test_parse_resource_module_decorator() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -106,7 +107,7 @@ def test_parse_resource_existing() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -119,7 +120,7 @@ def test_parse_child_resource() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -132,7 +133,7 @@ def test_parse_deploy_condition() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)

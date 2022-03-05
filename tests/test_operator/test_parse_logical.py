@@ -6,6 +6,7 @@ from assertpy import assert_that
 from pycep import BicepParser
 
 EXAMPLES_DIR = Path(__file__).parent / "examples/logical"
+BICEP_PARSER = BicepParser()
 
 
 def test_parse_and() -> None:
@@ -15,7 +16,7 @@ def test_parse_and() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -28,7 +29,7 @@ def test_parse_or() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -41,7 +42,7 @@ def test_parse_not() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -54,7 +55,7 @@ def test_parse_coalesce() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -67,7 +68,7 @@ def test_parse_conditional() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)

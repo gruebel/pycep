@@ -9,9 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+## [0.3.1] - 2022-03-05
+
 ### Changed
 
-- remove usuage of `typing_extensions.NotRequired`
+- Remove usuage of `typing_extensions.NotRequired`
+- Refactor `BicepParser` class to leverage lazy loading of the compiled grammar
 
 ## [0.3.0] - 2022-03-03
 
@@ -62,3 +65,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - First release to be able to parse all the official examples of Bicep [101](https://github.com/Azure/bicep/tree/main/docs/examples/101).
+
+[Unreleased]: https://github.com/gruebel/pycep/compare/0.3.0...HEAD
+[0.3.0]: https://github.com/gruebel/pycep/compare/0.2.0...0.3.0
+[0.2.0]: https://github.com/gruebel/pycep/compare/0.1.0...0.2.0
+[0.1.0]: https://github.com/gruebel/pycep/compare/24fc2a5...0.1.0

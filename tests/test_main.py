@@ -16,7 +16,7 @@ def test_parse_playground_via_text() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BicepParser().parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -28,7 +28,7 @@ def test_parse_playground_via_file_path() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(text=file_path.read_text()).json()
+    result = BicepParser().parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -41,7 +41,7 @@ def test_parse_playground_with_line_numbers() -> None:
     expected_result = json.loads((sub_dir_path / "result-line-numbers.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path, add_line_numbers=True).json()
+    result = BicepParser(add_line_numbers=True).parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -53,7 +53,7 @@ def test_parse_playground_and_check_bicep_elements() -> None:
     file_path = sub_dir_path / "main.bicep"
 
     # when
-    result = BicepParser(text=file_path.read_text()).json()
+    result = BicepParser().parse(text=file_path.read_text())
 
     # then
     vm_config = result["resources"]["vm"]["config"]  # type: ignore[index]
@@ -72,7 +72,7 @@ def test_constructor_error_with_text_and_file_path_parameters() -> None:
 
     # when
     with pytest.raises(TypeError) as exc_info:
-        BicepParser(file_path=file_path, text=file_path.read_text())
+        BicepParser().parse(file_path=file_path, text=file_path.read_text())
 
     # then
     assert_that(str(exc_info.value)).is_equal_to("Either 'text' or 'file_path' can be set")
@@ -81,7 +81,7 @@ def test_constructor_error_with_text_and_file_path_parameters() -> None:
 def test_constructor_error_with_missing_parameters() -> None:
     # when
     with pytest.raises(TypeError) as exc_info:
-        BicepParser()
+        BicepParser().parse()
 
     # then
     assert_that(str(exc_info.value)).is_equal_to("Either 'text' or 'file_path' has to be set")

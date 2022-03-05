@@ -6,6 +6,7 @@ from assertpy import assert_that
 from pycep import BicepParser
 
 EXAMPLES_DIR = Path(__file__).parent / "examples/resource"
+BICEP_PARSER = BicepParser()
 
 
 def test_parse_extension_resource_id() -> None:
@@ -15,7 +16,7 @@ def test_parse_extension_resource_id() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -28,7 +29,7 @@ def test_parse_list_keys() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -41,7 +42,7 @@ def test_parse_pick_zones() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -54,7 +55,7 @@ def test_parse_reference() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -67,7 +68,7 @@ def test_parse_resource_id() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -80,7 +81,7 @@ def test_parse_subscription_resource_id() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -93,7 +94,7 @@ def test_parse_tenant_resource_id() -> None:
     expected_result = json.loads((sub_dir_path / "result.json").read_text())
 
     # when
-    result = BicepParser(file_path=file_path).json()
+    result = BICEP_PARSER.parse(file_path=file_path)
 
     # then
     assert_that(result).is_equal_to(expected_result)
