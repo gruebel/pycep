@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Any
 
-from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
+from typing_extensions import Literal, TypeAlias, TypedDict
 
 # dict[str, Any] -> dict[str, PossibleValue] not supported https://github.com/python/mypy/issues/731
 PossibleValue: TypeAlias = "bool | int | str | list[bool | int | str] | dict[str, Any]"
@@ -52,8 +52,8 @@ class Globals(TypedDict):
 
 class ScopeAttributes(TypedDict):
     value: Literal["resourceGroup", "subscription", "managementGroup", "tenant"]
-    __start_line__: NotRequired[int]
-    __end_line__: NotRequired[int]
+    __start_line__: int | None  # NotRequired[int]
+    __end_line__: int | None  # NotRequired[int]
 
 
 class _Scope(TypedDict):
@@ -69,8 +69,8 @@ class ParameterAttributes(TypedDict):
     decorators: list[Decorator]
     type: str
     default: PossibleNoneValue
-    __start_line__: NotRequired[int]
-    __end_line__: NotRequired[int]
+    __start_line__: int | None  # NotRequired[int]
+    __end_line__: int | None  # NotRequired[int]
 
 
 class _Parameters(TypedDict):
@@ -84,8 +84,8 @@ class ParamResponse(TypedDict):
 
 class VariableAttributes(TypedDict):
     value: PossibleValue
-    __start_line__: NotRequired[int]
-    __end_line__: NotRequired[int]
+    __start_line__: int | None  # NotRequired[int]
+    __end_line__: int | None  # NotRequired[int]
 
 
 class _Variables(TypedDict):
@@ -100,8 +100,8 @@ class VarResponse(TypedDict):
 class OutputAttributes(TypedDict):
     type: str
     value: PossibleValue
-    __start_line__: NotRequired[int]
-    __end_line__: NotRequired[int]
+    __start_line__: int | None  # NotRequired[int]
+    __end_line__: int | None  # NotRequired[int]
 
 
 class _Outputs(TypedDict):
@@ -118,9 +118,9 @@ class ResourceAttributes(TypedDict):
     type: str
     api_version: str
     existing: bool
-    config: Dict[str, Any]
-    __start_line__: NotRequired[int]
-    __end_line__: NotRequired[int]
+    config: dict[str, Any]
+    __start_line__: int | None  # NotRequired[int]
+    __end_line__: int | None  # NotRequired[int]
 
 
 class Resource(TypedDict):
@@ -136,9 +136,9 @@ class ModuleAttributes(TypedDict):
     decorators: list[Decorator]
     type: Literal["local"] | Literal["bicep_registry"] | Literal["template_spec"]
     detail: _LocalModulePathDetail | _BicepRegistryModulePathDetail | _TemplateSpecModulePathDetail
-    config: Dict[str, Any]
-    __start_line__: NotRequired[int]
-    __end_line__: NotRequired[int]
+    config: dict[str, Any]
+    __start_line__: int | None  # NotRequired[int]
+    __end_line__: int | None  # NotRequired[int]
 
 
 class _Modules(TypedDict):
@@ -386,19 +386,19 @@ class Empty(TypedDict):
 class First(TypedDict):
     type: Literal["first"]
     parameters: _LengthParameters
-    property_name: NotRequired[str]
+    property_name: str | None  # NotRequired[str]
 
 
 class Intersection(TypedDict):
     type: Literal["intersection"]
     parameters: _UnionParameters
-    property_name: NotRequired[str]
+    property_name: str | None  # NotRequired[str]
 
 
 class Last(TypedDict):
     type: Literal["last"]
     parameters: _LengthParameters
-    property_name: NotRequired[str]
+    property_name: str | None  # NotRequired[str]
 
 
 class _LengthParameters(TypedDict):
@@ -443,13 +443,13 @@ class Take(TypedDict):
 class _UnionParameters(TypedDict):
     arg_1: str
     arg_2: str
-    arg_3: NotRequired[str]  # and many more possible
+    arg_3: str | None  # NotRequired[str]  # and many more possible
 
 
 class UnionFunc(TypedDict):
     type: Literal["union"]
     parameters: _UnionParameters
-    property_name: NotRequired[str]
+    property_name: str | None  # NotRequired[str]
 
 
 ####################
@@ -488,12 +488,12 @@ class UtcNow(TypedDict):
 
 class Deployment(TypedDict):
     type: Literal["deployment"]
-    property_name: NotRequired[str]
+    property_name: str | None  # NotRequired[str]
 
 
 class Environment(TypedDict):
     type: Literal["environment"]
-    property_name: NotRequired[str]
+    property_name: str | None  # NotRequired[str]
 
 
 ####################
@@ -563,7 +563,7 @@ class _ListKeysParameters(TypedDict):
 class ListKeys(TypedDict):
     type: Literal["list_keys"]
     parameters: _ListKeysParameters
-    property_name: NotRequired[str]
+    property_name: str | None  # NotRequired[str]
 
 
 class _PickZonesParameters(TypedDict):
@@ -588,7 +588,7 @@ class _ReferenceParameters(TypedDict):
 class Reference(TypedDict):
     type: Literal["reference"]
     parameters: _ReferenceParameters
-    property_name: NotRequired[str]
+    property_name: str | None  # NotRequired[str]
 
 
 class _ResourceIdParameters(TypedDict):
@@ -641,7 +641,7 @@ class _ManagementGroupParameters(TypedDict):
 class ManagementGroup(TypedDict):
     type: Literal["management_group"]
     parameters: _ManagementGroupParameters
-    property_name: NotRequired[str]
+    property_name: str | None  # NotRequired[str]
 
 
 class _ResourceGroupParameters(TypedDict):
@@ -652,7 +652,7 @@ class _ResourceGroupParameters(TypedDict):
 class ResourceGroup(TypedDict):
     type: Literal["resource_group"]
     parameters: _ResourceGroupParameters
-    property_name: NotRequired[str]
+    property_name: str | None  # NotRequired[str]
 
 
 class _SubscriptionParameters(TypedDict):
@@ -662,12 +662,12 @@ class _SubscriptionParameters(TypedDict):
 class Subscription(TypedDict):
     type: Literal["subscription"]
     parameters: _SubscriptionParameters
-    property_name: NotRequired[str]
+    property_name: str | None  # NotRequired[str]
 
 
 class Tenant(TypedDict):
     type: Literal["tenant"]
-    property_name: NotRequired[str]
+    property_name: str | None  # NotRequired[str]
 
 
 ####################
@@ -726,7 +726,7 @@ class EndsWith(TypedDict):
 class _FormatParameters(TypedDict):
     format_string: PossibleValue
     arg_1: PossibleValue
-    arg_2: NotRequired[PossibleValue]  # and many more possible
+    arg_2: PossibleValue | None  # NotRequired[PossibleValue]  # and many more possible
 
 
 class Format(TypedDict):
@@ -736,7 +736,7 @@ class Format(TypedDict):
 
 class _GuidParameters(TypedDict):
     base_string: str
-    extra_string_1: NotRequired[str]  # and many more possible
+    extra_string_1: str | None  # NotRequired[str]  # and many more possible
 
 
 class Guid(TypedDict):
@@ -793,7 +793,7 @@ class _SplitParameters(TypedDict):
 class Split(TypedDict):
     type: Literal["split"]
     parameters: _SplitParameters
-    index: NotRequired[int]
+    index: int | None  # NotRequired[int]
 
 
 class _StartsWithParameters(TypedDict):
@@ -955,7 +955,7 @@ class NotEqualsCaseInsensitive(TypedDict):
 class _AndOperands(TypedDict):
     operand_1: PossibleValue
     operand_2: PossibleValue
-    operand_3: NotRequired[PossibleValue]  # and many more possible
+    operand_3: PossibleValue | None  # NotRequired[PossibleValue]  # and many more possible
 
 
 class And(TypedDict):
@@ -1048,8 +1048,8 @@ class Substract(TypedDict):
 
 class BicepJson(TypedDict):
     globals: GlobalsAttributes
-    parameters: NotRequired[dict[str, ParameterAttributes]]
-    variables: NotRequired[dict[str, VariableAttributes]]
-    resources: NotRequired[dict[str, ResourceAttributes]]
-    modules: NotRequired[dict[str, ModuleAttributes]]
-    outputs: NotRequired[dict[str, OutputAttributes]]
+    parameters: dict[str, ParameterAttributes] | None  # NotRequired[dict[str, ParameterAttributes]]
+    variables: dict[str, VariableAttributes] | None  # NotRequired[dict[str, VariableAttributes]]
+    resources: dict[str, ResourceAttributes] | None  # NotRequired[dict[str, ResourceAttributes]]
+    modules: dict[str, ModuleAttributes] | None  # NotRequired[dict[str, ModuleAttributes]]
+    outputs: dict[str, OutputAttributes] | None  # NotRequired[dict[str, OutputAttributes]]

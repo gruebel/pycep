@@ -31,11 +31,11 @@ classifiers = [
 python = "^3.7"
 lark = ">=1.1.2"
 regex = "^2022.3.2"
-typing-extensions = "^4.1.1"
+typing-extensions = ">=3.10.0"
 
 [tool.poetry.dev-dependencies]
 assertpy = "^1.1"
-bandit = "^1.7.3"
+bandit = "^1.7.4"
 black = "^22.1.0"
 flake8 = "^4.0.1"
 flake8-bugbear = "^22.1.11"
