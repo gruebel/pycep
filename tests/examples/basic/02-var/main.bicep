@@ -7,6 +7,7 @@ var exampleInt = 1
 var mixedArray = [
   resourceGroup().name
   1
+  // some comment
   true
   'example string'
 ]

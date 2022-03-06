@@ -63,7 +63,7 @@ deploy_condition: "if" "(" value_brackets ")" value_brackets
 
 ?quoted_string: STRING | QUOTED_STRING | QUOTED_INTERPOLATION
 
-array: "[" _CPP_COMMENT_NL~0..5 (value_brackets _CPP_COMMENT_NL)* "]"
+array: "[" _CPP_COMMENT_NL~0..5 (value_brackets _CPP_COMMENT_NL~1..5)* "]"
 
 object: "{" _CPP_COMMENT_NL~0..5 (pair | child_resource)* "}"
 
@@ -95,8 +95,8 @@ deco_secure: "secure" "(" ")"
 
 // functions
 
-function: function_any | function_array | function_date | function_deployment | function_logical | function_numeric
-        | function_object | function_resource | function_scope | function_string
+function: function_any | function_array | function_date | function_deployment | function_file | function_logical
+        | function_numeric | function_object | function_resource | function_scope | function_string
 
 // functions - any
 
@@ -150,6 +150,12 @@ utc_now: ("utcNow" | "sys.utcNow") "(" [value_brackets] ")"
 deployment: ("deployment" | "az.deployment") "(" ")" ["." STRING]
 
 environment: ("environment" | "az.environment") "(" ")" ["." STRING]
+
+// functions - file
+
+?function_file: load_text_content
+
+load_text_content: ("loadTextContent" | "sys.loadTextContent") "(" value_brackets ["," value_brackets] ")"
 
 // functions - logical
 
@@ -321,7 +327,7 @@ QUOTED_STRING: "'" STRING "'"
 INDEXED: /(?=[\w][\w_.]+(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|[\[\]])+)(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|\[[\w\[\]_']+\]|[\w_\-\/.,'= ])+/
 QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}'{]+|(?R))*+}|\\'|[^'])*'/
 
-MULTI_LINE_STRING: "'''" (/./ | NEWLINE)+ "'''"
+MULTI_LINE_STRING: "'''" (/.*?/ | NEWLINE)+ "'''"
 
 _NEWLINE: NEWLINE
 _CPP_COMMENT_NL: [CPP_COMMENT] NEWLINE

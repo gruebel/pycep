@@ -660,6 +660,25 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
     ####################
     #
+    # functions - file
+    #
+    ####################
+
+    def load_text_content(
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleNoneValue]
+    ) -> pycep_typing.LoadTextContent:
+        file_path, encoding = args
+
+        return {
+            "type": "load_text_content",
+            "parameters": {
+                "file_path": file_path,
+                "encoding": encoding,
+            },
+        }
+
+    ####################
+    #
     # functions - logical
     #
     ####################

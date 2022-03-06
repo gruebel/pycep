@@ -24,6 +24,7 @@ ArrayFunctions: TypeAlias = (
 )
 DateFunctions: TypeAlias = "DateTimeAdd | UtcNow"
 DeploymentFunctions: TypeAlias = "Deployment | Environment"
+FileFunctions: TypeAlias = "LoadTextContent"
 LogicalFunctions: TypeAlias = "BoolFunc"
 NumericFunctions: TypeAlias = "IntFunc"
 ObjectFunctions: TypeAlias = "Json"
@@ -32,7 +33,7 @@ ResourceFunctions: TypeAlias = (
 )
 ScopeFunctions: TypeAlias = "ManagementGroup | ResourceGroup | Subscription | Tenant"
 StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | DataUri | DataUriToString | EndsWith | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | StartsWith | String | Substring | ToLower | ToUpper | Trim | UniqueString | Uri | UriComponent | UriComponentToString"
-Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
+Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | FileFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
 
 ####################
@@ -494,6 +495,23 @@ class Deployment(TypedDict, total=False):
 class Environment(TypedDict, total=False):
     type: Literal["environment"]
     property_name: str  # NotRequired[str]
+
+
+####################
+#
+# functions - file
+#
+####################
+
+
+class _LoadTextContentParameters(TypedDict, total=False):
+    file_path: PossibleValue
+    encoding: PossibleNoneValue
+
+
+class LoadTextContent(TypedDict):
+    type: Literal["load_text_content"]
+    parameters: _LoadTextContentParameters
 
 
 ####################
