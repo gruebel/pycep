@@ -56,7 +56,7 @@ def test_parse_playground_and_check_bicep_elements() -> None:
     result = BicepParser().parse(text=file_path.read_text())
 
     # then
-    vm_config = result["resources"]["vm"]["config"]  # type: ignore[index]
+    vm_config = result["resources"]["vm"]["config"]
     assert_that(vm_config["name"]).is_instance_of(BicepElement)
     assert_that(vm_config["location"]).is_instance_of(BicepElement)
     assert_that(vm_config["properties"]["osProfile"]["computerName"]).is_instance_of(BicepElement)

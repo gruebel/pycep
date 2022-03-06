@@ -47,8 +47,12 @@ This is still a very early stage, therefore a lot can and will change.
 ### CI/CD
 - [ ] Fix security issues found by Scorecard
 
-## Considering
+### Considering
 - Adding line numbers to other parts
 
-## Out-of-scope
+### Out-of-scope
 - Bicep to ARM converter and vice versa
+
+## Contributing
+
+Further details can be found in the [contribution guidelines](CONTRIBUTING.md).

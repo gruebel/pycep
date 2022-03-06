@@ -383,22 +383,22 @@ class Empty(TypedDict):
     parameters: _EmptyParameters
 
 
-class First(TypedDict):
+class First(TypedDict, total=False):
     type: Literal["first"]
     parameters: _LengthParameters
-    property_name: str | None  # NotRequired[str]
+    property_name: str  # NotRequired[str]
 
 
-class Intersection(TypedDict):
+class Intersection(TypedDict, total=False):
     type: Literal["intersection"]
     parameters: _UnionParameters
-    property_name: str | None  # NotRequired[str]
+    property_name: str  # NotRequired[str]
 
 
-class Last(TypedDict):
+class Last(TypedDict, total=False):
     type: Literal["last"]
     parameters: _LengthParameters
-    property_name: str | None  # NotRequired[str]
+    property_name: str  # NotRequired[str]
 
 
 class _LengthParameters(TypedDict):
@@ -440,16 +440,16 @@ class Take(TypedDict):
     parameters: _TakeParameters
 
 
-class _UnionParameters(TypedDict):
+class _UnionParameters(TypedDict, total=False):
     arg_1: str
     arg_2: str
-    arg_3: str | None  # NotRequired[str]  # and many more possible
+    arg_3: str  # NotRequired[str]  # and many more possible
 
 
-class UnionFunc(TypedDict):
+class UnionFunc(TypedDict, total=False):
     type: Literal["union"]
     parameters: _UnionParameters
-    property_name: str | None  # NotRequired[str]
+    property_name: str  # NotRequired[str]
 
 
 ####################
@@ -486,14 +486,14 @@ class UtcNow(TypedDict):
 ####################
 
 
-class Deployment(TypedDict):
+class Deployment(TypedDict, total=False):
     type: Literal["deployment"]
-    property_name: str | None  # NotRequired[str]
+    property_name: str  # NotRequired[str]
 
 
-class Environment(TypedDict):
+class Environment(TypedDict, total=False):
     type: Literal["environment"]
-    property_name: str | None  # NotRequired[str]
+    property_name: str  # NotRequired[str]
 
 
 ####################
@@ -560,10 +560,10 @@ class _ListKeysParameters(TypedDict):
     api_version: PossibleValue
 
 
-class ListKeys(TypedDict):
+class ListKeys(TypedDict, total=False):
     type: Literal["list_keys"]
     parameters: _ListKeysParameters
-    property_name: str | None  # NotRequired[str]
+    property_name: str  # NotRequired[str]
 
 
 class _PickZonesParameters(TypedDict):
@@ -585,10 +585,10 @@ class _ReferenceParameters(TypedDict):
     full: PossibleNoneValue
 
 
-class Reference(TypedDict):
+class Reference(TypedDict, total=False):
     type: Literal["reference"]
     parameters: _ReferenceParameters
-    property_name: str | None  # NotRequired[str]
+    property_name: str  # NotRequired[str]
 
 
 class _ResourceIdParameters(TypedDict):
@@ -638,10 +638,10 @@ class _ManagementGroupParameters(TypedDict):
     identifier: PossibleNoneValue
 
 
-class ManagementGroup(TypedDict):
+class ManagementGroup(TypedDict, total=False):
     type: Literal["management_group"]
     parameters: _ManagementGroupParameters
-    property_name: str | None  # NotRequired[str]
+    property_name: str  # NotRequired[str]
 
 
 class _ResourceGroupParameters(TypedDict):
@@ -649,25 +649,25 @@ class _ResourceGroupParameters(TypedDict):
     subscription_id: PossibleNoneValue
 
 
-class ResourceGroup(TypedDict):
+class ResourceGroup(TypedDict, total=False):
     type: Literal["resource_group"]
     parameters: _ResourceGroupParameters
-    property_name: str | None  # NotRequired[str]
+    property_name: str  # NotRequired[str]
 
 
 class _SubscriptionParameters(TypedDict):
     subscription_id: PossibleNoneValue
 
 
-class Subscription(TypedDict):
+class Subscription(TypedDict, total=False):
     type: Literal["subscription"]
     parameters: _SubscriptionParameters
-    property_name: str | None  # NotRequired[str]
+    property_name: str  # NotRequired[str]
 
 
-class Tenant(TypedDict):
+class Tenant(TypedDict, total=False):
     type: Literal["tenant"]
-    property_name: str | None  # NotRequired[str]
+    property_name: str  # NotRequired[str]
 
 
 ####################
@@ -723,10 +723,10 @@ class EndsWith(TypedDict):
     parameters: _StartsWithParameters
 
 
-class _FormatParameters(TypedDict):
+class _FormatParameters(TypedDict, total=False):
     format_string: PossibleValue
     arg_1: PossibleValue
-    arg_2: PossibleValue | None  # NotRequired[PossibleValue]  # and many more possible
+    arg_2: PossibleValue  # NotRequired[PossibleValue]  # and many more possible
 
 
 class Format(TypedDict):
@@ -734,9 +734,9 @@ class Format(TypedDict):
     parameters: _FormatParameters
 
 
-class _GuidParameters(TypedDict):
+class _GuidParameters(TypedDict, total=False):
     base_string: str
-    extra_string_1: str | None  # NotRequired[str]  # and many more possible
+    extra_string_1: str  # NotRequired[str]  # and many more possible
 
 
 class Guid(TypedDict):
@@ -790,10 +790,10 @@ class _SplitParameters(TypedDict):
     delimiter: PossibleValue
 
 
-class Split(TypedDict):
+class Split(TypedDict, total=False):
     type: Literal["split"]
     parameters: _SplitParameters
-    index: int | None  # NotRequired[int]
+    index: int  # NotRequired[int]
 
 
 class _StartsWithParameters(TypedDict):
@@ -952,10 +952,10 @@ class NotEqualsCaseInsensitive(TypedDict):
 ####################
 
 
-class _AndOperands(TypedDict):
+class _AndOperands(TypedDict, total=False):
     operand_1: PossibleValue
     operand_2: PossibleValue
-    operand_3: PossibleValue | None  # NotRequired[PossibleValue]  # and many more possible
+    operand_3: PossibleValue  # NotRequired[PossibleValue]  # and many more possible
 
 
 class And(TypedDict):
@@ -1046,10 +1046,10 @@ class Substract(TypedDict):
 ####################
 
 
-class BicepJson(TypedDict):
+class BicepJson(TypedDict, total=False):
     globals: GlobalsAttributes
-    parameters: dict[str, ParameterAttributes] | None  # NotRequired[dict[str, ParameterAttributes]]
-    variables: dict[str, VariableAttributes] | None  # NotRequired[dict[str, VariableAttributes]]
-    resources: dict[str, ResourceAttributes] | None  # NotRequired[dict[str, ResourceAttributes]]
-    modules: dict[str, ModuleAttributes] | None  # NotRequired[dict[str, ModuleAttributes]]
-    outputs: dict[str, OutputAttributes] | None  # NotRequired[dict[str, OutputAttributes]]
+    parameters: dict[str, ParameterAttributes]  # NotRequired[dict[str, ParameterAttributes]]
+    variables: dict[str, VariableAttributes]  # NotRequired[dict[str, VariableAttributes]]
+    resources: dict[str, ResourceAttributes]  # NotRequired[dict[str, ResourceAttributes]]
+    modules: dict[str, ModuleAttributes]  # NotRequired[dict[str, ModuleAttributes]]
+    outputs: dict[str, OutputAttributes]  # NotRequired[dict[str, OutputAttributes]]
