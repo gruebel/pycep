@@ -32,7 +32,7 @@ This is still a very early stage, therefore a lot can and will change.
 - [ ] Array (in progress)
 - [x] Date
 - [x] Deployment
-- [ ] File
+- [x] File
 - [x] Logical
 - [x] Numeric
 - [x] Object

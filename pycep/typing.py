@@ -24,7 +24,7 @@ ArrayFunctions: TypeAlias = (
 )
 DateFunctions: TypeAlias = "DateTimeAdd | UtcNow"
 DeploymentFunctions: TypeAlias = "Deployment | Environment"
-FileFunctions: TypeAlias = "LoadTextContent"
+FileFunctions: TypeAlias = "LoadFileAsBase64 | LoadTextContent"
 LogicalFunctions: TypeAlias = "BoolFunc"
 NumericFunctions: TypeAlias = "IntFunc"
 ObjectFunctions: TypeAlias = "Json"
@@ -502,6 +502,15 @@ class Environment(TypedDict, total=False):
 # functions - file
 #
 ####################
+
+
+class _LoadFileAsBase64Parameters(TypedDict):
+    file_path: PossibleValue
+
+
+class LoadFileAsBase64(TypedDict):
+    type: Literal["load_file_as_base64"]
+    parameters: _LoadFileAsBase64Parameters
 
 
 class _LoadTextContentParameters(TypedDict, total=False):

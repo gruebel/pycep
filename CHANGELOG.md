@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add contribution guidelines `CONTRIBUTING.md`
 - Support `LoadTextContent` function
+- Support `loadFileAsBase64` function
 
 ## [0.3.1] - 2022-03-05
 

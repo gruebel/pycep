@@ -46,7 +46,7 @@
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-files)
 
-- [ ] loadFileAsBase64
+- [x] loadFileAsBase64
 - [x] loadTextContent
 
 ### Logical

@@ -677,6 +677,14 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
 
+    def load_file_as_base64(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.LoadFileAsBase64:
+        return {
+            "type": "load_file_as_base64",
+            "parameters": {
+                "file_path": args[0],
+            },
+        }
+
     ####################
     #
     # functions - logical
