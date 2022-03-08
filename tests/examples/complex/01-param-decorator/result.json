@@ -66,7 +66,7 @@
       "decorators": [
         {
           "type": "min_value",
-          "argument": 1
+          "argument": -1
         }
       ],
       "type": "int",

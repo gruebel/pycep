@@ -24,7 +24,7 @@ param storageAccountName string
 param appNames array
 
 // min/max value
-@minValue(1)
+@minValue(-1)
 param month int
 
 @maxValue(730)

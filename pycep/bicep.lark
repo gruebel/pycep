@@ -1,4 +1,4 @@
-start: ((element _CPP_COMMENT_NL) | _CPP_COMMENT_NL)*
+start: ((element _CPP_COMMENT_NL?) | _CPP_COMMENT_NL)*
 
 element: "targetScope" "=" QUOTED_INTERPOLATION                                         -> scope
        | [decorator] "param" STRING data_type ["=" value_brackets]                      -> param
@@ -33,7 +33,7 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
 
 ?module_value: object | loop | deploy_condition
 
-child_resource: "resource" STRING QUOTED_INTERPOLATION [EXISTING] "=" object _CPP_COMMENT_NL
+child_resource: "resource" STRING QUOTED_INTERPOLATION [EXISTING] "=" object _CPP_COMMENT_NL+
 
 // element type extras
 
@@ -63,9 +63,9 @@ deploy_condition: "if" "(" value_brackets ")" value_brackets
 
 ?quoted_string: STRING | QUOTED_STRING | QUOTED_INTERPOLATION
 
-array: "[" _CPP_COMMENT_NL~0..5 (value_brackets _CPP_COMMENT_NL~1..5)* "]"
+array: "[" _CPP_COMMENT_NL~0..10 (value_brackets _CPP_COMMENT_NL~1..5)* "]"
 
-object: "{" _CPP_COMMENT_NL~0..5 (pair | child_resource)* "}"
+object: "{" _CPP_COMMENT_NL~0..10 (pair | child_resource)* "}"
 
 pair: key ":" (value_brackets | loop) _CPP_COMMENT_NL+
 
@@ -85,7 +85,7 @@ deco_min_len: "minLength" "(" /\d+/ ")"
 
 deco_max_len: "maxLength" "(" /\d+/ ")"
 
-deco_min_val: "minValue" "(" /\d+/ ")"
+deco_min_val: "minValue" "(" /-?\d+/ ")"
 
 deco_max_val: "maxValue" "(" /\d+/ ")"
 
