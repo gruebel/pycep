@@ -5,9 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.3.3] - 2022-03-21
 
-### Added
+### Changed
+
+- Adjust the name of child resources to add the parent name as prefix to prevent overlap
+- Moved `depends_on` to the `config` block
 
 ## [0.3.2] - 2022-03-14
 
@@ -78,7 +81,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release to be able to parse all the official examples of Bicep [101](https://github.com/Azure/bicep/tree/main/docs/examples/101).
 
-[Unreleased]: https://github.com/gruebel/pycep/compare/0.3.2...HEAD
+[Unreleased]: https://github.com/gruebel/pycep/compare/0.3.3...HEAD
+[0.3.3]: https://github.com/gruebel/pycep/compare/0.3.2...0.3.3
 [0.3.2]: https://github.com/gruebel/pycep/compare/0.3.1...0.3.2
 [0.3.1]: https://github.com/gruebel/pycep/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/gruebel/pycep/compare/0.2.0...0.3.0

@@ -336,29 +336,29 @@
         }
       }
     },
-    "service": {
+    "storage__service": {
       "decorators": [],
       "type": "Microsoft.Storage/storageAccounts/fileServices",
       "api_version": "2021-02-01",
       "existing": false,
       "config": {
-        "name": "default"
-      },
-      "depends_on": [
-        "storage"
-      ]
+        "name": "default",
+        "depends_on": [
+          "storage"
+        ]
+      }
     },
-    "share": {
+    "storage__service__share": {
       "decorators": [],
       "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
       "api_version": "2021-02-01",
       "existing": false,
       "config": {
-        "name": "diagShare"
-      },
-      "depends_on": [
-        "service"
-      ]
+        "name": "diagShare",
+        "depends_on": [
+          "storage__service"
+        ]
+      }
     }
   },
   "modules": {

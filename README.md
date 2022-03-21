@@ -6,11 +6,24 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pycep-parser)](https://github.com/gruebel/pycep)
 ![CodeQL](https://github.com/gruebel/pycep/workflows/CodeQL/badge.svg)
 
-A fun little project, which has the goal to parse
-[Azure Bicep](https://github.com/Azure/bicep) files.
-This is still a very early stage, therefore a lot can and will change.
+A parser for [Azure Bicep](https://github.com/Azure/bicep) files leveraging [Lark](https://github.com/lark-parser/lark).
 
-## Current capabalities
+This is still an early stage, therefore a lot can and will change.
+
+## Getting Started
+
+### Requirements
+
+- Python 3.7+
+- Lark 1.1.2+
+
+### Install
+
+```shell
+pip install --upgrade pycep-parser
+```
+
+## Current capabilities
 
 [Supported capabilities](docs/capabilities.md)
 
@@ -48,6 +61,7 @@ This is still a very early stage, therefore a lot can and will change.
 - [ ] Fix security issues found by Scorecard
 
 ### Considering
+- 1st class support of interpolated strings
 - Adding line numbers to other parts
 
 ### Out-of-scope

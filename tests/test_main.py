@@ -64,6 +64,13 @@ def test_parse_playground_and_check_bicep_elements() -> None:
     assert_that(vm_config["properties"]["osProfile"]["adminPassword"]).is_instance_of(BicepElement)
     assert_that(vm_config["properties"]["hardwareProfile"]["vmSize"]).is_instance_of(BicepElement)
 
+    storage_service_config = result["resources"]["storage__service"]["config"]
+    assert_that(storage_service_config["depends_on"]).is_length(1)
+    assert_that(storage_service_config["depends_on"][0]).is_instance_of(BicepElement)
+    storage_service_share_config = result["resources"]["storage__service__share"]["config"]
+    assert_that(storage_service_share_config["depends_on"]).is_length(1)
+    assert_that(storage_service_share_config["depends_on"][0]).is_instance_of(BicepElement)
+
 
 def test_constructor_error_with_text_and_file_path_parameters() -> None:
     # given

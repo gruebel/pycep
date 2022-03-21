@@ -1529,6 +1529,9 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         if "__child_resource__" in config.keys():
             child_resource = config.pop("__child_resource__")
 
+            # prefix the resource name with the parent to prevent overlap
+            child_resource["__name__"] = f"{parent_resource_name}__{child_resource['__name__']}"
+
             # inherit type and api version info from parent resource
             child_type_api_pair: pycep_typing.ApiTypeVersion = {
                 "type": f"{parent_type_api_pair['type']}/{child_resource['__attrs__']['type']}",
@@ -1537,7 +1540,9 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
             child_resource["__attrs__"]["type"] = child_type_api_pair["type"]
             child_resource["__attrs__"]["api_version"] = child_type_api_pair["api_version"]
-            child_resource["__attrs__"].setdefault("depends_on", []).append(parent_resource_name)
+            child_resource["__attrs__"]["config"].setdefault("depends_on", []).append(
+                BicepElement(parent_resource_name)
+            )
 
             self.child_resources.append(
                 {

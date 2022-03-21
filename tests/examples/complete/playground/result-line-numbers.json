@@ -384,33 +384,33 @@
       "__start_line__": 195,
       "__end_line__": 215
     },
-    "service": {
+    "storage__service": {
       "decorators": [],
       "type": "Microsoft.Storage/storageAccounts/fileServices",
       "api_version": "2021-02-01",
       "existing": false,
       "config": {
-        "name": "default"
+        "name": "default",
+        "depends_on": [
+          "storage"
+        ]
       },
       "__start_line__": 96,
-      "__end_line__": 102,
-      "depends_on": [
-        "storage"
-      ]
+      "__end_line__": 102
     },
-    "share": {
+    "storage__service__share": {
       "decorators": [],
       "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
       "api_version": "2021-02-01",
       "existing": false,
       "config": {
-        "name": "diagShare"
+        "name": "diagShare",
+        "depends_on": [
+          "storage__service"
+        ]
       },
       "__start_line__": 99,
-      "__end_line__": 101,
-      "depends_on": [
-        "service"
-      ]
+      "__end_line__": 101
     }
   },
   "modules": {
