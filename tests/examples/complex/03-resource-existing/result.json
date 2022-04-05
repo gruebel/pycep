@@ -17,6 +17,7 @@
   },
   "outputs": {
     "blobEndpoint": {
+      "decorators": [],
       "type": "string",
       "value": "stg.properties.primaryEndpoints.blob"
     }

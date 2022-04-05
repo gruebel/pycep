@@ -1,0 +1,29 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "outputs": {
+    "resourceName": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "Name of the created resource"
+        }
+      ],
+      "type": "string",
+      "value": "StorageAccount.name"
+    },
+    "resourceId": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "Id of the created resource"
+        }
+      ],
+      "type": "string",
+      "value": "StorageAccount.id"
+    }
+  }
+}

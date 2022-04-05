@@ -433,6 +433,7 @@
   },
   "outputs": {
     "nsgId": {
+      "decorators": [],
       "type": "string",
       "value": "nsg.id",
       "__start_line__": 224,

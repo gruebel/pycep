@@ -129,13 +129,16 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         return result
 
     @v_args(meta=True)
-    def output(self, meta: Meta, args: tuple[str, str, pycep_typing.PossibleValue]) -> pycep_typing.OutputResponse:
-        name, data_type, value = args
+    def output(
+        self, meta: Meta, args: tuple[list[pycep_typing.Decorator] | None, str, str, pycep_typing.PossibleValue]
+    ) -> pycep_typing.OutputResponse:
+        decorators, name, data_type, value = args
 
         result: pycep_typing.OutputResponse = {
             "outputs": {
                 "__name__": str(name),
                 "__attrs__": {  # type: ignore[typeddict-item]
+                    "decorators": decorators if decorators else [],
                     "type": data_type,
                     "value": value,
                 },
@@ -211,7 +214,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
         result: pycep_typing.ModuleResponse = {
             "modules": {
-                "__name__": name,
+                "__name__": str(name),
                 "__attrs__": {
                     "decorators": decorators if decorators else [],
                     **path,  # type: ignore[misc] # https://github.com/python/mypy/issues/11753

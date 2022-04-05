@@ -99,6 +99,7 @@ class VarResponse(TypedDict):
 
 
 class OutputAttributes(TypedDict):
+    decorators: list[Decorator]
     type: str
     value: PossibleValue
     __start_line__: int | None  # NotRequired[int]

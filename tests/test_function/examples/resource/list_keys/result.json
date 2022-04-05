@@ -83,6 +83,7 @@
   },
   "outputs": {
     "subnetId": {
+      "decorators": [],
       "type": "object",
       "value": {
         "function": {
@@ -96,6 +97,7 @@
       }
     },
     "namespace": {
+      "decorators": [],
       "type": "object",
       "value": {
         "function": {

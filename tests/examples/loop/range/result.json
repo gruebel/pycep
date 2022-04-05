@@ -23,6 +23,7 @@
   },
   "outputs": {
     "storageInfo": {
+      "decorators": [],
       "type": "array",
       "value": {
         "loop_type": {

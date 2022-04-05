@@ -57,6 +57,7 @@
   },
   "outputs": {
     "ftpUser": {
+      "decorators": [],
       "type": "bool",
       "value": {
         "function": {
@@ -69,6 +70,7 @@
       }
     },
     "namespace": {
+      "decorators": [],
       "type": "bool",
       "value": {
         "function": {

@@ -6,18 +6,22 @@
   },
   "outputs": {
     "stringOutput": {
+      "decorators": [],
       "type": "int",
       "value": 42
     },
     "booleanOutput": {
+      "decorators": [],
       "type": "bool",
       "value": false
     },
     "storageName": {
+      "decorators": [],
       "type": "string",
       "value": "${toLower(storageNamePrefix)}${uniqueString(resourceGroup().id)}"
     },
     "location": {
+      "decorators": [],
       "type": "string",
       "value": {
         "function": {
@@ -31,6 +35,7 @@
       }
     },
     "multilineOutput": {
+      "decorators": [],
       "type": "string",
       "value": "this is multi-line\n  string with formatting\n  preserved.\n"
     }

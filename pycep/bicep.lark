@@ -3,7 +3,7 @@ start: ((element _CPP_COMMENT_NL?) | _CPP_COMMENT_NL)*
 element: "targetScope" "=" QUOTED_INTERPOLATION                                         -> scope
        | [decorator] "param" STRING data_type ["=" value_brackets]                      -> param
        | "var" STRING "=" var_value                                                     -> var
-       | "output" STRING data_type "=" output_value                                     -> output
+       | [decorator] "output" STRING data_type "=" output_value                         -> output
        | [decorator] "resource" STRING type_api_pair [EXISTING] "=" resource_value      -> resource
        | [decorator] "module" STRING module_path "=" module_value                       -> module
 

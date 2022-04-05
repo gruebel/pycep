@@ -379,6 +379,7 @@
   },
   "outputs": {
     "nsgId": {
+      "decorators": [],
       "type": "string",
       "value": "nsg.id"
     }

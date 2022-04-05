@@ -81,6 +81,7 @@
   },
   "outputs": {
     "elementEqual": {
+      "decorators": [],
       "type": "bool",
       "value": {
         "operator": {

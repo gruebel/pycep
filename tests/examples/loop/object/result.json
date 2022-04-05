@@ -6,6 +6,7 @@
   },
   "outputs": {
     "inputObjKeys": {
+      "decorators": [],
       "type": "array",
       "value": {
         "loop_type": {

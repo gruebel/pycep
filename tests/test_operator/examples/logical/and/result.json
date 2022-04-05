@@ -61,6 +61,7 @@
   },
   "outputs": {
     "outputExpr": {
+      "decorators": [],
       "type": "bool",
       "value": {
         "operator": {
@@ -73,6 +74,7 @@
       }
     },
     "multiple": {
+      "decorators": [],
       "type": "bool",
       "value": {
         "operator": {
