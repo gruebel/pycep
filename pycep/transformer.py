@@ -10,7 +10,10 @@ from typing_extensions import Literal
 
 from pycep import typing as pycep_typing
 
-BICEP_REGISTRY_PATTERN = re.compile(r"br:(?P<registry_name>\w+)\.azurecr\.io/(?P<path>[\w/]+):(?P<tag>[\w.\-]+)")
+PUBLIC_BICEP_REGISTRY_PATTERN = re.compile(r"br:mcr\.microsoft\.com/(?P<path>[\w/\-]+):(?P<tag>[\w.\-]+)")
+PRIVATE_BICEP_REGISTRY_PATTERN = re.compile(
+    r"br:(?P<registry_name>\w+)\.azurecr\.io/(?P<path>[\w/\-]+):(?P<tag>[\w.\-]+)"
+)
 TEMPLATE_SPEC_PATTERN = re.compile(
     r"ts:(?P<sub_id>[\d\-]+)/(?P<rg_id>[\w._\-()]+)/(?P<name>[\w.\-]+):(?P<version>[\w.\-]+)"
 )
@@ -249,17 +252,28 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         file_path = str(args[0])[1:-1]
 
         if file_path.startswith("br:"):
-            m = re.match(BICEP_REGISTRY_PATTERN, file_path)
-            if not m:  # pragma: no cover
-                raise ValueError(f"Bicep registry path is invalid: {file_path}")
+            # check if it's referencing the official public registry
+            m = re.match(PUBLIC_BICEP_REGISTRY_PATTERN, file_path)
+            if m:
+                is_public = True
+                registry_name = "mcr.microsoft.com"
+            else:
+                # check if it's referencing a privvte registry
+                m = re.match(PRIVATE_BICEP_REGISTRY_PATTERN, file_path)
+                if m:
+                    is_public = False
+                    registry_name = m.group("registry_name")
+                else:  # pragma: no cover
+                    raise ValueError(f"Bicep registry path is invalid: {file_path}")
 
             br_result: pycep_typing.BicepRegistryModulePath = {
                 "type": "bicep_registry",
                 "detail": {
                     "full": file_path[3:],
-                    "registry_name": m.group("registry_name"),
+                    "registry_name": registry_name,
                     "path": m.group("path"),
                     "tag": m.group("tag"),
+                    "public": is_public,
                 },
             }
             return br_result

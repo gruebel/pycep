@@ -179,6 +179,7 @@ class _BicepRegistryModulePathDetail(TypedDict):
     registry_name: str
     path: str
     tag: str
+    public: bool
 
 
 class BicepRegistryModulePath(TypedDict):

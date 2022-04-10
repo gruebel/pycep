@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Support `@description` decorator for output elements
+- Support public module registry references
 
 ## [0.3.3] - 2022-03-21
 

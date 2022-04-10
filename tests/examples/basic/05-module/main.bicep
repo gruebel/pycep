@@ -6,8 +6,16 @@ module localModule '../storageAccount.bicep' = {
   }
 }
 
-// registry ref
-module registryModule 'br:exampleregistry.azurecr.io/bicep/modules/storage:v1' = {
+// public registry ref
+module publicRegistryModule 'br:mcr.microsoft.com/bicep/samples/hello-world:1.0.2' = {
+  name: 'helloWorld'
+  params: {
+    name: 'John Dole'
+  }
+}
+
+// private registry ref
+module privateRegistryModule 'br:exampleregistry.azurecr.io/bicep/modules/storage:v1' = {
   name: 'storageDeploy'
   params: {
     storagePrefix: 'examplestg1'
