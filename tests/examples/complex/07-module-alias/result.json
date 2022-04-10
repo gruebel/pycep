@@ -1,0 +1,59 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "modules": {
+    "publicRegistryModule": {
+      "decorators": [],
+      "type": "bicep_registry_alias",
+      "detail": {
+        "full": "public:samples/hello-world:1.0.2",
+        "alias": "public",
+        "path": "samples/hello-world",
+        "tag": "1.0.2",
+        "public": true
+      },
+      "config": {
+        "name": "helloWorld",
+        "params": {
+          "name": "John Dole"
+        }
+      }
+    },
+    "privateRegistryModule": {
+      "decorators": [],
+      "type": "bicep_registry_alias",
+      "detail": {
+        "full": "ContosoRegistry:storage:v1",
+        "alias": "ContosoRegistry",
+        "path": "storage",
+        "tag": "v1",
+        "public": false
+      },
+      "config": {
+        "name": "storageDeploy",
+        "params": {
+          "storagePrefix": "examplestg1"
+        }
+      }
+    },
+    "templateModule": {
+      "decorators": [],
+      "type": "template_spec_alias",
+      "detail": {
+        "full": "CoreSpecs:storage:v1",
+        "alias": "CoreSpecs",
+        "path": "storage",
+        "tag": "v1"
+      },
+      "config": {
+        "name": "storageDeploy",
+        "params": {
+          "storagePrefix": "examplestg1"
+        }
+      }
+    }
+  }
+}

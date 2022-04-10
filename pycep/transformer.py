@@ -10,10 +10,12 @@ from typing_extensions import Literal
 
 from pycep import typing as pycep_typing
 
+BICEP_REGISTRY_ALIAS_PATTERN = re.compile(r"br/(?P<alias>[\w]+):(?P<path>[\w/\-]+):(?P<tag>[\w.\-]+)")
 PUBLIC_BICEP_REGISTRY_PATTERN = re.compile(r"br:mcr\.microsoft\.com/(?P<path>[\w/\-]+):(?P<tag>[\w.\-]+)")
 PRIVATE_BICEP_REGISTRY_PATTERN = re.compile(
     r"br:(?P<registry_name>\w+)\.azurecr\.io/(?P<path>[\w/\-]+):(?P<tag>[\w.\-]+)"
 )
+TEMPLATE_SPEC_ALIAS_PATTERN = re.compile(r"ts/(?P<alias>[\w]+):(?P<path>[\w/\-]+):(?P<tag>[\w.\-]+)")
 TEMPLATE_SPEC_PATTERN = re.compile(
     r"ts:(?P<sub_id>[\d\-]+)/(?P<rg_id>[\w._\-()]+)/(?P<name>[\w.\-]+):(?P<version>[\w.\-]+)"
 )
@@ -277,6 +279,29 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                 },
             }
             return br_result
+        elif file_path.startswith("br/"):
+            m = re.match(BICEP_REGISTRY_ALIAS_PATTERN, file_path)
+            if not m:  # pragma: no cover
+                raise ValueError(f"Bicep registry alias is invalid: {file_path}")
+
+            alias = m.group("alias")
+            is_public = False
+
+            # check if it's the alias of the official public registry
+            if alias == "public":
+                is_public = True
+
+            br_alias_result: pycep_typing.BicepRegistryAliasModulePath = {
+                "type": "bicep_registry_alias",
+                "detail": {
+                    "full": file_path[3:],
+                    "alias": alias,
+                    "path": m.group("path"),
+                    "tag": m.group("tag"),
+                    "public": is_public,
+                },
+            }
+            return br_alias_result
         elif file_path.startswith("ts:"):
             m = re.match(TEMPLATE_SPEC_PATTERN, file_path)
             if not m:  # pragma: no cover
@@ -293,6 +318,21 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                 },
             }
             return ts_result
+        elif file_path.startswith("ts/"):
+            m = re.match(TEMPLATE_SPEC_ALIAS_PATTERN, file_path)
+            if not m:  # pragma: no cover
+                raise ValueError(f"Template spec alias is invalid: {file_path}")
+
+            ts_alias_result: pycep_typing.TemplateSpecAliasModulePath = {
+                "type": "template_spec_alias",
+                "detail": {
+                    "full": file_path[3:],
+                    "alias": m.group("alias"),
+                    "path": m.group("path"),
+                    "tag": m.group("tag"),
+                },
+            }
+            return ts_alias_result
 
         local_result: pycep_typing.LocalModulePath = {
             "type": "local",

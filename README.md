@@ -29,17 +29,6 @@ pip install --upgrade pycep-parser
 
 ## Next milestones
 
-### General
-- [x] Complete loop support
-- [x] Param decorator
-- [x] Resource/Module decorator
-- [x] Target scope
-- [x] Existing resource keyword
-- [x] Child resources
-- [ ] Module alias
-- [x] Deployment condition
-- [x] Adding line numbers to element blocks
-
 ### Functions
 - [x] Any
 - [ ] Array (in progress)

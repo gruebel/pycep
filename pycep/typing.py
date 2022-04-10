@@ -8,7 +8,8 @@ from typing_extensions import Literal, TypeAlias, TypedDict
 PossibleValue: TypeAlias = "bool | int | str | list[bool | int | str] | dict[str, Any]"
 PossibleNoneValue: TypeAlias = "PossibleValue | None"
 
-ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | TemplateSpecModulePath"
+ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | BicepRegistryAliasModulePath | TemplateSpecModulePath | TemplateSpecAliasModulePath"
+ModuleDetail: TypeAlias = "_LocalModulePathDetail | _BicepRegistryModulePathDetail | _BicepRegistryAliasModulePathDetail | _TemplateSpecModulePathDetail | _TemplateSpecAliasModulePathDetail"
 LoopType: TypeAlias = "LoopArray | LoopArrayIndex | LoopObject | LoopRange"
 ElementResponse: TypeAlias = "ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse"
 Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"
@@ -136,8 +137,8 @@ class ResourceResponse(TypedDict):
 
 class ModuleAttributes(TypedDict):
     decorators: list[Decorator]
-    type: Literal["local"] | Literal["bicep_registry"] | Literal["template_spec"]
-    detail: _LocalModulePathDetail | _BicepRegistryModulePathDetail | _TemplateSpecModulePathDetail
+    type: Literal["local", "bicep_registry", "bicep_registry_alias", "template_spec", "template_spec_alias"]
+    detail: ModuleDetail
     config: dict[str, Any]
     __start_line__: int | None  # NotRequired[int]
     __end_line__: int | None  # NotRequired[int]
@@ -187,6 +188,19 @@ class BicepRegistryModulePath(TypedDict):
     detail: _BicepRegistryModulePathDetail
 
 
+class _BicepRegistryAliasModulePathDetail(TypedDict):
+    full: str
+    alias: str
+    path: str
+    tag: str
+    public: bool
+
+
+class BicepRegistryAliasModulePath(TypedDict):
+    type: Literal["bicep_registry_alias"]
+    detail: _BicepRegistryAliasModulePathDetail
+
+
 class _TemplateSpecModulePathDetail(TypedDict):
     full: str
     subscription_id: str
@@ -198,6 +212,18 @@ class _TemplateSpecModulePathDetail(TypedDict):
 class TemplateSpecModulePath(TypedDict):
     type: Literal["template_spec"]
     detail: _TemplateSpecModulePathDetail
+
+
+class _TemplateSpecAliasModulePathDetail(TypedDict):
+    full: str
+    alias: str
+    path: str
+    tag: str
+
+
+class TemplateSpecAliasModulePath(TypedDict):
+    type: Literal["template_spec_alias"]
+    detail: _TemplateSpecAliasModulePathDetail
 
 
 ####################
