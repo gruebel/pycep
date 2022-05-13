@@ -16,8 +16,8 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846  # v3.0.0
-      - uses: actions/setup-python@9c644ca2ab8e57ea0a487b5ec2f8290740378bfd  # v3.1.0
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
+      - uses: actions/setup-python@98f2ad02fd48d057ee3b4d4f66525b231c3e52b6  # v3.1.2
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - uses: pre-commit/action@9b88afc9cd57fd75b655d5c71bd38146d07135fe  # v2.0.3
@@ -41,9 +41,9 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846  # v3.0.0
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@9c644ca2ab8e57ea0a487b5ec2f8290740378bfd  # v3.1.0
+        uses: actions/setup-python@98f2ad02fd48d057ee3b4d4f66525b231c3e52b6  # v3.1.2
         with:
           python-version: ${{ matrix.python-version }}
       - name: Get full Python version
@@ -66,7 +66,7 @@ jobs:
           poetry run python -m pytest -s --cov=pycep --cov-report=xml tests/
       - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.7' && github.repository == 'gruebel/pycep'
         name: Upload coverage to codecov
-        uses: codecov/codecov-action@f32b3a3741e1053eb607407145bc9619351dc93b  # v2.1.0
+        uses: codecov/codecov-action@81cd2dc8148241f03f5839d295e000b8f761e378  # v3.1.0
         with:
           flags: unittests
 
@@ -77,8 +77,8 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846  # v3.0.0
-      - uses: actions/setup-python@9c644ca2ab8e57ea0a487b5ec2f8290740378bfd  # v3.1.0
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
+      - uses: actions/setup-python@98f2ad02fd48d057ee3b4d4f66525b231c3e52b6  # v3.1.2
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}

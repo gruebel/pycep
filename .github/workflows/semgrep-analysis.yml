@@ -21,14 +21,14 @@ jobs:
       contents: read
     if: (github.actor != 'dependabot[bot]')
     steps:
-      - uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846  # v3.0.0
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
       - uses: returntocorp/semgrep-action@6808f9979438f48d88ec7424ce394d0fcb0e6833  # v1 (0.86.5)
         with:
           publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
           publishDeployment: ${{ secrets.SEMGREP_DEPLOYMENT_ID }}
           generateSarif: "1"
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@28eead240834b314f7def40f6fcba65d100d99b1  # v2.1.6
+        uses: github/codeql-action/upload-sarif@7502d6e991ca767d2db617bfd823a1ed925a0d59  # v2.1.9
         with:
           sarif_file: semgrep.sarif
         if: always()
