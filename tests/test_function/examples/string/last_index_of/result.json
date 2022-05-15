@@ -21,6 +21,7 @@
   },
   "variables": {
     "varStr": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "last_index_of",

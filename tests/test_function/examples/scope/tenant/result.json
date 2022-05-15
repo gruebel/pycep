@@ -18,6 +18,7 @@
   },
   "variables": {
     "id": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "tenant",

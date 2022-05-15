@@ -20,6 +20,7 @@
   },
   "variables": {
     "subId": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "subscription",

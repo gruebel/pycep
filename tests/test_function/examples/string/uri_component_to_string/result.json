@@ -20,6 +20,7 @@
   },
   "variables": {
     "varStr": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "uri_component_to_string",

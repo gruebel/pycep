@@ -20,6 +20,7 @@
   },
   "variables": {
     "cpuCores": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "bool",

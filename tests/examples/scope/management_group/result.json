@@ -32,6 +32,7 @@
   },
   "variables": {
     "mgScope": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "tenant_resource_id",
@@ -44,6 +45,7 @@
       }
     },
     "policyDefinitionName": {
+      "decorators": [],
       "value": "LocationRestriction"
     }
   },

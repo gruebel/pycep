@@ -24,6 +24,7 @@
   },
   "variables": {
     "uamiId": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "pick_zones",

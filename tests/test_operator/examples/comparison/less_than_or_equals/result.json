@@ -21,6 +21,7 @@
   },
   "variables": {
     "varCompare": {
+      "decorators": [],
       "value": {
         "operator": {
           "type": "less_than_or_equals",

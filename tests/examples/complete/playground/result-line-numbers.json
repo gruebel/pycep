@@ -89,51 +89,61 @@
   },
   "variables": {
     "virtualMachineName": {
+      "decorators": [],
       "value": "VM-MultiNic",
       "__start_line__": 25,
       "__end_line__": 25
     },
     "nic1Name": {
+      "decorators": [],
       "value": "nic-1",
       "__start_line__": 26,
       "__end_line__": 26
     },
     "nic2Name": {
+      "decorators": [],
       "value": "nic-2",
       "__start_line__": 27,
       "__end_line__": 27
     },
     "virtualNetworkName": {
+      "decorators": [],
       "value": "virtualNetwork",
       "__start_line__": 28,
       "__end_line__": 28
     },
     "subnet1Name": {
+      "decorators": [],
       "value": "subnet-1",
       "__start_line__": 29,
       "__end_line__": 29
     },
     "subnet2Name": {
+      "decorators": [],
       "value": "subnet-2",
       "__start_line__": 30,
       "__end_line__": 30
     },
     "publicIPAddressName": {
+      "decorators": [],
       "value": "publicIp",
       "__start_line__": 31,
       "__end_line__": 31
     },
     "diagStorageAccountName": {
+      "decorators": [],
       "value": "diags${uniqueString(resourceGroup().id)}",
       "__start_line__": 32,
       "__end_line__": 32
     },
     "networkSecurityGroupName": {
+      "decorators": [],
       "value": "NSG",
       "__start_line__": 33,
       "__end_line__": 33
     },
     "networkSecurityGroupName2": {
+      "decorators": [],
       "value": "${subnet2Name}-nsg",
       "__start_line__": 34,
       "__end_line__": 34

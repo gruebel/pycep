@@ -21,6 +21,7 @@
   },
   "variables": {
     "varEqual": {
+      "decorators": [],
       "value": {
         "operator": {
           "type": "not_equals_case_insensitive",

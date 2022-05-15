@@ -23,6 +23,7 @@
   },
   "variables": {
     "uamiId": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "extension_resource_id",

@@ -22,6 +22,7 @@
   },
   "variables": {
     "cpuCores": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "date_time_add",

@@ -21,6 +21,7 @@
   },
   "variables": {
     "varstr": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "take",

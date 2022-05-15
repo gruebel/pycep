@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Support `@description` decorator for var elements
+
 ## [0.3.4] - 2022-04-10
 
 ### Added

@@ -163,3 +163,16 @@ def test_parse_module_alias() -> None:
 
     # then
     assert_that(result).is_equal_to(expected_result)
+
+
+def test_parse_var_decorator() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "complex/08-var-decorator"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BICEP_PARSER.parse(file_path=file_path)
+
+    # then
+    assert_that(result).is_equal_to(expected_result)

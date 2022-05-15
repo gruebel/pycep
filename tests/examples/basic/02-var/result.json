@@ -6,15 +6,19 @@
   },
   "variables": {
     "stringVar": {
+      "decorators": [],
       "value": "this is multi-line\n  string with formatting\n  preserved.\n"
     },
     "exampleBool": {
+      "decorators": [],
       "value": true
     },
     "exampleInt": {
+      "decorators": [],
       "value": 1
     },
     "mixedArray": {
+      "decorators": [],
       "value": [
         {
           "function": {
@@ -32,6 +36,7 @@
       ]
     },
     "storageName": {
+      "decorators": [],
       "value": "${toLower(storageNamePrefix)}${uniqueString(resourceGroup().id)}"
     }
   }

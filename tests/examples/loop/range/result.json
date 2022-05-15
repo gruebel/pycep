@@ -6,6 +6,7 @@
   },
   "variables": {
     "stringArray": {
+      "decorators": [],
       "value": {
         "loop_type": {
           "type": "range",

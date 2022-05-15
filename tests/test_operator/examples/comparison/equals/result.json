@@ -21,6 +21,7 @@
   },
   "variables": {
     "firstBool": {
+      "decorators": [],
       "value": {
         "operator": {
           "type": "equals",
@@ -32,6 +33,7 @@
       }
     },
     "elementEqual": {
+      "decorators": [],
       "value": {
         "operator": {
           "type": "equals",
@@ -43,6 +45,7 @@
       }
     },
     "arrayEqual": {
+      "decorators": [],
       "value": {
         "operator": {
           "type": "equals",
@@ -62,6 +65,7 @@
       }
     },
     "objectEqual": {
+      "decorators": [],
       "value": {
         "operator": {
           "type": "equals",

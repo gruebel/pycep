@@ -21,6 +21,7 @@
   },
   "variables": {
     "resourceGroupName": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "resource_group",

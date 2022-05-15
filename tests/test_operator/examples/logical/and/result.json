@@ -21,6 +21,7 @@
   },
   "variables": {
     "varExpr": {
+      "decorators": [],
       "value": {
         "operator": {
           "type": "and",

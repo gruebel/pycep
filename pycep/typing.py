@@ -85,6 +85,7 @@ class ParamResponse(TypedDict):
 
 
 class VariableAttributes(TypedDict):
+    decorators: list[Decorator]
     value: PossibleValue
     __start_line__: int | None  # NotRequired[int]
     __end_line__: int | None  # NotRequired[int]

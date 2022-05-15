@@ -13,6 +13,7 @@
   },
   "variables": {
     "roleName": {
+      "decorators": [],
       "value": "Bicep Custom Role demo"
     }
   },

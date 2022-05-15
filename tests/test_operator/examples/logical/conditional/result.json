@@ -6,6 +6,7 @@
   },
   "variables": {
     "subnetId": {
+      "decorators": [],
       "value": {
         "operator": {
           "type": "conditional",

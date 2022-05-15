@@ -22,6 +22,7 @@
   },
   "variables": {
     "varStr": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "pad_left",

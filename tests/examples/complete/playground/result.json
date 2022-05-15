@@ -77,33 +77,43 @@
   },
   "variables": {
     "virtualMachineName": {
+      "decorators": [],
       "value": "VM-MultiNic"
     },
     "nic1Name": {
+      "decorators": [],
       "value": "nic-1"
     },
     "nic2Name": {
+      "decorators": [],
       "value": "nic-2"
     },
     "virtualNetworkName": {
+      "decorators": [],
       "value": "virtualNetwork"
     },
     "subnet1Name": {
+      "decorators": [],
       "value": "subnet-1"
     },
     "subnet2Name": {
+      "decorators": [],
       "value": "subnet-2"
     },
     "publicIPAddressName": {
+      "decorators": [],
       "value": "publicIp"
     },
     "diagStorageAccountName": {
+      "decorators": [],
       "value": "diags${uniqueString(resourceGroup().id)}"
     },
     "networkSecurityGroupName": {
+      "decorators": [],
       "value": "NSG"
     },
     "networkSecurityGroupName2": {
+      "decorators": [],
       "value": "${subnet2Name}-nsg"
     }
   },

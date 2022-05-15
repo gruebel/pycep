@@ -20,6 +20,7 @@
   },
   "variables": {
     "cpuCores": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "load_file_as_base64",

@@ -23,6 +23,7 @@
   },
   "variables": {
     "uamiId": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "subscription_resource_id",

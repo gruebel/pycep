@@ -21,6 +21,7 @@
   },
   "variables": {
     "uamiId": {
+      "decorators": [],
       "value": {
         "function": {
           "type": "list_keys",
