@@ -9,7 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+## [0.3.5] - 2022-05-15
+
+### Added
+
 - Support `@description` decorator for var elements
+- Leverage `typing.NotRequired` from Python 3.11 to improve type hints
 
 ## [0.3.4] - 2022-04-10
 
@@ -95,7 +100,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release to be able to parse all the official examples of Bicep [101](https://github.com/Azure/bicep/tree/main/docs/examples/101).
 
-[Unreleased]: https://github.com/gruebel/pycep/compare/0.3.4...HEAD
+[Unreleased]: https://github.com/gruebel/pycep/compare/0.3.5...HEAD
+[0.3.5]: https://github.com/gruebel/pycep/compare/0.3.4...0.3.5
 [0.3.4]: https://github.com/gruebel/pycep/compare/0.3.3...0.3.4
 [0.3.3]: https://github.com/gruebel/pycep/compare/0.3.2...0.3.3
 [0.3.2]: https://github.com/gruebel/pycep/compare/0.3.1...0.3.2

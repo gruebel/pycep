@@ -46,7 +46,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     def start(self, args: list[pycep_typing.ElementResponse]) -> pycep_typing.BicepJson:
         result: pycep_typing.BicepJson = {
             "globals": {
-                "scope": {  # type: ignore[typeddict-item]
+                "scope": {
                     "value": "resourceGroup",
                 },
             }
@@ -79,7 +79,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         result: pycep_typing.ScopeResponse = {
             "globals": {
                 "__name__": "scope",
-                "__attrs__": {  # type: ignore[typeddict-item]
+                "__attrs__": {
                     "value": value,
                 },
             }
@@ -100,7 +100,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         result: pycep_typing.ParamResponse = {
             "parameters": {
                 "__name__": str(name),
-                "__attrs__": {  # type: ignore[typeddict-item]
+                "__attrs__": {
                     "decorators": decorators if decorators else [],
                     "type": data_type,
                     "default": default,
@@ -123,7 +123,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         result: pycep_typing.VarResponse = {
             "variables": {
                 "__name__": str(name),
-                "__attrs__": {  # type: ignore[typeddict-item]
+                "__attrs__": {
                     "decorators": decorators if decorators else [],
                     "value": value,
                 },
@@ -145,7 +145,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         result: pycep_typing.OutputResponse = {
             "outputs": {
                 "__name__": str(name),
-                "__attrs__": {  # type: ignore[typeddict-item]
+                "__attrs__": {
                     "decorators": decorators if decorators else [],
                     "type": data_type,
                     "value": value,
@@ -177,7 +177,8 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                 "__name__": name_str,
                 "__attrs__": {
                     "decorators": decorators if decorators else [],
-                    **type_api_pair,  # type: ignore[misc] # https://github.com/python/mypy/issues/11753
+                    "type": type_api_pair["type"],
+                    "api_version": type_api_pair["api_version"],
                     "existing": True if existing else False,
                     "config": config,
                 },
@@ -198,7 +199,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
         result: pycep_typing.Resource = {
             "__name__": str(name),
-            "__attrs__": {  # type: ignore[typeddict-item]
+            "__attrs__": {
                 "decorators": [],
                 "type": str(type_name)[1:-1],
                 "api_version": "",  # will be set later with the parent resource api version
