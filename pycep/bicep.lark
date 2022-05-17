@@ -175,7 +175,7 @@ int_func: ("int" | "sys.int") "(" value_brackets ")"
 
 ?function_object: json_func
 
-json_func: ("json" | "sys.json") "(" value_brackets ")"
+json_func: ("json" | "sys.json") "(" value_brackets ")" ["." STRING]
 
 // functions - resource
 

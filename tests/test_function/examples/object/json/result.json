@@ -65,7 +65,8 @@
           "type": "json",
           "parameters": {
             "arg_1": "site.properties"
-          }
+          },
+          "property_name": "id"
         }
       }
     },
