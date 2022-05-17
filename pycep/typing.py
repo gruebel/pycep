@@ -590,6 +590,7 @@ class _JsonParameters(TypedDict):
 class Json(TypedDict):
     type: Literal["json"]
     parameters: _JsonParameters
+    property_name: NotRequired[str]
 
 
 ####################

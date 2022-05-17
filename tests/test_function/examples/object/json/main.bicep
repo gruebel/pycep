@@ -19,7 +19,7 @@ resource identityProvider 'Microsoft.ApiManagement/service/identityProviders@202
 }
 
 // output
-output ftpUser string = json(site.properties)
+output ftpUser string = json(site.properties).id
 
 // namespace sys
 output namespace string = sys.json(site)

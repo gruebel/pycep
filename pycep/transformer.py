@@ -780,13 +780,20 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     #
     ####################
 
-    def json_func(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.Json:
-        return {
+    def json_func(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleNoneValue]) -> pycep_typing.Json:
+        arg_1, property_name = args
+
+        result: pycep_typing.Json = {
             "type": "json",
             "parameters": {
-                "arg_1": args[0],
+                "arg_1": arg_1,
             },
         }
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
 
     ####################
     #

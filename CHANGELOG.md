@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Support property accessor for `json` function
+
 ## [0.3.5] - 2022-05-15
 
 ### Added
