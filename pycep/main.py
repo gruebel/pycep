@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from importlib import resources
+import sys
 from pathlib import Path
 
 from lark import Lark, Token, Tree
@@ -9,7 +9,12 @@ from pycep import typing as pycep_typing
 
 from .transformer import BicepToJson
 
-LARK_GRAMMAR = resources.read_text(__package__, "bicep.lark")
+if sys.version_info >= (3, 9):  # pragma: no cover
+    from importlib.resources import files
+else:
+    from importlib_resources import files
+
+LARK_GRAMMAR = (files(__package__) / "bicep.lark").read_text()
 
 
 class BicepParser:
