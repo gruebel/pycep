@@ -21,5 +21,9 @@ resource identityProvider 'Microsoft.ApiManagement/service/identityProviders@202
 // output
 output ftpUser string = json(site.properties).id
 
+output lateIndexed string = json(loadTextContent('./vars.json')).subscriptions[env].id
+
+output directIndexed string = json(loadTextContent('./vars.json'))[sub].dev[var_id]
+
 // namespace sys
 output namespace string = sys.json(site)

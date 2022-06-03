@@ -780,8 +780,10 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     #
     ####################
 
-    def json_func(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleNoneValue]) -> pycep_typing.Json:
-        arg_1, property_name = args
+    def json_func(
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleNoneValue, pycep_typing.PossibleNoneValue]
+    ) -> pycep_typing.Json:
+        arg_1, property_name_1, property_name_2 = args
 
         result: pycep_typing.Json = {
             "type": "json",
@@ -790,8 +792,14 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
 
-        if property_name:
-            result["property_name"] = str(property_name)
+        if property_name_2:
+            # workaround for direct index accessors
+            if property_name_1:
+                property_name = f"[{property_name_1}]{property_name_2}"
+            else:
+                property_name = str(property_name_2)
+
+            result["property_name"] = property_name
 
         return result
 
@@ -825,9 +833,15 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         }
 
     def list_keys(
-        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue, pycep_typing.PossibleNoneValue]
+        self,
+        args: tuple[
+            pycep_typing.PossibleValue,
+            pycep_typing.PossibleValue,
+            pycep_typing.PossibleNoneValue,
+            pycep_typing.PossibleNoneValue,
+        ],
     ) -> pycep_typing.ListKeys:
-        resource_identifier, api_version, property_name = args
+        resource_identifier, api_version, property_name_1, property_name_2 = args
 
         result: pycep_typing.ListKeys = {
             "type": "list_keys",
@@ -837,7 +851,13 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
 
-        if property_name:
+        if property_name_2:
+            # workaround for direct index accessors
+            if property_name_1:
+                property_name = f"[{property_name_1}]{property_name_2}"
+            else:
+                property_name = str(property_name_2)
+
             result["property_name"] = str(property_name)
 
         return result
