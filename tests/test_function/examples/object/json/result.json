@@ -70,6 +70,48 @@
         }
       }
     },
+    "lateIndexed": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "json",
+          "parameters": {
+            "arg_1": {
+              "function": {
+                "type": "load_text_content",
+                "parameters": {
+                  "file_path": "./vars.json",
+                  "encoding": null
+                }
+              }
+            }
+          },
+          "property_name": "subscriptions[env].id"
+        }
+      }
+    },
+    "directIndexed": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "json",
+          "parameters": {
+            "arg_1": {
+              "function": {
+                "type": "load_text_content",
+                "parameters": {
+                  "file_path": "./vars.json",
+                  "encoding": null
+                }
+              }
+            }
+          },
+          "property_name": "[sub]dev[var_id]"
+        }
+      }
+    },
     "namespace": {
       "decorators": [],
       "type": "string",

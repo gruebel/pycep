@@ -175,7 +175,7 @@ int_func: ("int" | "sys.int") "(" value_brackets ")"
 
 ?function_object: json_func
 
-json_func: ("json" | "sys.json") "(" value_brackets ")" ["." STRING]
+json_func: ("json" | "sys.json") "(" value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
 
 // functions - resource
 
@@ -183,7 +183,7 @@ json_func: ("json" | "sys.json") "(" value_brackets ")" ["." STRING]
 
 extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" value_brackets ("," value_brackets)~2..3 ")"
 
-list_keys: ("listKeys" | "az.listKeys") "(" value_brackets "," value_brackets ")" ["." (STRING | INDEXED)]
+list_keys: ("listKeys" | "az.listKeys") "(" value_brackets "," value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
 
 pick_zones: ("pickZones" | "az.pickZones") "(" value_brackets ("," value_brackets)~2..4 ")"
 
