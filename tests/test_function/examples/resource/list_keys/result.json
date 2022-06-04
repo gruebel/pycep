@@ -97,6 +97,34 @@
         }
       }
     },
+    "lateIndexed": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "list_keys",
+          "parameters": {
+            "resource_identifier": "refId",
+            "api_version": "apiVersion"
+          },
+          "property_name": "keys[env].value"
+        }
+      }
+    },
+    "directIndexed": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "list_keys",
+          "parameters": {
+            "resource_identifier": "refId",
+            "api_version": "apiVersion"
+          },
+          "property_name": "[sub]dev[var_id]"
+        }
+      }
+    },
     "namespace": {
       "decorators": [],
       "type": "object",
