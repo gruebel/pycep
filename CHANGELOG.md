@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support index accessor for `json` function
 - Support `managementGroupResourceId` function
+- Support `dateTimeFromEpoch` function
 
 ## [0.3.6] - 2022-05-21
 
