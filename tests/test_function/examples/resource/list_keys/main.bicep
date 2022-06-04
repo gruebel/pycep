@@ -28,5 +28,9 @@ module exampleModule 'rgModule.bicep' = {
 // output
 output subnetId object = listKeys(refId, apiVersion).primaryEndpoints.blob
 
+output lateIndexed string = listKeys(refId, apiVersion).keys[env].value
+
+output directIndexed string = listKeys(refId, apiVersion)[sub].dev[var_id]
+
 // namespace az
 output namespace object = az.listKeys(refId, apiVersion)
