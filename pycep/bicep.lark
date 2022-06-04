@@ -137,11 +137,13 @@ union: ("union" | "sys.union") "(" value_brackets ("," value_brackets)+ ")" ["."
 
 // functions - date
 
-?function_date: date_time_add | date_time_from_epoch | utc_now
+?function_date: date_time_add | date_time_from_epoch | date_time_to_epoch | utc_now
 
 date_time_add: ("dateTimeAdd" | "sys.dateTimeAdd") "(" value_brackets "," value_brackets ["," value_brackets]  ")"
 
 date_time_from_epoch: ("dateTimeFromEpoch" | "sys.dateTimeFromEpoch") "(" value_brackets ")"
+
+date_time_to_epoch: ("dateTimeToEpoch" | "sys.dateTimeToEpoch") "(" value_brackets ")"
 
 utc_now: ("utcNow" | "sys.utcNow") "(" [value_brackets] ")"
 

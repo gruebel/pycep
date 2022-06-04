@@ -1,0 +1,85 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramStr": {
+      "decorators": [],
+      "type": "string",
+      "default": {
+        "function": {
+          "type": "date_time_to_epoch",
+          "parameters": {
+            "date_time": "4/7/2023 2:53:14 PM"
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "cpuCores": {
+      "decorators": [],
+      "value": {
+        "function": {
+          "type": "date_time_to_epoch",
+          "parameters": {
+            "date_time": "epochValue"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "identityProvider": {
+      "decorators": [],
+      "type": "Microsoft.ApiManagement/service/identityProviders",
+      "api_version": "2020-06-01-preview",
+      "existing": false,
+      "config": {
+        "name": {
+          "function": {
+            "type": "date_time_to_epoch",
+            "parameters": {
+              "date_time": "epochValue"
+            }
+          }
+        },
+        "properties": {
+          "clientId": "googleClientId",
+          "clientSecret": "googleClientSecret"
+        },
+        "dependsOn": [
+          "apiManagementService"
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "ftpUser": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "date_time_to_epoch",
+          "parameters": {
+            "date_time": "epoch.value"
+          }
+        }
+      }
+    },
+    "namespace": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "date_time_to_epoch",
+          "parameters": {
+            "date_time": "epochValue"
+          }
+        }
+      }
+    }
+  }
+}

@@ -693,6 +693,14 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
 
+    def date_time_to_epoch(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.DateTimeToEpoch:
+        return {
+            "type": "date_time_to_epoch",
+            "parameters": {
+                "date_time": args[0],
+            },
+        }
+
     def utc_now(self, args: tuple[pycep_typing.PossibleNoneValue]) -> pycep_typing.UtcNow:
         return {
             "type": "utc_now",
