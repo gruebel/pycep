@@ -862,6 +862,26 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
         return result
 
+    def management_group_resource_id(self, args: list[Token]) -> pycep_typing.ManagementGroupResourceId:
+        args_len = len(args)
+        if args_len == 2:
+            resource_type = str(args[0])
+            resource_name_1 = str(args[1])
+            resource_name_2 = None
+        else:
+            resource_type = str(args[0])
+            resource_name_1 = str(args[1])
+            resource_name_2 = str(args[2])
+
+        return {
+            "type": "management_group_resource_id",
+            "parameters": {
+                "resource_type": resource_type,
+                "resource_name_1": resource_name_1,
+                "resource_name_2": resource_name_2,
+            },
+        }
+
     def pick_zones(self, args: list[pycep_typing.PossibleNoneValue]) -> pycep_typing.PickZones:
         args_len = len(args)
 
