@@ -35,6 +35,19 @@ def test_parse_list_keys() -> None:
     assert_that(result).is_equal_to(expected_result)
 
 
+def test_parse_management_group_resource_id() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "management_group_resource_id"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BICEP_PARSER.parse(file_path=file_path)
+
+    # then
+    assert_that(result).is_equal_to(expected_result)
+
+
 def test_parse_pick_zones() -> None:
     # given
     sub_dir_path = EXAMPLES_DIR / "pick_zones"

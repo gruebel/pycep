@@ -29,9 +29,7 @@ FileFunctions: TypeAlias = "LoadFileAsBase64 | LoadTextContent"
 LogicalFunctions: TypeAlias = "BoolFunc"
 NumericFunctions: TypeAlias = "IntFunc"
 ObjectFunctions: TypeAlias = "Json"
-ResourceFunctions: TypeAlias = (
-    "ExtensionResourceId | ListKeys | PickZones | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
-)
+ResourceFunctions: TypeAlias = "ExtensionResourceId | ListKeys | ManagementGroupResourceId | PickZones | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ManagementGroup | ResourceGroup | Subscription | Tenant"
 StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | DataUri | DataUriToString | EndsWith | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | StartsWith | String | Substring | ToLower | ToUpper | Trim | UniqueString | Uri | UriComponent | UriComponentToString"
 Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | FileFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
@@ -621,6 +619,11 @@ class ListKeys(TypedDict):
     type: Literal["list_keys"]
     parameters: _ListKeysParameters
     property_name: NotRequired[str]
+
+
+class ManagementGroupResourceId(TypedDict):
+    type: Literal["management_group_resource_id"]
+    parameters: _TenantResourceIdParameters
 
 
 class _PickZonesParameters(TypedDict):

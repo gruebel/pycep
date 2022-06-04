@@ -179,11 +179,14 @@ json_func: ("json" | "sys.json") "(" value_brackets ")" [["[" STRING "]"] "." (S
 
 // functions - resource
 
-?function_resource: extension_resource_id | list_keys | pick_zones | reference | resource_id | subscription_resource_id | tenant_resource_id
+?function_resource: extension_resource_id | list_keys | management_group_resource_id | pick_zones | reference
+                  | resource_id | subscription_resource_id | tenant_resource_id
 
 extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" value_brackets ("," value_brackets)~2..3 ")"
 
 list_keys: ("listKeys" | "az.listKeys") "(" value_brackets "," value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
+
+management_group_resource_id: ("managementGroupResourceId" | "az.managementGroupResourceId") "(" value_brackets ("," value_brackets)~1..2 ")"
 
 pick_zones: ("pickZones" | "az.pickZones") "(" value_brackets ("," value_brackets)~2..4 ")"
 
