@@ -33,6 +33,8 @@
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-date)
 
 - [x] dateTimeAdd
+- [ ] dateTimeFromEpoch
+- [ ] dateTimeToEpoch
 - [x] utcNow
 
 ### Deployment
@@ -81,6 +83,7 @@
 - [x] extensionResourceId
 - [ ] getSecret (used as a resource accessor)
 - [x] listKeys (deprecated)
+- [x] managementGroupResourceId
 - [x] pickZones
 - [ ] providers (deprecated)
 - [x] reference
