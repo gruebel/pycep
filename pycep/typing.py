@@ -23,7 +23,7 @@ AnyFunctions: TypeAlias = "AnyFunc"
 ArrayFunctions: TypeAlias = (
     "Array | Concat | Contains | Empty | First | Intersection | Last | Length | Max | Min | Skip | Take | UnionFunc"
 )
-DateFunctions: TypeAlias = "DateTimeAdd | DateTimeFromEpoch | UtcNow"
+DateFunctions: TypeAlias = "DateTimeAdd | DateTimeFromEpoch | DateTimeToEpoch | UtcNow"
 DeploymentFunctions: TypeAlias = "Deployment | Environment"
 FileFunctions: TypeAlias = "LoadFileAsBase64 | LoadTextContent"
 LogicalFunctions: TypeAlias = "BoolFunc"
@@ -505,6 +505,15 @@ class _DateTimeFromEpochParameters(TypedDict):
 class DateTimeFromEpoch(TypedDict):
     type: Literal["date_time_from_epoch"]
     parameters: _DateTimeFromEpochParameters
+
+
+class _DateTimeToEpochParameters(TypedDict):
+    date_time: PossibleValue
+
+
+class DateTimeToEpoch(TypedDict):
+    type: Literal["date_time_to_epoch"]
+    parameters: _DateTimeToEpochParameters
 
 
 class _UtcNowParameters(TypedDict):

@@ -34,7 +34,7 @@
 
 - [x] dateTimeAdd
 - [x] dateTimeFromEpoch
-- [ ] dateTimeToEpoch
+- [x] dateTimeToEpoch
 - [x] utcNow
 
 ### Deployment
