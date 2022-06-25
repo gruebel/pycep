@@ -109,7 +109,8 @@ any_func: ("any" | "sys.any") "(" value_brackets ")" ["." STRING]
 ?function_array: array_func | concat | contains | empty | first | intersection | last | length | max_func | min_func
                | skip | take | union
 
-array_func: ("array" | "sys.array") "(" value_brackets ")"
+_ARRAY.1: ("array" | "sys.array") "("
+array_func: _ARRAY value_brackets ")"
 
 concat: ("concat" | "sys.concat") "(" value_brackets ("," value_brackets)* ")"
 
@@ -123,11 +124,14 @@ intersection: ("intersection" | "sys.intersection") "(" value_brackets ("," valu
 
 last: ("last" | "sys.last") "(" value_brackets ")" ["." STRING]
 
-length: ("length" | "sys.length") "(" value_brackets ")"
+_LENGTH.1: ("length" | "sys.length") "("
+length: _LENGTH value_brackets ")"
 
-max_func: ("max" | "sys.max") "(" value_brackets ("," value_brackets)* ")"
+_MAX.1: ("max" | "sys.max") "("
+max_func: _MAX value_brackets ("," value_brackets)* ")"
 
-min_func: ("min" | "sys.min") "(" value_brackets ("," value_brackets)* ")"
+_MIN.1: ("min" | "sys.min") "("
+min_func: _MIN value_brackets ("," value_brackets)* ")"
 
 skip: ("skip" | "sys.skip") "(" value_brackets "," value_brackets ")"
 
@@ -151,9 +155,11 @@ utc_now: ("utcNow" | "sys.utcNow") "(" [value_brackets] ")"
 
 ?function_deployment: deployment | environment
 
-deployment: ("deployment" | "az.deployment") "(" ")" ["." STRING]
+_DEPLOYMENT.1: ("deployment" | "az.deployment") "("
+deployment: _DEPLOYMENT ")" ["." STRING]
 
-environment: ("environment" | "az.environment") "(" ")" ["." STRING]
+_ENVIRONMENT.1: ("environment" | "az.environment") "("
+environment: _ENVIRONMENT ")" ["." STRING]
 
 // functions - file
 
@@ -179,7 +185,8 @@ int_func: ("int" | "sys.int") "(" value_brackets ")"
 
 ?function_object: json_func
 
-json_func: ("json" | "sys.json") "(" value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
+_JSON.1: ("json" | "sys.json") "("
+json_func: _JSON value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
 
 // functions - resource
 
@@ -213,7 +220,8 @@ management_group: _MANAGEMENT_GROUP [value_brackets] ")" ["." STRING]
 _RESOURCE_GROUP.1: ("resourceGroup" | "az.resourceGroup") "("
 resource_group: _RESOURCE_GROUP [value_brackets ","? [value_brackets]] ")" ["." STRING]
 
-subscription: ("subscription" | "az.subscription") "(" [value_brackets] ")" ["." STRING]
+_SUBSCRIPTION.1: ("subscription" | "az.subscription") "("
+subscription: _SUBSCRIPTION [value_brackets] ")" ["." STRING]
 
 _TENANT.1: ("tenant" | "az.tenant") "("
 tenant: _TENANT ")" ["." STRING]
@@ -236,9 +244,11 @@ data_uri_to_string: ("dataUriToString" | "sys.dataUriToString") "(" value_bracke
 
 ends_with: ("endsWith" | "sys.endsWith") "(" value_brackets "," value_brackets ")"
 
-format: ("format" | "sys.format") "(" value_brackets ("," value_brackets)+ ")"
+_FORMAT.1: ("format" | "sys.format") "("
+format: _FORMAT value_brackets ("," value_brackets)+ ")"
 
-guid: ("guid" | "sys.guid") "(" value_brackets ("," value_brackets)* ")"
+_GUID.1: ("guid" | "sys.guid") "("
+guid: _GUID value_brackets ("," value_brackets)* ")"
 
 index_of: ("indexOf" | "sys.indexOf") "(" value_brackets "," value_brackets ")"
 
@@ -266,7 +276,8 @@ trim: ("trim" | "sys.trim") "(" value_brackets ")"
 
 unique_string: ("uniqueString" | "sys.uniqueString") "(" value_brackets ("," value_brackets)* ")"
 
-uri: ("uri" | "sys.uri") "(" value_brackets "," value_brackets ")"
+_URI.1: ("uri" | "sys.uri") "("
+uri: _URI value_brackets "," value_brackets ")"
 
 uri_component: ("uriComponent" | "sys.uriComponent") "(" value_brackets ")"
 

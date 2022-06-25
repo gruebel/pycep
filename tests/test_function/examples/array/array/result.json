@@ -48,7 +48,7 @@
         },
         "properties": {
           "clientId": "googleClientId",
-          "clientSecret": "googleClientSecret"
+          "clientSecret": "array"
         },
         "dependsOn": [
           "apiManagementService"

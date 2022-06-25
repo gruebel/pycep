@@ -8,7 +8,7 @@ var subId = subscription().id
 
 // resource
 resource managedidentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30' = {
-  name: uamiName
+  name: subscription
   subId: subscription().subscriptionId
 }
 

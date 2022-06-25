@@ -48,7 +48,7 @@
         },
         "properties": {
           "roleDefinitionId": "definition.id",
-          "principalId": "principalId"
+          "principalId": "length"
         }
       }
     }

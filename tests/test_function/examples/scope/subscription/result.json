@@ -39,7 +39,7 @@
       "api_version": "2018-11-30",
       "existing": false,
       "config": {
-        "name": "uamiName",
+        "name": "subscription",
         "subId": {
           "function": {
             "type": "subscription",

@@ -11,7 +11,7 @@ resource assignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview'
   name: uri(roleName, searchStr)
   properties: {
     roleDefinitionId: definition.id
-    principalId: principalId
+    principalId: uri
   }
 }
 
