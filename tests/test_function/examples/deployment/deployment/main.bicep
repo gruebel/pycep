@@ -11,7 +11,7 @@ resource identityProvider 'Microsoft.ApiManagement/service/identityProviders@202
   name: deployment().name
   properties: {
     clientId: 'googleClientId'
-    clientSecret: googleClientSecret
+    clientSecret: deployment
   }
   dependsOn: [
     apiManagementService

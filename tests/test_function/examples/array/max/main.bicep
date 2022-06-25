@@ -11,7 +11,7 @@ resource identityProvider 'Microsoft.ApiManagement/service/identityProviders@202
   name: 'exmple'
   properties: max(firstArray)
   dependsOn: [
-    apiManagementService
+    max
   ]
 }
 

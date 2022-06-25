@@ -11,7 +11,7 @@ resource identityProvider 'Microsoft.ApiManagement/service/identityProviders@202
   name: 'exmple'
   properties: format('{0}, {1}', greeting, name)
   dependsOn: [
-    apiManagementService
+    format
   ]
 }
 

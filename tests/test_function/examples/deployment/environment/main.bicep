@@ -11,7 +11,7 @@ resource identityProvider 'Microsoft.ApiManagement/service/identityProviders@202
   name: environment().name
   properties: {
     clientId: 'googleClientId'
-    clientSecret: googleClientSecret
+    clientSecret: environment
   }
   dependsOn: [
     apiManagementService

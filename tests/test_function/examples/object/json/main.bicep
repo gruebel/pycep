@@ -11,7 +11,7 @@ resource identityProvider 'Microsoft.ApiManagement/service/identityProviders@202
   name: json(someJsonObject)
   properties: {
     clientId: 'googleClientId'
-    clientSecret: googleClientSecret
+    clientSecret: json
   }
   dependsOn: [
     apiManagementService

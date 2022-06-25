@@ -54,7 +54,7 @@
           }
         },
         "dependsOn": [
-          "apiManagementService"
+          "format"
         ]
       }
     }
