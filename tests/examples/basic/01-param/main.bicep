@@ -12,7 +12,17 @@ param demoArray array = [
   1
   true
   'example string'
+  'comma', 'separated', 'elements'
 ]
+
+// object
+param demoObject object = {
+  name: resourceGroup().name
+  number: 1
+  boolean: true
+  string: 'example string'
+  single: 'line', comma: 'separated strings'
+}
 
 // expression
 param location string = resourceGroup().location
