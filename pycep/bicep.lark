@@ -163,9 +163,11 @@ environment: _ENVIRONMENT ")" ["." STRING]
 
 // functions - file
 
-?function_file: load_file_as_base64 | load_text_content
+?function_file: load_file_as_base64 | load_json_content | load_text_content
 
 load_file_as_base64: ("loadFileAsBase64" | "sys.loadFileAsBase64") "(" value_brackets ")"
+
+load_json_content: ("loadJsonContent" | "sys.loadJsonContent") "(" value_brackets ["," value_brackets ["," value_brackets]] ")" [["[" STRING "]"] "." (STRING | INDEXED)]
 
 load_text_content: ("loadTextContent" | "sys.loadTextContent") "(" value_brackets ["," value_brackets] ")"
 
