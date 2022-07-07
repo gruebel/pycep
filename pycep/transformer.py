@@ -754,6 +754,38 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
 
+    def load_json_content(
+        self,
+        args: tuple[
+            pycep_typing.PossibleValue,
+            pycep_typing.PossibleNoneValue,
+            pycep_typing.PossibleNoneValue,
+            pycep_typing.PossibleNoneValue,
+            pycep_typing.PossibleNoneValue,
+        ],
+    ) -> pycep_typing.LoadJsonContent:
+        file_path, json_path, encoding, property_name_1, property_name_2 = args
+
+        result: pycep_typing.LoadJsonContent = {
+            "type": "load_json_content",
+            "parameters": {
+                "file_path": file_path,
+                "json_path": json_path,
+                "encoding": encoding,
+            },
+        }
+
+        if property_name_2:
+            # workaround for direct index accessors
+            if property_name_1:
+                property_name = f"[{property_name_1}]{property_name_2}"
+            else:
+                property_name = str(property_name_2)
+
+            result["property_name"] = property_name
+
+        return result
+
     def load_file_as_base64(self, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.LoadFileAsBase64:
         return {
             "type": "load_file_as_base64",
