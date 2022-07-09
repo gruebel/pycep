@@ -29,12 +29,12 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11-dev"]
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
         experimental: [false]
-#        include:
-#          - os: ubuntu-latest
-#            python-version: "3.12-dev"
-#            experimental: true
+        include:
+          - os: ubuntu-latest
+            python-version: "3.11-dev"
+            experimental: true
       fail-fast: false
     continue-on-error: ${{ matrix.experimental }}
     defaults:
@@ -50,7 +50,7 @@ jobs:
         id: full-python-version
         run: echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
       - name: Set up poetry ${{ env.POETRY_VERSION }}
-        uses: abatilo/actions-poetry@7044c9c69e0265717d52471f66033b8d0e2a69ff  # v2.1.4
+        uses: abatilo/actions-poetry@c1aba0c402ae0d96fbb6d94050592a56b202009f  # v2.1.5
         with:
           poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies
@@ -82,7 +82,7 @@ jobs:
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
-        uses: abatilo/actions-poetry@7044c9c69e0265717d52471f66033b8d0e2a69ff  # v2.1.4
+        uses: abatilo/actions-poetry@c1aba0c402ae0d96fbb6d94050592a56b202009f  # v2.1.5
         with:
           poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies

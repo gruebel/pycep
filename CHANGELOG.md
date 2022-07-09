@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Support shadowing of a couple of built-in functions
+- Support `loadJsonContent` function
 - Support single line array and object declarations
 
 ## [0.3.7] - 2022-06-04
