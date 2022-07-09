@@ -1,8 +1,7 @@
 // allowed
 @allowed([
   1
-  2
-  3
+  2, 3
 ])
 param zone int
 

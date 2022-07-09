@@ -41,8 +41,32 @@
         },
         1,
         true,
-        "example string"
+        "example string",
+        "comma",
+        "separated",
+        "elements"
       ]
+    },
+    "demoObject": {
+      "decorators": [],
+      "type": "object",
+      "default": {
+        "name": {
+          "function": {
+            "type": "resource_group",
+            "parameters": {
+              "resource_group_name": null,
+              "subscription_id": null
+            },
+            "property_name": "name"
+          }
+        },
+        "number": 1,
+        "boolean": true,
+        "string": "example string",
+        "single": "line",
+        "comma": "separated strings"
+      }
     },
     "location": {
       "decorators": [],

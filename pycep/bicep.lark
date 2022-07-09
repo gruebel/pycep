@@ -63,11 +63,11 @@ deploy_condition: "if" "(" value_brackets ")" value_brackets
 
 ?quoted_string: STRING | QUOTED_STRING | QUOTED_INTERPOLATION
 
-array: "[" _CPP_COMMENT_NL~0..10 (value_brackets _CPP_COMMENT_NL~1..5)* "]"
+array: "[" _CPP_COMMENT_NL~0..10 (value_brackets ("," value_brackets)* _CPP_COMMENT_NL~0..5)* "]"
 
-object: "{" _CPP_COMMENT_NL~0..10 (pair | child_resource)* "}"
+object: "{" _CPP_COMMENT_NL~0..10 ((pair ("," pair)* | child_resource) _CPP_COMMENT_NL~0..5)* "}"
 
-pair: key ":" (value_brackets | loop) _CPP_COMMENT_NL+
+pair: key ":" (value_brackets | loop)
 
 !key: "resource" | quoted_string
 
