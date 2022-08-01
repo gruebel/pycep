@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
         with:
           ref: master
-      - uses: actions/setup-python@d09bd5e6005b175076f227b13d9730d56e9dcfcb  # v4.0.0
+      - uses: actions/setup-python@c4e89fac7e8767b327bbad6cb4d859eda999cf08  # v4.1.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
@@ -47,7 +47,7 @@ jobs:
         run: poetry publish --build
       - name: Extract release notes
         id: extract-release-notes
-        uses: ffurrer2/extract-release-notes@1c7f1ed024631f17659a9a013665ac6c16e905e7  # v1.14.0
+        uses: ffurrer2/extract-release-notes@d7f9902387b9be21075ddaecb27f429142899984  # v1.15.0
       - name: Create GitHub Release
         uses: softprops/action-gh-release@1e07f4398721186383de40550babbdf2b84acfc5  # v0.1.14
         with:
