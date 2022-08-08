@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
-      - uses: actions/setup-python@c4e89fac7e8767b327bbad6cb4d859eda999cf08  # v4.1.0
+      - uses: actions/setup-python@b55428b1882923874294fa556849718a1d7f2ca5  # v4.1.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - uses: pre-commit/action@9b88afc9cd57fd75b655d5c71bd38146d07135fe  # v2.0.3
@@ -43,7 +43,7 @@ jobs:
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@c4e89fac7e8767b327bbad6cb4d859eda999cf08  # v4.1.0
+        uses: actions/setup-python@b55428b1882923874294fa556849718a1d7f2ca5  # v4.1.0
         with:
           python-version: ${{ matrix.python-version }}
       - name: Get full Python version
@@ -78,7 +78,7 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
-      - uses: actions/setup-python@c4e89fac7e8767b327bbad6cb4d859eda999cf08  # v4.1.0
+      - uses: actions/setup-python@b55428b1882923874294fa556849718a1d7f2ca5  # v4.1.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
