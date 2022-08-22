@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-python@c4e89fac7e8767b327bbad6cb4d859eda999cf08  # v4.1.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
-      - uses: pre-commit/action@9b88afc9cd57fd75b655d5c71bd38146d07135fe  # v2.0.3
+      - uses: pre-commit/action@646c83fcd040023954eafda54b4db0192ce70507  # v2.0.3
 
   tests:
     needs: pre-commit
