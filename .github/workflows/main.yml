@@ -50,7 +50,7 @@ jobs:
         id: full-python-version
         run: echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
       - name: Set up poetry ${{ env.POETRY_VERSION }}
-        uses: abatilo/actions-poetry@c1aba0c402ae0d96fbb6d94050592a56b202009f  # v2.1.5
+        uses: abatilo/actions-poetry@0816ab2aa6474edc70c5f39eef65dea80c70d153  # v2.1.5
         with:
           poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies
@@ -82,7 +82,7 @@ jobs:
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
-        uses: abatilo/actions-poetry@c1aba0c402ae0d96fbb6d94050592a56b202009f  # v2.1.5
+        uses: abatilo/actions-poetry@0816ab2aa6474edc70c5f39eef65dea80c70d153  # v2.1.5
         with:
           poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies
