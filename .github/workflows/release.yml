@@ -8,7 +8,7 @@ on:
 permissions: read-all
 
 env:
-  POETRY_VERSION: "1.1.13"
+  POETRY_VERSION: "1.1.15"
   MIN_PYTHON_VERSION: "3.7"
 
 jobs:
@@ -20,11 +20,11 @@ jobs:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
         with:
           ref: master
-      - uses: actions/setup-python@c4e89fac7e8767b327bbad6cb4d859eda999cf08  # v4.1.0
+      - uses: actions/setup-python@b55428b1882923874294fa556849718a1d7f2ca5  # v4.2.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
-        uses: abatilo/actions-poetry@c1aba0c402ae0d96fbb6d94050592a56b202009f  # v2.1.5
+        uses: abatilo/actions-poetry@0816ab2aa6474edc70c5f39eef65dea80c70d153  # v2.1.6
         with:
           poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies
