@@ -8,6 +8,7 @@ from lark import Lark, Token, Tree
 from pycep import typing as pycep_typing
 
 from .transformer import BicepToJson
+from .validator import BicepValidator
 
 if sys.version_info >= (3, 9):  # pragma: no cover
     from importlib.resources import files
@@ -42,5 +43,11 @@ class BicepParser:
             bicep_text = file_path.read_text()
         else:
             raise TypeError("Either 'text' or 'file_path' has to be set")
+
+        if not BicepValidator.is_valid(bicep_text):
+            if file_path:
+                raise ValueError(f"{file_path} file content is invalid")
+            else:
+                raise ValueError("Text is invalid")
 
         return self.lark_parser.parse(bicep_text)
