@@ -99,8 +99,8 @@ def test_invalid_bicep_content_multi_line() -> None:
     file_path = sub_dir_path / "invalid_multi_line.bicep"
 
     # when
-    try:
-        result = BicepParser().parse(text=file_path.read_text())
-        assert 0 == 1
-    except Exception as e:
-        assert 'file content is invalid' in str(e)
+    with pytest.raises(ValueError) as exc_info:  # noqa: PT011
+        BicepParser().parse(text=file_path.read_text())
+
+    # then
+    assert_that(str(exc_info.value)).is_equal_to("Text is invalid")
