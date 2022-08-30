@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-## [0.3.8] - 2022-08-30
+## [0.3.9] - 2022-08-30
 
 ### Changed
 
@@ -133,7 +133,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release to be able to parse all the official examples of Bicep [101](https://github.com/Azure/bicep/tree/main/docs/examples/101).
 
-[Unreleased]: https://github.com/gruebel/pycep/compare/0.3.8...HEAD
+[Unreleased]: https://github.com/gruebel/pycep/compare/0.3.9...HEAD
+[0.3.9]: https://github.com/gruebel/pycep/compare/0.3.8...0.3.9
 [0.3.8]: https://github.com/gruebel/pycep/compare/0.3.7...0.3.8
 [0.3.7]: https://github.com/gruebel/pycep/compare/0.3.6...0.3.7
 [0.3.6]: https://github.com/gruebel/pycep/compare/0.3.5...0.3.6
