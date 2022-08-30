@@ -92,3 +92,15 @@ def test_constructor_error_with_missing_parameters() -> None:
 
     # then
     assert_that(str(exc_info.value)).is_equal_to("Either 'text' or 'file_path' has to be set")
+
+
+def test_invalid_bicep_content_multi_line() -> None:
+    sub_dir_path = EXAMPLES_DIR / "invalid"
+    file_path = sub_dir_path / "invalid_multi_line.bicep"
+
+    # when
+    try:
+        result = BicepParser().parse(text=file_path.read_text())
+        assert 0 == 1
+    except Exception as e:
+        assert 'file content is invalid' in str(e)
