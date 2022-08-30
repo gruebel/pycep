@@ -6,6 +6,7 @@ from pathlib import Path
 from lark import Lark, Token, Tree
 
 from pycep import typing as pycep_typing
+from .validator import BicepValidator
 
 from .transformer import BicepToJson
 
@@ -42,5 +43,8 @@ class BicepParser:
             bicep_text = file_path.read_text()
         else:
             raise TypeError("Either 'text' or 'file_path' has to be set")
+
+        if not BicepValidator.is_valid(bicep_text):
+            raise Exception(f"{file_path} file content is invalid")
 
         return self.lark_parser.parse(bicep_text)
