@@ -16,11 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
+      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8  # v3.1.0
         with:
           ref: master
-      - uses: actions/setup-python@b55428b1882923874294fa556849718a1d7f2ca5  # v4.2.0
+      - uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984  # v4.3.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
@@ -30,6 +32,7 @@ jobs:
       - name: Install dependencies
         run: poetry install --no-dev
       - name: Release version ${{ github.ref_name }}
+        id: version
         run: |
           # bump version
           poetry version $GITHUB_REF_NAME
@@ -41,6 +44,8 @@ jobs:
           git add pyproject.toml
           git commit -m "publish version ${new_version}"
           git push
+
+          echo "version=$new_version" >> $GITHUB_OUTPUT
       - name: Publish to PyPI
         env:
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
@@ -52,3 +57,39 @@ jobs:
         uses: softprops/action-gh-release@1e07f4398721186383de40550babbdf2b84acfc5  # v0.1.14
         with:
           body: ${{ steps.extract-release-notes.outputs.release_notes }}
+
+  create-pr:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout checkov
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8  # v3.1.0
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          repository: bridgecrewio/checkov
+      - uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984  # v4.3.0
+        with:
+          python-version: ${{ env.MIN_PYTHON_VERSION }}
+      - name: Prepare PR
+        run: |
+          # install needed tools
+          python -m pip install --no-cache-dir --upgrade pipenv "pipenv-setup[black]" "vistir<0.7.0"
+
+          # update Pipfile
+          pipenv --python ${{ env.MIN_PYTHON_VERSION }}
+          pipenv install pycep-parser==${{ needs.release.outputs.version }}
+          pipenv lock
+
+          # update setup.py
+          pipenv-setup sync --pipfile
+      - name: Create PR
+        uses: peter-evans/create-pull-request@b4d51739f96fca8047ad065eccef63442d8e99f7  # v4.2.0
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          branch: update-pycep-parser-dep
+          delete-branch: true
+          commit-message: update pycep-parser version
+          title: "chore: update pycep-parser version to ${{ needs.bump-version.outputs.version }}"
+          body: |
+            - Automatic update of pycep-parser
+            powered by [create-pull-request](https://github.com/peter-evans/create-pull-request) GHA
