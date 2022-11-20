@@ -10,7 +10,7 @@ from typing_extensions import Literal
 
 from pycep import typing as pycep_typing
 
-BICEP_REGISTRY_ALIAS_PATTERN = re.compile(r"br/(?P<alias>[\w]+):(?P<path>[\w/\-]+):(?P<tag>[\w.\-]+)")
+BICEP_REGISTRY_ALIAS_PATTERN = re.compile(r"br/(?P<alias>[\w]+):(?P<path>[\w/\-.]+):(?P<tag>[\w.\-]+)")
 PUBLIC_BICEP_REGISTRY_PATTERN = re.compile(r"br:mcr\.microsoft\.com/(?P<path>[\w/\-]+):(?P<tag>[\w.\-]+)")
 PRIVATE_BICEP_REGISTRY_PATTERN = re.compile(
     r"br:(?P<registry_name>\w+)\.azurecr\.io/(?P<path>[\w/\-]+):(?P<tag>[\w.\-]+)"

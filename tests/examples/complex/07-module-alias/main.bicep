@@ -16,6 +16,13 @@ module privateRegistryModule 'br/ContosoRegistry:storage:v1' = {
   }
 }
 
+module privateDotRegistryModule 'br/registry:microsoft.resources:1.2.3' = {
+  name: 'helloWorld'
+  params: {
+    name: 'John Dole'
+  }
+}
+
 // template spec
 module templateModule 'ts/CoreSpecs:storage:v1' = {
   name: 'storageDeploy'
