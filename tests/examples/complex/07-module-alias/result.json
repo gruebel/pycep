@@ -39,6 +39,23 @@
         }
       }
     },
+    "privateDotRegistryModule": {
+      "decorators": [],
+      "type": "bicep_registry_alias",
+      "detail": {
+        "full": "registry:microsoft.resources:1.2.3",
+        "alias": "registry",
+        "path": "microsoft.resources",
+        "tag": "1.2.3",
+        "public": false
+      },
+      "config": {
+        "name": "helloWorld",
+        "params": {
+          "name": "John Dole"
+        }
+      }
+    },
     "templateModule": {
       "decorators": [],
       "type": "template_spec_alias",

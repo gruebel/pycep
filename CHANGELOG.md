@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Support dot notation in private module registry names
+
 ## [0.3.9] - 2022-08-30
 
 ### Changed
