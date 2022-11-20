@@ -16,8 +16,8 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
-      - uses: actions/setup-python@b55428b1882923874294fa556849718a1d7f2ca5  # v4.2.0
+      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8  # v3.1.0
+      - uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984  # v4.3.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - uses: pre-commit/action@646c83fcd040023954eafda54b4db0192ce70507  # v3.0.0
@@ -41,14 +41,11 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
+      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8  # v3.1.0
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@b55428b1882923874294fa556849718a1d7f2ca5  # v4.2.0
+        uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984  # v4.3.0
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Get full Python version
-        id: full-python-version
-        run: echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
       - name: Set up poetry ${{ env.POETRY_VERSION }}
         uses: abatilo/actions-poetry@0816ab2aa6474edc70c5f39eef65dea80c70d153  # v2.1.6
         with:
@@ -77,8 +74,8 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
-      - uses: actions/setup-python@b55428b1882923874294fa556849718a1d7f2ca5  # v4.2.0
+      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8  # v3.1.0
+      - uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984  # v4.3.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
