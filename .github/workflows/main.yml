@@ -47,7 +47,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
-        uses: abatilo/actions-poetry@0816ab2aa6474edc70c5f39eef65dea80c70d153  # v2.1.6
+        uses: abatilo/actions-poetry@f295866fdd47fe14b18927b0908ac25ef3d5009a  # v2.2.0
         with:
           poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies
@@ -79,7 +79,7 @@ jobs:
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
-        uses: abatilo/actions-poetry@0816ab2aa6474edc70c5f39eef65dea80c70d153  # v2.1.6
+        uses: abatilo/actions-poetry@f295866fdd47fe14b18927b0908ac25ef3d5009a  # v2.2.0
         with:
           poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies
