@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.github/**'
+      - '.pre-commit-config.yaml'
   pull_request:
 
 permissions: read-all
@@ -19,7 +25,7 @@ jobs:
       - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8  # v3.1.0
       - uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984  # v4.3.0
         with:
-          python-version: ${{ env.MIN_PYTHON_VERSION }}
+          python-version: "3.8"  # needed for flake8 6.0.0+
       - uses: pre-commit/action@646c83fcd040023954eafda54b4db0192ce70507  # v3.0.0
 
   tests:
@@ -47,7 +53,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
-        uses: abatilo/actions-poetry@0816ab2aa6474edc70c5f39eef65dea80c70d153  # v2.1.6
+        uses: abatilo/actions-poetry@f295866fdd47fe14b18927b0908ac25ef3d5009a  # v2.2.0
         with:
           poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies
@@ -79,7 +85,7 @@ jobs:
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
-        uses: abatilo/actions-poetry@0816ab2aa6474edc70c5f39eef65dea80c70d153  # v2.1.6
+        uses: abatilo/actions-poetry@f295866fdd47fe14b18927b0908ac25ef3d5009a  # v2.2.0
         with:
           poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies

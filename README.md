@@ -5,6 +5,7 @@
 [![PyPI](https://img.shields.io/pypi/v/pycep-parser)](https://pypi.org/project/pycep-parser/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pycep-parser)](https://github.com/gruebel/pycep)
 ![CodeQL](https://github.com/gruebel/pycep/workflows/CodeQL/badge.svg)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/gruebel/pycep/badge)](https://api.securityscorecards.dev/projects/github.com/gruebel/pycep)
 
 A parser for [Azure Bicep](https://github.com/Azure/bicep) files leveraging [Lark](https://github.com/lark-parser/lark).
 
