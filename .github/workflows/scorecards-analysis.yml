@@ -13,6 +13,7 @@ jobs:
     name: Scorecards analysis
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       security-events: write
       actions: read
       contents: read
@@ -22,14 +23,14 @@ jobs:
         with:
           persist-credentials: false
       - name: "Run analysis"
-        uses: ossf/scorecard-action@ce330fde6b1a5c9c75b417e7efc510b822a35564  # v1.1.2
+        uses: ossf/scorecard-action@e38b1902ae4f44df626f11ba0734b14fb91f8f86  # v2.1.2
         with:
           results_file: results.sarif
           results_format: sarif
           repo_token: ${{ secrets.SCORECARD_READ_TOKEN }}
           publish_results: true
       - name: "Upload artifact"
-        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8  # v3.1.0
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce  # v3.1.2
         with:
           name: SARIF file
           path: results.sarif
