@@ -42,7 +42,7 @@ pip install --upgrade pycep-parser
 - [x] String
 
 ### Operators
-- [ ] Accessor
+- [x] Accessor
 - [x] Numeric
 
 ### Considering
