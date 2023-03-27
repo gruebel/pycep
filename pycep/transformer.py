@@ -381,7 +381,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "type": "array",
             "detail": {
                 "item_name": str(item_name),
-                "array_name": str(array_name),
+                "array_name": array_name
             },
         }
 
@@ -860,15 +860,15 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     def extension_resource_id(self, args: list[Token]) -> pycep_typing.ExtensionResourceId:
         args_len = len(args)
         if args_len == 3:
-            resource_id = str(args[0])
-            resource_type = str(args[1])
-            resource_name_1 = str(args[2])
+            resource_id = args[0]
+            resource_type = args[1]
+            resource_name_1 = args[2]
             resource_name_2 = None
         else:
-            resource_id = str(args[0])
-            resource_type = str(args[1])
-            resource_name_1 = str(args[2])
-            resource_name_2 = str(args[3])
+            resource_id = args[0]
+            resource_type = args[1]
+            resource_name_1 = args[2]
+            resource_name_2 = args[3]
 
         return {
             "type": "extension_resource_id",
@@ -913,13 +913,13 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     def management_group_resource_id(self, args: list[Token]) -> pycep_typing.ManagementGroupResourceId:
         args_len = len(args)
         if args_len == 2:
-            resource_type = str(args[0])
-            resource_name_1 = str(args[1])
+            resource_type = args[0]
+            resource_name_1 = args[1]
             resource_name_2 = None
         else:
-            resource_type = str(args[0])
-            resource_name_1 = str(args[1])
-            resource_name_2 = str(args[2])
+            resource_type = args[0]
+            resource_name_1 = args[1]
+            resource_name_2 = args[2]
 
         return {
             "type": "management_group_resource_id",
@@ -987,8 +987,8 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         if args_len == 2:
             subscription_id = None
             resource_group_name = None
-            resource_type = str(args[0])
-            resource_name_1 = str(args[1])
+            resource_type = args[0]
+            resource_name_1 = args[1]
             resource_name_2 = None
         elif args_len == 3:
             # this case is ambiguous and it could be any of
@@ -996,24 +996,24 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             # 0 -> resource_group_name, 1 -> resource_type, 2 -> resource_name_1
             subscription_id = None
             resource_group_name = None
-            resource_type = str(args[0])
-            resource_name_1 = str(args[1])
-            resource_name_2 = str(args[2])
+            resource_type = args[0]
+            resource_name_1 = args[1]
+            resource_name_2 = args[2]
         elif args_len == 4:
             # this case is ambiguous and it could be any of
             # 0 -> resource_group_name, 1 -> resource_type, 2 -> resource_name_1, 3 -> resource_name_2
             # 0 -> subscription_id, 1 -> resource_group_name, 2 -> resource_type, 3 -> resource_name_1
             subscription_id = None
-            resource_group_name = str(args[0])
-            resource_type = str(args[1])
-            resource_name_1 = str(args[2])
-            resource_name_2 = str(args[3])
+            resource_group_name = args[0]
+            resource_type = args[1]
+            resource_name_1 = args[2]
+            resource_name_2 = args[3]
         else:
-            subscription_id = str(args[0])
-            resource_group_name = str(args[1])
-            resource_type = str(args[2])
-            resource_name_1 = str(args[3])
-            resource_name_2 = str(args[4])
+            subscription_id = args[0]
+            resource_group_name = args[1]
+            resource_type = args[2]
+            resource_name_1 = args[3]
+            resource_name_2 = args[4]
 
         return {
             "type": "resource_id",
@@ -1032,22 +1032,22 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         args_len = len(args)
         if args_len == 2:
             subscription_id = None
-            resource_type = str(args[0])
-            resource_name_1 = str(args[1])
+            resource_type = args[0]
+            resource_name_1 = args[1]
             resource_name_2 = None
         elif args_len == 3:
             # this case is ambiguous and it could be any of
             # 0 -> resource_type, 1 -> resource_name_1, 2 -> resource_name_2
             # 0 -> subscription_id, 1 -> resource_type, 2 -> resource_name_1
             subscription_id = None
-            resource_type = str(args[0])
-            resource_name_1 = str(args[1])
-            resource_name_2 = str(args[2])
+            resource_type = args[0]
+            resource_name_1 = args[1]
+            resource_name_2 = args[2]
         else:
-            subscription_id = str(args[0])
-            resource_type = str(args[1])
-            resource_name_1 = str(args[2])
-            resource_name_2 = str(args[3])
+            subscription_id = args[0]
+            resource_type = args[1]
+            resource_name_1 = args[2]
+            resource_name_2 = args[3]
 
         return {
             "type": "subscription_resource_id",
@@ -1062,13 +1062,13 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     def tenant_resource_id(self, args: list[Token]) -> pycep_typing.TenantResourceId:
         args_len = len(args)
         if args_len == 2:
-            resource_type = str(args[0])
-            resource_name_1 = str(args[1])
+            resource_type = args[0]
+            resource_name_1 = args[1]
             resource_name_2 = None
         else:
-            resource_type = str(args[0])
-            resource_name_1 = str(args[1])
-            resource_name_2 = str(args[2])
+            resource_type = args[0]
+            resource_name_1 = args[1]
+            resource_name_2 = args[2]
 
         return {
             "type": "tenant_resource_id",
@@ -1626,6 +1626,52 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                 "operand_1": operand_1,
                 "operand_2": operand_2,
             },
+        }
+
+    ####################
+    #
+    # operators - accessor
+    #
+    ####################
+
+    def index_accessor(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.IndexAccessor:
+        arg_1, arg_2 = args
+        return {
+            "type": "index_accessor",
+            "operands": {
+                "operand_1": arg_1,
+                "operand_2": arg_2
+            }
+        }
+
+    def function_accessor(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.FunctionAccessor:
+        arg_1, *arg_x = args
+        return {
+            "type": "function_accessor",
+            "operands": {
+                "operand_1": arg_1,
+                **{f"operand_{idx + 2}": extra for idx, extra in enumerate(arg_x) if extra}  # type: ignore[misc] # dynamic operand creation
+            }
+        }
+
+    def nested_resource_accessor(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.NestedResourceAccessor:
+        arg_1, arg_2 = args
+        return {
+            "type": "nested_resource_accessor",
+            "operands": {
+                "operand_1": arg_1,
+                "operand_2": arg_2
+            }
+        }
+
+    def property_accessor(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.PropertyAccessor:
+        arg_1, arg_2 = args
+        return {
+            "type": "property_accessor",
+            "operands": {
+                "operand_1": arg_1,
+                "operand_2": arg_2
+            }
         }
 
     ####################

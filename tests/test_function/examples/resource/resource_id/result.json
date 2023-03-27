@@ -81,8 +81,24 @@
             "function": {
               "type": "resource_id",
               "parameters": {
-                "resource_type": "mi.type",
-                "resource_name_1": "mi.name",
+                "resource_type": {
+                  "operator": {
+                    "type": "property_accessor",
+                    "operands": {
+                      "operand_1": "mi",
+                      "operand_2": "type"
+                    }
+                  }
+                },
+                "resource_name_1": {
+                  "operator": {
+                    "type": "property_accessor",
+                    "operands": {
+                      "operand_1": "mi",
+                      "operand_2": "name"
+                    }
+                  }
+                },
                 "resource_name_2": null,
                 "resource_group_name": null,
                 "subscription_id": null
@@ -102,7 +118,15 @@
           "type": "resource_id",
           "parameters": {
             "resource_type": "Microsoft.Network/virtualNetworks/subnets",
-            "resource_name_1": "vnet.name",
+            "resource_name_1": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "vnet",
+                  "operand_2": "name"
+                }
+              }
+            },
             "resource_name_2": "subnet1Name",
             "resource_group_name": "rgName",
             "subscription_id": "subId"

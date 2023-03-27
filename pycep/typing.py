@@ -17,7 +17,8 @@ Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescrip
 ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOrEquals | LessThan | Equals | NotEquals | EqualsCaseInsensitive | NotEqualsCaseInsensitive"
 LogicalOperators: TypeAlias = "And | Or | Not | Coalesce | Conditional"
 NumericOperators: TypeAlias = "Add | Divide | Minus | Modulo | Multiply | Substract"
-Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperators"
+AccessorOperators: TypeAlias = "IndexAccessor | FunctionAccessor | NestedResourceAccessor | PropertyAccessor"
+Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperators | AccessorOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
 ArrayFunctions: TypeAlias = (
@@ -1131,10 +1132,47 @@ class Substract(TypedDict):
 
 ####################
 #
-# JSON response
+# Operators - accessor
 #
 ####################
 
+class _IndexAccessorOperands(TypedDict):
+    operand_1: PossibleValue
+    operand_2: PossibleValue
+
+class IndexAccessor(TypedDict):
+    type: Literal["index_accessor"]
+    operands: _IndexAccessorOperands
+
+class _FunctionAccessorOperands(TypedDict):
+    operand_1: PossibleValue
+    operand_2: NotRequired[PossibleValue]  # and many more possible
+
+class FunctionAccessor(TypedDict):
+    type: Literal["function_accessor"]
+    operands: _FunctionAccessorOperands
+
+class _NestedResourceAccessorOperands(TypedDict):
+    operand_1: PossibleValue
+    operand_2: PossibleValue
+
+class NestedResourceAccessor(TypedDict):
+    type: Literal["nested_resource_accessor"]
+    operands: _NestedResourceAccessorOperands
+
+class _PropertyAccessorOperands(TypedDict):
+    operand_1: PossibleValue
+    operand_2: PossibleValue
+
+class PropertyAccessor(TypedDict):
+    type: Literal["property_accessor"]
+    operands: _PropertyAccessorOperands
+
+####################
+#
+# JSON response
+#
+####################
 
 class BicepJson(TypedDict):
     globals: GlobalsAttributes

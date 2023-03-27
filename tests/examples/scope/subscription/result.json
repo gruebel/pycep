@@ -81,7 +81,15 @@
           }
         },
         "properties": {
-          "roleDefinitionId": "definition.id",
+          "roleDefinitionId": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": "definition",
+                "operand_2": "id"
+              }
+            }
+          },
           "principalId": "principalId"
         }
       }

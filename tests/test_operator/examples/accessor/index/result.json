@@ -1,0 +1,52 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "outputs": {
+    "myRegion": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "operator": {
+          "type": "index_accessor",
+          "operands": {
+            "operand_1": "regions",
+            "operand_2": "location"
+          }
+        }
+      }
+    },
+    "region": {
+      "decorators": [],
+      "type": "string",
+      "value": "shortLocation"
+    }
+  },
+  "variables": {
+    "location": {
+      "decorators": [],
+      "value": "westeurope"
+    },
+    "regions": {
+      "decorators": [],
+      "value": {
+        "uksouth": "uks",
+        "westeurope": "we"
+      }
+    },
+    "shortLocation": {
+      "decorators": [],
+      "value": {
+        "operator": {
+          "type": "index_accessor",
+          "operands": {
+            "operand_1": "regions",
+            "operand_2": "location"
+          }
+        }
+      }
+    }
+  }
+}

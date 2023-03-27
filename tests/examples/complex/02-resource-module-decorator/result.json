@@ -72,7 +72,23 @@
                 }
               }
             },
-            "password": "sqlLogicalServer.passwordFromKeyVault.secretName",
+            "password": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "sqlLogicalServer",
+                  "operand_2": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": "passwordFromKeyVault",
+                        "operand_2": "secretName"
+                      }
+                    }
+                  }
+                }
+              }
+            },
             "tags": {
               "function": {
                 "type": "union",
