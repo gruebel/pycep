@@ -12,7 +12,15 @@
           "type": "conditional",
           "operands": {
             "condition": "createNewVnet",
-            "true_value": "subnet.id",
+            "true_value": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "subnet",
+                  "operand_2": "id"
+                }
+              }
+            },
             "false_value": {
               "function": {
                 "type": "resource_id",
@@ -74,7 +82,31 @@
           "type": "conditional",
           "operands": {
             "condition": "deployStorage",
-            "true_value": "myStorageAccount.properties.primaryEndpoints.blob",
+            "true_value": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "myStorageAccount",
+                  "operand_2": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": "properties",
+                        "operand_2": {
+                          "operator": {
+                            "type": "property_accessor",
+                            "operands": {
+                              "operand_1": "primaryEndpoints",
+                              "operand_2": "blob"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
             "false_value": ""
           }
         }

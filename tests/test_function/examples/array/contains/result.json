@@ -45,7 +45,15 @@
           "function": {
             "type": "contains",
             "parameters": {
-              "container": "firstObject.names",
+              "container": {
+                "operator": {
+                  "type": "property_accessor",
+                  "operands": {
+                    "operand_1": "firstObject",
+                    "operand_2": "names"
+                  }
+                }
+              },
               "item_to_find": "name"
             }
           }

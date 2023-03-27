@@ -63,20 +63,52 @@
         },
         "condition": null,
         "config": {
-          "name": "parent.name",
+          "name": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": "parent",
+                "operand_2": "name"
+              }
+            }
+          },
           "properties": {
             "children": {
               "loop_type": {
                 "type": "array",
                 "detail": {
                   "item_name": "child",
-                  "array_name": "parent.children"
+                  "array_name": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": "parent",
+                        "operand_2": "children"
+                      }
+                    }
+                  }
                 }
               },
               "condition": null,
               "config": {
-                "name": "child.name",
-                "setting": "child.settingValue"
+                "name": {
+                  "operator": {
+                    "type": "property_accessor",
+                    "operands": {
+                      "operand_1": "child",
+                      "operand_2": "name"
+                    }
+                  }
+                },
+                "setting": {
+                  "operator": {
+                    "type": "property_accessor",
+                    "operands": {
+                      "operand_1": "child",
+                      "operand_2": "settingValue"
+                    }
+                  }
+                }
               }
             }
           }
@@ -97,7 +129,15 @@
           "type": "array",
           "detail": {
             "item_name": "firewallRules",
-            "array_name": "sqlLogicalServer.firewallRules"
+            "array_name": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "sqlLogicalServer",
+                  "operand_2": "firewallRules"
+                }
+              }
+            }
           }
         },
         "condition": null,
@@ -105,7 +145,15 @@
           "name": "sqlFirewallRule-${uniqueString(sqlLogicalServer.name)}",
           "params": {
             "sqlFirewallRule": "firewallRules",
-            "sqlServerName": "sqlLogicalServer.name"
+            "sqlServerName": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "sqlLogicalServer",
+                  "operand_2": "name"
+                }
+              }
+            }
           }
         }
       }

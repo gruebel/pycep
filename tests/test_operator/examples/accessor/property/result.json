@@ -1,0 +1,55 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "variables": {
+    "x": {
+      "decorators": [],
+      "value": {
+        "y": {
+          "z": "Hello",
+          "a": true
+        },
+        "q": 42
+      }
+    }
+  },
+  "outputs": {
+    "outputZ": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": "x",
+            "operand_2": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "y",
+                  "operand_2": "z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "outputQ": {
+      "decorators": [],
+      "type": "int",
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": "x",
+            "operand_2": "q"
+          }
+        }
+      }
+    }
+  }
+}

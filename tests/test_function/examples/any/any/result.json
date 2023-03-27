@@ -64,7 +64,15 @@
         "function": {
           "type": "any",
           "parameters": {
-            "value": "site.properties"
+            "value": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            }
           }
         }
       }
@@ -76,7 +84,15 @@
         "function": {
           "type": "any",
           "parameters": {
-            "value": "site.properties"
+            "value": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            }
           }
         }
       }

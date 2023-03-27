@@ -13,7 +13,6 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
       | INT                         -> int
       | STRING                      -> string
       | QUOTED_INTERPOLATION        -> string
-      | INDEXED                     -> string
       | MULTI_LINE_STRING           -> multi_line_string
       | array
       | object
@@ -287,7 +286,7 @@ uri_component_to_string: ("uriComponentToString" | "sys.uriComponentToString") "
 
 // operators
 
-operator: operator_comparison | operator_logical | operator_numeric
+operator: operator_comparison | operator_logical | operator_numeric | operator_accessor
 
 // operators - comparison
 
@@ -340,11 +339,24 @@ multiply: value_brackets "*" value_brackets
 
 substract.1: value_brackets "-" value_brackets
 
+// operators - accessor
+
+?operator_accessor: index_accessor | function_accessor | nested_resource_accessor | property_accessor
+
+index_accessor: value_brackets "[" value_brackets "]"
+
+function_accessor: value_brackets "." ("getSecret" | "list") "(" value_brackets ["," value_brackets]+ ")"
+
+nested_resource_accessor: value_brackets "::" value_brackets
+
+// 'sys.' and 'az.' have to be eliminated in 1st operand (see STRING definition regexp):
+property_accessor: value_brackets "." value_brackets
+
 // Terms
 
 EXISTING: "existing"
 
-STRING: /[a-zA-Z_](::|[\w_.])*/
+STRING: /(?!(sys|az)\.)[a-zA-Z_]([\w_])*/
 QUOTED_STRING: "'" STRING "'"
 INDEXED: /(?=[\w][\w_.]+(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|[\[\]])+)(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|\[[\w\[\]_().']+\]|[\w_\-\/.,'= ])+/
 QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}'{]+|(?R))*+}|\\'|[^'])*'/

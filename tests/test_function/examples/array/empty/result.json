@@ -64,7 +64,15 @@
         "function": {
           "type": "empty",
           "parameters": {
-            "item_to_test": "site.properties"
+            "item_to_test": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            }
           }
         }
       }

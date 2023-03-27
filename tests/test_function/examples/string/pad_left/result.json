@@ -53,7 +53,15 @@
           }
         },
         "properties": {
-          "roleDefinitionId": "definition.id",
+          "roleDefinitionId": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": "definition",
+                "operand_2": "id"
+              }
+            }
+          },
           "principalId": "principalId"
         }
       }
@@ -67,7 +75,15 @@
         "function": {
           "type": "pad_left",
           "parameters": {
-            "value_to_pad": "site.properties",
+            "value_to_pad": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            },
             "total_length": 3,
             "padding_character": null
           }
@@ -81,7 +97,15 @@
         "function": {
           "type": "pad_left",
           "parameters": {
-            "value_to_pad": "site.properties",
+            "value_to_pad": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            },
             "total_length": 3,
             "padding_character": null
           }

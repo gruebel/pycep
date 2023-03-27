@@ -45,7 +45,15 @@
           "function": {
             "type": "starts_with",
             "parameters": {
-              "string_to_search": "firstObject.names",
+              "string_to_search": {
+                "operator": {
+                  "type": "property_accessor",
+                  "operands": {
+                    "operand_1": "firstObject",
+                    "operand_2": "names"
+                  }
+                }
+              },
               "string_to_find": "name"
             }
           }
