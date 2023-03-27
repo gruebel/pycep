@@ -144,10 +144,10 @@
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/operators-access)
 
-- [ ] Index
-- [ ] Function
-- [ ] Nested resource
-- [ ] Property
+- [x] Index
+- [x] Function
+- [x] Nested resource
+- [x] Property
 
 ### Comparison
 
