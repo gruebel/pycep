@@ -195,7 +195,9 @@ json_func: _JSON value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
                   | resource_id | subscription_resource_id | tenant_resource_id
 
 extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" value_brackets ("," value_brackets)~2..3 ")"
-
+// TODO: Only a small subset of list*() functions is declared here
+// See https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-resource#list
+// With Bicep v0.4.412+, you call list*() using accessor operator, ex: storageAccount.listKeys()
 list_keys: ("listKeys" | "az.listKeys") "(" value_brackets "," value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
 
 management_group_resource_id: ("managementGroupResourceId" | "az.managementGroupResourceId") "(" value_brackets ("," value_brackets)~1..2 ")"
@@ -230,7 +232,7 @@ tenant: _TENANT ")" ["." STRING]
 // functions - string
 
 ?function_string: base64_func | base64_to_json | base64_to_string | data_uri | data_uri_to_string | ends_with | format
-                | guid | index_of | last_index_of | new_guid | pad_left | replace | split | starts_with | string_func
+                | guid | index_of | last_index_of | new_guid | pad_left | replace | split | join | starts_with | string_func
                 | substring | to_lower | to_upper | trim | unique_string | uri | uri_component | uri_component_to_string
 
 base64_func: ("base64" | "sys.base64") "(" value_brackets ")"
@@ -262,6 +264,8 @@ pad_left: ("padLeft" | "sys.padLeft") "(" value_brackets "," value_brackets [","
 replace: ("replace" | "sys.replace") "(" value_brackets ("," value_brackets)~2 ")"
 
 split: ("split" | "sys.split") "(" value_brackets "," value_brackets ")" ["[" INT "]"]
+
+join: ("join" | "sys.join") "(" value_brackets "," value_brackets ")"
 
 starts_with: ("startsWith" | "sys.startsWith") "(" value_brackets "," value_brackets ")"
 

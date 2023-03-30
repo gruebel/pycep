@@ -32,7 +32,7 @@ NumericFunctions: TypeAlias = "IntFunc"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = "ExtensionResourceId | ListKeys | ManagementGroupResourceId | PickZones | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ManagementGroup | ResourceGroup | Subscription | Tenant"
-StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | DataUri | DataUriToString | EndsWith | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | StartsWith | String | Substring | ToLower | ToUpper | Trim | UniqueString | Uri | UriComponent | UriComponentToString"
+StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | DataUri | DataUriToString | EndsWith | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | Join | StartsWith | String | Substring | ToLower | ToUpper | Trim | UniqueString | Uri | UriComponent | UriComponentToString"
 Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | FileFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
 
@@ -885,6 +885,16 @@ class Split(TypedDict):
     type: Literal["split"]
     parameters: _SplitParameters
     index: NotRequired[int]
+
+
+class _JoinParameters(TypedDict):
+    input_array: PossibleValue
+    delimeter: PossibleValue
+
+
+class Join(TypedDict):
+    type: Literal["join"]
+    parameters: _JoinParameters
 
 
 class _StartsWithParameters(TypedDict):
