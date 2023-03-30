@@ -13,7 +13,28 @@
           "type": "index_accessor",
           "operands": {
             "operand_1": "regions",
-            "operand_2": "location"
+            "operand_2": "uksouth"
+          }
+        }
+      }
+    },
+    "myZone": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": "zones",
+            "operand_2": {
+              "operator": {
+                "type": "index_accessor",
+                "operands": {
+                  "operand_1": "zone1",
+                  "operand_2": "westeurope"
+                }
+              }
+            }
           }
         }
       }
@@ -46,6 +67,13 @@
             "operand_2": "location"
           }
         }
+      }
+    },
+    "zones": {
+      "decorators": [],
+      "value": {
+        "zone1": "regions",
+        "zone2": {}
       }
     }
   }
