@@ -6,6 +6,11 @@ var regions = {
   westeurope: 'we'
 }
 var shortLocation = regions[location]
+var zones = {
+  zone1: regions
+  zone2: {}
+}
 
-output myRegion string = regions[location]
+output myRegion string = regions['uksouth']
+output myZone string = zones.zone1['westeurope']
 output region string = shortLocation

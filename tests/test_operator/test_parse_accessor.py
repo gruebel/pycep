@@ -32,8 +32,6 @@ def test_parse_function_accessor() -> None:
 
     # when
     result = BICEP_PARSER.parse(file_path=file_path)
-    # print(result)
-    # print(BICEP_PARSER.create_tree(file_path=file_path))
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -47,8 +45,6 @@ def test_parse_nested_resource_accessor() -> None:
 
     # when
     result = BICEP_PARSER.parse(file_path=file_path)
-    # print(result)
-    # print(BICEP_PARSER.create_tree(file_path=file_path))
 
     # then
     assert_that(result).is_equal_to(expected_result)
@@ -62,8 +58,6 @@ def test_parse_property_accessor() -> None:
 
     # when
     result = BICEP_PARSER.parse(file_path=file_path)
-    # print(result)
-    # print(BICEP_PARSER.create_tree(file_path=file_path))
 
     # then
     assert_that(result).is_equal_to(expected_result)
