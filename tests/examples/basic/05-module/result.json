@@ -53,6 +53,23 @@
         }
       }
     },
+    "privateDotRegistryModule": {
+      "decorators": [],
+      "type": "bicep_registry",
+      "detail": {
+        "full": "sampleregistry.azurecr.io/bicep/modules/company.department/sampleSolution:1.0.0",
+        "registry_name": "sampleregistry",
+        "path": "bicep/modules/company.department/sampleSolution",
+        "tag": "1.0.0",
+        "public": false
+      },
+      "config": {
+        "name": "sampleSolution-deploy",
+        "params": {
+          "parSampleParameter": "Sample"
+        }
+      }
+    },
     "templateModule": {
       "decorators": [],
       "type": "template_spec",
