@@ -22,6 +22,13 @@ module privateRegistryModule 'br:exampleregistry.azurecr.io/bicep/modules/storag
   }
 }
 
+module privateDotRegistryModule 'br:sampleregistry.azurecr.io/bicep/modules/company.department/sampleSolution:1.0.0' = {
+  name: 'sampleSolution-deploy'
+  params: {
+    parSampleParameter: 'Sample'
+  }
+}
+
 // template spec ref
 module templateModule 'ts:11111111-1111-1111-1111-111111111111/templateSpecsRG/storageSpec:2.0' = {
   name: 'storageDeploy'
