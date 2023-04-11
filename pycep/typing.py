@@ -30,7 +30,7 @@ FileFunctions: TypeAlias = "LoadFileAsBase64 | LoadJsonContent | LoadTextContent
 LogicalFunctions: TypeAlias = "BoolFunc"
 NumericFunctions: TypeAlias = "IntFunc"
 ObjectFunctions: TypeAlias = "Json"
-ResourceFunctions: TypeAlias = "ExtensionResourceId | ListKeys | ManagementGroupResourceId | PickZones | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
+ResourceFunctions: TypeAlias = "ExtensionResourceId | ListFunc | ManagementGroupResourceId | PickZones | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ManagementGroup | ResourceGroup | Subscription | Tenant"
 StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | DataUri | DataUriToString | EndsWith | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | Join | StartsWith | String | Substring | ToLower | ToUpper | Trim | UniqueString | Uri | UriComponent | UriComponentToString"
 Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | FileFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
@@ -641,15 +641,15 @@ class ExtensionResourceId(TypedDict):
     parameters: _ExtensionResourceIdParameters
 
 
-class _ListKeysParameters(TypedDict):
+class _ListFuncParameters(TypedDict):
+    func_name: PossibleValue
     resource_identifier: PossibleValue
     api_version: PossibleValue
 
 
-class ListKeys(TypedDict):
-    type: Literal["list_keys"]
-    parameters: _ListKeysParameters
-    property_name: NotRequired[str]
+class ListFunc(TypedDict):
+    type: Literal["list_func"]
+    parameters: _ListFuncParameters
 
 
 class ManagementGroupResourceId(TypedDict):
@@ -1146,43 +1146,54 @@ class Substract(TypedDict):
 #
 ####################
 
+
 class _IndexAccessorOperands(TypedDict):
     operand_1: PossibleValue
     operand_2: PossibleValue
+
 
 class IndexAccessor(TypedDict):
     type: Literal["index_accessor"]
     operands: _IndexAccessorOperands
 
+
 class _FunctionAccessorOperands(TypedDict):
     operand_1: PossibleValue
+    func_name: PossibleValue
     operand_2: NotRequired[PossibleValue]  # and many more possible
+
 
 class FunctionAccessor(TypedDict):
     type: Literal["function_accessor"]
     operands: _FunctionAccessorOperands
 
+
 class _NestedResourceAccessorOperands(TypedDict):
     operand_1: PossibleValue
     operand_2: PossibleValue
+
 
 class NestedResourceAccessor(TypedDict):
     type: Literal["nested_resource_accessor"]
     operands: _NestedResourceAccessorOperands
 
+
 class _PropertyAccessorOperands(TypedDict):
     operand_1: PossibleValue
     operand_2: PossibleValue
 
+
 class PropertyAccessor(TypedDict):
     type: Literal["property_accessor"]
     operands: _PropertyAccessorOperands
+
 
 ####################
 #
 # JSON response
 #
 ####################
+
 
 class BicepJson(TypedDict):
     globals: GlobalsAttributes

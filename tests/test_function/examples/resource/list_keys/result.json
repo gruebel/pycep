@@ -10,7 +10,7 @@
       "type": "object",
       "default": {
         "function": {
-          "type": "list_keys",
+          "type": "listKeys",
           "parameters": {
             "resource_identifier": "refId",
             "api_version": "apiVersion"
@@ -24,7 +24,7 @@
       "decorators": [],
       "value": {
         "function": {
-          "type": "list_keys",
+          "type": "listKeys",
           "parameters": {
             "resource_identifier": "refId",
             "api_version": "2020-09-01"
@@ -45,7 +45,7 @@
         "properties": {
           "listKeys": {
             "function": {
-              "type": "list_keys",
+              "type": "listKeys",
               "parameters": {
                 "resource_identifier": "refId",
                 "api_version": "apiVersion"
@@ -70,7 +70,7 @@
           "location": "location",
           "fwname": {
             "function": {
-              "type": "list_keys",
+              "type": "listKeys",
               "parameters": {
                 "resource_identifier": "refId",
                 "api_version": "apiVersion"
@@ -92,15 +92,22 @@
           "operands": {
             "operand_1": {
               "function": {
-                "type": "list_keys",
+                "type": "listKeys",
                 "parameters": {
                   "resource_identifier": "refId",
                   "api_version": "apiVersion"
-                },
-                "property_name": "primaryEndpoints"
+                }
               }
             },
-            "operand_2": "blob"
+            "operand_2": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "primaryEndpoints",
+                  "operand_2": "blob"
+                }
+              }
+            }
           }
         }
       }
@@ -109,13 +116,36 @@
       "decorators": [],
       "type": "string",
       "value": {
-        "function": {
-          "type": "list_keys",
-          "parameters": {
-            "resource_identifier": "refId",
-            "api_version": "apiVersion"
-          },
-          "property_name": "keys[env].value"
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": {
+              "function": {
+                "type": "listKeys",
+                "parameters": {
+                  "resource_identifier": "refId",
+                  "api_version": "apiVersion"
+                }
+              }
+            },
+            "operand_2": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": {
+                    "operator": {
+                      "type": "index_accessor",
+                      "operands": {
+                        "operand_1": "keys",
+                        "operand_2": "env"
+                      }
+                    }
+                  },
+                  "operand_2": "value"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -123,13 +153,36 @@
       "decorators": [],
       "type": "string",
       "value": {
-        "function": {
-          "type": "list_keys",
-          "parameters": {
-            "resource_identifier": "refId",
-            "api_version": "apiVersion"
-          },
-          "property_name": "[sub]dev[var_id]"
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": {
+              "operator": {
+                "type": "index_accessor",
+                "operands": {
+                  "operand_1": {
+                    "function": {
+                      "type": "listKeys",
+                      "parameters": {
+                        "resource_identifier": "refId",
+                        "api_version": "apiVersion"
+                      }
+                    }
+                  },
+                  "operand_2": "sub"
+                }
+              }
+            },
+            "operand_2": {
+              "operator": {
+                "type": "index_accessor",
+                "operands": {
+                  "operand_1": "dev",
+                  "operand_2": "var_id"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -138,7 +191,7 @@
       "type": "object",
       "value": {
         "function": {
-          "type": "list_keys",
+          "type": "listKeys",
           "parameters": {
             "resource_identifier": "refId",
             "api_version": "apiVersion"

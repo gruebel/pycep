@@ -64,6 +64,7 @@
               "type": "function_accessor",
               "operands": {
                 "operand_1": "kv",
+                "func_name": "getSecret",
                 "operand_2": "vmAdminPassword"
               }
             }

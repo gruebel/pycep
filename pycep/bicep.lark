@@ -191,14 +191,14 @@ json_func: _JSON value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
 
 // functions - resource
 
-?function_resource: extension_resource_id | list_keys | management_group_resource_id | pick_zones | reference
+?function_resource: extension_resource_id | list_func | management_group_resource_id | pick_zones | reference
                   | resource_id | subscription_resource_id | tenant_resource_id
 
 extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" value_brackets ("," value_brackets)~2..3 ")"
-// TODO: Only a small subset of list*() functions is declared here
+
 // See https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-resource#list
 // With Bicep v0.4.412+, you call list*() using accessor operator, ex: storageAccount.listKeys()
-list_keys: ("listKeys" | "az.listKeys") "(" value_brackets "," value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
+list_func: LIST_FUNC_NAME "(" value_brackets "," value_brackets ")"
 
 management_group_resource_id: ("managementGroupResourceId" | "az.managementGroupResourceId") "(" value_brackets ("," value_brackets)~1..2 ")"
 
@@ -349,7 +349,7 @@ substract.1: value_brackets "-" value_brackets
 
 index_accessor: value_brackets "[" value_brackets "]"
 
-function_accessor: value_brackets "." ("getSecret" | "list") "(" value_brackets ["," value_brackets]+ ")"
+function_accessor: value_brackets "." LIST_FUNC_NAME "(" value_brackets ["," value_brackets]+ ")"
 
 nested_resource_accessor: value_brackets "::" value_brackets
 
@@ -364,6 +364,7 @@ STRING: /(?!(sys|az)\.)[a-zA-Z_]([\w_])*/
 QUOTED_STRING: "'" STRING "'"
 INDEXED: /(?=[\w][\w_.]+(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|[\[\]])+)(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|\[[\w\[\]_().']+\]|[\w_\-\/.,'= ])+/
 QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}'{]+|(?R))*+}|\\'|[^'])*'/
+LIST_FUNC_NAME: /(?=([Ll]ist[A-za-z]*|getSecret)\()([A-Za-z]+)/
 
 MULTI_LINE_STRING: "'''" (/.*?/ | NEWLINE)+ "'''"
 

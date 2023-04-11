@@ -30,6 +30,8 @@ def test_parse_list_keys() -> None:
 
     # when
     result = BICEP_PARSER.parse(file_path=file_path)
+    print(result)
+    print(BICEP_PARSER.create_tree(file_path=file_path))
 
     # then
     assert_that(result).is_equal_to(expected_result)

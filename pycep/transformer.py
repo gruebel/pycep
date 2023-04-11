@@ -880,33 +880,23 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
 
-    def list_keys(
+    def list_func(
         self,
         args: tuple[
             pycep_typing.PossibleValue,
             pycep_typing.PossibleValue,
-            pycep_typing.PossibleNoneValue,
-            pycep_typing.PossibleNoneValue,
+            pycep_typing.PossibleValue,
         ],
-    ) -> pycep_typing.ListKeys:
-        resource_identifier, api_version, property_name_1, property_name_2 = args
+    ) -> pycep_typing.ListFunc:
+        func_name, resource_identifier, api_version = args
 
-        result: pycep_typing.ListKeys = {
-            "type": "list_keys",
+        result: pycep_typing.ListFunc = {
+            "type": str(func_name),
             "parameters": {
                 "resource_identifier": resource_identifier,
                 "api_version": api_version,
             },
         }
-
-        if property_name_2:
-            # workaround for direct index accessors
-            if property_name_1:
-                property_name = f"[{property_name_1}]{property_name_2}"
-            else:
-                property_name = str(property_name_2)
-
-            result["property_name"] = str(property_name)
 
         return result
 
@@ -1660,11 +1650,12 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         }
 
     def function_accessor(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.FunctionAccessor:
-        arg_1, *arg_x = args
+        arg_1, func_name, *arg_x = args
         return {
             "type": "function_accessor",
             "operands": {
                 "operand_1": arg_1,
+                "func_name": str(func_name),
                 **{f"operand_{idx + 2}": extra for idx, extra in enumerate(arg_x) if extra}  # type: ignore[misc] # dynamic operand creation
             }
         }
