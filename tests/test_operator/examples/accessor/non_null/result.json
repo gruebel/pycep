@@ -1,0 +1,39 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "variables": {
+    "maybeNull": {
+      "decorators": [],
+      "value": "mightIncludeNull[0]!.key"
+    }
+  },
+  "resources": {
+    "backupVault": {
+      "decorators": [],
+      "type": "Microsoft.DataProtection/backupVaults",
+      "api_version": "2022-03-01",
+      "existing": true,
+      "config": {
+        "name": {
+          "function": {
+            "type": "last",
+            "parameters": {
+              "arg_1": {
+                "function": {
+                  "type": "split",
+                  "parameters": {
+                    "input_string": "resourceId",
+                    "delimiter": "/"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

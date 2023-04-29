@@ -20,8 +20,7 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
       | function
       | operator
 
-?value_brackets: value
-               | "(" value ")"
+?value_brackets: (value | "(" value ")") "!"?
 
 // element values
 
@@ -346,7 +345,7 @@ EXISTING: "existing"
 
 STRING: /[a-zA-Z_](::|[\w_.])*/
 QUOTED_STRING: "'" STRING "'"
-INDEXED: /(?=[\w][\w_.]+(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|[\[\]])+)(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|\[[\w\[\]_().']+\]|[\w_\-\/.,'= ])+/
+INDEXED: /(?=[\w][\w_.]+(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|[\[\]])+)(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|\[[\w\[\]_().']+\]!?|[\w_\-\/.,'= ])+/
 QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}'{]+|(?R))*+}|\\'|[^'])*'/
 
 MULTI_LINE_STRING: "'''" (/.*?/ | NEWLINE)+ "'''"
