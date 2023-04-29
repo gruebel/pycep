@@ -375,13 +375,13 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
 
-    def loop_array(self, args: tuple[Token, Token]) -> pycep_typing.LoopArray:
+    def loop_array(self, args: tuple[Token, pycep_typing.PossibleValue]) -> pycep_typing.LoopArray:
         item_name, array_name = args
         return {
             "type": "array",
             "detail": {
                 "item_name": str(item_name),
-                "array_name": str(array_name),
+                "array_name": array_name,
             },
         }
 
@@ -791,6 +791,24 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "type": "load_file_as_base64",
             "parameters": {
                 "file_path": args[0],
+            },
+        }
+
+    ####################
+    #
+    # functions - lambda
+    #
+    ####################
+
+    def filter(self, args: tuple[pycep_typing.PossibleValue, Token, pycep_typing.PossibleValue]) -> pycep_typing.Filter:
+        input_array, input_element, expression = args
+
+        return {
+            "type": "filter",
+            "parameters": {
+                "input_array": input_array,
+                "input_element": str(input_element),
+                "expression": expression,
             },
         }
 

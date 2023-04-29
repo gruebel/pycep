@@ -94,8 +94,8 @@ deco_secure: "secure" "(" ")"
 
 // functions
 
-function: function_any | function_array | function_date | function_deployment | function_file | function_logical
-        | function_numeric | function_object | function_resource | function_scope | function_string
+function: function_any | function_array | function_date | function_deployment | function_file | function_lambda
+        | function_logical | function_numeric | function_object | function_resource | function_scope | function_string
 
 // functions - any
 
@@ -169,6 +169,12 @@ load_file_as_base64: ("loadFileAsBase64" | "sys.loadFileAsBase64") "(" value_bra
 load_json_content: ("loadJsonContent" | "sys.loadJsonContent") "(" value_brackets ["," value_brackets ["," value_brackets]] ")" [["[" STRING "]"] "." (STRING | INDEXED)]
 
 load_text_content: ("loadTextContent" | "sys.loadTextContent") "(" value_brackets ["," value_brackets] ")"
+
+// functions - lambda
+
+?function_lambda: filter
+
+filter: ("filter" | "sys.filter") "(" value_brackets "," STRING "=>" value_brackets ")"
 
 // functions - logical
 
