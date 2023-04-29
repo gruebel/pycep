@@ -77,8 +77,11 @@ jobs:
     if: github.event_name == 'push'
     needs: tests
     runs-on: ubuntu-latest
+    environment: release
     permissions:
       contents: write
+      # IMPORTANT: this permission is mandatory for trusted publishing to pypi
+      id-token: write
     steps:
       - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab  # v3.5.2
       - uses: actions/setup-python@57ded4d7d5e986d7296eab16560982c6dd7c923b  # v4.6.0
@@ -102,7 +105,7 @@ jobs:
           git add pyproject.toml
           git commit -m "publish version ${new_version}"
           git push
+      - name: Build Python package
+        run: poetry build
       - name: Publish prerelease to PyPI
-        env:
-          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
-        run: poetry publish --build
+        uses: pypa/gh-action-pypi-publish@0bf742be3ebe032c25dd15117957dc15d0cfc38d  # v1.8.5

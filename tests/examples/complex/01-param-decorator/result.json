@@ -42,6 +42,16 @@
       "type": "string",
       "default": "Standard_DS1_v2"
     },
+    "principalIds": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "Required. The IDs of the principals to assign the role to."
+        }
+      ],
+      "type": "array",
+      "default": null
+    },
     "storageAccountName": {
       "decorators": [
         {

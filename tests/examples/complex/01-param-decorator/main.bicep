@@ -15,6 +15,9 @@ param demoEnum string
 @description('Must be at least Standard_A3 to support 2 NICs.')
 param virtualMachineSize string = 'Standard_DS1_v2'
 
+@sys.description('Required. The IDs of the principals to assign the role to.')
+param principalIds array
+
 // min/max length
 @minLength(3)
 param storageAccountName string
