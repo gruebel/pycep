@@ -14,15 +14,18 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
+    environment: release
     permissions:
       contents: write
+      # IMPORTANT: this permission is mandatory for trusted publishing to pypi
+      id-token: write
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
-      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3  # v3.5.0
+      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab  # v3.5.2
         with:
           ref: master
-      - uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435  # v4.5.0
+      - uses: actions/setup-python@57ded4d7d5e986d7296eab16560982c6dd7c923b  # v4.6.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
@@ -46,10 +49,10 @@ jobs:
           git push
 
           echo "version=$new_version" >> $GITHUB_OUTPUT
+      - name: Build Python package
+        run: poetry build
       - name: Publish to PyPI
-        env:
-          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
-        run: poetry publish --build
+        uses: pypa/gh-action-pypi-publish@0bf742be3ebe032c25dd15117957dc15d0cfc38d  # v1.8.5
       - name: Extract release notes
         id: extract-release-notes
         uses: ffurrer2/extract-release-notes@f2dd00dec4102dbc6d7bdf804dfd85546dfa1f0b  # v1.16.0
@@ -63,11 +66,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout checkov
-        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3  # v3.5.0
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab  # v3.5.2
         with:
           token: ${{ secrets.PAT_TOKEN }}
           repository: bridgecrewio/checkov
-      - uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435  # v4.5.0
+      - uses: actions/setup-python@57ded4d7d5e986d7296eab16560982c6dd7c923b  # v4.6.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Prepare PR
