@@ -52,6 +52,16 @@
       "type": "array",
       "default": null
     },
+    "subnetId": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "Optional. Resource ID of an already existing subnet, e.g.: /subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/virtualNetworks/<vnetName>/subnets/<subnetName>.\nIf no value is provided, a new temporary VNET and subnet will be created in the staging resource group and will be deleted along with the remaining temporary resources.\n"
+        }
+      ],
+      "type": "string",
+      "default": ""
+    },
     "storageAccountName": {
       "decorators": [
         {

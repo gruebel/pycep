@@ -78,7 +78,7 @@ deco_allowed: "allowed" "(" array ")"
 
 deco_batch: "batchSize" "(" /\d+/ ")"
 
-deco_description: "description" "(" QUOTED_INTERPOLATION ")"
+deco_description: "description" "(" (QUOTED_INTERPOLATION | MULTI_LINE_STRING) ")"
 
 deco_min_len: "minLength" "(" /\d+/ ")"
 

@@ -18,6 +18,12 @@ param virtualMachineSize string = 'Standard_DS1_v2'
 @sys.description('Required. The IDs of the principals to assign the role to.')
 param principalIds array
 
+@description('''
+Optional. Resource ID of an already existing subnet, e.g.: /subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/virtualNetworks/<vnetName>/subnets/<subnetName>.
+If no value is provided, a new temporary VNET and subnet will be created in the staging resource group and will be deleted along with the remaining temporary resources.
+''')
+param subnetId string = ''
+
 // min/max length
 @minLength(3)
 param storageAccountName string

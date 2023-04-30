@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support `sys` namespace notation for decorators
 - Support `!` non-null operator
 - Support `filter` function
+- Support multi line strings in description decorator
 
 ## [0.3.9] - 2022-08-30
 
