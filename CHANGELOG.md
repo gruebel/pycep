@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support `filter` function
 - Support multi line strings in description decorator
 
+### Changed
+
+- Fixed an issue with comments between decorator and element
+
 ## [0.3.9] - 2022-08-30
 
 ### Changed

@@ -54,4 +54,5 @@ param demoPassword string
 @description('Password for the Virtual Machine.')
 @minLength(12)
 @secure()
+#disable-next-line secure-secrets-in-params // Not a secret
 param adminPassword string

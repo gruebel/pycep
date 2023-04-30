@@ -72,7 +72,7 @@ pair: key ":" (value_brackets | loop)
 
 // decorators
 
-decorator: ("@" "sys."? (deco_allowed | deco_batch | deco_description | deco_min_len | deco_max_len | deco_min_val | deco_max_val | deco_metadata | deco_secure) _CPP_COMMENT_NL)+
+decorator: ("@" "sys."? (deco_allowed | deco_batch | deco_description | deco_min_len | deco_max_len | deco_min_val | deco_max_val | deco_metadata | deco_secure) _CPP_COMMENT_NL~0..5)+
 
 deco_allowed: "allowed" "(" array ")"
 
