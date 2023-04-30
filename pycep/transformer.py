@@ -1735,6 +1735,9 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
         Additionally, removes surrounding single quotes.
         """
+        if value.type == "MULTI_LINE_STRING":
+            return self.multi_line_string((value,))
+
         if value.type not in ("QUOTED_STRING", "QUOTED_INTERPOLATION"):
             return BicepElement(value)
 
