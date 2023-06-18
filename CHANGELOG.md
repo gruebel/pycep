@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Added
 
+## [0.4.1] - 2023-06-18
+
+# Added
+
 - Support more list* accessor operators
 - Support newlines between function parameters
 
@@ -155,7 +159,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release to be able to parse all the official examples of Bicep [101](https://github.com/Azure/bicep/tree/main/docs/examples/101).
 
-[Unreleased]: https://github.com/gruebel/pycep/compare/0.4.0...HEAD
+[Unreleased]: https://github.com/gruebel/pycep/compare/0.4.1...HEAD
+[0.4.1]: https://github.com/gruebel/pycep/compare/0.4.0...0.4.1
 [0.4.0]: https://github.com/gruebel/pycep/compare/0.3.9...0.4.0
 [0.3.9]: https://github.com/gruebel/pycep/compare/0.3.8...0.3.9
 [0.3.8]: https://github.com/gruebel/pycep/compare/0.3.7...0.3.8
