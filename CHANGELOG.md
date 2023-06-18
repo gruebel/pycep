@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+# Added
+
+- Support more list* accessor operators
+
 ### Changed
 
 - Fixed an issue with function `resourceId` not allowing more than 5 parameters

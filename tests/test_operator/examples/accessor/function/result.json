@@ -1,0 +1,51 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "resources": {
+    "dScript": {
+      "decorators": [],
+      "type": "Microsoft.Resources/deploymentScripts",
+      "api_version": "2019-10-01-preview",
+      "existing": false,
+      "config": {
+        "name": "scriptWithStorage",
+        "location": "location",
+        "properties": {
+          "azCliVersion": "2.0.80",
+          "storageAccountSettings": {
+            "storageAccountName": "storageAccount.name",
+            "storageAccountKey": "storageAccount.listKeys().keys[0].value"
+          }
+        }
+      }
+    }
+  },
+  "modules": {
+    "sql": {
+      "decorators": [],
+      "type": "local",
+      "detail": {
+        "full": "./sql.bicep",
+        "path": "./sql.bicep"
+      },
+      "config": {
+        "name": "deploySQL",
+        "params": {
+          "sqlServerName": "sqlServerName",
+          "adminLogin": "adminLogin",
+          "adminPassword": "kv.getSecret('vmAdminPassword')"
+        }
+      }
+    }
+  },
+  "outputs": {
+    "subnetId": {
+      "decorators": [],
+      "type": "string",
+      "value": "storageAccount.listAccountSas('2021-04-01', accountSasProperties).accountSasToken"
+    }
+  }
+}

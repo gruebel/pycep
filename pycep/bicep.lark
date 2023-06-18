@@ -202,7 +202,8 @@ json_func: _JSON value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
 
 extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" value_brackets ("," value_brackets)~2..3 ")"
 
-list_keys: ("listKeys" | "az.listKeys") "(" value_brackets "," value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
+_LIST_KEYS.1: ("listKeys" | "az.listKeys") "("
+list_keys: _LIST_KEYS value_brackets "," value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
 
 management_group_resource_id: ("managementGroupResourceId" | "az.managementGroupResourceId") "(" value_brackets ("," value_brackets)~1..2 ")"
 
@@ -351,7 +352,7 @@ EXISTING: "existing"
 
 STRING: /[a-zA-Z_](::|[\w_.])*/
 QUOTED_STRING: "'" STRING "'"
-INDEXED: /(?=[\w][\w_.]+(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|[\[\]])+)(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|\[[\w\[\]_().']+\]!?|[\w_\-\/.,'= ])+/
+INDEXED: /(?=[\w][\w_.]+(.(get|list)[a-zA-Z]*\(([\w., '-]+)?\)|[\[\]])+)(.(get|list)[a-zA-Z]*\(([\w., '-]+)?\)|\[[\w\[\]_().']+\]!?|[\w_\-\/.,'= ])+/
 QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}'{]+|(?R))*+}|\\'|[^'])*'/
 
 MULTI_LINE_STRING: "'''" (/.*?/ | NEWLINE)+ "'''"
