@@ -88,7 +88,7 @@ deco_min_val: "minValue" "(" /-?\d+/ ")"
 
 deco_max_val: "maxValue" "(" /\d+/ ")"
 
-deco_metadata: "metadata" "(" object ")"
+deco_metadata: "metadata" "(" _CPP_COMMENT_NL? object _CPP_COMMENT_NL? ")"
 
 deco_secure: "secure" "(" ")"
 

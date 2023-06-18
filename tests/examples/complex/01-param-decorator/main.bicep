@@ -46,6 +46,15 @@ param retentionInDays int
 })
 param modules array = []
 
+@metadata(
+  {
+    monthDays: 'Days of the month that the job should execute on. Must be between 1 and 31.'
+    monthlyOccurrences: 'Occurrences of days within a month.'
+    weekDays: 'Days of the week that the job should execute on.'
+  }
+)
+param advancedSchedule object = {}
+
 // secure
 @secure()
 param demoPassword string
