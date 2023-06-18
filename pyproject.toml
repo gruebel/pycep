@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pycep-parser"
-version = "0.4.1a0"
+version = "0.4.1"
 description = "A Python based Bicep parser"
 authors = ["Anton Grübel <anton.gruebel@gmail.com>"]
 license = "Apache-2.0"
