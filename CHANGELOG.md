@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
+### Changed
+
+- Fixed an issue with function `resourceId` not allowing more than 5 parameters
 
 ## [0.4.0] - 2023-04-29
 

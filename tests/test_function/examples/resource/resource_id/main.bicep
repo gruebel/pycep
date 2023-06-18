@@ -25,7 +25,7 @@ module exampleModule 'rgModule.bicep' = {
 }
 
 // output
-output subnetId string = resourceId(subId, rgName, 'Microsoft.Network/virtualNetworks/subnets', vnet.name, subnet1Name)
+output subnetId string = resourceId(subId, rgName, 'Microsoft.Network/virtualNetworks/subnets', vnet.name, subnet1Name, rangeName, ipName)
 
 // namespace az
 output namespace object = az.resourceId('Microsoft.Automation/automationAccounts', automationAccountName)
