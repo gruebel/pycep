@@ -116,6 +116,20 @@
       "type": "array",
       "default": []
     },
+    "advancedSchedule": {
+      "decorators": [
+        {
+          "type": "metadata",
+          "argument": {
+            "monthDays": "Days of the month that the job should execute on. Must be between 1 and 31.",
+            "monthlyOccurrences": "Occurrences of days within a month.",
+            "weekDays": "Days of the week that the job should execute on."
+          }
+        }
+      ],
+      "type": "object",
+      "default": {}
+    },
     "demoPassword": {
       "decorators": [
         {

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Fixed an issue with function `resourceId` not allowing more than 5 parameters
+- Fixed an issue with a final newline in the `@metadata` decorator
 
 ## [0.4.0] - 2023-04-29
 
