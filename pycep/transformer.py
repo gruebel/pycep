@@ -1027,11 +1027,23 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             resource_name_1 = str(args[2])
             resource_name_2 = str(args[3])
         else:
+            # in theory there could be many resource_name parameters, but it is currently limited to 7
             subscription_id = str(args[0])
             resource_group_name = str(args[1])
             resource_type = str(args[2])
-            resource_name_1 = str(args[3])
-            resource_name_2 = str(args[4])
+
+            return {
+                "type": "resource_id",
+                "parameters": {
+                    "resource_type": resource_type,
+                    **{  # type: ignore[misc] # dynamic operand creation
+                        f"resource_name_{idx}": str(resource_name)
+                        for idx, resource_name in enumerate(args[3:], start=1)
+                    },
+                    "resource_group_name": resource_group_name,
+                    "subscription_id": subscription_id,
+                },
+            }
 
         return {
             "type": "resource_id",

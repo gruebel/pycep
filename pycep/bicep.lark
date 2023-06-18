@@ -211,7 +211,7 @@ pick_zones: ("pickZones" | "az.pickZones") "(" value_brackets ("," value_bracket
 reference: ("reference" | "az.reference") "(" value_brackets ["," value_brackets ["," value_brackets]] ")" ["." STRING]
 
 _RESOURCE_ID.1: ("resourceId" | "az.resourceId") "("
-resource_id: _RESOURCE_ID value_brackets ("," value_brackets)~1..4 ")"
+resource_id: _RESOURCE_ID value_brackets ("," value_brackets)~1..9 ")"
 
 subscription_resource_id: ("subscriptionResourceId" | "az.subscriptionResourceId") "(" value_brackets ("," value_brackets)~1..3 ")"
 
