@@ -7,17 +7,17 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
        | [decorator] "resource" STRING type_api_pair [EXISTING] "=" resource_value      -> resource
        | [decorator] "module" STRING module_path "=" module_value                       -> module
 
-?value: "null"                      -> null
-      | "true"                      -> true
-      | "false"                     -> false
-      | INT                         -> int
-      | STRING                      -> string
-      | QUOTED_INTERPOLATION        -> string
-      | INDEXED                     -> string
-      | MULTI_LINE_STRING           -> multi_line_string
+?value: _NEWLINE? "null"                      -> null
+      | _NEWLINE? "true"                      -> true
+      | _NEWLINE? "false"                     -> false
+      | _NEWLINE? INT                         -> int
+      | _NEWLINE? STRING                      -> string
+      | _NEWLINE? QUOTED_INTERPOLATION        -> string
+      | _NEWLINE? INDEXED                     -> string
+      | MULTI_LINE_STRING                     -> multi_line_string
       | array
       | object
-      | function
+      | _NEWLINE? function
       | operator
 
 ?value_brackets: (value | "(" value ")") "!"?
@@ -212,7 +212,7 @@ pick_zones: ("pickZones" | "az.pickZones") "(" value_brackets ("," value_bracket
 reference: ("reference" | "az.reference") "(" value_brackets ["," value_brackets ["," value_brackets]] ")" ["." STRING]
 
 _RESOURCE_ID.1: ("resourceId" | "az.resourceId") "("
-resource_id: _RESOURCE_ID value_brackets ("," value_brackets)~1..9 ")"
+resource_id: _RESOURCE_ID value_brackets ("," value_brackets)~1..9 _CPP_COMMENT_NL? ")"
 
 subscription_resource_id: ("subscriptionResourceId" | "az.subscriptionResourceId") "(" value_brackets ("," value_brackets)~1..3 ")"
 
