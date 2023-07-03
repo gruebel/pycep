@@ -52,7 +52,7 @@ jobs:
       - name: Build Python package
         run: poetry build
       - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@a56da0b891b3dc519c7ee3284aff1fad93cc8598  # v1.8.6
+        uses: pypa/gh-action-pypi-publish@f5622bde02b04381239da3573277701ceca8f6a0  # v1.8.7
       - name: Extract release notes
         id: extract-release-notes
         uses: ffurrer2/extract-release-notes@f2dd00dec4102dbc6d7bdf804dfd85546dfa1f0b  # v1.16.0
