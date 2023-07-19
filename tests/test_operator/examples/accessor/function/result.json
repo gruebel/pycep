@@ -4,42 +4,59 @@
       "value": "resourceGroup"
     }
   },
-  "variables": {
-    "kvName": {
-      "decorators": [],
-      "value": "kvTest"
-    },
-    "subscriptionId": {
-      "decorators": [],
-      "value": "gsfgsdfgsd"
-    },
-    "kvResourceGroup": {
-      "decorators": [],
-      "value": "rgTest"
-    },
-    "sqlServerName": {
-      "decorators": [],
-      "value": "sqlServer"
-    },
-    "adminLogin": {
-      "decorators": [],
-      "value": "admin"
-    }
-  },
   "resources": {
-    "kv": {
+    "dScript": {
       "decorators": [],
-      "type": "Microsoft.KeyVault/vaults",
-      "api_version": "2019-09-01",
-      "existing": true,
+      "type": "Microsoft.Resources/deploymentScripts",
+      "api_version": "2019-10-01-preview",
+      "existing": false,
       "config": {
-        "name": "kvName",
-        "scope": {
-          "function": {
-            "type": "resource_group",
-            "parameters": {
-              "resource_group_name": "kvResourceGroup",
-              "subscription_id": "subscriptionId"
+        "name": "scriptWithStorage",
+        "location": "location",
+        "properties": {
+          "azCliVersion": "2.0.80",
+          "storageAccountSettings": {
+            "storageAccountName": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "storageAccount",
+                  "operand_2": "name"
+                }
+              }
+            },
+            "storageAccountKey": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": {
+                    "operator": {
+                      "type": "function_accessor",
+                      "operands": {
+                        "operand_1": "storageAccount",
+                        "func_name": "listKeys"
+                      }
+                    }
+                  },
+                  "operand_2": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": {
+                          "operator": {
+                            "type": "index_accessor",
+                            "operands": {
+                              "operand_1": "keys",
+                              "operand_2": 0
+                            }
+                          }
+                        },
+                        "operand_2": "value"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -66,6 +83,37 @@
                 "operand_1": "kv",
                 "func_name": "getSecret",
                 "operand_2": "vmAdminPassword"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "subnetId": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": "storageAccount",
+            "operand_2": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": {
+                    "function": {
+                      "type": "listAccountSas",
+                      "parameters": {
+                        "resource_identifier": "2021-04-01",
+                        "api_version": "accountSasProperties"
+                      }
+                    }
+                  },
+                  "operand_2": "accountSasToken"
+                }
               }
             }
           }

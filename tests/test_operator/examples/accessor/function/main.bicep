@@ -1,16 +1,19 @@
 // https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/operators-access#function-accessor
 
-var kvName = 'kvTest'
-var subscriptionId = 'gsfgsdfgsd'
-var kvResourceGroup = 'rgTest'
-var sqlServerName = 'sqlServer'
-var adminLogin = 'admin'
-
-resource kv 'Microsoft.KeyVault/vaults@2019-09-01' existing = {
-  name: kvName
-  scope: resourceGroup(subscriptionId, kvResourceGroup )
+// resource
+resource dScript 'Microsoft.Resources/deploymentScripts@2019-10-01-preview' = {
+  name: 'scriptWithStorage'
+  location: location
+  properties: {
+    azCliVersion: '2.0.80'
+    storageAccountSettings: {
+      storageAccountName: storageAccount.name
+      storageAccountKey: storageAccount.listKeys().keys[0].value
+    }
+  }
 }
 
+// module
 module sql './sql.bicep' = {
   name: 'deploySQL'
   params: {
@@ -19,3 +22,6 @@ module sql './sql.bicep' = {
     adminPassword: kv.getSecret('vmAdminPassword')
   }
 }
+
+// output
+output subnetId string = storageAccount.listAccountSas('2021-04-01', accountSasProperties).accountSasToken

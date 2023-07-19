@@ -27,13 +27,14 @@ ArrayFunctions: TypeAlias = (
 DateFunctions: TypeAlias = "DateTimeAdd | DateTimeFromEpoch | DateTimeToEpoch | UtcNow"
 DeploymentFunctions: TypeAlias = "Deployment | Environment"
 FileFunctions: TypeAlias = "LoadFileAsBase64 | LoadJsonContent | LoadTextContent"
+LambdaFunctions: TypeAlias = "Filter"
 LogicalFunctions: TypeAlias = "BoolFunc"
 NumericFunctions: TypeAlias = "IntFunc"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = "ExtensionResourceId | ListFunc | ManagementGroupResourceId | PickZones | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ManagementGroup | ResourceGroup | Subscription | Tenant"
 StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | DataUri | DataUriToString | EndsWith | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | Join | StartsWith | String | Substring | ToLower | ToUpper | Trim | UniqueString | Uri | UriComponent | UriComponentToString"
-Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | FileFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
+Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | FileFunctions | LambdaFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
 
 
 ####################
@@ -247,7 +248,7 @@ class LoopRange(TypedDict):
 
 class _LoopArrayDetail(TypedDict):
     item_name: str
-    array_name: str
+    array_name: PossibleValue
 
 
 class LoopArray(TypedDict):
@@ -579,6 +580,24 @@ class _LoadTextContentParameters(TypedDict):
 class LoadTextContent(TypedDict):
     type: Literal["load_text_content"]
     parameters: _LoadTextContentParameters
+
+
+####################
+#
+# functions - lambda
+#
+####################
+
+
+class _FilterParameters(TypedDict):
+    input_array: PossibleValue
+    input_element: str
+    expression: PossibleValue
+
+
+class Filter(TypedDict):
+    type: Literal["filter"]
+    parameters: _FilterParameters
 
 
 ####################

@@ -375,13 +375,13 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
 
-    def loop_array(self, args: tuple[Token, Token]) -> pycep_typing.LoopArray:
+    def loop_array(self, args: tuple[Token, pycep_typing.PossibleValue]) -> pycep_typing.LoopArray:
         item_name, array_name = args
         return {
             "type": "array",
             "detail": {
                 "item_name": str(item_name),
-                "array_name": array_name
+                "array_name": array_name,
             },
         }
 
@@ -796,6 +796,24 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
     ####################
     #
+    # functions - lambda
+    #
+    ####################
+
+    def filter(self, args: tuple[pycep_typing.PossibleValue, Token, pycep_typing.PossibleValue]) -> pycep_typing.Filter:
+        input_array, input_element, expression = args
+
+        return {
+            "type": "filter",
+            "parameters": {
+                "input_array": input_array,
+                "input_element": str(input_element),
+                "expression": expression,
+            },
+        }
+
+    ####################
+    #
     # functions - logical
     #
     ####################
@@ -999,11 +1017,25 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             resource_name_1 = args[2]
             resource_name_2 = args[3]
         else:
+            # in theory there could be many resource_name parameters, but it is currently limited to 7
             subscription_id = args[0]
             resource_group_name = args[1]
             resource_type = args[2]
-            resource_name_1 = args[3]
-            resource_name_2 = args[4]
+            #resource_name_1 = args[3]
+            #resource_name_2 = args[4]
+
+            return {
+                "type": "resource_id",
+                "parameters": {
+                    "resource_type": resource_type,
+                    **{  # type: ignore[misc] # dynamic operand creation
+                        f"resource_name_{idx}": resource_name
+                        for idx, resource_name in enumerate(args[3:], start=1)
+                    },
+                    "resource_group_name": resource_group_name,
+                    "subscription_id": subscription_id,
+                },
+            }
 
         return {
             "type": "resource_id",
@@ -1769,6 +1801,9 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
         Additionally, removes surrounding single quotes.
         """
+        if value.type == "MULTI_LINE_STRING":
+            return self.multi_line_string((value,))
+
         if value.type not in ("QUOTED_STRING", "QUOTED_INTERPOLATION"):
             return BicepElement(value)
 

@@ -42,6 +42,26 @@
       "type": "string",
       "default": "Standard_DS1_v2"
     },
+    "principalIds": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "Required. The IDs of the principals to assign the role to."
+        }
+      ],
+      "type": "array",
+      "default": null
+    },
+    "subnetId": {
+      "decorators": [
+        {
+          "type": "description",
+          "argument": "Optional. Resource ID of an already existing subnet, e.g.: /subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/virtualNetworks/<vnetName>/subnets/<subnetName>.\nIf no value is provided, a new temporary VNET and subnet will be created in the staging resource group and will be deleted along with the remaining temporary resources.\n"
+        }
+      ],
+      "type": "string",
+      "default": ""
+    },
     "storageAccountName": {
       "decorators": [
         {
@@ -95,6 +115,20 @@
       ],
       "type": "array",
       "default": []
+    },
+    "advancedSchedule": {
+      "decorators": [
+        {
+          "type": "metadata",
+          "argument": {
+            "monthDays": "Days of the month that the job should execute on. Must be between 1 and 31.",
+            "monthlyOccurrences": "Occurrences of days within a month.",
+            "weekDays": "Days of the week that the job should execute on."
+          }
+        }
+      ],
+      "type": "object",
+      "default": {}
     },
     "demoPassword": {
       "decorators": [

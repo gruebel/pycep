@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pycep-parser"
-version = "0.3.10b5"
+version = "0.4.1a"
 description = "A Python based Bicep parser"
 authors = ["Anton Grübel <anton.gruebel@gmail.com>"]
 license = "Apache-2.0"
@@ -37,9 +37,9 @@ importlib-resources = {version = ">=2.0.0", python = "<3.9"}
 
 [tool.poetry.dev-dependencies]
 assertpy = "^1.1"
-mypy = "^1.1.1"
+mypy = "^1.2.0"
 pre-commit = "^2.21.0"  # v3 needs Python 3.8
-pytest = "^7.2.1"
+pytest = "^7.3.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

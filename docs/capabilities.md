@@ -52,6 +52,16 @@
 - [x] loadJsonContent
 - [x] loadTextContent
 
+### Lambda
+
+[Reference](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda)
+
+- [x] filter
+- [ ] map
+- [ ] reduce
+- [ ] sort
+- [ ] toObject
+
 ### Logical
 
 [Reference](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-logical)

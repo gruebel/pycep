@@ -34,6 +34,7 @@ pip install --upgrade pycep-parser
 - [x] Date
 - [x] Deployment
 - [x] File
+- [ ] Lambda (in progress)
 - [x] Logical
 - [x] Numeric
 - [x] Object

@@ -7,20 +7,19 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
        | [decorator] "resource" STRING type_api_pair [EXISTING] "=" resource_value      -> resource
        | [decorator] "module" STRING module_path "=" module_value                       -> module
 
-?value: "null"                      -> null
-      | "true"                      -> true
-      | "false"                     -> false
-      | INT                         -> int
-      | STRING                      -> string
-      | QUOTED_INTERPOLATION        -> string
-      | MULTI_LINE_STRING           -> multi_line_string
+?value: _NEWLINE? "null"                      -> null
+      | _NEWLINE? "true"                      -> true
+      | _NEWLINE? "false"                     -> false
+      | _NEWLINE? INT                         -> int
+      | _NEWLINE? STRING                      -> string
+      | _NEWLINE? QUOTED_INTERPOLATION        -> string
+      | MULTI_LINE_STRING                     -> multi_line_string
       | array
       | object
-      | function
+      | _NEWLINE? function
       | operator
 
-?value_brackets: value
-               | "(" value ")"
+?value_brackets: (value | "(" value ")") "!"?
 
 // element values
 
@@ -72,13 +71,13 @@ pair: key ":" (value_brackets | loop)
 
 // decorators
 
-decorator: ("@" (deco_allowed | deco_batch | deco_description | deco_min_len | deco_max_len | deco_min_val | deco_max_val | deco_metadata | deco_secure) _CPP_COMMENT_NL)+
+decorator: ("@" "sys."? (deco_allowed | deco_batch | deco_description | deco_min_len | deco_max_len | deco_min_val | deco_max_val | deco_metadata | deco_secure) _CPP_COMMENT_NL~0..5)+
 
 deco_allowed: "allowed" "(" array ")"
 
 deco_batch: "batchSize" "(" /\d+/ ")"
 
-deco_description: "description" "(" QUOTED_INTERPOLATION ")"
+deco_description: "description" "(" (QUOTED_INTERPOLATION | MULTI_LINE_STRING) ")"
 
 deco_min_len: "minLength" "(" /\d+/ ")"
 
@@ -88,14 +87,14 @@ deco_min_val: "minValue" "(" /-?\d+/ ")"
 
 deco_max_val: "maxValue" "(" /\d+/ ")"
 
-deco_metadata: "metadata" "(" object ")"
+deco_metadata: "metadata" "(" _CPP_COMMENT_NL? object _CPP_COMMENT_NL? ")"
 
 deco_secure: "secure" "(" ")"
 
 // functions
 
-function: function_any | function_array | function_date | function_deployment | function_file | function_logical
-        | function_numeric | function_object | function_resource | function_scope | function_string
+function: function_any | function_array | function_date | function_deployment | function_file | function_lambda
+        | function_logical | function_numeric | function_object | function_resource | function_scope | function_string
 
 // functions - any
 
@@ -170,6 +169,12 @@ load_json_content: ("loadJsonContent" | "sys.loadJsonContent") "(" value_bracket
 
 load_text_content: ("loadTextContent" | "sys.loadTextContent") "(" value_brackets ["," value_brackets] ")"
 
+// functions - lambda
+
+?function_lambda: filter
+
+filter: ("filter" | "sys.filter") "(" value_brackets "," STRING "=>" value_brackets ")"
+
 // functions - logical
 
 ?function_logical: bool_func
@@ -198,7 +203,7 @@ extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" va
 
 // See https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-resource#list
 // With Bicep v0.4.412+, you call list*() using accessor operator, ex: storageAccount.listKeys()
-list_func: LIST_FUNC_NAME "(" value_brackets "," value_brackets ")"
+list_func: (LIST_FUNC_NAME | "az." LIST_FUNC_NAME) "(" value_brackets "," value_brackets ")"
 
 management_group_resource_id: ("managementGroupResourceId" | "az.managementGroupResourceId") "(" value_brackets ("," value_brackets)~1..2 ")"
 
@@ -207,7 +212,7 @@ pick_zones: ("pickZones" | "az.pickZones") "(" value_brackets ("," value_bracket
 reference: ("reference" | "az.reference") "(" value_brackets ["," value_brackets ["," value_brackets]] ")" ["." STRING]
 
 _RESOURCE_ID.1: ("resourceId" | "az.resourceId") "("
-resource_id: _RESOURCE_ID value_brackets ("," value_brackets)~1..4 ")"
+resource_id: _RESOURCE_ID value_brackets ("," value_brackets)~1..9 _CPP_COMMENT_NL? ")"
 
 subscription_resource_id: ("subscriptionResourceId" | "az.subscriptionResourceId") "(" value_brackets ("," value_brackets)~1..3 ")"
 
@@ -349,7 +354,7 @@ substract.1: value_brackets "-" value_brackets
 
 index_accessor: value_brackets "[" value_brackets "]"
 
-function_accessor: value_brackets "." LIST_FUNC_NAME "(" value_brackets ["," value_brackets]+ ")"
+function_accessor: value_brackets "." LIST_FUNC_NAME "(" value_brackets? ["," value_brackets]+ ")"
 
 nested_resource_accessor: value_brackets "::" value_brackets
 

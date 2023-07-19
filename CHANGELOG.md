@@ -7,9 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+# Added
+
+## [0.4.1] - 2023-06-18
+
+# Added
+
+- Support more list* accessor operators
+- Support newlines between function parameters
+
+### Changed
+
+- Fixed an issue with function `resourceId` not allowing more than 5 parameters
+- Fixed an issue with a final newline in the `@metadata` decorator
+
+## [0.4.0] - 2023-04-29
+
 ### Added
 
 - Support dot notation in private module registry names
+- Support `sys` namespace notation for decorators
+- Support `!` non-null operator
+- Support `filter` function
+- Support multi line strings in description decorator
+
+### Changed
+
+- Fixed an issue with comments between decorator and element
 
 ## [0.3.9] - 2022-08-30
 
@@ -135,7 +159,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release to be able to parse all the official examples of Bicep [101](https://github.com/Azure/bicep/tree/main/docs/examples/101).
 
-[Unreleased]: https://github.com/gruebel/pycep/compare/0.3.9...HEAD
+[Unreleased]: https://github.com/gruebel/pycep/compare/0.4.1...HEAD
+[0.4.1]: https://github.com/gruebel/pycep/compare/0.4.0...0.4.1
+[0.4.0]: https://github.com/gruebel/pycep/compare/0.3.9...0.4.0
 [0.3.9]: https://github.com/gruebel/pycep/compare/0.3.8...0.3.9
 [0.3.8]: https://github.com/gruebel/pycep/compare/0.3.7...0.3.8
 [0.3.7]: https://github.com/gruebel/pycep/compare/0.3.6...0.3.7

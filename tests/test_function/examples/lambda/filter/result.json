@@ -1,0 +1,144 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "variables": {
+    "diagnosticsLogsSpecified": {
+      "decorators": [],
+      "value": {
+        "loop_type": {
+          "type": "array",
+          "detail": {
+            "item_name": "category",
+            "array_name": {
+              "function": {
+                "type": "filter",
+                "parameters": {
+                  "input_array": "diagnosticLogCategoriesToEnable",
+                  "input_element": "item",
+                  "expression": {
+                    "operator": {
+                      "type": "not_equals",
+                      "operands": {
+                        "operand_1": "item",
+                        "operand_2": "allLogs"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "condition": null,
+        "config": {
+          "category": "category",
+          "enabled": true,
+          "retentionPolicy": {
+            "enabled": true,
+            "days": "diagnosticLogsRetentionInDays"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "identityProvider": {
+      "decorators": [],
+      "type": "Microsoft.ApiManagement/service/identityProviders",
+      "api_version": "2020-06-01-preview",
+      "existing": false,
+      "config": {
+        "name": {
+          "function": {
+            "type": "filter",
+            "parameters": {
+              "input_array": "itemForLoop",
+              "input_element": "i",
+              "expression": {
+                "operator": {
+                  "type": "greater_than",
+                  "operands": {
+                    "operand_1": "i",
+                    "operand_2": 5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "properties": {
+          "clientId": "googleClientId",
+          "clientSecret": "googleClientSecret"
+        },
+        "dependsOn": [
+          "apiManagementService"
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "oldDogs": {
+      "decorators": [],
+      "type": "array",
+      "value": {
+        "function": {
+          "type": "filter",
+          "parameters": {
+            "input_array": "dogs",
+            "input_element": "dog",
+            "expression": {
+              "operator": {
+                "type": "greater_than_or_equals",
+                "operands": {
+                  "operand_1": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": "dog",
+                        "operand_2": "age"
+                      }
+                    }
+                  },
+                  "operand_2": 5
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "namespace": {
+      "decorators": [],
+      "type": "array",
+      "value": {
+        "function": {
+          "type": "filter",
+          "parameters": {
+            "input_array": "dogs",
+            "input_element": "dog",
+            "expression": {
+              "operator": {
+                "type": "greater_than_or_equals",
+                "operands": {
+                  "operand_1": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": "dog",
+                        "operand_2": "age"
+                      }
+                    }
+                  },
+                  "operand_2": 5
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

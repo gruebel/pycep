@@ -1,0 +1,55 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "variables": {
+    "maybeNull": {
+      "decorators": [],
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": {
+              "operator": {
+                "type": "index_accessor",
+                "operands": {
+                  "operand_1": "mightIncludeNull",
+                  "operand_2": 0
+                }
+              }
+            },
+            "operand_2": "key"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "backupVault": {
+      "decorators": [],
+      "type": "Microsoft.DataProtection/backupVaults",
+      "api_version": "2022-03-01",
+      "existing": true,
+      "config": {
+        "name": {
+          "function": {
+            "type": "last",
+            "parameters": {
+              "arg_1": {
+                "function": {
+                  "type": "split",
+                  "parameters": {
+                    "input_string": "resourceId",
+                    "delimiter": "/"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

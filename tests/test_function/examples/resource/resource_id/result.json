@@ -129,6 +129,8 @@
             },
             "resource_name_2": "subnet1Name",
             "resource_group_name": "rgName",
+            "resource_name_3": "rangeName",
+            "resource_name_4": "ipName",
             "subscription_id": "subId"
           }
         }

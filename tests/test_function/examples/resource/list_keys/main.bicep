@@ -33,4 +33,4 @@ output lateIndexed string = listKeys(refId, apiVersion).keys[env].value
 output directIndexed string = listKeys(refId, apiVersion)[sub].dev[var_id]
 
 // namespace az
-output namespace object = listKeys(refId, apiVersion)
+output namespace object = az.listKeys(refId, apiVersion)
