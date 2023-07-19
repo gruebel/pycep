@@ -1,0 +1,111 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.github/**'
+      - '.pre-commit-config.yaml'
+  pull_request:
+
+permissions: read-all
+
+env:
+  POETRY_VERSION: "1.4.1"
+  MIN_PYTHON_VERSION: "3.7"
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9  # v3.5.3
+      - uses: actions/setup-python@bd6b4b6205c4dbad673328db7b31b7fab9e241c0  # v4.6.1
+        with:
+          python-version: "3.8"  # needed for flake8 6.0.0+
+      - uses: pre-commit/action@646c83fcd040023954eafda54b4db0192ce70507  # v3.0.0
+
+  tests:
+    needs: pre-commit
+    name: ${{ matrix.os }} / ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        experimental: [false]
+        include:
+          - os: ubuntu-latest
+            python-version: "3.12-dev"
+            experimental: true
+      fail-fast: false
+    continue-on-error: ${{ matrix.experimental }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9  # v3.5.3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@bd6b4b6205c4dbad673328db7b31b7fab9e241c0  # v4.6.1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Set up poetry ${{ env.POETRY_VERSION }}
+        uses: abatilo/actions-poetry@192395c0d10c082a7c62294ab5d9a9de40e48974  # v2.3.0
+        with:
+          poetry-version: ${{ env.POETRY_VERSION }}
+      - name: Install dependencies
+        run: poetry install
+      - name: Install pytest plugin
+        run: poetry run pip install pytest-github-actions-annotate-failures
+      - name: Run pytest
+        run: poetry run python -m pytest tests/
+      - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.7'
+        name: Create coverage report
+        run: |
+          poetry run pip install pytest-cov
+          poetry run python -m pytest -s --cov=pycep --cov-report=xml tests/
+      - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.7' && github.repository == 'gruebel/pycep'
+        name: Upload coverage to codecov
+        uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d  # v3.1.4
+        with:
+          flags: unittests
+
+  publish:
+    if: github.event_name == 'push'
+    needs: tests
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write
+      # IMPORTANT: this permission is mandatory for trusted publishing to pypi
+      id-token: write
+    steps:
+      - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9  # v3.5.3
+      - uses: actions/setup-python@bd6b4b6205c4dbad673328db7b31b7fab9e241c0  # v4.6.1
+        with:
+          python-version: ${{ env.MIN_PYTHON_VERSION }}
+      - name: Set up poetry ${{ env.POETRY_VERSION }}
+        uses: abatilo/actions-poetry@192395c0d10c082a7c62294ab5d9a9de40e48974  # v2.3.0
+        with:
+          poetry-version: ${{ env.POETRY_VERSION }}
+      - name: Install dependencies
+        run: poetry install --no-dev
+      - name: Bump prerelease version
+        run: |
+          # bump version
+          poetry version prerelease
+          new_version=$(poetry version -s)
+
+          # commit and push
+          git config --global user.name 'gruebel'
+          git config --global user.email 'gruebel@users.noreply.github.com'
+          git add pyproject.toml
+          git commit -m "publish version ${new_version}"
+          git push
+      - name: Build Python package
+        run: poetry build
+      - name: Publish prerelease to PyPI
+        uses: pypa/gh-action-pypi-publish@f5622bde02b04381239da3573277701ceca8f6a0  # v1.8.7
