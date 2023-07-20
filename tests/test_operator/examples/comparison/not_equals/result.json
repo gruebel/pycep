@@ -105,8 +105,24 @@
       "api_version": "2020-06-01",
       "existing": false,
       "config": {
-        "name": "publicIp.name",
-        "location": "publicIp.location",
+        "name": {
+          "operator": {
+            "type": "property_accessor",
+            "operands": {
+              "operand_1": "publicIp",
+              "operand_2": "name"
+            }
+          }
+        },
+        "location": {
+          "operator": {
+            "type": "property_accessor",
+            "operands": {
+              "operand_1": "publicIp",
+              "operand_2": "location"
+            }
+          }
+        },
         "properties": {
           "ddosSettings": {
             "protectedIP": {

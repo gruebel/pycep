@@ -90,7 +90,15 @@
               "parameters": {
                 "resource_id": "mgScope",
                 "resource_type": "Microsoft.Authorization/policyDefinitions",
-                "resource_name_1": "policyDefinition.name",
+                "resource_name_1": {
+                  "operator": {
+                    "type": "property_accessor",
+                    "operands": {
+                      "operand_1": "policyDefinition",
+                      "operand_2": "name"
+                    }
+                  }
+                },
                 "resource_name_2": null
               }
             }

@@ -64,7 +64,15 @@
         "function": {
           "type": "array",
           "parameters": {
-            "convert_to_array": "site.properties"
+            "convert_to_array": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            }
           }
         }
       }

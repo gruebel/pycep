@@ -7,7 +7,23 @@
   "variables": {
     "maybeNull": {
       "decorators": [],
-      "value": "mightIncludeNull[0]!.key"
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": {
+              "operator": {
+                "type": "index_accessor",
+                "operands": {
+                  "operand_1": "mightIncludeNull",
+                  "operand_2": 0
+                }
+              }
+            },
+            "operand_2": "key"
+          }
+        }
+      }
     }
   },
   "resources": {

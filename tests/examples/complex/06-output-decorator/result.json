@@ -13,7 +13,15 @@
         }
       ],
       "type": "string",
-      "value": "StorageAccount.name"
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": "StorageAccount",
+            "operand_2": "name"
+          }
+        }
+      }
     },
     "resourceId": {
       "decorators": [
@@ -23,7 +31,15 @@
         }
       ],
       "type": "string",
-      "value": "StorageAccount.id"
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": "StorageAccount",
+            "operand_2": "id"
+          }
+        }
+      }
     }
   }
 }

@@ -1,0 +1,80 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "outputs": {
+    "myRegion": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "operator": {
+          "type": "index_accessor",
+          "operands": {
+            "operand_1": "regions",
+            "operand_2": "uksouth"
+          }
+        }
+      }
+    },
+    "myZone": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": "zones",
+            "operand_2": {
+              "operator": {
+                "type": "index_accessor",
+                "operands": {
+                  "operand_1": "zone1",
+                  "operand_2": "westeurope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "region": {
+      "decorators": [],
+      "type": "string",
+      "value": "shortLocation"
+    }
+  },
+  "variables": {
+    "location": {
+      "decorators": [],
+      "value": "westeurope"
+    },
+    "regions": {
+      "decorators": [],
+      "value": {
+        "uksouth": "uks",
+        "westeurope": "we"
+      }
+    },
+    "shortLocation": {
+      "decorators": [],
+      "value": {
+        "operator": {
+          "type": "index_accessor",
+          "operands": {
+            "operand_1": "regions",
+            "operand_2": "location"
+          }
+        }
+      }
+    },
+    "zones": {
+      "decorators": [],
+      "value": {
+        "zone1": "regions",
+        "zone2": {}
+      }
+    }
+  }
+}

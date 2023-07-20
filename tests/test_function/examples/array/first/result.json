@@ -48,7 +48,15 @@
           }
         },
         "properties": {
-          "roleDefinitionId": "definition.id",
+          "roleDefinitionId": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": "definition",
+                "operand_2": "id"
+              }
+            }
+          },
           "principalId": "principalId"
         }
       }
@@ -62,7 +70,15 @@
         "function": {
           "type": "first",
           "parameters": {
-            "arg_1": "site.properties"
+            "arg_1": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            }
           }
         }
       }
@@ -74,7 +90,15 @@
         "function": {
           "type": "first",
           "parameters": {
-            "arg_1": "site.properties"
+            "arg_1": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            }
           }
         }
       }
