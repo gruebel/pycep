@@ -19,7 +19,31 @@
     "blobEndpoint": {
       "decorators": [],
       "type": "string",
-      "value": "stg.properties.primaryEndpoints.blob"
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": "stg",
+            "operand_2": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "properties",
+                  "operand_2": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": "primaryEndpoints",
+                        "operand_2": "blob"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

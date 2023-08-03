@@ -70,7 +70,15 @@
         "function": {
           "type": "date_time_add",
           "parameters": {
-            "base": "site.properties",
+            "base": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            },
             "duration": "PT1H",
             "format": null
           }
@@ -84,7 +92,15 @@
         "function": {
           "type": "date_time_add",
           "parameters": {
-            "base": "site.properties",
+            "base": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            },
             "duration": "PT1H",
             "format": null
           }

@@ -47,7 +47,15 @@
         "condition": "deployUsers",
         "config": {
           "params": {
-            "apimInstanceName": "apiManagement.name"
+            "apimInstanceName": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "apiManagement",
+                  "operand_2": "name"
+                }
+              }
+            }
           },
           "name": "apimUsers"
         }

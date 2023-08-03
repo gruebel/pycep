@@ -40,7 +40,23 @@
         "params": {
           "managementGroupDisplayName": "Sandbox",
           "managementGroupId": "sbx-org-mgp",
-          "parentManagementGroupId": "managementGroupGlobal.outputs.managementGroupID",
+          "parentManagementGroupId": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": "managementGroupGlobal",
+                "operand_2": {
+                  "operator": {
+                    "type": "property_accessor",
+                    "operands": {
+                      "operand_1": "outputs",
+                      "operand_2": "managementGroupID"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "subscriptionIds": [
             "63c1651a-ec30-4f6c-a3ec-671e23063585"
           ]

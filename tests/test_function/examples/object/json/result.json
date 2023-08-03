@@ -64,7 +64,15 @@
         "function": {
           "type": "json",
           "parameters": {
-            "arg_1": "site.properties"
+            "arg_1": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            }
           },
           "property_name": "id"
         }

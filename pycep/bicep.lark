@@ -13,7 +13,6 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
       | _NEWLINE? INT                         -> int
       | _NEWLINE? STRING                      -> string
       | _NEWLINE? QUOTED_INTERPOLATION        -> string
-      | _NEWLINE? INDEXED                     -> string
       | MULTI_LINE_STRING                     -> multi_line_string
       | array
       | object
@@ -197,13 +196,14 @@ json_func: _JSON value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
 
 // functions - resource
 
-?function_resource: extension_resource_id | list_keys | management_group_resource_id | pick_zones | reference
+?function_resource: extension_resource_id | list_func | management_group_resource_id | pick_zones | reference
                   | resource_id | subscription_resource_id | tenant_resource_id
 
 extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" value_brackets ("," value_brackets)~2..3 ")"
 
-_LIST_KEYS.1: ("listKeys" | "az.listKeys") "("
-list_keys: _LIST_KEYS value_brackets "," value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
+// See https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-resource#list
+// With Bicep v0.4.412+, you call list*() using accessor operator, ex: storageAccount.listKeys()
+list_func: (LIST_FUNC_NAME | "az." LIST_FUNC_NAME) "(" value_brackets "," value_brackets ")"
 
 management_group_resource_id: ("managementGroupResourceId" | "az.managementGroupResourceId") "(" value_brackets ("," value_brackets)~1..2 ")"
 
@@ -237,7 +237,7 @@ tenant: _TENANT ")" ["." STRING]
 // functions - string
 
 ?function_string: base64_func | base64_to_json | base64_to_string | data_uri | data_uri_to_string | ends_with | format
-                | guid | index_of | last_index_of | new_guid | pad_left | replace | split | starts_with | string_func
+                | guid | index_of | last_index_of | new_guid | pad_left | replace | split | join | starts_with | string_func
                 | substring | to_lower | to_upper | trim | unique_string | uri | uri_component | uri_component_to_string
 
 base64_func: ("base64" | "sys.base64") "(" value_brackets ")"
@@ -270,6 +270,8 @@ replace: ("replace" | "sys.replace") "(" value_brackets ("," value_brackets)~2 "
 
 split: ("split" | "sys.split") "(" value_brackets "," value_brackets ")" ["[" INT "]"]
 
+join: ("join" | "sys.join") "(" value_brackets "," value_brackets ")"
+
 starts_with: ("startsWith" | "sys.startsWith") "(" value_brackets "," value_brackets ")"
 
 string_func: ("string" | "sys.string") "(" value_brackets ")"
@@ -293,7 +295,7 @@ uri_component_to_string: ("uriComponentToString" | "sys.uriComponentToString") "
 
 // operators
 
-operator: operator_comparison | operator_logical | operator_numeric
+operator: operator_comparison | operator_logical | operator_numeric | operator_accessor
 
 // operators - comparison
 
@@ -346,14 +348,28 @@ multiply: value_brackets "*" value_brackets
 
 substract.1: value_brackets "-" value_brackets
 
+// operators - accessor
+
+?operator_accessor: index_accessor | function_accessor | nested_resource_accessor | property_accessor
+
+index_accessor: value_brackets "[" value_brackets "]"
+
+function_accessor: value_brackets "." LIST_FUNC_NAME "(" value_brackets? ["," value_brackets]+ ")"
+
+nested_resource_accessor: value_brackets "::" value_brackets
+
+// 'sys.' and 'az.' have to be eliminated in 1st operand (see STRING definition regexp):
+property_accessor: value_brackets "." value_brackets
+
 // Terms
 
 EXISTING: "existing"
 
-STRING: /[a-zA-Z_](::|[\w_.])*/
+STRING: /(?!(sys|az)\.)[a-zA-Z_]([\w_])*/
 QUOTED_STRING: "'" STRING "'"
-INDEXED: /(?=[\w][\w_.]+(.(get|list)[a-zA-Z]*\(([\w., '-]+)?\)|[\[\]])+)(.(get|list)[a-zA-Z]*\(([\w., '-]+)?\)|\[[\w\[\]_().']+\]!?|[\w_\-\/.,'= ])+/
+INDEXED: /(?=[\w][\w_.]+(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|[\[\]])+)(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|\[[\w\[\]_().']+\]|[\w_\-\/.,'= ])+/
 QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}'{]+|(?R))*+}|\\'|[^'])*'/
+LIST_FUNC_NAME: /(?=([Ll]ist[A-za-z]*|getSecret)\()([A-Za-z]+)/
 
 MULTI_LINE_STRING: "'''" (/.*?/ | NEWLINE)+ "'''"
 

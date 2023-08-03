@@ -1,0 +1,65 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "resources": {
+    "demoParent": {
+      "decorators": [],
+      "type": "demo.Rp/parentType",
+      "api_version": "2020-01-01",
+      "existing": false,
+      "config": {
+        "name": "demoParent",
+        "location": "West US"
+      }
+    },
+    "demoParent__demoSibling": {
+      "decorators": [],
+      "type": "demo.Rp/parentType/childType",
+      "api_version": "2020-01-01",
+      "existing": false,
+      "config": {
+        "name": "demoSibling",
+        "properties": {
+          "displayName": "Sibling of ${demoNested.properties.displayName}"
+        },
+        "depends_on": [
+          "demoParent"
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "displayName": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "operator": {
+          "type": "nested_resource_accessor",
+          "operands": {
+            "operand_1": "demoParent",
+            "operand_2": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "demoNested",
+                  "operand_2": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": "properties",
+                        "operand_2": "displayName"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
