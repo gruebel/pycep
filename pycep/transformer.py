@@ -1022,8 +1022,8 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             subscription_id = args[0]
             resource_group_name = args[1]
             resource_type = args[2]
-            #resource_name_1 = args[3]
-            #resource_name_2 = args[4]
+            # resource_name_1 = args[3]
+            # resource_name_2 = args[4]
 
             return {
                 "type": "resource_id",
@@ -1689,7 +1689,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "operands": {
                 "operand_1": arg_1,
                 "func_name": str(func_name),
-                **{f"operand_{idx + 2}": extra for idx, extra in enumerate(arg_x) if extra}  # type: ignore[misc] # dynamic operand creation
+                **{f"operand_{idx + 2}": extra for idx, extra in enumerate(arg_x) if extra},  # type: ignore[misc] # dynamic operand creation
             }
         }
 
