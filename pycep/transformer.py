@@ -909,8 +909,9 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         func_name, resource_identifier, api_version = args
 
         result: pycep_typing.ListFunc = {
-            "type": str(func_name),
+            "type": "list_func",
             "parameters": {
+                "func_name": str(func_name),
                 "resource_identifier": resource_identifier,
                 "api_version": api_version,
             },
