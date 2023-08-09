@@ -1030,8 +1030,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                 "parameters": {
                     "resource_type": resource_type,
                     **{  # type: ignore[misc] # dynamic operand creation
-                        f"resource_name_{idx}": resource_name
-                        for idx, resource_name in enumerate(args[3:], start=1)
+                        f"resource_name_{idx}": resource_name for idx, resource_name in enumerate(args[3:], start=1)
                     },
                     "resource_group_name": resource_group_name,
                     "subscription_id": subscription_id,
@@ -1324,18 +1323,10 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
         return result
 
-    def join(
-        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]
-    ) -> pycep_typing.Join:
+    def join(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Join:
         input_array, delimeter = args
 
-        result: pycep_typing.Join = {
-            "type": "join",
-            "parameters": {
-                "input_array": input_array,
-                "delimeter": delimeter
-            }
-        }
+        result: pycep_typing.Join = {"type": "join", "parameters": {"input_array": input_array, "delimeter": delimeter}}
 
         return result
 
@@ -1672,15 +1663,11 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     #
     ####################
 
-    def index_accessor(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.IndexAccessor:
+    def index_accessor(
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]
+    ) -> pycep_typing.IndexAccessor:
         arg_1, arg_2 = args
-        return {
-            "type": "index_accessor",
-            "operands": {
-                "operand_1": arg_1,
-                "operand_2": arg_2
-            }
-        }
+        return {"type": "index_accessor", "operands": {"operand_1": arg_1, "operand_2": arg_2}}
 
     def function_accessor(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.FunctionAccessor:
         arg_1, func_name, *arg_x = args
@@ -1690,28 +1677,20 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                 "operand_1": arg_1,
                 "func_name": str(func_name),
                 **{f"operand_{idx + 2}": extra for idx, extra in enumerate(arg_x) if extra},  # type: ignore[misc] # dynamic operand creation
-            }
+            },
         }
 
-    def nested_resource_accessor(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.NestedResourceAccessor:
+    def nested_resource_accessor(
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]
+    ) -> pycep_typing.NestedResourceAccessor:
         arg_1, arg_2 = args
-        return {
-            "type": "nested_resource_accessor",
-            "operands": {
-                "operand_1": arg_1,
-                "operand_2": arg_2
-            }
-        }
+        return {"type": "nested_resource_accessor", "operands": {"operand_1": arg_1, "operand_2": arg_2}}
 
-    def property_accessor(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.PropertyAccessor:
+    def property_accessor(
+        self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]
+    ) -> pycep_typing.PropertyAccessor:
         arg_1, arg_2 = args
-        return {
-            "type": "property_accessor",
-            "operands": {
-                "operand_1": arg_1,
-                "operand_2": arg_2
-            }
-        }
+        return {"type": "property_accessor", "operands": {"operand_1": arg_1, "operand_2": arg_2}}
 
     ####################
     #
