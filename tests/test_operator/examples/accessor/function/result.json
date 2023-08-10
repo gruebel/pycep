@@ -105,8 +105,9 @@
                 "operands": {
                   "operand_1": {
                     "function": {
-                      "type": "listAccountSas",
+                      "type": "list_func",
                       "parameters": {
+                        "func_name": "listAccountSas",
                         "resource_identifier": "2021-04-01",
                         "api_version": "accountSasProperties"
                       }

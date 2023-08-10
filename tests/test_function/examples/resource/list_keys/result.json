@@ -10,8 +10,9 @@
       "type": "object",
       "default": {
         "function": {
-          "type": "listKeys",
+          "type": "list_func",
           "parameters": {
+            "func_name": "listKeys",
             "resource_identifier": "refId",
             "api_version": "apiVersion"
           }
@@ -24,8 +25,9 @@
       "decorators": [],
       "value": {
         "function": {
-          "type": "listKeys",
+          "type": "list_func",
           "parameters": {
+            "func_name": "listKeys",
             "resource_identifier": "refId",
             "api_version": "2020-09-01"
           }
@@ -45,8 +47,9 @@
         "properties": {
           "listKeys": {
             "function": {
-              "type": "listKeys",
+              "type": "list_func",
               "parameters": {
+                "func_name": "listKeys",
                 "resource_identifier": "refId",
                 "api_version": "apiVersion"
               }
@@ -70,8 +73,9 @@
           "location": "location",
           "fwname": {
             "function": {
-              "type": "listKeys",
+              "type": "list_func",
               "parameters": {
+                "func_name": "listKeys",
                 "resource_identifier": "refId",
                 "api_version": "apiVersion"
               }
@@ -92,8 +96,9 @@
           "operands": {
             "operand_1": {
               "function": {
-                "type": "listKeys",
+                "type": "list_func",
                 "parameters": {
+                  "func_name": "listKeys",
                   "resource_identifier": "refId",
                   "api_version": "apiVersion"
                 }
@@ -121,8 +126,9 @@
           "operands": {
             "operand_1": {
               "function": {
-                "type": "listKeys",
+                "type": "list_func",
                 "parameters": {
+                  "func_name": "listKeys",
                   "resource_identifier": "refId",
                   "api_version": "apiVersion"
                 }
@@ -162,8 +168,9 @@
                 "operands": {
                   "operand_1": {
                     "function": {
-                      "type": "listKeys",
+                      "type": "list_func",
                       "parameters": {
+                        "func_name": "listKeys",
                         "resource_identifier": "refId",
                         "api_version": "apiVersion"
                       }
@@ -191,8 +198,9 @@
       "type": "object",
       "value": {
         "function": {
-          "type": "listKeys",
+          "type": "list_func",
           "parameters": {
+            "func_name": "listKeys",
             "resource_identifier": "refId",
             "api_version": "apiVersion"
           }
