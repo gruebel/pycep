@@ -38,9 +38,81 @@
         },
         "condition": null,
         "config": {
-          "id": "storageAcct[i].id",
-          "blobEndpoint": "storageAcct[i].properties.primaryEndpoints.blob",
-          "status": "storageAcct[i].properties.statusOfPrimary"
+          "id": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": {
+                  "operator": {
+                    "type": "index_accessor",
+                    "operands": {
+                      "operand_1": "storageAcct",
+                      "operand_2": "i"
+                    }
+                  }
+                },
+                "operand_2": "id"
+              }
+            }
+          },
+          "blobEndpoint": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": {
+                  "operator": {
+                    "type": "index_accessor",
+                    "operands": {
+                      "operand_1": "storageAcct",
+                      "operand_2": "i"
+                    }
+                  }
+                },
+                "operand_2": {
+                  "operator": {
+                    "type": "property_accessor",
+                    "operands": {
+                      "operand_1": "properties",
+                      "operand_2": {
+                        "operator": {
+                          "type": "property_accessor",
+                          "operands": {
+                            "operand_1": "primaryEndpoints",
+                            "operand_2": "blob"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "status": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": {
+                  "operator": {
+                    "type": "index_accessor",
+                    "operands": {
+                      "operand_1": "storageAcct",
+                      "operand_2": "i"
+                    }
+                  }
+                },
+                "operand_2": {
+                  "operator": {
+                    "type": "property_accessor",
+                    "operands": {
+                      "operand_1": "properties",
+                      "operand_2": "statusOfPrimary"
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

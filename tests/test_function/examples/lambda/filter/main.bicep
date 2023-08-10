@@ -23,7 +23,7 @@ resource identityProvider 'Microsoft.ApiManagement/service/identityProviders@202
 }
 
 // output
-output oldDogs array = filter(dogs, dog => dog.age >=5)
+output oldDogs array = filter(dogs, dog => (dog.age) >= 5)
 
 // namespace sys
-output namespace array = sys.filter(dogs, dog => dog.age >=5)
+output namespace array = sys.filter(dogs, dog => (dog.age) >= 5)

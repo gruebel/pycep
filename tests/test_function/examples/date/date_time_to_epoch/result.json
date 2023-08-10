@@ -64,7 +64,15 @@
         "function": {
           "type": "date_time_to_epoch",
           "parameters": {
-            "date_time": "epoch.value"
+            "date_time": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "epoch",
+                  "operand_2": "value"
+                }
+              }
+            }
           }
         }
       }

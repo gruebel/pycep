@@ -17,7 +17,15 @@
           }
         },
         "condition": null,
-        "config": "item.key"
+        "config": {
+          "operator": {
+            "type": "property_accessor",
+            "operands": {
+              "operand_1": "item",
+              "operand_2": "key"
+            }
+          }
+        }
       }
     }
   },
@@ -37,8 +45,40 @@
         },
         "condition": null,
         "config": {
-          "name": "nsg.value.name",
-          "location": "nsg.value.location"
+          "name": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": "nsg",
+                "operand_2": {
+                  "operator": {
+                    "type": "property_accessor",
+                    "operands": {
+                      "operand_1": "value",
+                      "operand_2": "name"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "location": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": "nsg",
+                "operand_2": {
+                  "operator": {
+                    "type": "property_accessor",
+                    "operands": {
+                      "operand_1": "value",
+                      "operand_2": "location"
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

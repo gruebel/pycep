@@ -50,7 +50,15 @@
           }
         },
         "properties": {
-          "roleDefinitionId": "definition.id",
+          "roleDefinitionId": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": "definition",
+                "operand_2": "id"
+              }
+            }
+          },
           "principalId": "uri"
         }
       }
@@ -64,7 +72,15 @@
         "function": {
           "type": "uri",
           "parameters": {
-            "base_uri": "site.properties",
+            "base_uri": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            },
             "relative_uri": "nested/azuredeploy.json"
           }
         }
@@ -77,7 +93,15 @@
         "function": {
           "type": "uri",
           "parameters": {
-            "base_uri": "site.properties",
+            "base_uri": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            },
             "relative_uri": "nested/azuredeploy.json"
           }
         }

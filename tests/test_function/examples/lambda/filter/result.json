@@ -93,7 +93,15 @@
               "operator": {
                 "type": "greater_than_or_equals",
                 "operands": {
-                  "operand_1": "dog.age",
+                  "operand_1": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": "dog",
+                        "operand_2": "age"
+                      }
+                    }
+                  },
                   "operand_2": 5
                 }
               }
@@ -115,7 +123,15 @@
               "operator": {
                 "type": "greater_than_or_equals",
                 "operands": {
-                  "operand_1": "dog.age",
+                  "operand_1": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": "dog",
+                        "operand_2": "age"
+                      }
+                    }
+                  },
                   "operand_2": 5
                 }
               }

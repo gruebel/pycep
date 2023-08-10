@@ -155,20 +155,60 @@
                 "properties": {
                   "primary": true
                 },
-                "id": "nic1.id"
+                "id": {
+                  "operator": {
+                    "type": "property_accessor",
+                    "operands": {
+                      "operand_1": "nic1",
+                      "operand_2": "id"
+                    }
+                  }
+                }
               },
               {
                 "properties": {
                   "primary": false
                 },
-                "id": "nic2.id"
+                "id": {
+                  "operator": {
+                    "type": "property_accessor",
+                    "operands": {
+                      "operand_1": "nic2",
+                      "operand_2": "id"
+                    }
+                  }
+                }
               }
             ]
           },
           "diagnosticsProfile": {
             "bootDiagnostics": {
               "enabled": true,
-              "storageUri": "diagsAccount.properties.primaryEndpoints.blob"
+              "storageUri": {
+                "operator": {
+                  "type": "property_accessor",
+                  "operands": {
+                    "operand_1": "diagsAccount",
+                    "operand_2": {
+                      "operator": {
+                        "type": "property_accessor",
+                        "operands": {
+                          "operand_1": "properties",
+                          "operand_2": {
+                            "operator": {
+                              "type": "property_accessor",
+                              "operands": {
+                                "operand_1": "primaryEndpoints",
+                                "operand_2": "blob"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -224,7 +264,15 @@
               "properties": {
                 "addressPrefix": "10.0.1.0/24",
                 "networkSecurityGroup": {
-                  "id": "nsg2.id"
+                  "id": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": "nsg2",
+                        "operand_2": "id"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -251,7 +299,15 @@
                       "type": "resource_id",
                       "parameters": {
                         "resource_type": "Microsoft.Network/virtualNetworks/subnets",
-                        "resource_name_1": "vnet.name",
+                        "resource_name_1": {
+                          "operator": {
+                            "type": "property_accessor",
+                            "operands": {
+                              "operand_1": "vnet",
+                              "operand_2": "name"
+                            }
+                          }
+                        },
                         "resource_name_2": "subnet1Name",
                         "resource_group_name": null,
                         "subscription_id": null
@@ -261,13 +317,29 @@
                 },
                 "privateIPAllocationMethod": "Dynamic",
                 "publicIPAddress": {
-                  "id": "pip.id"
+                  "id": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": "pip",
+                        "operand_2": "id"
+                      }
+                    }
+                  }
                 }
               }
             }
           ],
           "networkSecurityGroup": {
-            "id": "nsg.id"
+            "id": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "nsg",
+                  "operand_2": "id"
+                }
+              }
+            }
           }
         }
       }
@@ -291,7 +363,15 @@
                       "type": "resource_id",
                       "parameters": {
                         "resource_type": "Microsoft.Network/virtualNetworks/subnets",
-                        "resource_name_1": "vnet.name",
+                        "resource_name_1": {
+                          "operator": {
+                            "type": "property_accessor",
+                            "operands": {
+                              "operand_1": "vnet",
+                              "operand_2": "name"
+                            }
+                          }
+                        },
                         "resource_name_2": "subnet2Name",
                         "resource_group_name": null,
                         "subscription_id": null
@@ -391,7 +471,15 @@
     "nsgId": {
       "decorators": [],
       "type": "string",
-      "value": "nsg.id"
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": "nsg",
+            "operand_2": "id"
+          }
+        }
+      }
     }
   }
 }

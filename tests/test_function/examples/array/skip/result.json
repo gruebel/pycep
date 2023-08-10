@@ -45,7 +45,15 @@
           "function": {
             "type": "skip",
             "parameters": {
-              "original_value": "firstObject.names",
+              "original_value": {
+                "operator": {
+                  "type": "property_accessor",
+                  "operands": {
+                    "operand_1": "firstObject",
+                    "operand_2": "names"
+                  }
+                }
+              },
               "number_to_skip": "name"
             }
           }

@@ -16,8 +16,48 @@
         "properties": {
           "azCliVersion": "2.0.80",
           "storageAccountSettings": {
-            "storageAccountName": "storageAccount.name",
-            "storageAccountKey": "storageAccount.listKeys().keys[0].value"
+            "storageAccountName": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "storageAccount",
+                  "operand_2": "name"
+                }
+              }
+            },
+            "storageAccountKey": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": {
+                    "operator": {
+                      "type": "function_accessor",
+                      "operands": {
+                        "operand_1": "storageAccount",
+                        "func_name": "listKeys"
+                      }
+                    }
+                  },
+                  "operand_2": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": {
+                          "operator": {
+                            "type": "index_accessor",
+                            "operands": {
+                              "operand_1": "keys",
+                              "operand_2": 0
+                            }
+                          }
+                        },
+                        "operand_2": "value"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -36,7 +76,16 @@
         "params": {
           "sqlServerName": "sqlServerName",
           "adminLogin": "adminLogin",
-          "adminPassword": "kv.getSecret('vmAdminPassword')"
+          "adminPassword": {
+            "operator": {
+              "type": "function_accessor",
+              "operands": {
+                "operand_1": "kv",
+                "func_name": "getSecret",
+                "operand_2": "vmAdminPassword"
+              }
+            }
+          }
         }
       }
     }
@@ -45,7 +94,32 @@
     "subnetId": {
       "decorators": [],
       "type": "string",
-      "value": "storageAccount.listAccountSas('2021-04-01', accountSasProperties).accountSasToken"
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": "storageAccount",
+            "operand_2": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": {
+                    "function": {
+                      "type": "list_func",
+                      "parameters": {
+                        "func_name": "listAccountSas",
+                        "resource_identifier": "2021-04-01",
+                        "api_version": "accountSasProperties"
+                      }
+                    }
+                  },
+                  "operand_2": "accountSasToken"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
