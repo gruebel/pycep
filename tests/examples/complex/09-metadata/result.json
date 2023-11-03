@@ -1,0 +1,18 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "metadata": {
+    "name": {
+      "value": "Test file for parser"
+    },
+    "description": {
+      "value": "Test file for parser"
+    },
+    "owner": {
+      "value": "community"
+    }
+  }
+}

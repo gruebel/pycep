@@ -66,6 +66,14 @@ class _Scope(TypedDict):
 class ScopeResponse(TypedDict):
     globals: _Scope
 
+class _Metadata(TypedDict):
+    __name__: Literal["scope"]
+    __attrs__: ScopeAttributes
+
+
+class MetadataResponse(TypedDict):
+    metadata: _Metadata
+
 
 class ParameterAttributes(TypedDict):
     decorators: list[Decorator]

@@ -92,6 +92,25 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         return result
 
     @v_args(meta=True)
+    def metadata(self, meta: Meta, args: tuple[Token]) -> pycep_typing.MetadataResponse:
+        name, value = args
+
+        result: pycep_typing.MetadataResponse = {
+            "metadata": {
+                "__name__": str(name),
+                "__attrs__": {
+                    "value": value,
+                },
+            }
+        }
+
+        if self.add_line_numbers:
+            result["globals"]["__attrs__"]["__start_line__"] = meta.line
+            result["globals"]["__attrs__"]["__end_line__"] = meta.end_line
+
+        return result
+
+    @v_args(meta=True)
     def param(
         self, meta: Meta, args: tuple[list[pycep_typing.Decorator] | None, str, str, pycep_typing.PossibleNoneValue]
     ) -> pycep_typing.ParamResponse:
