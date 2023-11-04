@@ -1,7 +1,7 @@
 start: ((element _CPP_COMMENT_NL?) | _CPP_COMMENT_NL)*
 
 element: "targetScope" "=" QUOTED_INTERPOLATION                                         -> scope
-       | "metadata" STRING "=" QUOTED_INTERPOLATION                                     -> metadata
+       | "metadata" STRING "=" metadata_value                                           -> metadata
        | [decorator] "param" STRING data_type ["=" value_brackets]                      -> param
        | [decorator] "var" STRING "=" var_value                                         -> var
        | [decorator] "output" STRING data_type "=" output_value                         -> output
@@ -25,6 +25,8 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
 // element values
 
 ?var_value: value_brackets | loop
+
+?metadata_value: QUOTED_INTERPOLATION -> string
 
 ?output_value: value_brackets | loop
 

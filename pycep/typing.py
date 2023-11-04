@@ -66,11 +66,16 @@ class _Scope(TypedDict):
 class ScopeResponse(TypedDict):
     globals: _Scope
 
-class _Metadata(TypedDict):
-    __name__: str
-    __attrs__: str
+
+class MetadataAttributes(TypedDict):
+    value: str
     __start_line__: NotRequired[int]
     __end_line__: NotRequired[int]
+
+
+class _Metadata(TypedDict):
+    __name__: str
+    __attrs__: MetadataAttributes
 
 
 class MetadataResponse(TypedDict):

@@ -92,7 +92,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         return result
 
     @v_args(meta=True)
-    def metadata(self, meta: Meta, args: tuple[Token]) -> pycep_typing.MetadataResponse:
+    def metadata(self, meta: Meta, args: tuple[str, str]) -> pycep_typing.MetadataResponse:
         name, value = args
 
         result: pycep_typing.MetadataResponse = {
@@ -105,8 +105,8 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         }
 
         if self.add_line_numbers:
-            result["globals"]["__attrs__"]["__start_line__"] = meta.line
-            result["globals"]["__attrs__"]["__end_line__"] = meta.end_line
+            result["metadata"]["__attrs__"]["__start_line__"] = meta.line
+            result["metadata"]["__attrs__"]["__end_line__"] = meta.end_line
 
         return result
 
