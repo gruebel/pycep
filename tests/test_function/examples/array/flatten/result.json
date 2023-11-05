@@ -1,0 +1,110 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramStr": {
+      "decorators": [],
+      "type": "string",
+      "default": {
+        "function": {
+          "type": "flatten",
+          "parameters": {
+            "array_to_flattern": [
+              "one",
+              "two"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "varStr": {
+      "decorators": [],
+      "value": {
+        "function": {
+          "type": "flatten",
+          "parameters": {
+            "array_to_flattern": "administratorAccountUsername"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "assignment": {
+      "decorators": [],
+      "type": "Microsoft.Authorization/roleAssignments",
+      "api_version": "2020-04-01-preview",
+      "existing": false,
+      "config": {
+        "name": {
+          "function": {
+            "type": "flatten",
+            "parameters": {
+              "array_to_flattern": "roleName"
+            },
+            "property_name": "name"
+          }
+        },
+        "properties": {
+          "roleDefinitionId": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": "definition",
+                "operand_2": "id"
+              }
+            }
+          },
+          "principalId": "principalId"
+        }
+      }
+    }
+  },
+  "outputs": {
+    "ftpUser": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "flatten",
+          "parameters": {
+            "array_to_flattern": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "namespace": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "flatten",
+          "parameters": {
+            "array_to_flattern": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "site",
+                  "operand_2": "properties"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

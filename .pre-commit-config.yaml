@@ -47,3 +47,8 @@ repos:
           - lark==1.1.8
         args: [--strict, --implicit-reexport, --ignore-missing-imports, --show-error-codes]
         files: pycep|tests
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.15.0
+    hooks:
+    - id: pyupgrade
+      args: ["--py38-plus"]
