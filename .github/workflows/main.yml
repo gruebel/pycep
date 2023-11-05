@@ -15,8 +15,8 @@ on:
 permissions: read-all
 
 env:
-  POETRY_VERSION: "1.4.1"
-  MIN_PYTHON_VERSION: "3.7"
+  POETRY_VERSION: "1.7.0"
+  MIN_PYTHON_VERSION: "3.8"
 
 jobs:
   pre-commit:
@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
       - uses: actions/setup-python@65d7f2d534ac1bc67fcd62888c5f4f3d2cb2b236  # v4.7.1
         with:
-          python-version: "3.8"  # needed for flake8 6.0.0+
+          python-version: ${{ env.MIN_PYTHON_VERSION }}
       - uses: pre-commit/action@646c83fcd040023954eafda54b4db0192ce70507  # v3.0.0
 
   tests:
@@ -35,7 +35,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
         experimental: [false]
         include:
           - os: ubuntu-latest
@@ -62,12 +62,12 @@ jobs:
         run: poetry run pip install pytest-github-actions-annotate-failures
       - name: Run pytest
         run: poetry run python -m pytest tests/
-      - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.7'
+      - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8'
         name: Create coverage report
         run: |
           poetry run pip install pytest-cov
           poetry run python -m pytest -s --cov=pycep --cov-report=xml tests/
-      - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.7' && github.repository == 'gruebel/pycep'
+      - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8' && github.repository == 'gruebel/pycep'
         name: Upload coverage to codecov
         uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d  # v3.1.4
         with:

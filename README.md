@@ -13,7 +13,7 @@ A parser for [Azure Bicep](https://github.com/Azure/bicep) files leveraging [Lar
 
 ### Requirements
 
-- Python 3.7+
+- Python 3.8+
 - Lark 1.1.2+
 
 ### Install
@@ -29,22 +29,12 @@ pip install --upgrade pycep-parser
 ## Next milestones
 
 ### Functions
-- [x] Any
 - [ ] Array (in progress)
-- [x] Date
-- [x] Deployment
-- [x] File
+- [ ] CIDR (in progress)
 - [ ] Lambda (in progress)
-- [x] Logical
-- [x] Numeric
-- [x] Object
-- [x] Resource
-- [x] Scope
-- [x] String
 
 ### Operators
-- [x] Accessor
-- [x] Numeric
+- [ ] Safe-dereference
 
 ### Considering
 - 1st class support of interpolated strings
