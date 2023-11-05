@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support `metadata` element
 - Support more resource for `list*` function
 
+### Changed
+
+- Fixed a regression to support quoted keys with dots in an object
+
 ## [0.4.1] - 2023-06-18
 
 # Added
