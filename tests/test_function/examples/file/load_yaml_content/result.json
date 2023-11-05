@@ -1,0 +1,137 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "paramStr": {
+      "decorators": [],
+      "type": "string",
+      "default": {
+        "function": {
+          "type": "load_yaml_content",
+          "parameters": {
+            "file_path": "rules.yaml",
+            "path_filter": "firstRule",
+            "encoding": null
+          }
+        }
+      }
+    }
+  },
+  "variables": {
+    "cpuCores": {
+      "decorators": [],
+      "value": {
+        "function": {
+          "type": "load_yaml_content",
+          "parameters": {
+            "file_path": "filePath",
+            "path_filter": "yamlPath",
+            "encoding": "encoding"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "identityProvider": {
+      "decorators": [],
+      "type": "Microsoft.ApiManagement/service/identityProviders",
+      "api_version": "2020-06-01-preview",
+      "existing": false,
+      "config": {
+        "name": "example",
+        "properties": {
+          "function": {
+            "type": "load_yaml_content",
+            "parameters": {
+              "file_path": "filePath",
+              "path_filter": null,
+              "encoding": null
+            }
+          }
+        },
+        "dependsOn": [
+          "apiManagementService"
+        ]
+      }
+    }
+  },
+  "outputs": {
+    "ftpUser": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "load_yaml_content",
+          "parameters": {
+            "file_path": "filePath",
+            "path_filter": null,
+            "encoding": null
+          }
+        }
+      }
+    },
+    "ftpUserId": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "load_yaml_content",
+          "parameters": {
+            "file_path": "filePath",
+            "path_filter": null,
+            "encoding": null
+          },
+          "property_name": "id"
+        }
+      }
+    },
+    "lateIndexed": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "load_yaml_content",
+          "parameters": {
+            "file_path": "./vars.yaml",
+            "path_filter": null,
+            "encoding": null
+          },
+          "property_name": "subscriptions[env].id"
+        }
+      }
+    },
+    "directIndexed": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "load_yaml_content",
+          "parameters": {
+            "file_path": "./vars.yaml",
+            "path_filter": null,
+            "encoding": null
+          },
+          "property_name": "[sub]dev[var_id]"
+        }
+      }
+    },
+    "namespace": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "load_yaml_content",
+          "parameters": {
+            "file_path": "filePath",
+            "path_filter": null,
+            "encoding": null
+          }
+        }
+      }
+    }
+  }
+}
