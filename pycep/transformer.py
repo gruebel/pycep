@@ -1343,9 +1343,9 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         return result
 
     def join(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleValue]) -> pycep_typing.Join:
-        input_array, delimeter = args
+        input_array, delimiter = args
 
-        result: pycep_typing.Join = {"type": "join", "parameters": {"input_array": input_array, "delimeter": delimeter}}
+        result: pycep_typing.Join = {"type": "join", "parameters": {"input_array": input_array, "delimiter": delimiter}}
 
         return result
 

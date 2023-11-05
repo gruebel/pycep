@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Fixed a regression to support quoted keys with dots in an object
+- Fixed typo in `join` parameter name
 
 ## [0.4.1] - 2023-06-18
 
