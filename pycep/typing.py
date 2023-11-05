@@ -26,7 +26,7 @@ ArrayFunctions: TypeAlias = (
 )
 DateFunctions: TypeAlias = "DateTimeAdd | DateTimeFromEpoch | DateTimeToEpoch | UtcNow"
 DeploymentFunctions: TypeAlias = "Deployment | Environment"
-FileFunctions: TypeAlias = "LoadFileAsBase64 | LoadJsonContent | LoadTextContent"
+FileFunctions: TypeAlias = "LoadFileAsBase64 | LoadJsonContent | LoadYamlContent | LoadTextContent"
 LambdaFunctions: TypeAlias = "Filter"
 LogicalFunctions: TypeAlias = "BoolFunc"
 NumericFunctions: TypeAlias = "IntFunc"
@@ -584,6 +584,18 @@ class _LoadJsonContentParameters(TypedDict):
 class LoadJsonContent(TypedDict):
     type: Literal["load_json_content"]
     parameters: _LoadJsonContentParameters
+    property_name: NotRequired[str]
+
+
+class _LoadYamlContentParameters(TypedDict):
+    file_path: PossibleValue
+    path_filter: PossibleNoneValue
+    encoding: PossibleNoneValue
+
+
+class LoadYamlContent(TypedDict):
+    type: Literal["load_yaml_content"]
+    parameters: _LoadYamlContentParameters
     property_name: NotRequired[str]
 
 

@@ -61,7 +61,7 @@
 
 - [x] loadFileAsBase64
 - [x] loadJsonContent
-- [ ] loadYamlContent
+- [x] loadYamlContent
 - [x] loadTextContent
 
 ### Lambda
