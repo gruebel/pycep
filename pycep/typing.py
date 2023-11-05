@@ -923,7 +923,7 @@ class Split(TypedDict):
 
 class _JoinParameters(TypedDict):
     input_array: PossibleValue
-    delimeter: PossibleValue
+    delimiter: PossibleValue
 
 
 class Join(TypedDict):

@@ -128,6 +128,7 @@
 - [x] format
 - [x] guid
 - [x] indexOf
+- [x] join
 - [x] last
 - [x] lastIndexOf
 - [x] length
