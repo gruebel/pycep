@@ -4,6 +4,11 @@
       "value": "resourceGroup"
     }
   },
+  "metadata": {
+    "description": {
+      "value": "Official playground example https://aka.ms/bicepdemo"
+    }
+  },
   "parameters": {
     "virtualMachineSize": {
       "decorators": [

@@ -1,4 +1,4 @@
-// Offical playground example https://aka.ms/bicepdemo
+metadata description = 'Official playground example https://aka.ms/bicepdemo'
 
 targetScope = 'resourceGroup'
 
