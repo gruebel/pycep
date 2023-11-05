@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: check-json
       - id: check-toml
@@ -14,17 +14,14 @@ repos:
     rev: 23.10.1
     hooks:
       - id: black
-        language_version: python3.8
   - repo: https://github.com/pycqa/isort
     rev: 5.12.0
     hooks:
       - id: isort
-        language_version: python3.8
   - repo: https://github.com/PyCQA/flake8
     rev: 6.1.0
     hooks:
       - id: flake8
-        language_version: python3.8
         additional_dependencies:
           - flake8-bugbear
           - flake8-builtins
@@ -46,7 +43,6 @@ repos:
     rev: v1.6.1
     hooks:
       - id: mypy
-        language_version: python3.8
         additional_dependencies:
           - lark==1.1.8
         args: [--strict, --implicit-reexport, --ignore-missing-imports, --show-error-codes]

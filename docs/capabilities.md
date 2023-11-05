@@ -17,9 +17,12 @@
 - [x] contains
 - [x] empty
 - [x] first
+- [ ] flatten
+- [x] indexOf
 - [x] intersection
 - [ ] items
 - [x] last
+- [x] lastIndexOf
 - [x] length
 - [x] max
 - [x] min
@@ -27,6 +30,14 @@
 - [x] skip
 - [x] take
 - [x] union
+
+### CIDR
+
+[Reference](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-cidr)
+
+- [ ] cidrHost
+- [ ] cidrSubnet
+- [ ] parseCidr
 
 ### Date
 
@@ -50,6 +61,7 @@
 
 - [x] loadFileAsBase64
 - [x] loadJsonContent
+- [ ] loadYamlContent
 - [x] loadTextContent
 
 ### Lambda
@@ -86,6 +98,12 @@
 - [x] json
 - [x] length
 - [x] union
+
+### Parameters file
+
+[Reference](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-parameters-file)
+
+- [ ] readEnvironmentVariable (only used in `.bicepparam` files)
 
 ### Resource
 
@@ -179,7 +197,7 @@
 
 - [x] And
 - [x] Or
-- [x] Not (partially, but need firther improvements)
+- [x] Not (partially, but need further improvements)
 - [x] Coalesce
 - [x] Conditional expression
 
