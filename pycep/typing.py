@@ -21,9 +21,7 @@ AccessorOperators: TypeAlias = "IndexAccessor | FunctionAccessor | NestedResourc
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperators | AccessorOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
-ArrayFunctions: TypeAlias = (
-    "Array | Concat | Contains | Empty | First | Intersection | Last | Length | Max | Min | Skip | Take | UnionFunc"
-)
+ArrayFunctions: TypeAlias = "Array | Concat | Contains | Empty | First | Flatten | Intersection | Last | Length | Max | Min | Skip | Take | UnionFunc"
 DateFunctions: TypeAlias = "DateTimeAdd | DateTimeFromEpoch | DateTimeToEpoch | UtcNow"
 DeploymentFunctions: TypeAlias = "Deployment | Environment"
 FileFunctions: TypeAlias = "LoadFileAsBase64 | LoadJsonContent | LoadYamlContent | LoadTextContent"
@@ -431,6 +429,16 @@ class Empty(TypedDict):
 class First(TypedDict):
     type: Literal["first"]
     parameters: _LengthParameters
+    property_name: NotRequired[str]
+
+
+class _FlattenParameters(TypedDict):
+    array_to_flattern: PossibleValue
+
+
+class Flatten(TypedDict):
+    type: Literal["flatten"]
+    parameters: _FlattenParameters
     property_name: NotRequired[str]
 
 

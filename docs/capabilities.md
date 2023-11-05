@@ -17,7 +17,7 @@
 - [x] contains
 - [x] empty
 - [x] first
-- [ ] flatten
+- [x] flatten
 - [x] indexOf
 - [x] intersection
 - [ ] items

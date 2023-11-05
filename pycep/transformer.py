@@ -583,6 +583,21 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
         return result
 
+    def flatten(self, args: tuple[pycep_typing.PossibleValue, pycep_typing.PossibleNoneValue]) -> pycep_typing.Flatten:
+        array_to_flattern, property_name = args
+
+        result: pycep_typing.Flatten = {
+            "type": "flatten",
+            "parameters": {
+                "array_to_flattern": array_to_flattern,
+            },
+        }
+
+        if property_name:
+            result["property_name"] = str(property_name)
+
+        return result
+
     def intersection(self, args: tuple[str, ...]) -> pycep_typing.Intersection:
         arg_1, arg_2, *arg_x, property_name = args
 
