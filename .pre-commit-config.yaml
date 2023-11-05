@@ -11,16 +11,17 @@ repos:
         args: ["--django"]
       - id: trailing-whitespace
   - repo: https://github.com/psf/black
-    rev: 23.3.0
+    rev: 23.10.1
     hooks:
       - id: black
+        language_version: python3.8
   - repo: https://github.com/pycqa/isort
     rev: 5.12.0
     hooks:
       - id: isort
         language_version: python3.8
   - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
+    rev: 6.1.0
     hooks:
       - id: flake8
         language_version: python3.8
@@ -42,10 +43,11 @@ repos:
       - id: python-check-blanket-type-ignore
       - id: python-use-type-annotations
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.2.0
+    rev: v1.6.1
     hooks:
       - id: mypy
+        language_version: python3.8
         additional_dependencies:
-          - lark==1.1.5
+          - lark==1.1.8
         args: [--strict, --implicit-reexport, --ignore-missing-imports, --show-error-codes]
         files: pycep|tests

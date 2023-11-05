@@ -6,6 +6,13 @@
       "__end_line__": 3
     }
   },
+  "metadata": {
+    "description": {
+      "__end_line__": 1,
+      "__start_line__": 1,
+      "value": "Official playground example https://aka.ms/bicepdemo"
+    }
+  },
   "parameters": {
     "virtualMachineSize": {
       "decorators": [

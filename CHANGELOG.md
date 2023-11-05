@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Added
 
+## [0.4.2] - 2023-11-05
+
+# Added
+
+- Support Python 3.12 officially
+- Support all accessor operators
+- Support `join` function
+- Support `metadata` element
+- Support more resource for `list*` function
+
 ## [0.4.1] - 2023-06-18
 
 # Added
@@ -159,7 +169,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release to be able to parse all the official examples of Bicep [101](https://github.com/Azure/bicep/tree/main/docs/examples/101).
 
-[Unreleased]: https://github.com/gruebel/pycep/compare/0.4.1...HEAD
+[Unreleased]: https://github.com/gruebel/pycep/compare/0.4.2...HEAD
+[0.4.2]: https://github.com/gruebel/pycep/compare/0.4.1...0.4.2
 [0.4.1]: https://github.com/gruebel/pycep/compare/0.4.0...0.4.1
 [0.4.0]: https://github.com/gruebel/pycep/compare/0.3.9...0.4.0
 [0.3.9]: https://github.com/gruebel/pycep/compare/0.3.8...0.3.9
