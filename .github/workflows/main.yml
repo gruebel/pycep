@@ -26,7 +26,7 @@ jobs:
       - uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c  # v5.0.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
-      - uses: pre-commit/action@646c83fcd040023954eafda54b4db0192ce70507  # v3.0.0
+      - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd  # v3.0.1
 
   tests:
     needs: pre-commit
@@ -72,7 +72,7 @@ jobs:
           poetry run python -m pytest -s --cov=pycep --cov-report=xml tests/
       - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8' && github.repository == 'gruebel/pycep'
         name: Upload coverage to codecov
-        uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d  # v3.1.4
+        uses: codecov/codecov-action@4fe8c5f003fae66aa5ebb77cfd3e7bfbbda0b6b0  # v3.1.5
         with:
           flags: unittests
 
