@@ -140,7 +140,7 @@ skip: ("skip" | "sys.skip") "(" value_brackets "," value_brackets ")"
 
 take: ("take" | "sys.take") "(" value_brackets "," value_brackets ")"
 
-union: ("union" | "sys.union") "(" value_brackets ("," value_brackets)+ ")" ["." STRING]
+union: ("union" | "sys.union") "(" value_brackets ("," _CPP_COMMENT_NL? value_brackets)+ _CPP_COMMENT_NL? ")" ["." STRING]
 
 // functions - date
 
