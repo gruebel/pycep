@@ -47,7 +47,7 @@ class BicepParser:
         if not BicepValidator.is_valid(bicep_text):
             if file_path:
                 raise ValueError(f"{file_path} file content is invalid")
-            else:
-                raise ValueError("Text is invalid")
+
+            raise ValueError("Text is invalid")
 
         return self.lark_parser.parse(bicep_text)
