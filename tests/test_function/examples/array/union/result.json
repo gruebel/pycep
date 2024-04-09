@@ -55,6 +55,64 @@
           "apiManagementService"
         ]
       }
+    },
+    "applicationGateway": {
+      "decorators": [],
+      "type": "Microsoft.Network/applicationGateways",
+      "api_version": "2023-04-01",
+      "existing": false,
+      "config": {
+        "name": "name",
+        "properties": {
+          "function": {
+            "type": "union",
+            "parameters": {
+              "arg_1": {
+                "urlPathMaps": "urlPathMaps"
+              },
+              "arg_2": {
+                "operator": {
+                  "type": "conditional",
+                  "operands": {
+                    "condition": "enableFips",
+                    "true_value": {
+                      "enableFips": "enableFips"
+                    },
+                    "false_value": {}
+                  }
+                }
+              },
+              "arg_3": {
+                "operator": {
+                  "type": "not",
+                  "operands": {
+                    "bool_value": {
+                      "operator": {
+                        "type": "conditional",
+                        "operands": {
+                          "condition": {
+                            "function": {
+                              "type": "empty",
+                              "parameters": {
+                                "item_to_test": "wafc"
+                              }
+                            }
+                          },
+                          "true_value": {
+                            "webApplicationFirewallConfiguration": "wafc"
+                          },
+                          "false_value": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "zones": "zones"
+      }
     }
   },
   "outputs": {
