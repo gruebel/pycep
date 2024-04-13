@@ -7,6 +7,7 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
        | [decorator] "output" STRING data_type "=" output_value                         -> output
        | [decorator] "resource" STRING type_api_pair [EXISTING] "=" resource_value      -> resource
        | [decorator] "module" STRING module_path "=" module_value                       -> module
+       | [decorator] "type" STRING "=" type_value                                       -> custom_type
 
 ?value: _NEWLINE? "null"                      -> null
       | _NEWLINE? "true"                      -> true
@@ -35,6 +36,8 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
 ?module_value: object | loop | deploy_condition
 
 child_resource: "resource" STRING QUOTED_INTERPOLATION [EXISTING] "=" object _CPP_COMMENT_NL+
+
+?type_value: value_brackets ("|" value_brackets)*
 
 // element type extras
 
@@ -68,7 +71,7 @@ array: "[" _CPP_COMMENT_NL~0..10 (value_brackets ("," value_brackets)* _CPP_COMM
 
 object: "{" _CPP_COMMENT_NL~0..10 ((pair ("," pair)* | child_resource) _CPP_COMMENT_NL~0..5)* "}"
 
-pair: key ":" (value_brackets | loop)
+pair: key ":" (value_brackets | loop) "?"?
 
 !key: "resource" | quoted_string
 
@@ -186,13 +189,15 @@ filter: ("filter" | "sys.filter") "(" value_brackets "," STRING "=>" value_brack
 
 ?function_logical: bool_func
 
-bool_func: ("bool" | "sys.bool") "(" value_brackets ")"
+_BOOL.1: ("bool" | "sys.bool") "("
+bool_func: _BOOL value_brackets ")"
 
 // functions - numeric
 
 ?function_numeric: int_func
 
-int_func: ("int" | "sys.int") "(" value_brackets ")"
+_INT.1: ("int" | "sys.int") "("
+int_func: _INT value_brackets ")"
 
 // functions - object
 
@@ -281,7 +286,8 @@ join: ("join" | "sys.join") "(" value_brackets "," value_brackets ")"
 
 starts_with: ("startsWith" | "sys.startsWith") "(" value_brackets "," value_brackets ")"
 
-string_func: ("string" | "sys.string") "(" value_brackets ")"
+_STRING.1: ("string" | "sys.string") "("
+string_func: _STRING value_brackets ")"
 
 substring: ("substring" | "sys.substring") "(" value_brackets "," value_brackets ["," value_brackets] ")"
 
