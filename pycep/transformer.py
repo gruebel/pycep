@@ -2,11 +2,10 @@ from __future__ import annotations
 
 import itertools
 import re
-from typing import Any, cast
+from typing import Any, Literal, cast
 
 from lark import Token, Transformer, v_args
 from lark.tree import Meta
-from typing_extensions import Literal
 
 from pycep import typing as pycep_typing
 
@@ -255,6 +254,28 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
         return result
 
+    @v_args(meta=True)
+    def custom_type(
+        self, meta: Meta, args: tuple[list[pycep_typing.Decorator] | None, Token, pycep_typing.PossibleValue]
+    ) -> pycep_typing.TypeResponse:
+        decorators, name, value = args
+
+        result: pycep_typing.TypeResponse = {
+            "types": {
+                "__name__": str(name),
+                "__attrs__": {
+                    "decorators": decorators if decorators else [],
+                    "value": value,
+                },
+            }
+        }
+
+        if self.add_line_numbers:
+            result["types"]["__attrs__"]["__start_line__"] = meta.line
+            result["types"]["__attrs__"]["__end_line__"] = meta.end_line
+
+        return result
+
     ####################
     #
     # element type extras
@@ -363,6 +384,10 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
         return local_result
+
+    def type_value(self, args: tuple[pycep_typing.PossibleNoneValue, ...]) -> str:
+        # this is only triggered, when a union type was found, ex. "'bicep' | 'arm' | 'azure'"
+        return " | ".join(str(arg) for arg in args)
 
     ####################
     #
