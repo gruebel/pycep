@@ -15,6 +15,18 @@ resource identityProvider 'Microsoft.ApiManagement/service/identityProviders@202
   ]
 }
 
+resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' = {
+  name: name
+  properties: union({
+      urlPathMaps: urlPathMaps
+    }, (enableFips ? {
+      enableFips: enableFips
+    } : {}),
+    (!empty(wafc) ? { webApplicationFirewallConfiguration: wafc } : {})
+  )
+  zones: zones
+}
+
 // output
 output ftpUser object = union(firstObject, secondObject, thirdObject)
 

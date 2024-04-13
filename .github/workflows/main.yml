@@ -22,8 +22,8 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
-      - uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c  # v5.0.0
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633  # v4.1.2
+      - uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d  # v5.1.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd  # v3.0.1
@@ -47,9 +47,9 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633  # v4.1.2
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c  # v5.0.0
+        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d  # v5.1.0
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
@@ -69,12 +69,18 @@ jobs:
         name: Create coverage report
         run: |
           poetry run pip install pytest-cov
-          poetry run python -m pytest -s --cov=pycep --cov-report=xml tests/
+          poetry run python -m pytest -s --cov=pycep --cov-report=lcov tests/
+      - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8' && github.repository == 'gruebel/pycep'
+        name: Upload coverage to coveralls
+        uses: coverallsapp/github-action@3dfc5567390f6fa9267c0ee9c251e4c8c3f18949  # v2.2.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8' && github.repository == 'gruebel/pycep'
         name: Upload coverage to codecov
-        uses: codecov/codecov-action@4fe8c5f003fae66aa5ebb77cfd3e7bfbbda0b6b0  # v3.1.5
+        uses: codecov/codecov-action@c16abc29c95fcf9174b58eb7e1abf4c866893bc8  # v4.1.1
         with:
           flags: unittests
+          fail_ci_if_error: false
 
   publish:
     if: github.event_name == 'push'
@@ -86,13 +92,12 @@ jobs:
       # IMPORTANT: this permission is mandatory for trusted publishing to pypi
       id-token: write
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
-      - uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c  # v5.0.0
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633  # v4.1.2
+      - uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d  # v5.1.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
-        run: |
-          pip install poetry==${{ env.POETRY_VERSION }}
+        run: pip install poetry==${{ env.POETRY_VERSION }}
       - name: Install dependencies
         run: poetry install --no-dev
       - name: Bump prerelease version
@@ -110,4 +115,4 @@ jobs:
       - name: Build Python package
         run: poetry build
       - name: Publish prerelease to PyPI
-        uses: pypa/gh-action-pypi-publish@2f6f737ca5f74c637829c0f5c3acd0e29ea5e8bf  # v1.8.11
+        uses: pypa/gh-action-pypi-publish@81e9d935c883d0b210363ab89cf05f3894778450  # v1.8.14

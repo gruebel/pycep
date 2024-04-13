@@ -22,15 +22,14 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633  # v4.1.2
         with:
           ref: master
-      - uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c  # v5.0.0
+      - uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d  # v5.1.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Set up poetry ${{ env.POETRY_VERSION }}
-        run: |
-          pip install poetry==${{ env.POETRY_VERSION }}
+        run: pip install poetry==${{ env.POETRY_VERSION }}
       - name: Install dependencies
         run: poetry install --no-dev
       - name: Release version ${{ github.ref_name }}
@@ -51,12 +50,12 @@ jobs:
       - name: Build Python package
         run: poetry build
       - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@2f6f737ca5f74c637829c0f5c3acd0e29ea5e8bf  # v1.8.11
+        uses: pypa/gh-action-pypi-publish@81e9d935c883d0b210363ab89cf05f3894778450  # v1.8.14
       - name: Extract release notes
         id: extract-release-notes
         uses: ffurrer2/extract-release-notes@4a5a562549e21065f6791b32ec5415bd33045cd2  # v2.1.0
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844  # v0.1.15
+        uses: softprops/action-gh-release@9d7c94cfd0a1f3ed45544c887983e9fa900f0564  # v2.0.4
         with:
           body: ${{ steps.extract-release-notes.outputs.release_notes }}
 
@@ -65,11 +64,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout checkov
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633  # v4.1.2
         with:
           token: ${{ secrets.PAT_TOKEN }}
           repository: bridgecrewio/checkov
-      - uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c  # v5.0.0
+      - uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d  # v5.1.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
       - name: Prepare PR
@@ -85,7 +84,7 @@ jobs:
           # update setup.py
           pipenv-setup sync --pipfile
       - name: Create PR
-        uses: peter-evans/create-pull-request@b1ddad2c994a25fbc81a28b3ec0e368bb2021c50  # v6.0.0
+        uses: peter-evans/create-pull-request@70a41aba780001da0a30141984ae2a0c95d8704e  # v6.0.2
         with:
           token: ${{ secrets.PAT_TOKEN }}
           branch: update-pycep-parser-dep

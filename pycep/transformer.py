@@ -2,11 +2,10 @@ from __future__ import annotations
 
 import itertools
 import re
-from typing import Any, cast
+from typing import Any, Literal, cast
 
 from lark import Token, Transformer, v_args
 from lark.tree import Meta
-from typing_extensions import Literal
 
 from pycep import typing as pycep_typing
 
@@ -25,8 +24,6 @@ VALID_TARGET_SCOPES = {"resourceGroup", "subscription", "managementGroup", "tena
 
 class BicepElement(str):
     """An alias to differentiate between a string and a Bicep element."""
-
-    pass
 
 
 class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
@@ -198,7 +195,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                     "decorators": decorators if decorators else [],
                     "type": type_api_pair["type"],
                     "api_version": type_api_pair["api_version"],
-                    "existing": True if existing else False,
+                    "existing": bool(existing),
                     "config": config,
                 },
             }
@@ -222,7 +219,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                 "decorators": [],
                 "type": str(type_name)[1:-1],
                 "api_version": "",  # will be set later with the parent resource api version
-                "existing": True if existing else False,
+                "existing": bool(existing),
                 "config": config,
             },
         }
@@ -254,6 +251,28 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         if self.add_line_numbers:
             result["modules"]["__attrs__"]["__start_line__"] = meta.line
             result["modules"]["__attrs__"]["__end_line__"] = meta.end_line
+
+        return result
+
+    @v_args(meta=True)
+    def custom_type(
+        self, meta: Meta, args: tuple[list[pycep_typing.Decorator] | None, Token, pycep_typing.PossibleValue]
+    ) -> pycep_typing.TypeResponse:
+        decorators, name, value = args
+
+        result: pycep_typing.TypeResponse = {
+            "types": {
+                "__name__": str(name),
+                "__attrs__": {
+                    "decorators": decorators if decorators else [],
+                    "value": value,
+                },
+            }
+        }
+
+        if self.add_line_numbers:
+            result["types"]["__attrs__"]["__start_line__"] = meta.line
+            result["types"]["__attrs__"]["__end_line__"] = meta.end_line
 
         return result
 
@@ -365,6 +384,10 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
         return local_result
+
+    def type_value(self, args: tuple[pycep_typing.PossibleNoneValue, ...]) -> str:
+        # this is only triggered, when a union type was found, ex. "'bicep' | 'arm' | 'azure'"
+        return " | ".join(str(arg) for arg in args)
 
     ####################
     #
@@ -496,7 +519,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "argument": args[0],
         }
 
-    def deco_secure(self, _: Any) -> pycep_typing.DecoratorSecure:
+    def deco_secure(self, _: Any) -> pycep_typing.DecoratorSecure:  # noqa: ANN401
         return {
             "type": "secure",
         }
@@ -1765,8 +1788,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     ####################
 
     def array(self, args: list[bool | int | Token]) -> list[bool | int | str]:
-        result = [item.value if isinstance(item, Token) else item for item in args]
-        return result
+        return [item.value if isinstance(item, Token) else item for item in args]
 
     def object(self, args: list[tuple[str, Any]]) -> dict[str, Any]:
         return dict(args)
@@ -1782,21 +1804,19 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         return int(arg[0])
 
     def string(self, arg: tuple[Token]) -> str:
-        result = self.transform_string_token(arg[0])
-        return result
+        return self.transform_string_token(arg[0])
 
     def multi_line_string(self, arg: tuple[Token]) -> str:
         value = str(arg[0])[3:-3]
-        value = value[1:] if value.startswith("\n") else value
-        return value
+        return value[1:] if value.startswith("\n") else value
 
-    def true(self, _: Any) -> Literal[True]:
+    def true(self, _: Any) -> Literal[True]:  # noqa: ANN401
         return True
 
-    def false(self, _: Any) -> Literal[False]:
+    def false(self, _: Any) -> Literal[False]:  # noqa: ANN401
         return False
 
-    def null(self, _: Any) -> None:
+    def null(self, _: Any) -> None:  # noqa: ANN401
         return None
 
     ####################
@@ -1812,7 +1832,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
         Beware that this method is not idempotent, it modifies the passed in `config`.
         """
-        if "__child_resource__" in config.keys():
+        if "__child_resource__" in config:
             child_resource = config.pop("__child_resource__")
 
             # prefix the resource name with the parent to prevent overlap

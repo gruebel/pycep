@@ -28,6 +28,12 @@ pip install --upgrade pycep-parser
 
 ## Next milestones
 
+### Custom data types
+Initial support was added with following parts still missing
+- Array type
+- Decorators in object type
+- Union type in object type
+
 ### Functions
 - [ ] Array (in progress)
 - [ ] CIDR (in progress)

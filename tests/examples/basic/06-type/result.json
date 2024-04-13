@@ -1,0 +1,98 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "types": {
+    "myStringType": {
+      "decorators": [],
+      "value": "string"
+    },
+    "myOtherStringType": {
+      "decorators": [],
+      "value": "myStringType"
+    },
+    "myStringLiteralType": {
+      "decorators": [],
+      "value": "bicep | arm | azure"
+    },
+    "myIntLiteralType": {
+      "decorators": [],
+      "value": 10
+    },
+    "myBoolLiteralType": {
+      "decorators": [],
+      "value": true
+    },
+    "storageAccountConfigType": {
+      "decorators": [],
+      "value": {
+        "name": "string",
+        "sku": "string"
+      }
+    },
+    "invalidRecursiveObjectType": {
+      "decorators": [],
+      "value": {
+        "level1": {
+          "level2": {
+            "level3": {
+              "level4": {
+                "level5": "invalidRecursiveObjectType"
+              }
+            }
+          }
+        }
+      }
+    },
+    "negativeIntLiteral": {
+      "decorators": [],
+      "value": {
+        "operator": {
+          "type": "minus",
+          "operands": {
+            "integer_value": 10
+          }
+        }
+      }
+    },
+    "negatedIntReference": {
+      "decorators": [],
+      "value": {
+        "operator": {
+          "type": "minus",
+          "operands": {
+            "integer_value": "negativeIntLiteral"
+          }
+        }
+      }
+    },
+    "negatedBoolLiteral": {
+      "decorators": [],
+      "value": {
+        "operator": {
+          "type": "not",
+          "operands": {
+            "bool_value": true
+          }
+        }
+      }
+    },
+    "negatedBoolReference": {
+      "decorators": [],
+      "value": {
+        "operator": {
+          "type": "not",
+          "operands": {
+            "bool_value": "negatedBoolLiteral"
+          }
+        }
+      }
+    },
+    "oneOfSeveralObjects": {
+      "decorators": [],
+      "value": "{'foo': 'bar'} | {'fizz': 'buzz'} | {'snap': 'crackle'}"
+    }
+  }
+}

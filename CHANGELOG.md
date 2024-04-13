@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support `loadYamlContent` function
 - Support `flatten` function
+- Initial support of custom data types
+
+# Changed
+
+- Fixed multiline issue with union function
 
 # Removed
 

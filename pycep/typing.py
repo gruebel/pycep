@@ -1,17 +1,18 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Literal, TypedDict
 
-from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
+from typing_extensions import NotRequired, TypeAlias
 
-# dict[str, Any] -> dict[str, PossibleValue] not supported https://github.com/python/mypy/issues/731
-PossibleValue: TypeAlias = "bool | int | str | list[bool | int | str] | dict[str, Any]"
+PossibleValue: TypeAlias = "bool | int | str | list[bool | int | str] | dict[str, PossibleValue]"
 PossibleNoneValue: TypeAlias = "PossibleValue | None"
 
 ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | BicepRegistryAliasModulePath | TemplateSpecModulePath | TemplateSpecAliasModulePath"
 ModuleDetail: TypeAlias = "_LocalModulePathDetail | _BicepRegistryModulePathDetail | _BicepRegistryAliasModulePathDetail | _TemplateSpecModulePathDetail | _TemplateSpecAliasModulePathDetail"
 LoopType: TypeAlias = "LoopArray | LoopArrayIndex | LoopObject | LoopRange"
-ElementResponse: TypeAlias = "ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse"
+ElementResponse: TypeAlias = (
+    "ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse | TypeResponse"
+)
 Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"
 
 ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOrEquals | LessThan | Equals | NotEquals | EqualsCaseInsensitive | NotEqualsCaseInsensitive"
@@ -170,6 +171,10 @@ class ModuleResponse(TypedDict):
 class ApiTypeVersion(TypedDict):
     type: str
     api_version: str
+
+
+class TypeResponse(TypedDict):
+    types: _Variables
 
 
 ####################
