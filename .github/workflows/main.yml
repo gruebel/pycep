@@ -62,7 +62,11 @@ jobs:
       - name: Install dependencies
         run: poetry install
       - name: Install pytest plugin
-        run: poetry run pip install pytest-github-actions-annotate-failures
+        run: |
+          poetry run pip install pytest-github-actions-annotate-failures
+          if [ '${{ matrix.python-version }}' == '3.13-dev' ]; then
+            poetry run pip install assertpy
+          fi
       - name: Run pytest
         run: poetry run python -m pytest tests/
       - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8'
