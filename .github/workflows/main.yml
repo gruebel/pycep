@@ -65,7 +65,7 @@ jobs:
         run: |
           poetry run pip install pytest-github-actions-annotate-failures
           if [ '${{ matrix.python-version }}' == '3.13-dev' ]; then
-            poetry run pip install assertpy
+            poetry run pip install assertpy lark regex typing-extensions
           fi
       - name: Run pytest
         run: poetry run python -m pytest tests/
