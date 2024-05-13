@@ -53,7 +53,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@81e9d935c883d0b210363ab89cf05f3894778450  # v1.8.14
       - name: Extract release notes
         id: extract-release-notes
-        uses: ffurrer2/extract-release-notes@4a5a562549e21065f6791b32ec5415bd33045cd2  # v2.1.0
+        uses: ffurrer2/extract-release-notes@9989ccec43d726ef05aa1cd7b2854fb96b6df6ab  # v2.2.0
       - name: Create GitHub Release
         uses: softprops/action-gh-release@9d7c94cfd0a1f3ed45544c887983e9fa900f0564  # v2.0.4
         with:
