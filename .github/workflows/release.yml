@@ -55,7 +55,7 @@ jobs:
         id: extract-release-notes
         uses: ffurrer2/extract-release-notes@9989ccec43d726ef05aa1cd7b2854fb96b6df6ab  # v2.2.0
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@a74c6b72af54cfa997e81df42d94703d6313a2d0  # v2.0.6
+        uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191  # v2.0.8
         with:
           body: ${{ steps.extract-release-notes.outputs.release_notes }}
 
