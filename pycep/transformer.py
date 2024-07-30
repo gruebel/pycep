@@ -117,7 +117,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "parameters": {
                 "__name__": str(name),
                 "__attrs__": {
-                    "decorators": decorators if decorators else [],
+                    "decorators": decorators or [],
                     "type": data_type,
                     "default": default,
                 },
@@ -140,7 +140,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "variables": {
                 "__name__": str(name),
                 "__attrs__": {
-                    "decorators": decorators if decorators else [],
+                    "decorators": decorators or [],
                     "value": value,
                 },
             }
@@ -162,7 +162,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "outputs": {
                 "__name__": str(name),
                 "__attrs__": {
-                    "decorators": decorators if decorators else [],
+                    "decorators": decorators or [],
                     "type": data_type,
                     "value": value,
                 },
@@ -192,7 +192,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "resources": {
                 "__name__": name_str,
                 "__attrs__": {
-                    "decorators": decorators if decorators else [],
+                    "decorators": decorators or [],
                     "type": type_api_pair["type"],
                     "api_version": type_api_pair["api_version"],
                     "existing": bool(existing),
@@ -241,7 +241,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "modules": {
                 "__name__": str(name),
                 "__attrs__": {
-                    "decorators": decorators if decorators else [],
+                    "decorators": decorators or [],
                     **path,  # type: ignore[typeddict-item] # start and end line are not-required
                     "config": config,
                 },
@@ -264,7 +264,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "types": {
                 "__name__": str(name),
                 "__attrs__": {
-                    "decorators": decorators if decorators else [],
+                    "decorators": decorators or [],
                     "value": value,
                 },
             }
