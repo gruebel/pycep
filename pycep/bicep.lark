@@ -49,7 +49,7 @@ module_path: QUOTED_INTERPOLATION
 
 // loops
 
-loop: "[" "for" (loop_array | loop_array_index | loop_object | loop_range) ":" ["if" "(" value_brackets ")"] value_brackets "]"
+loop: "[" _CPP_COMMENT_NL? "for" (loop_array | loop_array_index | loop_object | loop_range) ":" ["if" "(" value_brackets ")"] value_brackets _CPP_COMMENT_NL? "]"
 
 loop_array: STRING "in" value_brackets
 
