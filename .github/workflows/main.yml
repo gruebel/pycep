@@ -67,7 +67,7 @@ jobs:
           poetry run python -m pytest -s --cov=pycep --cov-report=lcov tests/
       - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8' && github.repository == 'gruebel/pycep'
         name: Upload coverage to coveralls
-        uses: coverallsapp/github-action@643bc377ffa44ace6394b2b5d0d3950076de9f63  # v2.3.0
+        uses: coverallsapp/github-action@4cdef0b2dbe0c9aa26bed48edb868db738625e79  # v2.3.3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8' && github.repository == 'gruebel/pycep'
