@@ -11,16 +11,16 @@ repos:
         args: ["--django"]
       - id: trailing-whitespace
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.5.5
+    rev: v0.7.1
     hooks:
       - id: ruff
         args: ["--fix"]
       - id: ruff-format
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.11.0
+    rev: v1.13.0
     hooks:
       - id: mypy
         additional_dependencies:
-          - lark==1.1.9
+          - lark==1.2.2
         args: [--strict, --implicit-reexport, --ignore-missing-imports, --show-error-codes]
         files: pycep|tests

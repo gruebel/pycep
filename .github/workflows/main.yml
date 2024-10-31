@@ -22,7 +22,7 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938  # v4.2.0
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
       - uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3  # v5.2.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
@@ -47,7 +47,7 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938  # v4.2.0
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3  # v5.2.0
         with:
@@ -67,12 +67,12 @@ jobs:
           poetry run python -m pytest -s --cov=pycep --cov-report=lcov tests/
       - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8' && github.repository == 'gruebel/pycep'
         name: Upload coverage to coveralls
-        uses: coverallsapp/github-action@643bc377ffa44ace6394b2b5d0d3950076de9f63  # v2.3.0
+        uses: coverallsapp/github-action@cfd0633edbd2411b532b808ba7a8b5e04f76d2c8  # v2.3.4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8' && github.repository == 'gruebel/pycep'
         name: Upload coverage to codecov
-        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673  # v4.5.0
+        uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238  # v4.6.0
         with:
           flags: unittests
           fail_ci_if_error: false
@@ -87,7 +87,7 @@ jobs:
       # IMPORTANT: this permission is mandatory for trusted publishing to pypi
       id-token: write
     steps:
-      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938  # v4.2.0
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
       - uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3  # v5.2.0
         with:
           python-version: ${{ env.MIN_PYTHON_VERSION }}
@@ -110,4 +110,4 @@ jobs:
       - name: Build Python package
         run: poetry build
       - name: Publish prerelease to PyPI
-        uses: pypa/gh-action-pypi-publish@0ab0b79471669eb3a4d647e625009c62f9f3b241  # v1.10.1
+        uses: pypa/gh-action-pypi-publish@fb13cb306901256ace3dab689990e13a5550ffaa  # v1.11.0
