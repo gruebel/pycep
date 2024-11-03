@@ -4,7 +4,10 @@
 param paramStr array = format('{0}, {1}. Formatted number: {2:N0}', greeting, name, numberToFormat)
 
 // var
-var cpuCores = format('-{0}-', greeting)
+var cpuCores = format(
+  '-{0}-',
+  greeting
+)
 
 // resource
 resource identityProvider 'Microsoft.ApiManagement/service/identityProviders@2020-06-01-preview' = {
