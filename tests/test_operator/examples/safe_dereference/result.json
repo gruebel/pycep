@@ -1,0 +1,131 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "resources": {
+    "storage": {
+      "decorators": [],
+      "type": "Microsoft.Storage/storageAccounts",
+      "api_version": "2023-04-01",
+      "existing": false,
+      "config": {
+        "loop_type": {
+          "type": "range",
+          "detail": {
+            "item_name": null,
+            "index_name": "i",
+            "start_index": 0,
+            "count": "storageCount"
+          }
+        },
+        "condition": null,
+        "config": {
+          "name": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": {
+                  "operator": {
+                    "type": "index_accessor",
+                    "operands": {
+                      "operand_1": "storageAccountSettings",
+                      "operand_2": "i"
+                    }
+                  }
+                },
+                "operand_2": {
+                  "operator": {
+                    "type": "coalesce",
+                    "operands": {
+                      "operand_1": "name",
+                      "operand_2": "defaultname"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "location": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": {
+                  "operator": {
+                    "type": "index_accessor",
+                    "operands": {
+                      "operand_1": "storageAccountSettings",
+                      "operand_2": "i"
+                    }
+                  }
+                },
+                "operand_2": {
+                  "operator": {
+                    "type": "coalesce",
+                    "operands": {
+                      "operand_1": "location",
+                      "operand_2": "location"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "kind": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": {
+                  "operator": {
+                    "type": "index_accessor",
+                    "operands": {
+                      "operand_1": "storageAccountSettings",
+                      "operand_2": "i"
+                    }
+                  }
+                },
+                "operand_2": {
+                  "operator": {
+                    "type": "coalesce",
+                    "operands": {
+                      "operand_1": "kind",
+                      "operand_2": "StorageV2"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "sku": {
+            "name": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": {
+                    "operator": {
+                      "type": "index_accessor",
+                      "operands": {
+                        "operand_1": "storageAccountSettings",
+                        "operand_2": "i"
+                      }
+                    }
+                  },
+                  "operand_2": {
+                    "operator": {
+                      "type": "coalesce",
+                      "operands": {
+                        "operand_1": "sku",
+                        "operand_2": "Standard_GRS"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

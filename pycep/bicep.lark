@@ -265,7 +265,7 @@ data_uri_to_string: ("dataUriToString" | "sys.dataUriToString") "(" value_bracke
 ends_with: ("endsWith" | "sys.endsWith") "(" value_brackets "," value_brackets ")"
 
 _FORMAT.1: ("format" | "sys.format") "("
-format: _FORMAT value_brackets ("," value_brackets)+ ")"
+format: _FORMAT _CPP_COMMENT_NL? value_brackets ("," value_brackets)+ _CPP_COMMENT_NL? ")"
 
 _GUID.1: ("guid" | "sys.guid") "("
 guid: _GUID value_brackets ("," value_brackets)* ")"
@@ -365,14 +365,14 @@ substract.1: value_brackets "-" value_brackets
 
 ?operator_accessor: index_accessor | function_accessor | nested_resource_accessor | property_accessor
 
-index_accessor: value_brackets "[" value_brackets "]"
+index_accessor: value_brackets "[" "?"? value_brackets "]"
 
 function_accessor: value_brackets "." LIST_FUNC_NAME "(" value_brackets? ["," value_brackets]+ ")"
 
 nested_resource_accessor: value_brackets "::" value_brackets
 
 // 'sys.' and 'az.' have to be eliminated in 1st operand (see STRING definition regexp):
-property_accessor: value_brackets "." value_brackets
+property_accessor: value_brackets "." "?"? value_brackets
 
 // Terms
 
