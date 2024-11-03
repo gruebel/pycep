@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Added
 
+## [0.5.1] - 2024-11-03
+
+# Added
+
 - Support Python 3.13 officially
 - Support `loadYamlContent` function
 - Support `flatten` function
@@ -189,7 +193,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release to be able to parse all the official examples of Bicep [101](https://github.com/Azure/bicep/tree/main/docs/examples/101).
 
-[Unreleased]: https://github.com/gruebel/pycep/compare/0.4.2...HEAD
+[Unreleased]: https://github.com/gruebel/pycep/compare/0.5.1...HEAD
+[0.5.1]: https://github.com/gruebel/pycep/compare/0.4.2...0.5.1
 [0.4.2]: https://github.com/gruebel/pycep/compare/0.4.1...0.4.2
 [0.4.1]: https://github.com/gruebel/pycep/compare/0.4.0...0.4.1
 [0.4.0]: https://github.com/gruebel/pycep/compare/0.3.9...0.4.0
