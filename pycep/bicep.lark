@@ -61,7 +61,7 @@ loop_range: ["(" STRING ","] STRING ")"? "in" "range" "(" value_brackets "," val
 
 // deploy condition
 
-deploy_condition: "if" "(" value_brackets ")" value_brackets
+deploy_condition: _CPP_COMMENT_NL? "if" "(" value_brackets ")" value_brackets
 
 // data types
 
