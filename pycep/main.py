@@ -1,19 +1,18 @@
 from __future__ import annotations
 
-import sys
-from pathlib import Path
+from importlib.resources import files
+from typing import TYPE_CHECKING
 
 from lark import Lark, Token, Tree
-
-from pycep import typing as pycep_typing
 
 from .transformer import BicepToJson
 from .validator import BicepValidator
 
-if sys.version_info >= (3, 9):  # pragma: no cover
-    from importlib.resources import files
-else:
-    from importlib_resources import files
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from pycep import typing as pycep_typing
+
 
 LARK_GRAMMAR = (files(__package__) / "bicep.lark").read_text()
 

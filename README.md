@@ -13,7 +13,7 @@ A parser for [Azure Bicep](https://github.com/Azure/bicep) files leveraging [Lar
 
 ### Requirements
 
-- Python 3.8+
+- Python 3.9+
 - Lark 1.1.2+
 
 ### Install
