@@ -2,12 +2,15 @@ from __future__ import annotations
 
 import itertools
 import re
-from typing import Any, Literal, cast
+from typing import TYPE_CHECKING, Any, Literal, cast
 
 from lark import Token, Transformer, v_args
-from lark.tree import Meta
 
 from pycep import typing as pycep_typing
+
+if TYPE_CHECKING:
+    from lark.tree import Meta
+
 
 BICEP_REGISTRY_ALIAS_PATTERN = re.compile(r"br/(?P<alias>[\w]+):(?P<path>[\w/\-.]+):(?P<tag>[\w.\-]+)")
 PUBLIC_BICEP_REGISTRY_PATTERN = re.compile(r"br:mcr\.microsoft\.com/(?P<path>[\w/\-]+):(?P<tag>[\w.\-]+)")
@@ -22,7 +25,7 @@ TEMPLATE_SPEC_PATTERN = re.compile(
 VALID_TARGET_SCOPES = {"resourceGroup", "subscription", "managementGroup", "tenant"}
 
 
-class BicepElement(str):
+class BicepElement(str):  # noqa: FURB189
     """An alias to differentiate between a string and a Bicep element."""
 
 
@@ -68,7 +71,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
     @v_args(meta=True)
     def scope(self, meta: Meta, args: tuple[Token]) -> pycep_typing.ScopeResponse:
-        value = cast(Literal["resourceGroup", "subscription", "managementGroup", "tenant"], str(args[0])[1:-1])
+        value = cast('Literal["resourceGroup", "subscription", "managementGroup", "tenant"]', str(args[0])[1:-1])
 
         if value not in VALID_TARGET_SCOPES:  # pragma: no cover
             raise ValueError(f"target scope is invalid: {value}")
@@ -1031,9 +1034,9 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     def pick_zones(self, args: list[pycep_typing.PossibleNoneValue]) -> pycep_typing.PickZones:
         args_len = len(args)
 
-        provider_namespace = cast(pycep_typing.PossibleValue, args[0])
-        resource_type = cast(pycep_typing.PossibleValue, args[1])
-        location = cast(pycep_typing.PossibleValue, args[2])
+        provider_namespace = cast("pycep_typing.PossibleValue", args[0])
+        resource_type = cast("pycep_typing.PossibleValue", args[1])
+        location = cast("pycep_typing.PossibleValue", args[2])
         number_of_zones = None
         offset = None
 
@@ -1808,7 +1811,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
     def multi_line_string(self, arg: tuple[Token]) -> str:
         value = str(arg[0])[3:-3]
-        return value[1:] if value.startswith("\n") else value
+        return value.removeprefix("\n")
 
     def true(self, _: Any) -> Literal[True]:  # noqa: ANN401
         return True
