@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  POETRY_VERSION: "1.8.2"
+  POETRY_VERSION: "2.0.0"
   MIN_PYTHON_VERSION: "3.9"
 
 jobs:
