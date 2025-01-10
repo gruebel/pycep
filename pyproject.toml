@@ -1,21 +1,12 @@
-[tool.poetry]
+[project]
 name = "pycep-parser"
 version = "0.6.1a0"
 description = "A Python based Bicep parser"
-authors = ["Anton Grübel <anton.gruebel@gmail.com>"]
-license = "Apache-2.0"
-
-readme = "README.md"
-
-packages = [
-    { include = "pycep" }
+authors = [
+    { name = "Anton Grübel", email = "anton.gruebel@gmail.com" }
 ]
-
-homepage = "https://github.com/gruebel/pycep"
-repository = "https://github.com/gruebel/pycep"
-
+license = "Apache-2.0"
 keywords = ["bicep", "parser", "lark"]
-
 classifiers = [
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3 :: Only",
@@ -26,22 +17,35 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Typing :: Typed"
 ]
+readme = "README.md"
 
-[tool.poetry.dependencies]
-python = "^3.9"
-lark = ">=1.1.2"
-regex = ">=2022.1.18"
-typing-extensions = ">=3.10.0"
+requires-python = ">=3.9"
 
-[tool.poetry.dev-dependencies]
-assertpy = "^1.1"
-mypy = {extras = ["faster-cache"], version = "^1.13.0"}
-pre-commit = "^4.0.1"
-pytest = "^8.3.4"
+dependencies = [
+    "lark>=1.1.2",
+    "regex>=2022.1.18",
+    "typing-extensions>=3.10.0",
+]
+
+[project.urls]
+homepage = "https://github.com/gruebel/pycep"
+repository = "https://github.com/gruebel/pycep"
+changelog = "https://github.com/gruebel/pycep/blob/master/CHANGELOG.md"
+releases = "https://github.com/gruebel/pycep/releases"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [
+    { include = "pycep" }
+]
+
+[tool.poetry.group.dev.dependencies]
+assertpy = "^1.1"
+pre-commit = "^4.0.1"
+pytest = "^8.3.4"
 
 [tool.mypy]
 files = "pycep"
@@ -92,6 +96,7 @@ select = [
     "PLE",
     "PT",
     "PTH",
+    "PYI",
     "RET",
     "RSE",
     "RUF",
