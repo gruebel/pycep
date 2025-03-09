@@ -9,8 +9,7 @@ permissions:
   contents: read
 
 env:
-  POETRY_VERSION: "2.0.0"
-  MIN_PYTHON_VERSION: "3.9"
+  UV_VERSION: "0.6.x"
 
 jobs:
   release:
@@ -21,35 +20,38 @@ jobs:
       # IMPORTANT: this permission is mandatory for trusted publishing to pypi
       id-token: write
     outputs:
-      version: ${{ steps.version.outputs.version }}
+      version: ${{ steps.version.outputs.current-version }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
         with:
           ref: master
       - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38  # v5.4.0
         with:
-          python-version: ${{ env.MIN_PYTHON_VERSION }}
-      - name: Set up poetry ${{ env.POETRY_VERSION }}
-        run: pipx install poetry==${{ env.POETRY_VERSION }}
+          python-version-file: '.python-version'
+      - name: Set up uv ${{ env.UV_VERSION }}
+        uses: astral-sh/setup-uv@f94ec6bedd8674c4426838e6b50417d36b6ab231  # v5.3.1
+        with:
+          version: ${{ env.UV_VERSION }}
       - name: Install dependencies
-        run: poetry install --no-dev
+        run: uv sync --no-dev
+      - name: Bump version
+        id: version
+        uses: callowayproject/bump-my-version@a2c562f686c643f39425e34af8101c661968d039  # 1.0.2
+        with:
+          args: '--new-version ${{ github.ref_name }}'
       - name: Release version ${{ github.ref_name }}
         id: version
         run: |
-          # bump version
-          poetry version $GITHUB_REF_NAME
-          new_version=$(poetry version -s)
-
           # commit and push
           git config --global user.name 'gruebel'
           git config --global user.email 'gruebel@users.noreply.github.com'
           git add pyproject.toml
-          git commit -m "publish version ${new_version}"
+          git commit -m "publish version ${{ steps.version.outputs.current-version }}"
           git push
 
           echo "version=$new_version" >> $GITHUB_OUTPUT
       - name: Build Python package
-        run: poetry build
+        run: uv build
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc  # v1.12.4
       - name: Extract release notes
@@ -71,7 +73,7 @@ jobs:
           repository: bridgecrewio/checkov
       - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38  # v5.4.0
         with:
-          python-version: ${{ env.MIN_PYTHON_VERSION }}
+          python-version-file: '.python-version'
       - name: Prepare PR
         run: |
           # install needed tools

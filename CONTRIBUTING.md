@@ -7,7 +7,7 @@ Any contributions to improve the parser are welcome.
 To setup the project and install all needed dependency just run
 
 ```shell
-poetry install
+uv sync
 ```
 
 ### Code Quality
@@ -15,7 +15,7 @@ poetry install
 Either install the `pre-commit` hook or run
 
 ```shell
-poetry run pre-commit run -a
+uv run pre-commit run -a
 ```
 
 ### Tests
@@ -23,5 +23,5 @@ poetry run pre-commit run -a
 Tests are run with `pytest`
 
 ```shell
-poetry run pytest tests
+uv run pytest
 ```

@@ -1,6 +1,6 @@
 [project]
 name = "pycep-parser"
-version = "0.6.1a0"
+version = "0.6.1-dev1"
 description = "A Python based Bicep parser"
 authors = [
     { name = "Anton Grübel", email = "anton.gruebel@gmail.com" }
@@ -33,19 +33,25 @@ repository = "https://github.com/gruebel/pycep"
 changelog = "https://github.com/gruebel/pycep/blob/master/CHANGELOG.md"
 releases = "https://github.com/gruebel/pycep/releases"
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry]
-packages = [
-    { include = "pycep" }
+[dependency-groups]
+dev = [
+    "assertpy>=1.1",
+    "pre-commit>=4.0.1",
+    "pytest>=8.3.4",
 ]
 
-[tool.poetry.group.dev.dependencies]
-assertpy = "^1.1"
-pre-commit = "^4.0.1"
-pytest = "^8.3.4"
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/pycep",
+    "/tests",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["pycep"]
 
 [tool.mypy]
 files = "pycep"
@@ -117,3 +123,32 @@ ignore = [
 ]
 
 fixable = ["I001"]
+
+# needed till uv supports it natively
+# https://github.com/astral-sh/uv/issues/6298
+[tool.bumpversion]
+parse = """(?x)
+    (?P<major>0|[1-9]\\d*)\\.
+    (?P<minor>0|[1-9]\\d*)\\.
+    (?P<patch>0|[1-9]\\d*)
+    (?:
+        -                             # dash separator for pre-release section
+        (?P<pre_l>[a-zA-Z-]+)         # pre-release label
+        (?P<pre_n>0|[1-9]\\d*)        # pre-release version number
+    )?                                # pre-release section is optional
+"""
+serialize = [
+    "{major}.{minor}.{patch}-{pre_l}{pre_n}",
+    "{major}.{minor}.{patch}",
+]
+search = "{current_version}"
+replace = "{new_version}"
+regex = false
+ignore_missing_version = false
+ignore_missing_files = false
+tag = false
+allow_dirty = true
+commit = false
+
+[tool.bumpversion.parts.pre_l]
+values = ["dev"]
