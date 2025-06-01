@@ -104,7 +104,7 @@ jobs:
         run: uv sync --no-dev
       - name: Bump prerelease version
         id: version
-        uses: callowayproject/bump-my-version@a2c562f686c643f39425e34af8101c661968d039  # 1.0.2
+        uses: callowayproject/bump-my-version@5049c88b771bbed7b0da22ad9ba8711b579f9ca6  # 1.1.4
         with:
           args: 'pre_n'
       - name: Commit version bump
