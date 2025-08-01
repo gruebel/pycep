@@ -54,7 +54,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
       - name: Set up uv ${{ env.UV_VERSION }}
-        uses: astral-sh/setup-uv@bd01e18f51369d5a26f1651c3cb451d3417e3bba  # v6.3.1
+        uses: astral-sh/setup-uv@e92bafb6253dcd438e0484186d7669ea7a8ca1cc  # v6.4.3
         with:
           version: ${{ env.UV_VERSION }}
           enable-cache: true
@@ -96,7 +96,7 @@ jobs:
         with:
           python-version-file: '.python-version'
       - name: Set up uv ${{ env.UV_VERSION }}
-        uses: astral-sh/setup-uv@bd01e18f51369d5a26f1651c3cb451d3417e3bba  # v6.3.1
+        uses: astral-sh/setup-uv@e92bafb6253dcd438e0484186d7669ea7a8ca1cc  # v6.4.3
         with:
           version: ${{ env.UV_VERSION }}
           enable-cache: true
