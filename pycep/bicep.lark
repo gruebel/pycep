@@ -35,7 +35,7 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
 
 ?module_value: object | loop | deploy_condition
 
-child_resource: "resource" STRING QUOTED_INTERPOLATION [EXISTING] "=" object _CPP_COMMENT_NL+
+child_resource: "resource" STRING QUOTED_INTERPOLATION [EXISTING] "=" (object | loop | deploy_condition) _CPP_COMMENT_NL+
 
 ?type_value: value_brackets ("|" value_brackets)*
 
