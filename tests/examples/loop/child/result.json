@@ -1,0 +1,53 @@
+{
+    "globals": {
+      "scope": {
+        "value": "resourceGroup"
+      }
+    },
+    "resources": {
+      "storageAccount": {
+        "decorators": [],
+        "type": "Microsoft.Storage/storageAccounts",
+        "api_version": "2023-01-01",
+        "existing": false,
+        "config": {
+          "name": "storageAccountName"
+        }
+      },
+      "storageAccount__queueService": {
+        "decorators": [],
+        "type": "Microsoft.Storage/storageAccounts/queueServices",
+        "api_version": "2023-01-01",
+        "existing": false,
+        "config": {
+          "name": "default",
+          "depends_on": [
+            "storageAccount"
+          ]
+        }
+      },
+      "storageAccount__queueService__queueList": {
+        "decorators": [],
+        "type": "Microsoft.Storage/storageAccounts/queueServices/queues",
+        "api_version": "2023-01-01",
+        "existing": false,
+        "config": {
+          "loop_type": {
+            "type": "array",
+            "detail": {
+              "item_name": "queueName",
+              "array_name": "storageQueues"
+            }
+          },
+          "condition": null,
+          "config": {
+            "name": "queueName"
+          },
+          "depends_on": [
+            "storageAccount__queueService"
+          ]
+        }
+      }
+    }
+  }
+  
