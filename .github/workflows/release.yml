@@ -40,7 +40,6 @@ jobs:
         with:
           args: '--new-version ${{ github.ref_name }}'
       - name: Release version ${{ github.ref_name }}
-        id: version
         run: |
           # commit and push
           git config --global user.name 'gruebel'
