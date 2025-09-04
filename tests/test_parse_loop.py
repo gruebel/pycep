@@ -48,6 +48,19 @@ def test_parse_loop_object() -> None:
     assert_that(result).is_equal_to(expected_result)
 
 
+def test_parse_loop_child_resources() -> None:
+    # given
+    sub_dir_path = EXAMPLES_DIR / "child"
+    file_path = sub_dir_path / "main.bicep"
+    expected_result = json.loads((sub_dir_path / "result.json").read_text())
+
+    # when
+    result = BICEP_PARSER.parse(file_path=file_path)
+
+    # then
+    assert_that(result).is_equal_to(expected_result)
+
+
 def test_parse_loop_condition() -> None:
     # given
     sub_dir_path = EXAMPLES_DIR / "condition"
