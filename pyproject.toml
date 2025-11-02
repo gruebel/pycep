@@ -1,6 +1,6 @@
 [project]
 name = "pycep-parser"
-version = "0.6.1.dev2"
+version = "0.6.1.dev3"
 description = "A Python based Bicep parser"
 authors = [
     { name = "Anton Grübel", email = "anton.gruebel@gmail.com" }
