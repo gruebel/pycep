@@ -59,16 +59,16 @@ jobs:
           version: ${{ env.UV_VERSION }}
           enable-cache: true
       - name: Install dependencies
-        run: uv sync
+        run: uv sync --frozen
       - name: Install pytest plugin
         run: uv pip install pytest-github-actions-annotate-failures
       - name: Run pytest
-        run: uv run pytest
+        run: uv run --frozen pytest
       - if: matrix.os == 'ubuntu-latest' && matrix.python-version == env.MIN_PYTHON_VERSION
         name: Create coverage report
         run: |
           uv pip install pytest-cov
-          uv run pytest -s --cov=pycep --cov-report=lcov
+          uv run --frozen pytest -s --cov=pycep --cov-report=lcov
       - if: matrix.os == 'ubuntu-latest' && matrix.python-version == env.MIN_PYTHON_VERSION && github.repository == 'gruebel/pycep'
         name: Upload coverage to coveralls
         uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b  # v2.3.6
@@ -101,20 +101,22 @@ jobs:
           version: ${{ env.UV_VERSION }}
           enable-cache: true
       - name: Install dependencies
-        run: uv sync --no-dev
-      - name: Bump prerelease version
-        id: version
-        uses: callowayproject/bump-my-version@d6368037f18eff6802afbcaeb3ed06fc5b62998f  # 1.2
-        with:
-          args: 'pre_n'
+        run: uv sync --frozen --no-dev
       - name: Commit version bump
+        id: version
         run: |
+          # bump version
+          uv version --frozen --bump dev
+          new_version=$(uv version --frozen --short)
+
           # commit and push
           git config --global user.name 'gruebel'
           git config --global user.email 'gruebel@users.noreply.github.com'
           git add pyproject.toml
-          git commit -m "publish version ${{ steps.version.outputs.current-version }}"
+          git commit -m "publish version ${new_version}"
           git push
+
+          echo "version=$new_version" >> $GITHUB_OUTPUT
       - name: Build Python package
         run: uv build
       - name: Publish prerelease to PyPI

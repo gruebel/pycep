@@ -33,19 +33,19 @@ jobs:
         with:
           version: ${{ env.UV_VERSION }}
       - name: Install dependencies
-        run: uv sync --no-dev
-      - name: Bump version
-        id: version
-        uses: callowayproject/bump-my-version@d6368037f18eff6802afbcaeb3ed06fc5b62998f  # 1.2
-        with:
-          args: '--new-version ${{ github.ref_name }}'
+        run: uv sync --frozen --no-dev
       - name: Release version ${{ github.ref_name }}
+        id: version
         run: |
+          # bump version
+          uv version --frozen ${{ github.ref_name }}
+          new_version=$(uv version --frozen --short)
+
           # commit and push
           git config --global user.name 'gruebel'
           git config --global user.email 'gruebel@users.noreply.github.com'
           git add pyproject.toml
-          git commit -m "publish version ${{ steps.version.outputs.current-version }}"
+          git commit -m "publish version ${new_version}"
           git push
 
           echo "version=$new_version" >> $GITHUB_OUTPUT
@@ -60,39 +60,3 @@ jobs:
         uses: softprops/action-gh-release@6cbd405e2c4e67a21c47fa9e383d020e4e28b836  # v2.3.3
         with:
           body: ${{ steps.extract-release-notes.outputs.release_notes }}
-
-  create-pr:
-    needs: release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout checkov
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
-        with:
-          token: ${{ secrets.PAT_TOKEN }}
-          repository: bridgecrewio/checkov
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5.6.0
-        with:
-          python-version-file: '.python-version'
-      - name: Prepare PR
-        run: |
-          # install needed tools
-          python -m pip install --no-cache-dir --upgrade pipenv "pipenv-setup[black]" "vistir<0.7.0"
-
-          # update Pipfile
-          pipenv --python ${{ env.MIN_PYTHON_VERSION }}
-          pipenv install pycep-parser==${{ needs.release.outputs.version }}
-          pipenv lock
-
-          # update setup.py
-          pipenv-setup sync --pipfile
-      - name: Create PR
-        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e  # v7.0.8
-        with:
-          token: ${{ secrets.PAT_TOKEN }}
-          branch: update-pycep-parser-dep
-          delete-branch: true
-          commit-message: update pycep-parser version
-          title: "chore: update pycep-parser version to ${{ needs.bump-version.outputs.version }}"
-          body: |
-            - Automatic update of pycep-parser
-            powered by [create-pull-request](https://github.com/peter-evans/create-pull-request) GHA
