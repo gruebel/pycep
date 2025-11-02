@@ -32,13 +32,13 @@ jobs:
         id: version
         run: |
           # bump version
-          uv version --frozen ${{ github.ref_name }}
-          new_version=$(uv version --frozen --short)
+          uv version ${{ github.ref_name }}
+          new_version=$(uv version --short)
 
           # commit and push
           git config --global user.name 'gruebel'
           git config --global user.email 'gruebel@users.noreply.github.com'
-          git add pyproject.toml
+          git add pyproject.toml uv.lock
           git commit -m "publish version ${new_version}"
           git push
 
