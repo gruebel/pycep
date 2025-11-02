@@ -123,32 +123,3 @@ ignore = [
 ]
 
 fixable = ["I001"]
-
-# needed till uv supports it natively
-# https://github.com/astral-sh/uv/issues/6298
-[tool.bumpversion]
-parse = """(?x)
-    (?P<major>0|[1-9]\\d*)\\.
-    (?P<minor>0|[1-9]\\d*)\\.
-    (?P<patch>0|[1-9]\\d*)
-    (?:
-        -                             # dash separator for pre-release section
-        (?P<pre_l>[a-zA-Z-]+)         # pre-release label
-        (?P<pre_n>0|[1-9]\\d*)        # pre-release version number
-    )?                                # pre-release section is optional
-"""
-serialize = [
-    "{major}.{minor}.{patch}-{pre_l}{pre_n}",
-    "{major}.{minor}.{patch}",
-]
-search = "{current_version}"
-replace = "{new_version}"
-regex = false
-ignore_missing_version = false
-ignore_missing_files = false
-tag = false
-allow_dirty = true
-commit = false
-
-[tool.bumpversion.parts.pre_l]
-values = ["dev"]
