@@ -22,9 +22,9 @@ readme = "README.md"
 requires-python = ">=3.9"
 
 dependencies = [
-    "lark>=1.1.2",
-    "regex>=2022.1.18",
-    "typing-extensions>=3.10.0",
+    "lark>=1.1.2,<2.0.0",
+    "regex>=2022.1.18,<2026.0.0",
+    "typing-extensions>=3.10.0,<5.0.0",
 ]
 
 [project.urls]
@@ -35,9 +35,9 @@ releases = "https://github.com/gruebel/pycep/releases"
 
 [dependency-groups]
 dev = [
-    "assertpy>=1.1",
-    "pre-commit>=4.0.1",
-    "pytest>=8.3.4",
+    "assertpy>=1.1,<2.0",
+    "prek>=0.2.12,<0.3.0",
+    "pytest>=8.4.2,<9.0.0",
 ]
 
 [build-system]
@@ -54,6 +54,12 @@ required-version = "~=0.9.0"
 
 [tool.mypy]
 files = "pycep"
+
+python_version = "3.9"
+local_partial_types = true # will become the new default from version 2
+allow_redefinition_new = true # will become the new default from version 2
+fixed_format_cache = true # new caching mechanism
+pretty = true
 strict = true
 implicit_reexport = true
 
