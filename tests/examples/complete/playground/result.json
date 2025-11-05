@@ -9,6 +9,11 @@
       "value": "Official playground example https://aka.ms/bicepdemo"
     }
   },
+  "extensions": {
+    "microsoftGraphV1": {
+      "name": "microsoftGraphV1"
+    }
+  },
   "parameters": {
     "virtualMachineSize": {
       "decorators": [
@@ -431,6 +436,17 @@
         }
       }
     },
+    "appRegistration": {
+      "decorators": [],
+      "type": "Microsoft.Graph/applications",
+      "api_version": "v1.0",
+      "existing": false,
+      "config": {
+        "uniqueName": "${virtualMachineName}-app",
+        "displayName": "${virtualMachineName} Application",
+        "signInAudience": "AzureADMyOrg"
+      }
+    },
     "storage__service": {
       "decorators": [],
       "type": "Microsoft.Storage/storageAccounts/fileServices",
@@ -482,6 +498,19 @@
           "operands": {
             "operand_1": "nsg",
             "operand_2": "id"
+          }
+        }
+      }
+    },
+    "appRegistrationId": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": "appRegistration",
+            "operand_2": "appId"
           }
         }
       }

@@ -1,0 +1,20 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "extensions": {
+    "microsoftGraphV1": {
+      "name": "microsoftGraphV1"
+    },
+    "kubernetes": {
+      "name": "kubernetes",
+      "config": {
+        "namespace": "default",
+        "kubeConfig": "someKubeConfig"
+      },
+      "alias": "k8s"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 start: ((element _CPP_COMMENT_NL?) | _CPP_COMMENT_NL)*
 
 element: "targetScope" "=" QUOTED_INTERPOLATION                                         -> scope
+       | "extension" STRING ["with" object] ["as" STRING]                               -> extension
        | "metadata" STRING "=" metadata_value                                           -> metadata
        | [decorator] "param" STRING data_type ["=" value_brackets]                      -> param
        | [decorator] "var" STRING "=" var_value                                         -> var

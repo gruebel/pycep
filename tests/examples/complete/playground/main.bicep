@@ -2,6 +2,8 @@ metadata description = 'Official playground example https://aka.ms/bicepdemo'
 
 targetScope = 'resourceGroup'
 
+extension microsoftGraphV1
+
 @description('Virtual machine size (has to be at least the size of Standard_A3 to support 2 NICs)')
 param virtualMachineSize string = 'Standard_DS1_v2'
 
@@ -221,4 +223,11 @@ module network './network.bicep' = {
   }
 }
 
+resource appRegistration 'Microsoft.Graph/applications@v1.0' = {
+  uniqueName: '${virtualMachineName}-app'
+  displayName: '${virtualMachineName} Application'
+  signInAudience: 'AzureADMyOrg'
+}
+
 output nsgId string = nsg.id
+output appRegistrationId string = appRegistration.appId

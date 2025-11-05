@@ -8,9 +8,16 @@
   },
   "metadata": {
     "description": {
-      "__end_line__": 1,
+      "value": "Official playground example https://aka.ms/bicepdemo",
       "__start_line__": 1,
-      "value": "Official playground example https://aka.ms/bicepdemo"
+      "__end_line__": 1
+    }
+  },
+  "extensions": {
+    "microsoftGraphV1": {
+      "name": "microsoftGraphV1",
+      "__start_line__": 5,
+      "__end_line__": 5
     }
   },
   "parameters": {
@@ -23,8 +30,8 @@
       ],
       "type": "string",
       "default": "Standard_DS1_v2",
-      "__start_line__": 5,
-      "__end_line__": 6
+      "__start_line__": 7,
+      "__end_line__": 8
     },
     "adminUsername": {
       "decorators": [
@@ -35,8 +42,8 @@
       ],
       "type": "string",
       "default": null,
-      "__start_line__": 8,
-      "__end_line__": 9
+      "__start_line__": 10,
+      "__end_line__": 11
     },
     "adminPassword": {
       "decorators": [
@@ -50,8 +57,8 @@
       ],
       "type": "string",
       "default": null,
-      "__start_line__": 11,
-      "__end_line__": 13
+      "__start_line__": 13,
+      "__end_line__": 15
     },
     "storageAccountType": {
       "decorators": [
@@ -69,8 +76,8 @@
       ],
       "type": "string",
       "default": "Standard_LRS",
-      "__start_line__": 15,
-      "__end_line__": 20
+      "__start_line__": 17,
+      "__end_line__": 22
     },
     "location": {
       "decorators": [
@@ -90,70 +97,70 @@
           "property_name": "location"
         }
       },
-      "__start_line__": 22,
-      "__end_line__": 23
+      "__start_line__": 24,
+      "__end_line__": 25
     }
   },
   "variables": {
     "virtualMachineName": {
       "decorators": [],
       "value": "VM-MultiNic",
-      "__start_line__": 25,
-      "__end_line__": 25
+      "__start_line__": 27,
+      "__end_line__": 27
     },
     "nic1Name": {
       "decorators": [],
       "value": "nic-1",
-      "__start_line__": 26,
-      "__end_line__": 26
+      "__start_line__": 28,
+      "__end_line__": 28
     },
     "nic2Name": {
       "decorators": [],
       "value": "nic-2",
-      "__start_line__": 27,
-      "__end_line__": 27
+      "__start_line__": 29,
+      "__end_line__": 29
     },
     "virtualNetworkName": {
       "decorators": [],
       "value": "virtualNetwork",
-      "__start_line__": 28,
-      "__end_line__": 28
+      "__start_line__": 30,
+      "__end_line__": 30
     },
     "subnet1Name": {
       "decorators": [],
       "value": "subnet-1",
-      "__start_line__": 29,
-      "__end_line__": 29
+      "__start_line__": 31,
+      "__end_line__": 31
     },
     "subnet2Name": {
       "decorators": [],
       "value": "subnet-2",
-      "__start_line__": 30,
-      "__end_line__": 30
+      "__start_line__": 32,
+      "__end_line__": 32
     },
     "publicIPAddressName": {
       "decorators": [],
       "value": "publicIp",
-      "__start_line__": 31,
-      "__end_line__": 31
+      "__start_line__": 33,
+      "__end_line__": 33
     },
     "diagStorageAccountName": {
       "decorators": [],
       "value": "diags${uniqueString(resourceGroup().id)}",
-      "__start_line__": 32,
-      "__end_line__": 32
+      "__start_line__": 34,
+      "__end_line__": 34
     },
     "networkSecurityGroupName": {
       "decorators": [],
       "value": "NSG",
-      "__start_line__": 33,
-      "__end_line__": 33
+      "__start_line__": 35,
+      "__end_line__": 35
     },
     "networkSecurityGroupName2": {
       "decorators": [],
       "value": "${subnet2Name}-nsg",
-      "__start_line__": 34,
-      "__end_line__": 34
+      "__start_line__": 36,
+      "__end_line__": 36
     }
   },
   "resources": {
@@ -252,8 +259,8 @@
           }
         }
       },
-      "__start_line__": 37,
-      "__end_line__": 86
+      "__start_line__": 39,
+      "__end_line__": 88
     },
     "storage": {
       "decorators": [],
@@ -268,8 +275,8 @@
           "name": "storageAccountType"
         }
       },
-      "__start_line__": 88,
-      "__end_line__": 103
+      "__start_line__": 90,
+      "__end_line__": 105
     },
     "nsg2": {
       "decorators": [],
@@ -280,8 +287,8 @@
         "name": "networkSecurityGroupName2",
         "location": "location"
       },
-      "__start_line__": 106,
-      "__end_line__": 109
+      "__start_line__": 108,
+      "__end_line__": 111
     },
     "vnet": {
       "decorators": [],
@@ -324,8 +331,8 @@
           ]
         }
       },
-      "__start_line__": 112,
-      "__end_line__": 139
+      "__start_line__": 114,
+      "__end_line__": 141
     },
     "nic1": {
       "decorators": [],
@@ -390,8 +397,8 @@
           }
         }
       },
-      "__start_line__": 142,
-      "__end_line__": 164
+      "__start_line__": 144,
+      "__end_line__": 166
     },
     "nic2": {
       "decorators": [],
@@ -434,8 +441,8 @@
           ]
         }
       },
-      "__start_line__": 167,
-      "__end_line__": 183
+      "__start_line__": 169,
+      "__end_line__": 185
     },
     "pip": {
       "decorators": [],
@@ -449,8 +456,8 @@
           "publicIPAllocationMethod": "Dynamic"
         }
       },
-      "__start_line__": 186,
-      "__end_line__": 192
+      "__start_line__": 188,
+      "__end_line__": 194
     },
     "nsg": {
       "decorators": [],
@@ -478,8 +485,21 @@
           ]
         }
       },
-      "__start_line__": 195,
-      "__end_line__": 215
+      "__start_line__": 197,
+      "__end_line__": 217
+    },
+    "appRegistration": {
+      "decorators": [],
+      "type": "Microsoft.Graph/applications",
+      "api_version": "v1.0",
+      "existing": false,
+      "config": {
+        "uniqueName": "${virtualMachineName}-app",
+        "displayName": "${virtualMachineName} Application",
+        "signInAudience": "AzureADMyOrg"
+      },
+      "__start_line__": 226,
+      "__end_line__": 230
     },
     "storage__service": {
       "decorators": [],
@@ -492,8 +512,8 @@
           "storage"
         ]
       },
-      "__start_line__": 96,
-      "__end_line__": 102
+      "__start_line__": 98,
+      "__end_line__": 104
     },
     "storage__service__share": {
       "decorators": [],
@@ -506,8 +526,8 @@
           "storage__service"
         ]
       },
-      "__start_line__": 99,
-      "__end_line__": 101
+      "__start_line__": 101,
+      "__end_line__": 103
     }
   },
   "modules": {
@@ -524,8 +544,8 @@
           "myIp": "123.123.123.123"
         }
       },
-      "__start_line__": 217,
-      "__end_line__": 222
+      "__start_line__": 219,
+      "__end_line__": 224
     }
   },
   "outputs": {
@@ -541,8 +561,23 @@
           }
         }
       },
-      "__start_line__": 224,
-      "__end_line__": 224
+      "__start_line__": 232,
+      "__end_line__": 232
+    },
+    "appRegistrationId": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": "appRegistration",
+            "operand_2": "appId"
+          }
+        }
+      },
+      "__start_line__": 233,
+      "__end_line__": 233
     }
   }
 }
