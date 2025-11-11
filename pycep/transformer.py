@@ -100,9 +100,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         result: pycep_typing.ExtensionResponse = {
             "extensions": {
                 "__name__": str(name),
-                "__attrs__": {
-                    "name": str(name),
-                },
+                "__attrs__": {},
             }
         }
 

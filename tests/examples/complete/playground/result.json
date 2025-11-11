@@ -10,9 +10,7 @@
     }
   },
   "extensions": {
-    "microsoftGraphV1": {
-      "name": "microsoftGraphV1"
-    }
+    "microsoftGraphV1": {}
   },
   "parameters": {
     "virtualMachineSize": {

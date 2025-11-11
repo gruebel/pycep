@@ -80,7 +80,6 @@ class MetadataResponse(TypedDict):
 
 
 class ExtensionAttributes(TypedDict):
-    name: str
     alias: NotRequired[str]
     config: NotRequired[dict[str, Any]]
     __start_line__: NotRequired[int]

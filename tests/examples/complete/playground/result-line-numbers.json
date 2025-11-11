@@ -15,7 +15,6 @@
   },
   "extensions": {
     "microsoftGraphV1": {
-      "name": "microsoftGraphV1",
       "__start_line__": 5,
       "__end_line__": 5
     }

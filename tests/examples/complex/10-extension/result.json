@@ -5,11 +5,8 @@
     }
   },
   "extensions": {
-    "microsoftGraphV1": {
-      "name": "microsoftGraphV1"
-    },
+    "microsoftGraphV1": {},
     "kubernetes": {
-      "name": "kubernetes",
       "config": {
         "namespace": "default",
         "kubeConfig": "someKubeConfig"
