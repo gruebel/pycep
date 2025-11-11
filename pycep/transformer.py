@@ -92,6 +92,31 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         return result
 
     @v_args(meta=True)
+    def extension(
+        self, meta: Meta, args: tuple[str, dict[str, Any] | None, str | None]
+    ) -> pycep_typing.ExtensionResponse:
+        name, config, alias = args
+
+        result: pycep_typing.ExtensionResponse = {
+            "extensions": {
+                "__name__": str(name),
+                "__attrs__": {},
+            }
+        }
+
+        if config:
+            result["extensions"]["__attrs__"]["config"] = config
+
+        if alias:
+            result["extensions"]["__attrs__"]["alias"] = str(alias)
+
+        if self.add_line_numbers:
+            result["extensions"]["__attrs__"]["__start_line__"] = meta.line
+            result["extensions"]["__attrs__"]["__end_line__"] = meta.end_line
+
+        return result
+
+    @v_args(meta=True)
     def metadata(self, meta: Meta, args: tuple[str, str]) -> pycep_typing.MetadataResponse:
         name, value = args
 
