@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support `extension` element
 - Support typed variables
 - Support nullable types
+- Support `import` element
 
 # Changed
 
