@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 env:
-  PREK_VERSION: '0.2.12'
+  PREK_VERSION: '0.2.14'
 
 jobs:
   prek:

@@ -1,0 +1,42 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "name": {
+      "decorators": [],
+      "type": "string",
+      "default": null
+    },
+    "age": {
+      "decorators": [],
+      "type": "int",
+      "default": null
+    }
+  },
+  "variables": {
+    "nullVar": {
+      "decorators": [],
+      "value": null
+    },
+    "stringVar": {
+      "decorators": [],
+      "value": null,
+      "type": "string"
+    }
+  },
+  "outputs": {
+    "description": {
+      "decorators": [],
+      "type": "string",
+      "value": "name"
+    },
+    "config": {
+      "decorators": [],
+      "type": "object",
+      "value": null
+    }
+  }
+}
