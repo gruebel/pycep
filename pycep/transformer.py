@@ -160,9 +160,11 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
 
     @v_args(meta=True)
     def var(
-        self, meta: Meta, args: tuple[list[pycep_typing.Decorator] | None, Token, pycep_typing.PossibleValue]
+        self,
+        meta: Meta,
+        args: tuple[list[pycep_typing.Decorator] | None, Token, str | None, pycep_typing.PossibleValue],
     ) -> pycep_typing.VarResponse:
-        decorators, name, value = args
+        decorators, name, data_type, value = args
 
         result: pycep_typing.VarResponse = {
             "variables": {
@@ -173,6 +175,9 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                 },
             }
         }
+
+        if data_type:
+            result["variables"]["__attrs__"]["type"] = data_type
 
         if self.add_line_numbers:
             result["variables"]["__attrs__"]["__start_line__"] = meta.line
