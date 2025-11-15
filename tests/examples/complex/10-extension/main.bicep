@@ -1,3 +1,5 @@
+// https://docs.azure.cn/en-us/azure-resource-manager/bicep/bicep-extension
+
 // Simple extension
 extension microsoftGraphV1
 
