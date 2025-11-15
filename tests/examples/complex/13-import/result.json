@@ -1,0 +1,43 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "imports": {
+    "myConstant": {
+      "file_path": "../exports.bicep"
+    },
+    "myObjectType": {
+      "file_path": "exports.bicep"
+    },
+    "sayHello": {
+      "file_path": "exports.bicep"
+    },
+    "kubernetes": {
+      "file_path": "exports.bicep",
+      "alias": "k8s"
+    },
+    "pandas": {
+      "file_path": "exports.bicep",
+      "alias": "pd"
+    },
+    "networkx": {
+      "file_path": "exports.bicep",
+      "alias": "nx"
+    },
+    "identityPrefixes": {
+      "file_path": "../../configuration/shared/shared.bicep",
+      "alias": "prefixes"
+    },
+    "tagsType": {
+      "file_path": "../../configuration/shared/shared.bicep"
+    },
+    "*": {
+      "file_path": "exports.bicep",
+      "alias": "myImports"
+    },
+    "az@1.0.0": {},
+    "sys@1.0.0": {}
+  }
+}

@@ -1,11 +1,12 @@
 start: ((element _CPP_COMMENT_NL?) | _CPP_COMMENT_NL)*
 
 element: "targetScope" "=" QUOTED_INTERPOLATION                                         -> scope
+       | "import" _import_statement                                                     -> custom_import
        | "extension" STRING ["with" object] ["as" STRING]                               -> extension
        | "metadata" STRING "=" metadata_value                                           -> metadata
-       | [decorator] "param" STRING data_type "?"? ["=" value_brackets]                      -> param
-       | [decorator] "var" STRING [data_type "?"?] "=" var_value                             -> var
-       | [decorator] "output" STRING data_type "?"? "=" output_value                         -> output
+       | [decorator] "param" STRING data_type "?"? ["=" value_brackets]                 -> param
+       | [decorator] "var" STRING [data_type "?"?] "=" var_value                        -> var
+       | [decorator] "output" STRING data_type "?"? "=" output_value                    -> output
        | [decorator] "resource" STRING type_api_pair [EXISTING] "=" resource_value      -> resource
        | [decorator] "module" STRING module_path "=" module_value                       -> module
        | [decorator] "type" STRING "=" type_value                                       -> custom_type
@@ -23,6 +24,10 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
       | operator
 
 ?value_brackets: (value | "(" value ")") "!"?
+
+// aliases
+
+_import_statement: (("{" import_alias ("," import_alias)* "}" | import_alias) "from" QUOTED_INTERPOLATION | QUOTED_INTERPOLATION)
 
 // element values
 
@@ -47,6 +52,8 @@ data_type: STRING
 type_api_pair: QUOTED_INTERPOLATION
 
 module_path: QUOTED_INTERPOLATION
+
+import_alias: (STRING | /\*/) ["as" STRING]
 
 // loops
 

@@ -33,6 +33,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     def __init__(self, add_line_numbers: bool) -> None:
         self.add_line_numbers = add_line_numbers
 
+        self.imports: list[pycep_typing.ImportResponse] = []
         self.child_resources: list[pycep_typing.ResourceResponse] = []
 
         super().__init__()
@@ -57,7 +58,10 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             result["globals"]["scope"]["__start_line__"] = 0
             result["globals"]["scope"]["__end_line__"] = 0
 
-        for arg in itertools.chain(args, self.child_resources):
+        for arg in itertools.chain(args, self.imports, self.child_resources):
+            if not arg:
+                # very unlikely this will happen in a real Bicep file, but in test files possible
+                continue
             for key, value in arg.items():
                 result.setdefault(key, {})[value["__name__"]] = value["__attrs__"]  # type: ignore[misc, index]
 
@@ -90,6 +94,48 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             result["globals"]["__attrs__"]["__end_line__"] = meta.end_line
 
         return result
+
+    @v_args(meta=True)
+    def custom_import(
+        self, meta: Meta, args: tuple[pycep_typing.ImportNameAlias, pycep_typing.ImportNameAlias, Token]
+    ) -> None:
+        # the import statement parsing is slightly overload to support namespace imports,
+        # which don't have a file reference
+        if len(args) == 1:
+            result: pycep_typing._Import = {
+                "__name__": self.transform_string_token(args[0]),
+                "__attrs__": {},
+            }
+            self.imports.append(
+                {
+                    "imports": result,
+                }
+            )
+            return
+
+        # to make typing easy, there are two import types defined, but it could be more
+        *name_alias_pairs, file_path = args
+
+        for name_alias in name_alias_pairs:
+            result = {
+                "__name__": str(name_alias["name"]),
+                "__attrs__": {
+                    "file_path": self.transform_string_token(file_path),
+                },
+            }
+
+            if alias := name_alias.get("alias"):
+                result["__attrs__"]["alias"] = str(alias)
+
+            if self.add_line_numbers:
+                result["__attrs__"]["__start_line__"] = meta.line
+                result["__attrs__"]["__end_line__"] = meta.end_line
+
+            self.imports.append(
+                {
+                    "imports": result,
+                }
+            )
 
     @v_args(meta=True)
     def extension(
@@ -417,6 +463,16 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             },
         }
         return local_result
+
+    def import_alias(self, args: tuple[Token, ...]) -> pycep_typing.ImportNameAlias:
+        name, alias = args
+
+        result: pycep_typing.ImportNameAlias = {"name": str(name)}
+
+        if alias:
+            result["alias"] = str(alias)
+
+        return result
 
     def type_value(self, args: tuple[pycep_typing.PossibleNoneValue, ...]) -> str:
         # this is only triggered, when a union type was found, ex. "'bicep' | 'arm' | 'azure'"
