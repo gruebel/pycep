@@ -112,7 +112,7 @@ wheels = [
 
 [[package]]
 name = "pycep-parser"
-version = "0.6.1.dev8"
+version = "0.6.1.dev9"
 source = { editable = "." }
 dependencies = [
     { name = "lark" },
