@@ -78,14 +78,21 @@
       "decorators": [],
       "type": "string",
       "value": {
-        "function": {
-          "type": "load_yaml_content",
-          "parameters": {
-            "file_path": "filePath",
-            "path_filter": null,
-            "encoding": null
-          },
-          "property_name": "id"
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": {
+              "function": {
+                "type": "load_yaml_content",
+                "parameters": {
+                  "file_path": "filePath",
+                  "path_filter": null,
+                  "encoding": null
+                }
+              }
+            },
+            "operand_2": "id"
+          }
         }
       }
     },
@@ -93,14 +100,37 @@
       "decorators": [],
       "type": "string",
       "value": {
-        "function": {
-          "type": "load_yaml_content",
-          "parameters": {
-            "file_path": "./vars.yaml",
-            "path_filter": null,
-            "encoding": null
-          },
-          "property_name": "subscriptions[env].id"
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": {
+              "function": {
+                "type": "load_yaml_content",
+                "parameters": {
+                  "file_path": "./vars.yaml",
+                  "path_filter": null,
+                  "encoding": null
+                }
+              }
+            },
+            "operand_2": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": {
+                    "operator": {
+                      "type": "index_accessor",
+                      "operands": {
+                        "operand_1": "subscriptions",
+                        "operand_2": "env"
+                      }
+                    }
+                  },
+                  "operand_2": "id"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -108,14 +138,37 @@
       "decorators": [],
       "type": "string",
       "value": {
-        "function": {
-          "type": "load_yaml_content",
-          "parameters": {
-            "file_path": "./vars.yaml",
-            "path_filter": null,
-            "encoding": null
-          },
-          "property_name": "[sub]dev[var_id]"
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": {
+              "operator": {
+                "type": "index_accessor",
+                "operands": {
+                  "operand_1": {
+                    "function": {
+                      "type": "load_yaml_content",
+                      "parameters": {
+                        "file_path": "./vars.yaml",
+                        "path_filter": null,
+                        "encoding": null
+                      }
+                    }
+                  },
+                  "operand_2": "sub"
+                }
+              }
+            },
+            "operand_2": {
+              "operator": {
+                "type": "index_accessor",
+                "operands": {
+                  "operand_1": "dev",
+                  "operand_2": "var_id"
+                }
+              }
+            }
+          }
         }
       }
     },

@@ -1,167 +1,181 @@
 {
-    "globals": {
-        "scope": {
-            "value": "resourceGroup"
-        }
-    },
-    "variables": {
-        "resourceAccessRules": {
-            "decorators": [],
-            "value": {
-                "loop_type": {
-                    "type": "array_index",
-                    "detail": {
-                        "item_name": "id",
-                        "index_name": "item",
-                        "array_name": "networkAccess_resource"
-                    }
-                },
-                "condition": null,
-                "config": {
-                    "tenantId": {
-                        "function": {
-                            "type": "subscription",
-                            "parameters": {
-                                "subscription_id": null
-                            },
-                            "property_name": "tenantId"
-                        }
-                    },
-                    "resourceId": {
-                        "operator": {
-                            "type": "index_accessor",
-                            "operands": {
-                                "operand_1": "networkAccess_resource",
-                                "operand_2": "item"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "outputs": {
-        "deployedNSGs": {
-            "decorators": [],
-            "type": "array",
-            "value": {
-                "loop_type": {
-                    "type": "array_index",
-                    "detail": {
-                        "item_name": "name",
-                        "index_name": "i",
-                        "array_name": "orgNames"
-                    }
-                },
-                "condition": null,
-                "config": {
-                    "orgName": "name",
-                    "nsgName": {
-                        "operator": {
-                            "type": "property_accessor",
-                            "operands": {
-                                "operand_1": {
-                                    "operator": {
-                                        "type": "index_accessor",
-                                        "operands": {
-                                            "operand_1": "nsg",
-                                            "operand_2": "i"
-                                        }
-                                    }
-                                },
-                                "operand_2": "name"
-                            }
-                        }
-                    },
-                    "resourceId": {
-                        "operator": {
-                            "type": "property_accessor",
-                            "operands": {
-                                "operand_1": {
-                                    "operator": {
-                                        "type": "index_accessor",
-                                        "operands": {
-                                            "operand_1": "nsg",
-                                            "operand_2": "i"
-                                        }
-                                    }
-                                },
-                                "operand_2": "id"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "modules": {
-        "sqlLogicalServer": {
-            "decorators": [],
-            "type": "local",
-            "detail": {
-                "full": "sql-logical-server.bicep",
-                "path": "sql-logical-server.bicep"
-            },
-            "config": {
-                "loop_type": {
-                    "type": "array_index",
-                    "detail": {
-                        "item_name": "sqlLogicalServer",
-                        "index_name": "index",
-                        "array_name": "sqlLogicalServers"
-                    }
-                },
-                "condition": null,
-                "config": {
-                    "name": "sqlLogicalServer-${index}",
-                    "params": {
-                        "sqlLogicalServer": {
-                            "function": {
-                                "type": "union",
-                                "parameters": {
-                                    "arg_1": "defaultSqlLogicalServerProperties",
-                                    "arg_2": "sqlLogicalServer"
-                                }
-                            }
-                        },
-                        "password": {
-                            "operator": {
-                                "type": "property_accessor",
-                                "operands": {
-                                    "operand_1": "sqlLogicalServer",
-                                    "operand_2": {
-                                        "operator": {
-                                            "type": "property_accessor",
-                                            "operands": {
-                                                "operand_1": "passwordFromKeyVault",
-                                                "operand_2": "secretName"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "tags": {
-                            "function": {
-                                "type": "union",
-                                "parameters": {
-                                    "arg_1": "tags",
-                                    "arg_2": {
-                                        "function": {
-                                            "type": "union",
-                                            "parameters": {
-                                                "arg_1": "defaultSqlLogicalServerProperties",
-                                                "arg_2": "sqlLogicalServer"
-                                            },
-                                            "property_name": "tags"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
     }
+  },
+  "variables": {
+    "resourceAccessRules": {
+      "decorators": [],
+      "value": {
+        "loop_type": {
+          "type": "array_index",
+          "detail": {
+            "item_name": "id",
+            "index_name": "item",
+            "array_name": "networkAccess_resource"
+          }
+        },
+        "condition": null,
+        "config": {
+          "tenantId": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": {
+                  "function": {
+                    "type": "subscription",
+                    "parameters": {
+                      "subscription_id": null
+                    }
+                  }
+                },
+                "operand_2": "tenantId"
+              }
+            }
+          },
+          "resourceId": {
+            "operator": {
+              "type": "index_accessor",
+              "operands": {
+                "operand_1": "networkAccess_resource",
+                "operand_2": "item"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "deployedNSGs": {
+      "decorators": [],
+      "type": "array",
+      "value": {
+        "loop_type": {
+          "type": "array_index",
+          "detail": {
+            "item_name": "name",
+            "index_name": "i",
+            "array_name": "orgNames"
+          }
+        },
+        "condition": null,
+        "config": {
+          "orgName": "name",
+          "nsgName": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": {
+                  "operator": {
+                    "type": "index_accessor",
+                    "operands": {
+                      "operand_1": "nsg",
+                      "operand_2": "i"
+                    }
+                  }
+                },
+                "operand_2": "name"
+              }
+            }
+          },
+          "resourceId": {
+            "operator": {
+              "type": "property_accessor",
+              "operands": {
+                "operand_1": {
+                  "operator": {
+                    "type": "index_accessor",
+                    "operands": {
+                      "operand_1": "nsg",
+                      "operand_2": "i"
+                    }
+                  }
+                },
+                "operand_2": "id"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "modules": {
+    "sqlLogicalServer": {
+      "decorators": [],
+      "type": "local",
+      "detail": {
+        "full": "sql-logical-server.bicep",
+        "path": "sql-logical-server.bicep"
+      },
+      "config": {
+        "loop_type": {
+          "type": "array_index",
+          "detail": {
+            "item_name": "sqlLogicalServer",
+            "index_name": "index",
+            "array_name": "sqlLogicalServers"
+          }
+        },
+        "condition": null,
+        "config": {
+          "name": "sqlLogicalServer-${index}",
+          "params": {
+            "sqlLogicalServer": {
+              "function": {
+                "type": "union",
+                "parameters": {
+                  "arg_1": "defaultSqlLogicalServerProperties",
+                  "arg_2": "sqlLogicalServer"
+                }
+              }
+            },
+            "password": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "sqlLogicalServer",
+                  "operand_2": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": "passwordFromKeyVault",
+                        "operand_2": "secretName"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "tags": {
+              "function": {
+                "type": "union",
+                "parameters": {
+                  "arg_1": "tags",
+                  "arg_2": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": {
+                          "function": {
+                            "type": "union",
+                            "parameters": {
+                              "arg_1": "defaultSqlLogicalServerProperties",
+                              "arg_2": "sqlLogicalServer"
+                            }
+                          }
+                        },
+                        "operand_2": "tags"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

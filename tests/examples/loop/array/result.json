@@ -4,6 +4,30 @@
       "value": "resourceGroup"
     }
   },
+  "variables": {
+    "stringArray": {
+      "decorators": [],
+      "value": {
+        "loop_type": {
+          "type": "array",
+          "detail": {
+            "item_name": "i",
+            "array_name": {
+              "function": {
+                "type": "range",
+                "parameters": {
+                  "start_index": 0,
+                  "count": "itemCount"
+                }
+              }
+            }
+          }
+        },
+        "condition": null,
+        "config": "item${(i + 1)}"
+      }
+    }
+  },
   "outputs": {
     "out1": {
       "decorators": [],

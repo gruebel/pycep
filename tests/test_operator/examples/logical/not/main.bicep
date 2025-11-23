@@ -1,4 +1,4 @@
-// https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/operators-logical#and-
+// https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/operators-logical#not-
 
 // param
 param paramExpr bool = !true
@@ -21,6 +21,4 @@ resource managementGroup 'Microsoft.Management/managementGroups@2020-05-01' = {
 
 // output
 output outputExpr bool = !(paramExpr)
-
-// multiple - Term 'FUNCTION' need to be separated first
-//output multiple bool = !(!true)
+output multiple bool = !(!true)

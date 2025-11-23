@@ -1,4 +1,5 @@
 // variable
+var stringArray = [for (item, i) in range(0, itemCount): 'item${(i + 1)}']
 
 // output
 output deployedNSGs array = [for (name, i) in orgNames: {

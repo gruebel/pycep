@@ -101,11 +101,18 @@
                   "resource_identifier": "refId",
                   "api_version": null,
                   "full": null
-                },
-                "property_name": "primaryEndpoints"
+                }
               }
             },
-            "operand_2": "blob"
+            "operand_2": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": "primaryEndpoints",
+                  "operand_2": "blob"
+                }
+              }
+            }
           }
         }
       }

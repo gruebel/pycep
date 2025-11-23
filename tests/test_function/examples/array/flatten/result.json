@@ -42,12 +42,19 @@
       "existing": false,
       "config": {
         "name": {
-          "function": {
-            "type": "flatten",
-            "parameters": {
-              "array_to_flattern": "roleName"
-            },
-            "property_name": "name"
+          "operator": {
+            "type": "property_accessor",
+            "operands": {
+              "operand_1": {
+                "function": {
+                  "type": "flatten",
+                  "parameters": {
+                    "array_to_flattern": "roleName"
+                  }
+                }
+              },
+              "operand_2": "name"
+            }
           }
         },
         "properties": {

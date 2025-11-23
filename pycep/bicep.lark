@@ -22,6 +22,7 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
       | object
       | _NEWLINE? function
       | operator
+      | lambda_expression
 
 ?value_brackets: (value | "(" value ")") "!"?
 
@@ -57,15 +58,13 @@ import_alias: (STRING | /\*/) ["as" STRING]
 
 // loops
 
-loop: "[" _CPP_COMMENT_NL? "for" (loop_array | loop_array_index | loop_object | loop_range) ":" ["if" "(" value_brackets ")"] value_brackets _CPP_COMMENT_NL? "]"
+loop: "[" _CPP_COMMENT_NL? "for" (loop_array | loop_array_index | loop_object) ":" [value_brackets] value_brackets _CPP_COMMENT_NL? "]"
 
 loop_array: STRING "in" value_brackets
 
 loop_array_index: "(" STRING "," STRING ")" "in" value_brackets
 
 loop_object: STRING "in" "items" "(" value_brackets ")"
-
-loop_range: ["(" STRING ","] STRING ")"? "in" "range" "(" value_brackets "," value_brackets ")"
 
 // deploy condition
 
@@ -82,6 +81,8 @@ object: "{" _CPP_COMMENT_NL~0..10 ((pair ("," pair)* | child_resource) _CPP_COMM
 pair: key ":" (value_brackets | loop) "?"?
 
 !key: "resource" | quoted_string
+
+lambda_expression: (value_brackets | "(" value_brackets "," value_brackets ("," value_brackets)+ ")") "=>" value_brackets
 
 // decorators
 
@@ -107,212 +108,8 @@ deco_secure: "secure" "(" ")"
 
 // functions
 
-function: function_any | function_array | function_date | function_deployment | function_file | function_lambda
-        | function_logical | function_numeric | function_object | function_resource | function_scope | function_string
-
-// functions - any
-
-?function_any: any_func
-
-any_func: ("any" | "sys.any") "(" value_brackets ")" ["." STRING]
-
-// functions - array
-
-?function_array: array_func | concat | contains | empty | first | flatten | intersection | last | length | max_func | min_func
-               | skip | take | union
-
-_ARRAY.1: ("array" | "sys.array") "("
-array_func: _ARRAY value_brackets ")"
-
-concat: ("concat" | "sys.concat") "(" value_brackets ("," value_brackets)* ")"
-
-contains: ("contains" | "sys.contains") "(" value_brackets "," value_brackets ")"
-
-empty: ("empty" | "sys.empty") "(" value_brackets ")"
-
-first: ("first" | "sys.first") "(" value_brackets ")" ["." STRING]
-
-flatten: ("flatten" | "sys.flatten") "(" value_brackets ")" ["." STRING]
-
-intersection: ("intersection" | "sys.intersection") "(" value_brackets ("," value_brackets)+ ")" ["." STRING]
-
-last: ("last" | "sys.last") "(" value_brackets ")" ["." STRING]
-
-_LENGTH.1: ("length" | "sys.length") "("
-length: _LENGTH value_brackets ")"
-
-_MAX.1: ("max" | "sys.max") "("
-max_func: _MAX value_brackets ("," value_brackets)* ")"
-
-_MIN.1: ("min" | "sys.min") "("
-min_func: _MIN value_brackets ("," value_brackets)* ")"
-
-skip: ("skip" | "sys.skip") "(" value_brackets "," value_brackets ")"
-
-take: ("take" | "sys.take") "(" value_brackets "," value_brackets ")"
-
-union: ("union" | "sys.union") "(" value_brackets ("," _CPP_COMMENT_NL? value_brackets)+ _CPP_COMMENT_NL? ")" ["." STRING]
-
-// functions - date
-
-?function_date: date_time_add | date_time_from_epoch | date_time_to_epoch | utc_now
-
-date_time_add: ("dateTimeAdd" | "sys.dateTimeAdd") "(" value_brackets "," value_brackets ["," value_brackets]  ")"
-
-date_time_from_epoch: ("dateTimeFromEpoch" | "sys.dateTimeFromEpoch") "(" value_brackets ")"
-
-date_time_to_epoch: ("dateTimeToEpoch" | "sys.dateTimeToEpoch") "(" value_brackets ")"
-
-utc_now: ("utcNow" | "sys.utcNow") "(" [value_brackets] ")"
-
-// functions - deployment
-
-?function_deployment: deployment | environment
-
-_DEPLOYMENT.1: ("deployment" | "az.deployment") "("
-deployment: _DEPLOYMENT ")" ["." STRING]
-
-_ENVIRONMENT.1: ("environment" | "az.environment") "("
-environment: _ENVIRONMENT ")" ["." STRING]
-
-// functions - file
-
-?function_file: load_file_as_base64 | load_json_content | load_yaml_content | load_text_content
-
-load_file_as_base64: ("loadFileAsBase64" | "sys.loadFileAsBase64") "(" value_brackets ")"
-
-load_json_content: ("loadJsonContent" | "sys.loadJsonContent") "(" value_brackets ["," value_brackets ["," value_brackets]] ")" [["[" STRING "]"] "." (STRING | INDEXED)]
-
-load_yaml_content: ("loadYamlContent" | "sys.loadYamlContent") "(" value_brackets ["," value_brackets ["," value_brackets]] ")" [["[" STRING "]"] "." (STRING | INDEXED)]
-
-load_text_content: ("loadTextContent" | "sys.loadTextContent") "(" value_brackets ["," value_brackets] ")"
-
-// functions - lambda
-
-?function_lambda: filter
-
-filter: ("filter" | "sys.filter") "(" value_brackets "," STRING "=>" value_brackets ")"
-
-// functions - logical
-
-?function_logical: bool_func
-
-_BOOL.1: ("bool" | "sys.bool") "("
-bool_func: _BOOL value_brackets ")"
-
-// functions - numeric
-
-?function_numeric: int_func
-
-_INT.1: ("int" | "sys.int") "("
-int_func: _INT value_brackets ")"
-
-// functions - object
-
-?function_object: json_func
-
-_JSON.1: ("json" | "sys.json") "("
-json_func: _JSON value_brackets ")" [["[" STRING "]"] "." (STRING | INDEXED)]
-
-// functions - resource
-
-?function_resource: extension_resource_id | list_func | management_group_resource_id | pick_zones | reference
-                  | resource_id | subscription_resource_id | tenant_resource_id
-
-extension_resource_id: ("extensionResourceId" | "az.extensionResourceId") "(" value_brackets ("," value_brackets)~2..3 ")"
-
-// See https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-resource#list
-// With Bicep v0.4.412+, you call list*() using accessor operator, ex: storageAccount.listKeys()
-list_func: (LIST_FUNC_NAME | "az." LIST_FUNC_NAME) "(" value_brackets "," value_brackets ")"
-
-management_group_resource_id: ("managementGroupResourceId" | "az.managementGroupResourceId") "(" value_brackets ("," value_brackets)~1..2 ")"
-
-pick_zones: ("pickZones" | "az.pickZones") "(" value_brackets ("," value_brackets)~2..4 ")"
-
-reference: ("reference" | "az.reference") "(" value_brackets ["," value_brackets ["," value_brackets]] ")" ["." STRING]
-
-_RESOURCE_ID.1: ("resourceId" | "az.resourceId") "("
-resource_id: _RESOURCE_ID value_brackets ("," value_brackets)~1..9 _CPP_COMMENT_NL? ")"
-
-subscription_resource_id: ("subscriptionResourceId" | "az.subscriptionResourceId") "(" value_brackets ("," value_brackets)~1..3 ")"
-
-tenant_resource_id: ("tenantResourceId" | "az.tenantResourceId") "(" value_brackets ("," value_brackets)~1..2 ")"
-
-// functions - scope
-
-?function_scope: management_group | resource_group | subscription | tenant
-
-_MANAGEMENT_GROUP.1: ("managementGroup" | "az.managementGroup") "("
-management_group: _MANAGEMENT_GROUP [value_brackets] ")" ["." STRING]
-
-_RESOURCE_GROUP.1: ("resourceGroup" | "az.resourceGroup") "("
-resource_group: _RESOURCE_GROUP [value_brackets ","? [value_brackets]] ")" ["." STRING]
-
-_SUBSCRIPTION.1: ("subscription" | "az.subscription") "("
-subscription: _SUBSCRIPTION [value_brackets] ")" ["." STRING]
-
-_TENANT.1: ("tenant" | "az.tenant") "("
-tenant: _TENANT ")" ["." STRING]
-
-// functions - string
-
-?function_string: base64_func | base64_to_json | base64_to_string | data_uri | data_uri_to_string | ends_with | format
-                | guid | index_of | last_index_of | new_guid | pad_left | replace | split | join | starts_with | string_func
-                | substring | to_lower | to_upper | trim | unique_string | uri | uri_component | uri_component_to_string
-
-base64_func: ("base64" | "sys.base64") "(" value_brackets ")"
-
-base64_to_json: ("base64ToJson" | "sys.base64ToJson") "(" value_brackets ")"
-
-base64_to_string: ("base64ToString" | "sys.base64ToString") "(" value_brackets ")"
-
-data_uri: ("dataUri" | "sys.dataUri") "(" value_brackets ")"
-
-data_uri_to_string: ("dataUriToString" | "sys.dataUriToString") "(" value_brackets ")"
-
-ends_with: ("endsWith" | "sys.endsWith") "(" value_brackets "," value_brackets ")"
-
-_FORMAT.1: ("format" | "sys.format") "("
-format: _FORMAT _CPP_COMMENT_NL? value_brackets ("," value_brackets)+ _CPP_COMMENT_NL? ")"
-
-_GUID.1: ("guid" | "sys.guid") "("
-guid: _GUID value_brackets ("," value_brackets)* ")"
-
-index_of: ("indexOf" | "sys.indexOf") "(" value_brackets "," value_brackets ")"
-
-last_index_of: ("lastIndexOf" | "sys.lastIndexOf") "(" value_brackets "," value_brackets ")"
-
-new_guid: ("newGuid" | "sys.newGuid") "(" ")"
-
-pad_left: ("padLeft" | "sys.padLeft") "(" value_brackets "," value_brackets ["," value_brackets] ")"
-
-replace: ("replace" | "sys.replace") "(" value_brackets ("," value_brackets)~2 ")"
-
-split: ("split" | "sys.split") "(" value_brackets "," value_brackets ")" ["[" INT "]"]
-
-join: ("join" | "sys.join") "(" value_brackets "," value_brackets ")"
-
-starts_with: ("startsWith" | "sys.startsWith") "(" value_brackets "," value_brackets ")"
-
-_STRING.1: ("string" | "sys.string") "("
-string_func: _STRING value_brackets ")"
-
-substring: ("substring" | "sys.substring") "(" value_brackets "," value_brackets ["," value_brackets] ")"
-
-to_lower: ("toLower" | "sys.toLower") "(" value_brackets ")"
-
-to_upper: ("toUpper" | "sys.toUpper") "(" value_brackets ")"
-
-trim: ("trim" | "sys.trim") "(" value_brackets ")"
-
-unique_string: ("uniqueString" | "sys.uniqueString") "(" value_brackets ("," value_brackets)* ")"
-
-_URI.1: ("uri" | "sys.uri") "("
-uri: _URI value_brackets "," value_brackets ")"
-
-uri_component: ("uriComponent" | "sys.uriComponent") "(" value_brackets ")"
-
-uri_component_to_string: ("uriComponentToString" | "sys.uriComponentToString") "(" value_brackets ")"
+FUNCTION.1: /((sys|az)\.)?[a-zA-Z0-9]+/ "("
+function: FUNCTION _CPP_COMMENT_NL? value_brackets? ("," _CPP_COMMENT_NL? value_brackets)* _CPP_COMMENT_NL? ")"
 
 // operators
 
@@ -390,7 +187,7 @@ STRING: /(?!(sys|az)\.)[a-zA-Z_]([\w_])*/
 QUOTED_STRING: "'" /[a-zA-Z_]([\w_.])*/ "'"
 INDEXED: /(?=[\w][\w_.]+(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|[\[\]])+)(.(get|list)[a-zA-Z]*\(('[\w-]+'|[\w.]+)?\)|\[[\w\[\]_().']+\]|[\w_\-\/.,'= ])+/
 QUOTED_INTERPOLATION: /(?!.*''')'(\${(?:[^}'{]+|(?R))*+}|\\'|[^'])*'/
-LIST_FUNC_NAME: /(?=([Ll]ist[A-za-z]*|getSecret)\()([A-Za-z]+)/
+LIST_FUNC_NAME.2: /(?=([Ll]ist[A-za-z]*|getSecret)\()([A-Za-z]+)/
 
 MULTI_LINE_STRING: "'''" (/.*?/ | NEWLINE)+ "'''"
 

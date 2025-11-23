@@ -98,25 +98,18 @@
         "operator": {
           "type": "property_accessor",
           "operands": {
-            "operand_1": "storageAccount",
-            "operand_2": {
+            "operand_1": {
               "operator": {
-                "type": "property_accessor",
+                "type": "function_accessor",
                 "operands": {
-                  "operand_1": {
-                    "function": {
-                      "type": "list_func",
-                      "parameters": {
-                        "func_name": "listAccountSas",
-                        "resource_identifier": "2021-04-01",
-                        "api_version": "accountSasProperties"
-                      }
-                    }
-                  },
-                  "operand_2": "accountSasToken"
+                  "operand_1": "storageAccount",
+                  "func_name": "listAccountSas",
+                  "operand_2": "2021-04-01",
+                  "operand_3": "accountSasProperties"
                 }
               }
-            }
+            },
+            "operand_2": "accountSasToken"
           }
         }
       }

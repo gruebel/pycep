@@ -17,13 +17,18 @@
                 "type": "filter",
                 "parameters": {
                   "input_array": "diagnosticLogCategoriesToEnable",
-                  "input_element": "item",
                   "expression": {
-                    "operator": {
-                      "type": "not_equals",
-                      "operands": {
-                        "operand_1": "item",
-                        "operand_2": "allLogs"
+                    "type": "lambda_expression",
+                    "detail": {
+                      "var_1": "item",
+                      "expression": {
+                        "operator": {
+                          "type": "not_equals",
+                          "operands": {
+                            "operand_1": "item",
+                            "operand_2": "allLogs"
+                          }
+                        }
                       }
                     }
                   }
@@ -56,13 +61,18 @@
             "type": "filter",
             "parameters": {
               "input_array": "itemForLoop",
-              "input_element": "i",
               "expression": {
-                "operator": {
-                  "type": "greater_than",
-                  "operands": {
-                    "operand_1": "i",
-                    "operand_2": 5
+                "type": "lambda_expression",
+                "detail": {
+                  "var_1": "i",
+                  "expression": {
+                    "operator": {
+                      "type": "greater_than",
+                      "operands": {
+                        "operand_1": "i",
+                        "operand_2": 5
+                      }
+                    }
                   }
                 }
               }
@@ -88,21 +98,26 @@
           "type": "filter",
           "parameters": {
             "input_array": "dogs",
-            "input_element": "dog",
             "expression": {
-              "operator": {
-                "type": "greater_than_or_equals",
-                "operands": {
-                  "operand_1": {
-                    "operator": {
-                      "type": "property_accessor",
-                      "operands": {
-                        "operand_1": "dog",
-                        "operand_2": "age"
-                      }
+              "type": "lambda_expression",
+              "detail": {
+                "var_1": "dog",
+                "expression": {
+                  "operator": {
+                    "type": "greater_than_or_equals",
+                    "operands": {
+                      "operand_1": {
+                        "operator": {
+                          "type": "property_accessor",
+                          "operands": {
+                            "operand_1": "dog",
+                            "operand_2": "age"
+                          }
+                        }
+                      },
+                      "operand_2": 5
                     }
-                  },
-                  "operand_2": 5
+                  }
                 }
               }
             }
@@ -118,21 +133,26 @@
           "type": "filter",
           "parameters": {
             "input_array": "dogs",
-            "input_element": "dog",
             "expression": {
-              "operator": {
-                "type": "greater_than_or_equals",
-                "operands": {
-                  "operand_1": {
-                    "operator": {
-                      "type": "property_accessor",
-                      "operands": {
-                        "operand_1": "dog",
-                        "operand_2": "age"
-                      }
+              "type": "lambda_expression",
+              "detail": {
+                "var_1": "dog",
+                "expression": {
+                  "operator": {
+                    "type": "greater_than_or_equals",
+                    "operands": {
+                      "operand_1": {
+                        "operator": {
+                          "type": "property_accessor",
+                          "operands": {
+                            "operand_1": "dog",
+                            "operand_2": "age"
+                          }
+                        }
+                      },
+                      "operand_2": 5
                     }
-                  },
-                  "operand_2": 5
+                  }
                 }
               }
             }
