@@ -1,0 +1,20 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "types": {
+    "myObjectType": {
+      "decorators": [
+        {
+          "type": "export"
+        }
+      ],
+      "value": {
+        "foo": "string",
+        "bar": "int"
+      }
+    }
+  }
+}

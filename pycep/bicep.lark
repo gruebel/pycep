@@ -86,13 +86,15 @@ lambda_expression: (value_brackets | "(" value_brackets "," value_brackets ("," 
 
 // decorators
 
-decorator: ("@" "sys."? (deco_allowed | deco_batch | deco_description | deco_min_len | deco_max_len | deco_min_val | deco_max_val | deco_metadata | deco_secure) _CPP_COMMENT_NL~0..5)+
+decorator: ("@" "sys."? (deco_allowed | deco_batch | deco_description | deco_export | deco_min_len | deco_max_len | deco_min_val | deco_max_val | deco_metadata | deco_secure) _CPP_COMMENT_NL~0..5)+
 
 deco_allowed: "allowed" "(" array ")"
 
 deco_batch: "batchSize" "(" /\d+/ ")"
 
 deco_description: "description" "(" (QUOTED_INTERPOLATION | MULTI_LINE_STRING) ")"
+
+deco_export: "export" "(" ")"
 
 deco_min_len: "minLength" "(" /\d+/ ")"
 

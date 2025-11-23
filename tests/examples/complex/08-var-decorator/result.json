@@ -38,6 +38,14 @@
           }
         }
       }
+    },
+    "myConstant": {
+      "decorators": [
+        {
+          "type": "export"
+        }
+      ],
+      "value": "This is a constant value"
     }
   }
 }
