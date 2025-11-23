@@ -11,7 +11,7 @@ ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | BicepRegist
 ModuleDetail: TypeAlias = "_LocalModulePathDetail | _BicepRegistryModulePathDetail | _BicepRegistryAliasModulePathDetail | _TemplateSpecModulePathDetail | _TemplateSpecAliasModulePathDetail"
 LoopType: TypeAlias = "LoopArray | LoopArrayIndex | LoopObject | LoopRange"
 ElementResponse: TypeAlias = "ImportResponse | ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse | TypeResponse | ExtensionResponse"
-Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"
+Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorExport | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"
 
 ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOrEquals | LessThan | Equals | NotEquals | EqualsCaseInsensitive | NotEqualsCaseInsensitive"
 LogicalOperators: TypeAlias = "And | Or | Not | Coalesce | Conditional"
@@ -369,6 +369,10 @@ class DecoratorBatchSize(TypedDict):
 class DecoratorDescription(TypedDict):
     type: Literal["description"]
     argument: str
+
+
+class DecoratorExport(TypedDict):
+    type: Literal["export"]
 
 
 class DecoratorMinLength(TypedDict):

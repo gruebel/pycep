@@ -569,6 +569,11 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "argument": argument,
         }
 
+    def deco_export(self, _: Any) -> pycep_typing.DecoratorExport:  # noqa: ANN401
+        return {
+            "type": "export",
+        }
+
     def deco_min_len(self, args: tuple[Token]) -> pycep_typing.DecoratorMinLength:
         return {
             "type": "min_length",

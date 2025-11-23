@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support any kind of function via a fallback mechanism
 - Support `range` function
 - Support multiple NOT `!` operators in a single expression
+- Support `@export` decorator
 
 # Changed
 
