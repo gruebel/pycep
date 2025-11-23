@@ -1,6 +1,6 @@
 [project]
 name = "pycep-parser"
-version = "0.6.1"
+version = "0.7.0.dev0"
 description = "A Python based Bicep parser"
 authors = [
     { name = "Anton Grübel", email = "anton.gruebel@gmail.com" }
@@ -29,15 +29,15 @@ dependencies = [
 ]
 
 [project.urls]
-homepage = "https://github.com/gruebel/pycep"
-repository = "https://github.com/gruebel/pycep"
-changelog = "https://github.com/gruebel/pycep/blob/master/CHANGELOG.md"
-releases = "https://github.com/gruebel/pycep/releases"
+Homepage = "https://github.com/gruebel/pycep"
+Repository = "https://github.com/gruebel/pycep"
+Changelog = "https://github.com/gruebel/pycep/blob/master/CHANGELOG.md"
+Releases = "https://github.com/gruebel/pycep/releases"
 
 [dependency-groups]
 dev = [
     "assertpy>=1.1,<2.0",
-    "prek>=0.2.14,<0.3.0",
+    "prek>=0.2.18,<0.3.0",
     "pytest>=8.4.2,<9.0.0",
 ]
 

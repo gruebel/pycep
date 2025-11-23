@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 env:
-  PREK_VERSION: '0.2.14'
+  PREK_VERSION: '0.2.18'
 
 jobs:
   prek:
@@ -107,7 +107,7 @@ jobs:
           git commit -m "publish version ${new_version}"
           git push
 
-          echo "version=$new_version" >> $GITHUB_OUTPUT
+          echo "version=$new_version" >> "$GITHUB_OUTPUT"
       - name: Build Python package
         run: uv build
       - name: Publish prerelease to PyPI

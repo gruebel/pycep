@@ -41,7 +41,7 @@ jobs:
           git commit -m "publish version ${new_version}"
           git push
 
-          echo "version=$new_version" >> $GITHUB_OUTPUT
+          echo "version=$new_version" >> "$GITHUB_OUTPUT"
       - name: Build Python package
         run: uv build
       - name: Publish to PyPI
