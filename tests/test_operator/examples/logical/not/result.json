@@ -69,6 +69,25 @@
           }
         }
       }
+    },
+    "multiple": {
+      "decorators": [],
+      "type": "bool",
+      "value": {
+        "operator": {
+          "type": "not",
+          "operands": {
+            "bool_value": {
+              "operator": {
+                "type": "not",
+                "operands": {
+                  "bool_value": true
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

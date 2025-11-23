@@ -20,7 +20,7 @@ AccessorOperators: TypeAlias = "IndexAccessor | FunctionAccessor | NestedResourc
 Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperators | AccessorOperators"
 
 AnyFunctions: TypeAlias = "AnyFunc"
-ArrayFunctions: TypeAlias = "Array | Concat | Contains | Empty | First | Flatten | Intersection | Last | Length | Max | Min | Skip | Take | UnionFunc"
+ArrayFunctions: TypeAlias = "Array | Concat | Contains | Empty | First | Flatten | Intersection | Last | Length | Max | Min | Range | Skip | Take | UnionFunc"
 DateFunctions: TypeAlias = "DateTimeAdd | DateTimeFromEpoch | DateTimeToEpoch | UtcNow"
 DeploymentFunctions: TypeAlias = "Deployment | Environment"
 FileFunctions: TypeAlias = "LoadFileAsBase64 | LoadJsonContent | LoadYamlContent | LoadTextContent"
@@ -30,8 +30,8 @@ NumericFunctions: TypeAlias = "IntFunc"
 ObjectFunctions: TypeAlias = "Json"
 ResourceFunctions: TypeAlias = "ExtensionResourceId | ListFunc | ManagementGroupResourceId | PickZones | Reference | ResourceId | SubscriptionResourceId | TenantResourceId"
 ScopeFunctions: TypeAlias = "ManagementGroup | ResourceGroup | Subscription | Tenant"
-StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | DataUri | DataUriToString | EndsWith | Format | Guid | IndexOf | LastIndexOf | NewGuid | Split | Join | StartsWith | String | Substring | ToLower | ToUpper | Trim | UniqueString | Uri | UriComponent | UriComponentToString"
-Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | FileFunctions | LambdaFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions"
+StringFunctions: TypeAlias = "Base64 | Base64ToJson | Base64ToString | DataUri | DataUriToString | EndsWith | Format | Guid | IndexOf | Join | LastIndexOf | NewGuid | PadLeft | Replace | Split | StartsWith | String | Substring | ToLower | ToUpper | Trim | UniqueString | Uri | UriComponent | UriComponentToString"
+Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | DeploymentFunctions | FileFunctions | LambdaFunctions | LogicalFunctions | NumericFunctions | ObjectFunctions | ResourceFunctions | ScopeFunctions | StringFunctions | UnknownFunction"
 
 
 ####################
@@ -313,7 +313,7 @@ class LoopArray(TypedDict):
 class _LoopArrayIndexDetail(TypedDict):
     item_name: str
     index_name: str
-    array_name: str
+    array_name: PossibleValue
 
 
 class LoopArrayIndex(TypedDict):
@@ -402,6 +402,25 @@ class DecoratorSecure(TypedDict):
 
 ####################
 #
+# lambda expression
+#
+####################
+
+
+class _LambdaExpressionDetail(TypedDict):
+    var_1: str
+    var_2: NotRequired[str]
+    var_3: NotRequired[str]
+    expression: PossibleValue
+
+
+class LambdaExpression(TypedDict):
+    type: Literal["lambda_expression"]
+    detail: _LambdaExpressionDetail
+
+
+####################
+#
 # functions
 #
 ####################
@@ -470,7 +489,6 @@ class Empty(TypedDict):
 class First(TypedDict):
     type: Literal["first"]
     parameters: _LengthParameters
-    property_name: NotRequired[str]
 
 
 class _FlattenParameters(TypedDict):
@@ -480,19 +498,16 @@ class _FlattenParameters(TypedDict):
 class Flatten(TypedDict):
     type: Literal["flatten"]
     parameters: _FlattenParameters
-    property_name: NotRequired[str]
 
 
 class Intersection(TypedDict):
     type: Literal["intersection"]
     parameters: _UnionParameters
-    property_name: NotRequired[str]
 
 
 class Last(TypedDict):
     type: Literal["last"]
     parameters: _LengthParameters
-    property_name: NotRequired[str]
 
 
 class _LengthParameters(TypedDict):
@@ -512,6 +527,16 @@ class Max(TypedDict):
 class Min(TypedDict):
     type: Literal["min"]
     parameters: _UnionParameters
+
+
+class _RangeParameters(TypedDict):
+    start_index: PossibleValue
+    count: PossibleValue
+
+
+class Range(TypedDict):
+    type: Literal["range"]
+    parameters: _RangeParameters
 
 
 class _SkipParameters(TypedDict):
@@ -543,7 +568,6 @@ class _UnionParameters(TypedDict):
 class UnionFunc(TypedDict):
     type: Literal["union"]
     parameters: _UnionParameters
-    property_name: NotRequired[str]
 
 
 ####################
@@ -600,12 +624,10 @@ class UtcNow(TypedDict):
 
 class Deployment(TypedDict):
     type: Literal["deployment"]
-    property_name: NotRequired[str]
 
 
 class Environment(TypedDict):
     type: Literal["environment"]
-    property_name: NotRequired[str]
 
 
 ####################
@@ -633,7 +655,6 @@ class _LoadJsonContentParameters(TypedDict):
 class LoadJsonContent(TypedDict):
     type: Literal["load_json_content"]
     parameters: _LoadJsonContentParameters
-    property_name: NotRequired[str]
 
 
 class _LoadYamlContentParameters(TypedDict):
@@ -645,7 +666,6 @@ class _LoadYamlContentParameters(TypedDict):
 class LoadYamlContent(TypedDict):
     type: Literal["load_yaml_content"]
     parameters: _LoadYamlContentParameters
-    property_name: NotRequired[str]
 
 
 class _LoadTextContentParameters(TypedDict):
@@ -667,7 +687,6 @@ class LoadTextContent(TypedDict):
 
 class _FilterParameters(TypedDict):
     input_array: PossibleValue
-    input_element: str
     expression: PossibleValue
 
 
@@ -714,7 +733,6 @@ class _JsonParameters(TypedDict):
 class Json(TypedDict):
     type: Literal["json"]
     parameters: _JsonParameters
-    property_name: NotRequired[str]
 
 
 ####################
@@ -774,7 +792,6 @@ class _ReferenceParameters(TypedDict):
 class Reference(TypedDict):
     type: Literal["reference"]
     parameters: _ReferenceParameters
-    property_name: NotRequired[str]
 
 
 class _ResourceIdParameters(TypedDict):
@@ -827,7 +844,6 @@ class _ManagementGroupParameters(TypedDict):
 class ManagementGroup(TypedDict):
     type: Literal["management_group"]
     parameters: _ManagementGroupParameters
-    property_name: NotRequired[str]
 
 
 class _ResourceGroupParameters(TypedDict):
@@ -838,7 +854,6 @@ class _ResourceGroupParameters(TypedDict):
 class ResourceGroup(TypedDict):
     type: Literal["resource_group"]
     parameters: _ResourceGroupParameters
-    property_name: NotRequired[str]
 
 
 class _SubscriptionParameters(TypedDict):
@@ -848,12 +863,10 @@ class _SubscriptionParameters(TypedDict):
 class Subscription(TypedDict):
     type: Literal["subscription"]
     parameters: _SubscriptionParameters
-    property_name: NotRequired[str]
 
 
 class Tenant(TypedDict):
     type: Literal["tenant"]
-    property_name: NotRequired[str]
 
 
 ####################
@@ -1076,6 +1089,24 @@ class _UriComponentToStringParameters(TypedDict):
 class UriComponentToString(TypedDict):
     type: Literal["uri_component_to_string"]
     parameters: _UriComponentToStringParameters
+
+
+####################
+#
+# placeholder for unknown built-in and self-defined functions
+#
+####################
+
+
+class _UnknownFunctionParameters(TypedDict):
+    arg_1: NotRequired[str]
+    arg_2: NotRequired[str]
+    arg_3: NotRequired[str]  # and many more possible
+
+
+class UnknownFunction(TypedDict):
+    type: str
+    parameters: _UnknownFunctionParameters
 
 
 ####################

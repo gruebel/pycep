@@ -42,13 +42,20 @@
       "config": {
         "name": "exmple",
         "properties": {
-          "function": {
-            "type": "union",
-            "parameters": {
-              "arg_1": "firstObject",
-              "arg_2": "secondObject"
-            },
-            "property_name": "tags"
+          "operator": {
+            "type": "property_accessor",
+            "operands": {
+              "operand_1": {
+                "function": {
+                  "type": "union",
+                  "parameters": {
+                    "arg_1": "firstObject",
+                    "arg_2": "secondObject"
+                  }
+                }
+              },
+              "operand_2": "tags"
+            }
           }
         },
         "dependsOn": [

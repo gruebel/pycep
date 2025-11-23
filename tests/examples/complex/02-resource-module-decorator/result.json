@@ -17,12 +17,18 @@
       "existing": false,
       "config": {
         "loop_type": {
-          "type": "range",
+          "type": "array",
           "detail": {
-            "item_name": null,
-            "index_name": "i",
-            "start_index": 0,
-            "count": 4
+            "item_name": "i",
+            "array_name": {
+              "function": {
+                "type": "range",
+                "parameters": {
+                  "start_index": 0,
+                  "count": 4
+                }
+              }
+            }
           }
         },
         "condition": null,
@@ -95,13 +101,20 @@
                 "parameters": {
                   "arg_1": "tags",
                   "arg_2": {
-                    "function": {
-                      "type": "union",
-                      "parameters": {
-                        "arg_1": "defaultSqlLogicalServerProperties",
-                        "arg_2": "sqlLogicalServer"
-                      },
-                      "property_name": "tags"
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": {
+                          "function": {
+                            "type": "union",
+                            "parameters": {
+                              "arg_1": "defaultSqlLogicalServerProperties",
+                              "arg_2": "sqlLogicalServer"
+                            }
+                          }
+                        },
+                        "operand_2": "tags"
+                      }
                     }
                   }
                 }

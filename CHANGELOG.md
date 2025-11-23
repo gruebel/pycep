@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Added
 
+- Support any kind of function via a fallback mechanism
+- Support `range` function
+- Support multiple NOT `!` operators in a single expression
+
+# Changed
+
+- Simplified function parsing, which reduced the startup time by multiple seconds
+- loop type `range` is now either of type `array` or `array_index` and the `array_name` stores the `range` function
+- Improved support of lambda expressions
+- Improved `property_accessor` and `index_accessor` parsing
+
 ## [0.6.1] - 2025-11-23
 
 # Added

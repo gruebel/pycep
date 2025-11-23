@@ -44,12 +44,19 @@
           ],
           "assignableScopes": [
             {
-              "function": {
-                "type": "subscription",
-                "parameters": {
-                  "subscription_id": null
-                },
-                "property_name": "id"
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": {
+                    "function": {
+                      "type": "subscription",
+                      "parameters": {
+                        "subscription_id": null
+                      }
+                    }
+                  },
+                  "operand_2": "id"
+                }
               }
             }
           ]
@@ -69,12 +76,19 @@
               "base_string": "roleName",
               "extra_string_1": "principalId",
               "extra_string_2": {
-                "function": {
-                  "type": "subscription",
-                  "parameters": {
-                    "subscription_id": null
-                  },
-                  "property_name": "subscriptionId"
+                "operator": {
+                  "type": "property_accessor",
+                  "operands": {
+                    "operand_1": {
+                      "function": {
+                        "type": "subscription",
+                        "parameters": {
+                          "subscription_id": null
+                        }
+                      }
+                    },
+                    "operand_2": "subscriptionId"
+                  }
                 }
               }
             }

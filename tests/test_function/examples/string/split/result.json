@@ -41,13 +41,20 @@
       "existing": false,
       "config": {
         "name": {
-          "function": {
-            "type": "split",
-            "parameters": {
-              "input_string": "roleName",
-              "delimiter": "."
-            },
-            "index": 0
+          "operator": {
+            "type": "index_accessor",
+            "operands": {
+              "operand_1": {
+                "function": {
+                  "type": "split",
+                  "parameters": {
+                    "input_string": "roleName",
+                    "delimiter": "."
+                  }
+                }
+              },
+              "operand_2": 0
+            }
           }
         },
         "properties": {

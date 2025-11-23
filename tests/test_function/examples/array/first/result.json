@@ -39,12 +39,19 @@
       "existing": false,
       "config": {
         "name": {
-          "function": {
-            "type": "first",
-            "parameters": {
-              "arg_1": "roleName"
-            },
-            "property_name": "name"
+          "operator": {
+            "type": "property_accessor",
+            "operands": {
+              "operand_1": {
+                "function": {
+                  "type": "first",
+                  "parameters": {
+                    "arg_1": "roleName"
+                  }
+                }
+              },
+              "operand_2": "name"
+            }
           }
         },
         "properties": {

@@ -10,8 +10,7 @@
       "type": "object",
       "default": {
         "function": {
-          "type": "tenant",
-          "property_name": "[None]"
+          "type": "tenant"
         }
       }
     }
@@ -20,9 +19,16 @@
     "id": {
       "decorators": [],
       "value": {
-        "function": {
-          "type": "tenant",
-          "property_name": "[Token('STRING', 'id')]"
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": {
+              "function": {
+                "type": "tenant"
+              }
+            },
+            "operand_2": "id"
+          }
         }
       }
     }
@@ -36,9 +42,16 @@
       "config": {
         "name": "uamiName",
         "id": {
-          "function": {
-            "type": "tenant",
-            "property_name": "[Token('STRING', 'id')]"
+          "operator": {
+            "type": "property_accessor",
+            "operands": {
+              "operand_1": {
+                "function": {
+                  "type": "tenant"
+                }
+              },
+              "operand_2": "id"
+            }
           }
         }
       }
@@ -56,8 +69,7 @@
         "name": "exampleModule",
         "scope": {
           "function": {
-            "type": "tenant",
-            "property_name": "[None]"
+            "type": "tenant"
           }
         }
       }
@@ -69,8 +81,7 @@
       "type": "object",
       "value": {
         "function": {
-          "type": "tenant",
-          "property_name": "[None]"
+          "type": "tenant"
         }
       }
     },
@@ -79,8 +90,7 @@
       "type": "object",
       "value": {
         "function": {
-          "type": "tenant",
-          "property_name": "[None]"
+          "type": "tenant"
         }
       }
     }

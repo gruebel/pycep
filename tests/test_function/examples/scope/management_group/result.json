@@ -22,12 +22,19 @@
     "id": {
       "decorators": [],
       "value": {
-        "function": {
-          "type": "management_group",
-          "parameters": {
-            "identifier": null
-          },
-          "property_name": "id"
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": {
+              "function": {
+                "type": "management_group",
+                "parameters": {
+                  "identifier": null
+                }
+              }
+            },
+            "operand_2": "id"
+          }
         }
       }
     }
@@ -41,12 +48,19 @@
       "config": {
         "name": "uamiName",
         "id": {
-          "function": {
-            "type": "management_group",
-            "parameters": {
-              "identifier": null
-            },
-            "property_name": "id"
+          "operator": {
+            "type": "property_accessor",
+            "operands": {
+              "operand_1": {
+                "function": {
+                  "type": "management_group",
+                  "parameters": {
+                    "identifier": null
+                  }
+                }
+              },
+              "operand_2": "id"
+            }
           }
         }
       }

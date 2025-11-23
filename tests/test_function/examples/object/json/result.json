@@ -61,20 +61,27 @@
       "decorators": [],
       "type": "string",
       "value": {
-        "function": {
-          "type": "json",
-          "parameters": {
-            "arg_1": {
-              "operator": {
-                "type": "property_accessor",
-                "operands": {
-                  "operand_1": "site",
-                  "operand_2": "properties"
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": {
+              "function": {
+                "type": "json",
+                "parameters": {
+                  "arg_1": {
+                    "operator": {
+                      "type": "property_accessor",
+                      "operands": {
+                        "operand_1": "site",
+                        "operand_2": "properties"
+                      }
+                    }
+                  }
                 }
               }
-            }
-          },
-          "property_name": "id"
+            },
+            "operand_2": "id"
+          }
         }
       }
     },
@@ -82,20 +89,43 @@
       "decorators": [],
       "type": "string",
       "value": {
-        "function": {
-          "type": "json",
-          "parameters": {
-            "arg_1": {
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": {
               "function": {
-                "type": "load_text_content",
+                "type": "json",
                 "parameters": {
-                  "file_path": "./vars.json",
-                  "encoding": null
+                  "arg_1": {
+                    "function": {
+                      "type": "load_text_content",
+                      "parameters": {
+                        "file_path": "./vars.json",
+                        "encoding": null
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "operand_2": {
+              "operator": {
+                "type": "property_accessor",
+                "operands": {
+                  "operand_1": {
+                    "operator": {
+                      "type": "index_accessor",
+                      "operands": {
+                        "operand_1": "subscriptions",
+                        "operand_2": "env"
+                      }
+                    }
+                  },
+                  "operand_2": "id"
                 }
               }
             }
-          },
-          "property_name": "subscriptions[env].id"
+          }
         }
       }
     },
@@ -103,20 +133,43 @@
       "decorators": [],
       "type": "string",
       "value": {
-        "function": {
-          "type": "json",
-          "parameters": {
-            "arg_1": {
-              "function": {
-                "type": "load_text_content",
-                "parameters": {
-                  "file_path": "./vars.json",
-                  "encoding": null
+        "operator": {
+          "type": "property_accessor",
+          "operands": {
+            "operand_1": {
+              "operator": {
+                "type": "index_accessor",
+                "operands": {
+                  "operand_1": {
+                    "function": {
+                      "type": "json",
+                      "parameters": {
+                        "arg_1": {
+                          "function": {
+                            "type": "load_text_content",
+                            "parameters": {
+                              "file_path": "./vars.json",
+                              "encoding": null
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "operand_2": "sub"
+                }
+              }
+            },
+            "operand_2": {
+              "operator": {
+                "type": "index_accessor",
+                "operands": {
+                  "operand_1": "dev",
+                  "operand_2": "var_id"
                 }
               }
             }
-          },
-          "property_name": "[sub]dev[var_id]"
+          }
         }
       }
     },

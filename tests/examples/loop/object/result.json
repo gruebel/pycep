@@ -10,10 +10,17 @@
       "type": "array",
       "value": {
         "loop_type": {
-          "type": "object",
+          "type": "array",
           "detail": {
             "item_name": "item",
-            "object_name": "inputObj"
+            "array_name": {
+              "function": {
+                "type": "items",
+                "parameters": {
+                  "arg_1": "inputObj"
+                }
+              }
+            }
           }
         },
         "condition": null,
@@ -37,10 +44,17 @@
       "existing": false,
       "config": {
         "loop_type": {
-          "type": "object",
+          "type": "array",
           "detail": {
             "item_name": "nsg",
-            "object_name": "nsgValues"
+            "array_name": {
+              "function": {
+                "type": "items",
+                "parameters": {
+                  "arg_1": "nsgValues"
+                }
+              }
+            }
           }
         },
         "condition": null,

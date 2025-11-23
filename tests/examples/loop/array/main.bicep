@@ -1,4 +1,5 @@
 // variable
+var stringArray = [for i in range(0, itemCount): 'item${(i + 1)}']
 
 // output
 output out1 array = [for i in bicepVarArray: {
