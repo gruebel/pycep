@@ -5,7 +5,7 @@ import pytest
 from assertpy import assert_that
 
 from pycep import BicepParser
-from pycep.transformer import BicepElement
+from pycep.models import BicepElement
 
 EXAMPLES_DIR = Path(__file__).parent / "examples"
 

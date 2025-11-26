@@ -11,7 +11,7 @@ ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | BicepRegist
 ModuleDetail: TypeAlias = "_LocalModulePathDetail | _BicepRegistryModulePathDetail | _BicepRegistryAliasModulePathDetail | _TemplateSpecModulePathDetail | _TemplateSpecAliasModulePathDetail"
 LoopType: TypeAlias = "LoopArray | LoopArrayIndex | LoopObject | LoopRange"
 ElementResponse: TypeAlias = "ImportResponse | ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse | TypeResponse | ExtensionResponse"
-Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorExport | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure"
+Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorExport | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSecure | UnknownDecorator"
 
 ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOrEquals | LessThan | Equals | NotEquals | EqualsCaseInsensitive | NotEqualsCaseInsensitive"
 LogicalOperators: TypeAlias = "And | Or | Not | Coalesce | Conditional"
@@ -1097,9 +1097,14 @@ class UriComponentToString(TypedDict):
 
 ####################
 #
-# placeholder for unknown built-in and self-defined functions
+# placeholders for unknown built-in and self-defined types
 #
 ####################
+
+
+class UnknownDecorator(TypedDict):
+    type: str
+    argument: NotRequired[PossibleValue]
 
 
 class _UnknownFunctionParameters(TypedDict):
