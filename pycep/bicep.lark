@@ -4,12 +4,12 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
        | "import" _import_statement                                                     -> custom_import
        | "extension" STRING ["with" object] ["as" STRING]                               -> extension
        | "metadata" STRING "=" metadata_value                                           -> metadata
-       | [decorator] "param" STRING data_type "?"? ["=" value_brackets]                 -> param
-       | [decorator] "var" STRING [data_type "?"?] "=" var_value                        -> var
-       | [decorator] "output" STRING data_type "?"? "=" output_value                    -> output
-       | [decorator] "resource" STRING type_api_pair [EXISTING] "=" resource_value      -> resource
-       | [decorator] "module" STRING module_path "=" module_value                       -> module
-       | [decorator] "type" STRING "=" type_value                                       -> custom_type
+       | [decorators] "param" STRING data_type "?"? ["=" value_brackets]                -> param
+       | [decorators] "var" STRING [data_type "?"?] "=" var_value                       -> var
+       | [decorators] "output" STRING data_type "?"? "=" output_value                   -> output
+       | [decorators] "resource" STRING type_api_pair [EXISTING] "=" resource_value     -> resource
+       | [decorators] "module" STRING module_path "=" module_value                      -> module
+       | [decorators] "type" STRING "=" type_value                                      -> custom_type
 
 ?value: _NEWLINE? "null"                      -> null
       | _NEWLINE? "true"                      -> true
@@ -86,27 +86,8 @@ lambda_expression: (value_brackets | "(" value_brackets "," value_brackets ("," 
 
 // decorators
 
-decorator: ("@" "sys."? (deco_allowed | deco_batch | deco_description | deco_export | deco_min_len | deco_max_len | deco_min_val | deco_max_val | deco_metadata | deco_secure) _CPP_COMMENT_NL~0..5)+
-
-deco_allowed: "allowed" "(" array ")"
-
-deco_batch: "batchSize" "(" /\d+/ ")"
-
-deco_description: "description" "(" (QUOTED_INTERPOLATION | MULTI_LINE_STRING) ")"
-
-deco_export: "export" "(" ")"
-
-deco_min_len: "minLength" "(" /\d+/ ")"
-
-deco_max_len: "maxLength" "(" /\d+/ ")"
-
-deco_min_val: "minValue" "(" /-?\d+/ ")"
-
-deco_max_val: "maxValue" "(" /\d+/ ")"
-
-deco_metadata: "metadata" "(" _CPP_COMMENT_NL? object _CPP_COMMENT_NL? ")"
-
-deco_secure: "secure" "(" ")"
+decorator: ("@" /(sys\.)?[a-zA-Z0-9]+/ "(" _CPP_COMMENT_NL? value_brackets? _CPP_COMMENT_NL? ")" _CPP_COMMENT_NL~0..5)
+decorators: decorator+
 
 // functions
 

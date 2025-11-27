@@ -7,7 +7,10 @@ from typing import TYPE_CHECKING, Any, Literal, cast
 from lark import Token, Transformer, v_args
 
 from pycep import typing as pycep_typing
+from pycep.models import BicepElement
+from pycep.rules.decorators import DECORATORS, UNKNOWN_DECORATOR
 from pycep.rules.functions import FUNCTIONS, UNKNOWN_FUNCTION
+from pycep.utils import sanitize_multi_line_string_token, transform_string_token
 
 if TYPE_CHECKING:
     from lark.tree import Meta
@@ -24,10 +27,6 @@ TEMPLATE_SPEC_PATTERN = re.compile(
 )
 
 VALID_TARGET_SCOPES = {"resourceGroup", "subscription", "managementGroup", "tenant"}
-
-
-class BicepElement(str):  # noqa: FURB189
-    """An alias to differentiate between a string and a Bicep element."""
 
 
 class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
@@ -104,7 +103,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         # which don't have a file reference
         if len(args) == 1:
             result: pycep_typing._Import = {
-                "__name__": self.transform_string_token(args[0]),
+                "__name__": transform_string_token(args[0]),
                 "__attrs__": {},
             }
             self.imports.append(
@@ -121,7 +120,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             result = {
                 "__name__": str(name_alias["name"]),
                 "__attrs__": {
-                    "file_path": self.transform_string_token(file_path),
+                    "file_path": transform_string_token(file_path),
                 },
             }
 
@@ -547,67 +546,15 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     #
     ####################
 
-    def decorator(self, args: list[pycep_typing.Decorator]) -> list[pycep_typing.Decorator]:
+    def decorator(self, args: list[pycep_typing.Decorator]) -> pycep_typing.Decorator:
+        deco_name, *params = args
+        deco_name = str(deco_name)
+
+        deco_def = DECORATORS.get(deco_name, UNKNOWN_DECORATOR)
+        return deco_def(deco_name, params)
+
+    def decorators(self, args: list[pycep_typing.Decorator]) -> list[pycep_typing.Decorator]:
         return args
-
-    def deco_allowed(self, args: tuple[list[int | str]]) -> pycep_typing.DecoratorAllowed:
-        return {
-            "type": "allowed",
-            "argument": args[0],
-        }
-
-    def deco_batch(self, args: tuple[Token]) -> pycep_typing.DecoratorBatchSize:
-        return {
-            "type": "batchSize",
-            "argument": int(args[0]),
-        }
-
-    def deco_description(self, args: tuple[Token]) -> pycep_typing.DecoratorDescription:
-        argument = self.transform_string_token(args[0])
-        return {
-            "type": "description",
-            "argument": argument,
-        }
-
-    def deco_export(self, _: Any) -> pycep_typing.DecoratorExport:  # noqa: ANN401
-        return {
-            "type": "export",
-        }
-
-    def deco_min_len(self, args: tuple[Token]) -> pycep_typing.DecoratorMinLength:
-        return {
-            "type": "min_length",
-            "argument": int(args[0]),
-        }
-
-    def deco_max_len(self, args: tuple[Token]) -> pycep_typing.DecoratorMaxLength:
-        return {
-            "type": "max_length",
-            "argument": int(args[0]),
-        }
-
-    def deco_min_val(self, args: tuple[Token]) -> pycep_typing.DecoratorMinValue:
-        return {
-            "type": "min_value",
-            "argument": int(args[0]),
-        }
-
-    def deco_max_val(self, args: tuple[Token]) -> pycep_typing.DecoratorMaxValue:
-        return {
-            "type": "max_value",
-            "argument": int(args[0]),
-        }
-
-    def deco_metadata(self, args: tuple[dict[str, Any]]) -> pycep_typing.DecoratorMetadata:
-        return {
-            "type": "metadata",
-            "argument": args[0],
-        }
-
-    def deco_secure(self, _: Any) -> pycep_typing.DecoratorSecure:  # noqa: ANN401
-        return {
-            "type": "secure",
-        }
 
     ####################
     #
@@ -616,7 +563,6 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     ####################
 
     def function(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Function:
-        # func_name, *params, index, property = args
         func_name, *params = args
         func_name = str(func_name).removesuffix("(")
 
@@ -913,11 +859,10 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         return int(arg[0])
 
     def string(self, arg: tuple[Token]) -> str:
-        return self.transform_string_token(arg[0])
+        return transform_string_token(arg[0])
 
     def multi_line_string(self, arg: tuple[Token]) -> str:
-        value = str(arg[0])[3:-3]
-        return value.removeprefix("\n")
+        return sanitize_multi_line_string_token(arg[0])
 
     def true(self, _: Any) -> Literal[True]:  # noqa: ANN401
         return True
@@ -982,16 +927,3 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                 parent_type_api_pair=child_type_api_pair,
                 config=child_resource["__attrs__"]["config"],
             )
-
-    def transform_string_token(self, value: Token) -> str | BicepElement:
-        """Transforms string typed Token to a `str` or `BicepElement`.
-
-        Additionally, removes surrounding single quotes.
-        """
-        if value.type == "MULTI_LINE_STRING":
-            return self.multi_line_string((value,))
-
-        if value.type not in ("QUOTED_STRING", "QUOTED_INTERPOLATION"):
-            return BicepElement(value)
-
-        return str(value)[1:-1]
