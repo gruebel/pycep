@@ -82,6 +82,12 @@ def deco_metadata(_deco_name: str, args: tuple[dict[str, Any]]) -> pycep_typing.
     }
 
 
+def deco_sealed(_deco_name: str, _args: tuple[None]) -> pycep_typing.DecoratorSealed:
+    return {
+        "type": "sealed",
+    }
+
+
 def deco_secure(_deco_name: str, _args: tuple[None]) -> pycep_typing.DecoratorSecure:
     return {
         "type": "secure",
@@ -96,10 +102,14 @@ def deco_secure(_deco_name: str, _args: tuple[None]) -> pycep_typing.DecoratorSe
 
 
 def unknown_deco(deco_name: str, args: tuple[pycep_typing.PossibleValue]) -> pycep_typing.UnknownDecorator:
-    return {
+    result: pycep_typing.UnknownDecorator = {
         "type": deco_name,
-        "argument": args[0],
     }
+
+    if args:
+        result["argument"] = args[0]
+
+    return result
 
 
 ####################
@@ -127,6 +137,8 @@ DECORATORS: dict[str, Callable[[str, Any], pycep_typing.Decorator]] = {
     "sys.maxValue": deco_max_val,
     "metadata": deco_metadata,
     "sys.metadata": deco_metadata,
+    "sealed": deco_sealed,
+    "sys.sealed": deco_sealed,
     "secure": deco_secure,
     "sys.secure": deco_secure,
 }

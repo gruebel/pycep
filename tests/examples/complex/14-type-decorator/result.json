@@ -15,6 +15,17 @@
         "foo": "string",
         "bar": "int"
       }
+    },
+    "anObject": {
+      "decorators": [
+        {
+          "type": "sealed"
+        }
+      ],
+      "value": {
+        "property": "string",
+        "optionalProperty": "string"
+      }
     }
   }
 }
