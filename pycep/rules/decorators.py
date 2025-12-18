@@ -62,9 +62,9 @@ def deco_min_val(_deco_name: str, args: tuple[int | dict[str, Any]]) -> pycep_ty
     if isinstance(arg, dict) and (operator := arg.get("operator", {})).get("type") == "minus":
         arg = operator["operands"]["integer_value"] * -1
 
-    return {
+    return {  # ty: ignore[invalid-return-type] # there is no real issue if this returns a dict
         "type": "min_value",
-        "argument": arg,  # type: ignore[typeddict-item] # there is no real issue, if this returns a dict
+        "argument": arg,  # ty: ignore[invalid-argument-type]
     }
 
 
