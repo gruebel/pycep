@@ -63,7 +63,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                 # very unlikely this will happen in a real Bicep file, but in test files possible
                 continue
             for key, value in arg.items():
-                result.setdefault(key, {})[value["__name__"]] = value["__attrs__"]  # type: ignore[misc, index]
+                result.setdefault(key, {})[value["__name__"]] = value["__attrs__"]  # ty: ignore[non-subscriptable, no-matching-overload]
 
         return result
 
@@ -117,7 +117,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         *name_alias_pairs, file_path = args
 
         for name_alias in name_alias_pairs:
-            result = {
+            result: pycep_typing._Import = {
                 "__name__": str(name_alias["name"]),
                 "__attrs__": {
                     "file_path": transform_string_token(file_path),
@@ -321,7 +321,8 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                 "__name__": str(name),
                 "__attrs__": {
                     "decorators": decorators or [],
-                    **path,  # type: ignore[typeddict-item] # start and end line are not-required
+                    "type": path["type"],
+                    "detail": path["detail"],
                     "config": config,
                 },
             }
@@ -682,7 +683,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "operands": {
                 "operand_1": operand_1,
                 "operand_2": operand_2,
-                **{f"operand_{idx + 3}": op for idx, op in enumerate(operand_x)},  # type: ignore[typeddict-item] # dynamic operand creation
+                **{f"operand_{idx + 3}": op for idx, op in enumerate(operand_x)},
             },
         }
 
@@ -694,7 +695,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "operands": {
                 "operand_1": operand_1,
                 "operand_2": operand_2,
-                **{f"operand_{idx + 3}": op for idx, op in enumerate(operand_x)},  # type: ignore[typeddict-item] # dynamic operand creation
+                **{f"operand_{idx + 3}": op for idx, op in enumerate(operand_x)},
             },
         }
 
@@ -714,7 +715,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "operands": {
                 "operand_1": operand_1,
                 "operand_2": operand_2,
-                **{f"operand_{idx + 3}": op for idx, op in enumerate(operand_x)},  # type: ignore[typeddict-item] # dynamic operand creation
+                **{f"operand_{idx + 3}": op for idx, op in enumerate(operand_x)},
             },
         }
 
@@ -820,7 +821,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "operands": {
                 "operand_1": arg_1,
                 "func_name": str(func_name),
-                **{f"operand_{idx + 2}": extra for idx, extra in enumerate(arg_x) if extra},  # type: ignore[typeddict-item] # dynamic operand creation
+                **{f"operand_{idx + 2}": extra for idx, extra in enumerate(arg_x) if extra},
             },
         }
 
@@ -855,7 +856,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     def key(self, arg: tuple[Token]) -> str:
         return str(arg[0])
 
-    def int(self, arg: tuple[Token]) -> int:
+    def int_type(self, arg: tuple[Token]) -> int:
         return int(arg[0])
 
     def string(self, arg: tuple[Token]) -> str:
@@ -880,7 +881,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
             "type": "lambda_expression",
             "detail": {
                 "var_1": str(arg_1),
-                **{f"var_{idx + 2}": str(arg) for idx, arg in enumerate(arg_x)},  # type: ignore[typeddict-item] # dynamic variable creation
+                **{f"var_{idx + 2}": str(arg) for idx, arg in enumerate(arg_x)},
                 "expression": expr,
             },
         }

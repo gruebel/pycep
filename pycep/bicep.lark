@@ -14,7 +14,7 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
 ?value: _NEWLINE? "null"                      -> null
       | _NEWLINE? "true"                      -> true
       | _NEWLINE? "false"                     -> false
-      | _NEWLINE? INT                         -> int
+      | _NEWLINE? INT                         -> int_type
       | _NEWLINE? STRING                      -> string
       | _NEWLINE? QUOTED_INTERPOLATION        -> string
       | MULTI_LINE_STRING                     -> multi_line_string

@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     from pycep import typing as pycep_typing
 
 
-LARK_GRAMMAR = (files(__package__) / "bicep.lark").read_text()
+LARK_GRAMMAR = (files(__package__) / "bicep.lark").read_text()  # ty: ignore[invalid-argument-type] # can't be `None` here
 
 
 class BicepParser:

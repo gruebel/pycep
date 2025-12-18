@@ -45,11 +45,11 @@ def array_func(_func_name: str, args: tuple[pycep_typing.PossibleValue, ...]) ->
 def concat(_func_name: str, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Concat:
     arg_1, *arg_x = args
 
-    return {
+    return {  # ty: ignore[invalid-return-type] # dynamic operand creation
         "type": "concat",
-        "parameters": {
+        "parameters": {  # ty: ignore[missing-typed-dict-key]
             "arg_1": arg_1,
-            **{f"arg_{idx + 2}": arg for idx, arg in enumerate(arg_x)},  # type: ignore[typeddict-item] # dynamic operand creation
+            **{f"arg_{idx + 2}": arg for idx, arg in enumerate(arg_x)},
         },
     }
 
@@ -103,7 +103,7 @@ def intersection(_func_name: str, args: tuple[str, ...]) -> pycep_typing.Interse
         "parameters": {
             "arg_1": arg_1,
             "arg_2": arg_2,
-            **{f"arg_{idx + 3}": arg for idx, arg in enumerate(arg_x)},  # type: ignore[typeddict-item] # dynamic operand creation
+            **{f"arg_{idx + 3}": arg for idx, arg in enumerate(arg_x)},
         },
     }
 
@@ -131,11 +131,11 @@ def length(_func_name: str, args: tuple[pycep_typing.PossibleValue]) -> pycep_ty
 def max_func(_func_name: str, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Max:
     arg_1, *arg_x = args
 
-    return {
+    return {  # ty: ignore[invalid-return-type] # dynamic operand creation
         "type": "max",
-        "parameters": {
+        "parameters": {  # ty: ignore[missing-typed-dict-key]
             "arg_1": arg_1,
-            **{f"arg_{idx + 2}": arg for idx, arg in enumerate(arg_x)},  # type: ignore[typeddict-item] # dynamic operand creation
+            **{f"arg_{idx + 2}": arg for idx, arg in enumerate(arg_x)},
         },
     }
 
@@ -143,11 +143,11 @@ def max_func(_func_name: str, args: tuple[pycep_typing.PossibleValue, ...]) -> p
 def min_func(_func_name: str, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Min:
     arg_1, *arg_x = args
 
-    return {
+    return {  # ty: ignore[invalid-return-type] # dynamic operand creation
         "type": "min",
-        "parameters": {
+        "parameters": {  # ty: ignore[missing-typed-dict-key]
             "arg_1": arg_1,
-            **{f"arg_{idx + 2}": arg for idx, arg in enumerate(arg_x)},  # type: ignore[typeddict-item] # dynamic operand creation
+            **{f"arg_{idx + 2}": arg for idx, arg in enumerate(arg_x)},
         },
     }
 
@@ -195,7 +195,7 @@ def union(_func_name: str, args: tuple[str, ...]) -> pycep_typing.UnionFunc:
         "parameters": {
             "arg_1": arg_1,
             "arg_2": arg_2,
-            **{f"arg_{idx + 3}": arg for idx, arg in enumerate(arg_x)},  # type: ignore[typeddict-item] # dynamic operand creation
+            **{f"arg_{idx + 3}": arg for idx, arg in enumerate(arg_x)},
         },
     }
 
@@ -588,13 +588,11 @@ def resource_id(_func_name: str, args: list[Token]) -> pycep_typing.ResourceId:
         # resource_name_1 = args[3]
         # resource_name_2 = args[4]
 
-        return {
+        return {  # ty: ignore[invalid-return-type] # dynamic operand creation
             "type": "resource_id",
-            "parameters": {
+            "parameters": {  # ty: ignore[missing-typed-dict-key]
                 "resource_type": resource_type,
-                **{  # type: ignore[typeddict-item] # dynamic operand creation
-                    f"resource_name_{idx}": resource_name for idx, resource_name in enumerate(args[3:], start=1)
-                },
+                **{f"resource_name_{idx}": resource_name for idx, resource_name in enumerate(args[3:], start=1)},
                 "resource_group_name": resource_group_name,
                 "subscription_id": subscription_id,
             },
@@ -793,11 +791,11 @@ def ends_with(
 def format_func(_func_name: str, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.Format:
     format_string, *arg_x = args
 
-    return {
+    return {  # ty: ignore[invalid-return-type] # dynamic operand creation
         "type": "format",
-        "parameters": {
+        "parameters": {  # ty: ignore[missing-typed-dict-key]
             "format_string": format_string,
-            **{f"arg_{idx + 1}": extra for idx, extra in enumerate(arg_x)},  # type: ignore[typeddict-item] # dynamic operand creation
+            **{f"arg_{idx + 1}": extra for idx, extra in enumerate(arg_x)},
         },
     }
 
@@ -809,7 +807,7 @@ def guid(_func_name: str, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep
         "type": "guid",
         "parameters": {
             "base_string": base_string,
-            **{f"extra_string_{idx + 1}": extra for idx, extra in enumerate(extra_string_x)},  # type: ignore[typeddict-item] # dynamic operand creation
+            **{f"extra_string_{idx + 1}": extra for idx, extra in enumerate(extra_string_x)},
         },
     }
 
@@ -970,7 +968,7 @@ def unique_string(_func_name: str, args: tuple[pycep_typing.PossibleValue, ...])
         "type": "unique_string",
         "parameters": {
             "base_string": base_string,
-            **{f"extra_string_{idx + 1}": extra for idx, extra in enumerate(extra_string_x)},  # type: ignore[typeddict-item] # dynamic operand creation
+            **{f"extra_string_{idx + 1}": extra for idx, extra in enumerate(extra_string_x)},
         },
     }
 
@@ -1015,9 +1013,9 @@ def uri_component_to_string(
 
 
 def unknown_func(func_name: str, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.UnknownFunction:
-    return {
+    return {  # ty: ignore[invalid-return-type] # dynamic operand creation
         "type": func_name,
-        "parameters": {f"arg_{idx + 1}": arg for idx, arg in enumerate(args)},  # type: ignore[typeddict-item] # dynamic operand creation
+        "parameters": {f"arg_{idx + 1}": arg for idx, arg in enumerate(args)},  # ty: ignore[invalid-argument-type]
     }
 
 
