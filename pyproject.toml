@@ -37,9 +37,9 @@ Releases = "https://github.com/gruebel/pycep/releases"
 [dependency-groups]
 dev = [
     "assertpy>=1.1,<2.0",
-    "prek>=0.2.22,<0.3.0",
+    "prek>=0.2.25,<0.3.0",
     "pytest>=8.4.2,<9.0.0",
-    "ty>=0.0.3,<0.1.0",
+    "ty>=0.0.7,<0.1.0",
 ]
 
 [build-system]
