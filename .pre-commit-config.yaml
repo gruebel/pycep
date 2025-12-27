@@ -3,21 +3,30 @@ repos:
     rev: v6.0.0
     hooks:
       - id: check-json
+        priority: 0
       - id: check-toml
+        priority: 0
       - id: check-yaml
+        priority: 0
       - id: end-of-file-fixer
+        priority: 0
       - id: name-tests-test
+        priority: 0
         args: ["--pytest-test-first"]
       - id: trailing-whitespace
+        priority: 0
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.10
     hooks:
       - id: ruff-check
+        priority: 1
         args: ["--fix"]
       - id: ruff-format
+        priority: 0
   - repo: local # till there is an official one https://github.com/astral-sh/ty/issues/269
     hooks:
       - id: ty
+        priority: 1
         name: ty check
         entry: uv run ty check
         pass_filenames: false
@@ -26,3 +35,4 @@ repos:
     rev: v1.7.9
     hooks:
       - id: actionlint-docker
+        priority: 1
