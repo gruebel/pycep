@@ -10,7 +10,7 @@ PossibleNoneValue: TypeAlias = "PossibleValue | None"
 ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | BicepRegistryAliasModulePath | TemplateSpecModulePath | TemplateSpecAliasModulePath"
 ModuleDetail: TypeAlias = "_LocalModulePathDetail | _BicepRegistryModulePathDetail | _BicepRegistryAliasModulePathDetail | _TemplateSpecModulePathDetail | _TemplateSpecAliasModulePathDetail"
 LoopType: TypeAlias = "LoopArray | LoopArrayIndex | LoopObject | LoopRange"
-ElementResponse: TypeAlias = "ImportResponse | ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse | TypeResponse | ExtensionResponse"
+ElementResponse: TypeAlias = "ImportResponse | ParamResponse | VarResponse | ResourceResponse | ModuleResponse | OutputResponse | TypeResponse | ExtensionResponse | FunctionResponse"
 Decorator: TypeAlias = "DecoratorAllowed | DecoratorBatchSize | DecoratorDescription | DecoratorExport | DecoratorMinLength | DecoratorMaxLength | DecoratorMinValue | DecoratorMaxValue | DecoratorMetadata | DecoratorSealed | DecoratorSecure | UnknownDecorator"
 
 ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOrEquals | LessThan | Equals | NotEquals | EqualsCaseInsensitive | NotEqualsCaseInsensitive"
@@ -209,8 +209,34 @@ class ApiTypeVersion(TypedDict):
     api_version: str
 
 
+TypeAttributes: TypeAlias = VariableAttributes
+
+
+class _Types(TypedDict):
+    __name__: str
+    __attrs__: TypeAttributes
+
+
 class TypeResponse(TypedDict):
-    types: _Variables
+    types: _Types
+
+
+class FunctionAttributes(TypedDict):
+    decorators: list[Decorator]
+    args: dict[str, str]
+    type: str
+    expression: PossibleValue
+    __start_line__: NotRequired[int]
+    __end_line__: NotRequired[int]
+
+
+class _Functions(TypedDict):
+    __name__: str
+    __attrs__: FunctionAttributes
+
+
+class FunctionResponse(TypedDict):
+    functions: _Functions
 
 
 ####################
@@ -1337,6 +1363,9 @@ class PropertyAccessor(TypedDict):
 class BicepJson(TypedDict):
     globals: GlobalsAttributes
     imports: NotRequired[dict[str, ImportAttributes]]
+    extensions: NotRequired[dict[str, ExtensionAttributes]]
+    types: NotRequired[dict[str, VariableAttributes]]
+    functions: NotRequired[dict[str, FunctionAttributes]]
     parameters: NotRequired[dict[str, ParameterAttributes]]
     variables: NotRequired[dict[str, VariableAttributes]]
     resources: NotRequired[dict[str, ResourceAttributes]]

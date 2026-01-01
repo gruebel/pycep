@@ -63,7 +63,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                 # very unlikely this will happen in a real Bicep file, but in test files possible
                 continue
             for key, value in arg.items():
-                result.setdefault(key, {})[value["__name__"]] = value["__attrs__"]  # ty: ignore[non-subscriptable, no-matching-overload]
+                result.setdefault(key, {})[value["__name__"]] = value["__attrs__"]  # ty: ignore[not-subscriptable, no-matching-overload]
 
         return result
 
@@ -353,6 +353,38 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
         if self.add_line_numbers:
             result["types"]["__attrs__"]["__start_line__"] = meta.line
             result["types"]["__attrs__"]["__end_line__"] = meta.end_line
+
+        return result
+
+    @v_args(meta=True)
+    def custom_func(
+        self,
+        meta: Meta,
+        args: tuple[
+            list[pycep_typing.Decorator] | None,
+            Token,
+            pycep_typing.PossibleValue,
+            pycep_typing.PossibleValue,
+        ],
+    ) -> pycep_typing.FunctionResponse:
+        decorators, name, *arg_type_pairs, return_type, expression = args
+
+        result: pycep_typing.FunctionResponse = {
+            "functions": {
+                "__name__": str(name),
+                "__attrs__": {
+                    "decorators": decorators or [],
+                    # TODO: change `zip` to `itertools.pairwise` when updating to Python 3.10
+                    "args": {str(arg_name): arg_type for arg_name, arg_type in zip(*[iter(arg_type_pairs)] * 2)},
+                    "type": return_type,
+                    "expression": expression,
+                },
+            }
+        }
+
+        if self.add_line_numbers:
+            result["functions"]["__attrs__"]["__start_line__"] = meta.line
+            result["functions"]["__attrs__"]["__end_line__"] = meta.end_line
 
         return result
 
