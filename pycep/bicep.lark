@@ -10,6 +10,7 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
        | [decorators] "resource" STRING type_api_pair [EXISTING] "=" resource_value     -> resource
        | [decorators] "module" STRING module_path "=" module_value                      -> module
        | [decorators] "type" STRING "=" type_value                                      -> custom_type
+       | [decorators] "func" _func_statement                                            -> custom_func
 
 ?value: _NEWLINE? "null"                      -> null
       | _NEWLINE? "true"                      -> true
@@ -29,6 +30,8 @@ element: "targetScope" "=" QUOTED_INTERPOLATION                                 
 // aliases
 
 _import_statement: (("{" import_alias ("," import_alias)* "}" | import_alias) "from" QUOTED_INTERPOLATION | QUOTED_INTERPOLATION)
+
+_func_statement: STRING "(" (STRING data_type ("," STRING data_type)*)? ")" data_type "=>" value_brackets
 
 // element values
 

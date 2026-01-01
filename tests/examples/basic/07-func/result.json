@@ -1,0 +1,140 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "functions": {
+    "buildUrl": {
+      "decorators": [],
+      "args": {
+        "https": "bool",
+        "hostname": "string",
+        "path": "string"
+      },
+      "type": "string",
+      "expression": "${https ? 'https' : 'http'}://${hostname}${empty(path) ? '' : '/${path}'}"
+    },
+    "sayHelloString": {
+      "decorators": [],
+      "args": {
+        "name": "string"
+      },
+      "type": "string",
+      "expression": "Hi ${name}!"
+    },
+    "sayHelloObject": {
+      "decorators": [],
+      "args": {
+        "name": "string"
+      },
+      "type": "object",
+      "expression": {
+        "hello": "Hi ${name}!"
+      }
+    },
+    "nameArray": {
+      "decorators": [],
+      "args": {
+        "name": "string"
+      },
+      "type": "array",
+      "expression": [
+        "name"
+      ]
+    },
+    "addNameArray": {
+      "decorators": [],
+      "args": {
+        "name": "string"
+      },
+      "type": "array",
+      "expression": [
+        "Mary",
+        "Bob",
+        "name"
+      ]
+    }
+  },
+  "outputs": {
+    "azureUrl": {
+      "decorators": [],
+      "type": "string",
+      "value": {
+        "function": {
+          "type": "buildUrl",
+          "parameters": {
+            "arg_1": true,
+            "arg_2": "microsoft.com",
+            "arg_3": "azure"
+          }
+        }
+      }
+    },
+    "greetingArray": {
+      "decorators": [],
+      "type": "array",
+      "value": {
+        "function": {
+          "type": "map",
+          "parameters": {
+            "arg_1": [
+              "Evie",
+              "Casper"
+            ],
+            "arg_2": {
+              "type": "lambda_expression",
+              "detail": {
+                "var_1": "name",
+                "expression": {
+                  "function": {
+                    "type": "sayHelloString",
+                    "parameters": {
+                      "arg_1": "name"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "greetingObject": {
+      "decorators": [],
+      "type": "object",
+      "value": {
+        "function": {
+          "type": "sayHelloObject",
+          "parameters": {
+            "arg_1": "John"
+          }
+        }
+      }
+    },
+    "nameArray": {
+      "decorators": [],
+      "type": "array",
+      "value": {
+        "function": {
+          "type": "nameArray",
+          "parameters": {
+            "arg_1": "John"
+          }
+        }
+      }
+    },
+    "addNameArray": {
+      "decorators": [],
+      "type": "array",
+      "value": {
+        "function": {
+          "type": "addNameArray",
+          "parameters": {
+            "arg_1": "John"
+          }
+        }
+      }
+    }
+  }
+}
