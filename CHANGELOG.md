@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Added
 
+## [0.7.0] - 2026-01-11
+
+# Added
+
 - Support any kind of function via a fallback mechanism
 - Support any kind of decorator via a fallback mechanism
 - Support `range` function
@@ -232,7 +236,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release to be able to parse all the official examples of Bicep [101](https://github.com/Azure/bicep/tree/main/docs/examples/101).
 
-[Unreleased]: https://github.com/gruebel/pycep/compare/0.6.1...HEAD
+[Unreleased]: https://github.com/gruebel/pycep/compare/0.7.0...HEAD
+[0.7.0]: https://github.com/gruebel/pycep/compare/0.6.1...0.7.0
 [0.6.1]: https://github.com/gruebel/pycep/compare/0.5.1...0.6.1
 [0.5.1]: https://github.com/gruebel/pycep/compare/0.4.2...0.5.1
 [0.4.2]: https://github.com/gruebel/pycep/compare/0.4.1...0.4.2
