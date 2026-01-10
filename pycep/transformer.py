@@ -374,8 +374,10 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
                 "__name__": str(name),
                 "__attrs__": {
                     "decorators": decorators or [],
-                    # TODO: change `zip` to `itertools.pairwise` when updating to Python 3.10
-                    "args": {str(arg_name): arg_type for arg_name, arg_type in zip(*[iter(arg_type_pairs)] * 2)},
+                    # TODO: change `zip` to `itertools.batched` when updating to Python 3.12
+                    "args": {
+                        str(arg_name): arg_type for arg_name, arg_type in zip(*[iter(arg_type_pairs)] * 2, strict=True)
+                    },
                     "type": return_type,
                     "expression": expression,
                 },

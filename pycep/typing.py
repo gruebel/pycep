@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from typing import Any, Literal, TypedDict
+from typing import Any, Literal, TypeAlias, TypedDict
 
-from typing_extensions import NotRequired, TypeAlias
+from typing_extensions import NotRequired
 
 PossibleValue: TypeAlias = "bool | int | str | list[bool | int | str] | dict[str, PossibleValue]"
-PossibleNoneValue: TypeAlias = "PossibleValue | None"
+PossibleNoneValue: TypeAlias = "PossibleValue | None"  # noqa: TC008
 
 ModulePath: TypeAlias = "LocalModulePath | BicepRegistryModulePath | BicepRegistryAliasModulePath | TemplateSpecModulePath | TemplateSpecAliasModulePath"
 ModuleDetail: TypeAlias = "_LocalModulePathDetail | _BicepRegistryModulePathDetail | _BicepRegistryAliasModulePathDetail | _TemplateSpecModulePathDetail | _TemplateSpecAliasModulePathDetail"
@@ -17,7 +17,7 @@ ComparisonOperators: TypeAlias = "GreaterThanOrEquals | GreaterThan | LessThanOr
 LogicalOperators: TypeAlias = "And | Or | Not | Coalesce | Conditional"
 NumericOperators: TypeAlias = "Add | Divide | Minus | Modulo | Multiply | Substract"
 AccessorOperators: TypeAlias = "IndexAccessor | FunctionAccessor | NestedResourceAccessor | PropertyAccessor"
-Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperators | AccessorOperators"
+Operators: TypeAlias = "ComparisonOperators | LogicalOperators | NumericOperators | AccessorOperators"  # noqa: TC008
 
 AnyFunctions: TypeAlias = "AnyFunc"
 ArrayFunctions: TypeAlias = "Array | Concat | Contains | Empty | First | Flatten | Intersection | Last | Length | Max | Min | Range | Skip | Take | UnionFunc"
