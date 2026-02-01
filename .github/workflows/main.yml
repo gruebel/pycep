@@ -81,7 +81,7 @@ jobs:
   publish:
     if: github.event_name == 'push'
     needs: tests
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest # `pypa/gh-action-pypi-publish` needs Docker
     environment: release
     permissions:
       contents: write
