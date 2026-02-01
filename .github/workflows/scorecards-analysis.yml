@@ -12,7 +12,7 @@ permissions:
 jobs:
   analysis:
     name: Scorecards analysis
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # `ossf/scorecard-action` needs Docker
     permissions:
       id-token: write
       security-events: write
@@ -25,7 +25,7 @@ jobs:
           persist-credentials: false
       - name: "Run analysis"
         uses: ossf/scorecard-action@4eaacf0543bb3f2c246792bd56e8cdeffafb205a  # v2.4.3
-        with: # needs Docker
+        with:
           results_file: results.sarif
           results_format: sarif
           repo_token: ${{ secrets.SCORECARD_READ_TOKEN }}
