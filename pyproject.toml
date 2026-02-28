@@ -4,7 +4,7 @@ requires = [ "uv-build~=0.10.0" ]
 
 [project]
 name = "pycep-parser"
-version = "0.7.1.dev4"
+version = "0.7.1.dev5"
 description = "A Python based Bicep parser"
 readme = "README.md"
 keywords = [ "bicep", "lark", "parser" ]
