@@ -23,7 +23,7 @@ priority = 0
 
 [[repos]]
 repo = "https://github.com/astral-sh/ruff-pre-commit"
-rev = "v0.15.1"
+rev = "v0.15.4"
 
 [[repos.hooks]]
 id = "ruff-check"
@@ -61,3 +61,11 @@ rev = "v6.0.0"
 id = "name-tests-test"
 priority = 0
 args = ["--pytest-test-first"]
+
+[[repos]]
+repo = "https://github.com/tox-dev/pyproject-fmt"
+rev = "v2.16.2"
+
+[[repos.hooks]]
+id = "pyproject-fmt"
+priority = 0
