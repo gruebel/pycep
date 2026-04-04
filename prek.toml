@@ -23,7 +23,7 @@ priority = 0
 
 [[repos]]
 repo = "https://github.com/astral-sh/ruff-pre-commit"
-rev = "v0.15.4"
+rev = "v0.15.9"
 
 [[repos.hooks]]
 id = "ruff-check"
@@ -47,7 +47,7 @@ language = "system"
 
 [[repos]]
 repo = "https://github.com/rhysd/actionlint"
-rev = "v1.7.11"
+rev = "v1.7.12"
 
 [[repos.hooks]]
 id = "actionlint-docker"
@@ -64,7 +64,7 @@ args = ["--pytest-test-first"]
 
 [[repos]]
 repo = "https://github.com/tox-dev/pyproject-fmt"
-rev = "v2.16.2"
+rev = "v2.21.0"
 
 [[repos.hooks]]
 id = "pyproject-fmt"
