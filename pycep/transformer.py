@@ -396,7 +396,7 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     #
     ####################
 
-    def array_suffix(self, args: list[Any]) -> None:
+    def array_suffix(self, _: list[Any]) -> None:
         return None  # presence counts; value is unused
 
     def base_type(self, args: list[Any]) -> pycep_typing.DataType:

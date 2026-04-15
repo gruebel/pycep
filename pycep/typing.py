@@ -45,12 +45,12 @@ Functions: TypeAlias = "AnyFunctions | ArrayFunctions | DateFunctions | Deployme
 
 class ArrayType(TypedDict):
     type: Literal["array"]
-    item_type: "DataType"
+    item_type: DataType
 
 
 class UnionType(TypedDict):
     type: Literal["union"]
-    members: "list[DataType]"
+    members: list[DataType]
 
 
 ####################
