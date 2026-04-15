@@ -1,0 +1,39 @@
+{
+  "globals": {
+    "scope": {
+      "value": "resourceGroup"
+    }
+  },
+  "parameters": {
+    "simpleArray": {
+      "decorators": [],
+      "type": {
+        "type": "array",
+        "item_type": "string"
+      },
+      "default": null
+    },
+    "nestedArray": {
+      "decorators": [],
+      "type": {
+        "type": "array",
+        "item_type": {
+          "type": "array",
+          "item_type": "string"
+        }
+      },
+      "default": null
+    },
+    "unionArray": {
+      "decorators": [],
+      "type": {
+        "type": "array",
+        "item_type": {
+          "type": "union",
+          "members": ["int", "string"]
+        }
+      },
+      "default": null
+    }
+  }
+}
