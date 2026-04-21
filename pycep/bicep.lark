@@ -51,7 +51,10 @@ child_resource: "resource" STRING QUOTED_INTERPOLATION [EXISTING] "=" (object | 
 
 // element type extras
 
-data_type: STRING
+data_type: base_type array_suffix*
+base_type: STRING | union_type
+union_type: "(" data_type ("|" data_type)+ ")"
+array_suffix: "[" "]"
 
 type_api_pair: QUOTED_INTERPOLATION
 
