@@ -34,13 +34,13 @@ urls.Repository = "https://github.com/gruebel/pycep"
 [dependency-groups]
 dev = [
   "assertpy>=1.1,<2.0",
-  "prek>=0.3.8,<0.4.0",
+  "prek>=0.4.3,<0.5.0",
   "pytest>=9.0.0,<10.0.0",
-  "ty>=0.0.28,<0.1.0",
+  "ty>=0.0.40,<0.1.0",
 ]
 
 [tool.uv]
-required-version = "~=0.11.0"
+required-version = ">=0.11.0"
 build-backend.module-name = "pycep"
 build-backend.module-root = ""
 build-backend.source-include = [ "tests/**" ]
