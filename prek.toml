@@ -67,3 +67,4 @@ rev = "v2.24.1"
 [[repos.hooks]]
 id = "pyproject-fmt"
 priority = 0
+additional_dependencies = ["tomli"] # remove after Python 3.11 upgrade
