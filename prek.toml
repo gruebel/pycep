@@ -23,7 +23,7 @@ priority = 0
 
 [[repos]]
 repo = "https://github.com/astral-sh/ruff-pre-commit"
-rev = "v0.15.15"
+rev = "v0.15.17"
 
 [[repos.hooks]]
 id = "ruff-check"
@@ -35,15 +35,13 @@ id = "ruff-format"
 priority = 0
 
 [[repos]]
-repo = "local"
+repo = "https://github.com/astral-sh/ty-pre-commit"
+rev = "v0.0.49"
 
 [[repos.hooks]]
 id = "ty"
 priority = 1
-name = "ty check"
-entry = "uv run ty check"
-pass_filenames = false
-language = "system"
+args = ["--frozen"]
 
 [[repos]]
 repo = "https://github.com/rhysd/actionlint"
@@ -64,7 +62,7 @@ args = ["--pytest-test-first"]
 
 [[repos]]
 repo = "https://github.com/tox-dev/pyproject-fmt"
-rev = "v2.21.2"
+rev = "v2.24.1"
 
 [[repos.hooks]]
 id = "pyproject-fmt"
