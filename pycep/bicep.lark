@@ -80,9 +80,9 @@ deploy_condition: _CPP_COMMENT_NL? "if" "(" value_brackets ")" value_brackets
 
 ?quoted_string: STRING | QUOTED_STRING | QUOTED_INTERPOLATION
 
-array: "[" _CPP_COMMENT_NL~0..10 (value_brackets ("," value_brackets)* _CPP_COMMENT_NL~0..5)* "]"
+array: "[" _CPP_COMMENT_NL* (value_brackets ("," value_brackets)* _CPP_COMMENT_NL*)* "]"
 
-object: "{" _CPP_COMMENT_NL~0..10 ((pair ("," pair)* | child_resource) _CPP_COMMENT_NL~0..5)* "}"
+object: "{" _CPP_COMMENT_NL* ((pair ("," pair)* | child_resource) _CPP_COMMENT_NL*)* "}"
 
 pair: key ":" (value_brackets | loop) "?"?
 
@@ -92,7 +92,7 @@ lambda_expression: (value_brackets | "(" value_brackets "," value_brackets ("," 
 
 // decorators
 
-decorator: ("@" /(sys\.)?[a-zA-Z0-9]+/ "(" _CPP_COMMENT_NL? value_brackets? _CPP_COMMENT_NL? ")" _CPP_COMMENT_NL~0..5)
+decorator: ("@" /(sys\.)?[a-zA-Z0-9]+/ "(" _CPP_COMMENT_NL? value_brackets? _CPP_COMMENT_NL? ")" _CPP_COMMENT_NL~0..10)
 decorators: decorator+
 
 // functions

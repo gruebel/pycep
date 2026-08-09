@@ -9,7 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Added
 
+## [0.7.1] - 2026-08-09
+
+# Added
+
 - Support array and union-array types in data_type
+
+# Changed
+
+- allow infinite comment lines in objects and arrays
 
 ## [0.7.0] - 2026-01-11
 
