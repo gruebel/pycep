@@ -99,7 +99,7 @@ def test_invalid_bicep_content_multi_line() -> None:
     file_path = sub_dir_path / "invalid_multi_line.bicep"
 
     # when
-    with pytest.raises(ValueError) as exc_info:  # noqa: PT011
+    with pytest.raises(ValueError) as exc_info:  # ruff:ignore[pytest-raises-too-broad]
         BicepParser().parse(text=file_path.read_text())
 
     # then

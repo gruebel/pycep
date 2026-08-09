@@ -1,6 +1,6 @@
 [build-system]
 build-backend = "uv_build"
-requires = [ "uv-build~=0.11.0" ]
+requires = [ "uv-build~=0.12.0" ]
 
 [project]
 name = "pycep-parser"
@@ -34,12 +34,12 @@ urls.Repository = "https://github.com/gruebel/pycep"
 [dependency-groups]
 dev = [
   "assertpy>=1.1,<2.0",
-  "prek>=0.4.3,<0.5.0",
-  "pytest>=9.0.0,<10.0.0",
+  "prek>=0.4.12,<0.5.0",
+  "pytest>=9.1.0,<10.0.0",
 ]
 
 [tool.uv]
-required-version = ">=0.11.0"
+required-version = ">=0.12.0"
 build-backend.module-name = "pycep"
 build-backend.module-root = ""
 build-backend.source-include = [ "tests/**" ]
