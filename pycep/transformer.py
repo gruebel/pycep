@@ -913,13 +913,13 @@ class BicepToJson(Transformer[Token, pycep_typing.BicepJson]):
     def multi_line_string(self, arg: tuple[Token]) -> str:
         return sanitize_multi_line_string_token(arg[0])
 
-    def true(self, _: Any) -> Literal[True]:  # noqa: ANN401
+    def true(self, _: Any) -> Literal[True]:  # ruff:ignore[any-type]
         return True
 
-    def false(self, _: Any) -> Literal[False]:  # noqa: ANN401
+    def false(self, _: Any) -> Literal[False]:  # ruff:ignore[any-type]
         return False
 
-    def null(self, _: Any) -> None:  # noqa: ANN401
+    def null(self, _: Any) -> None:  # ruff:ignore[any-type]
         return None
 
     def lambda_expression(self, args: tuple[pycep_typing.PossibleValue, ...]) -> pycep_typing.LambdaExpression:
